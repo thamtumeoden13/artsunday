@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { IBM_Plex_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./provider";
+import { cn } from "@/utils/cn";
 
-const inter = Inter({ subsets: ["latin"] });
+const IBMPlex = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-ibm-plex'
+});
 
 export const metadata: Metadata = {
   title: "Art-Sunday",
@@ -17,10 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={cn("font-IBMPlex antialiased", IBMPlex.variable)}>
         <ThemeProvider
           attribute="class"
-          defaultTheme='light'
+          defaultTheme='dark'
           enableSystem
           disableTransitionOnChange
         >
