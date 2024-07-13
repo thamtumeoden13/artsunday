@@ -1,3 +1,4 @@
+import About from "@/components/About";
 import HeroPage from "@/components/Hero";
 import { FloatingNav } from "@/components/ui/FloatingNav";
 import { navItems } from "@/constants";
@@ -12,6 +13,7 @@ export default function Home() {
           navItems={navItems}
         />
         <HeroPage />
+        <About />
       </div>
     </main>
   );

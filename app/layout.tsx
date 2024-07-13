@@ -10,8 +10,10 @@ const IBMPlex = IBM_Plex_Sans({
   variable: '--font-ibm-plex'
 });
 
+const inter = Inter({ subsets: ["latin"] });
+
 export const metadata: Metadata = {
-  title: "Art-Sunday",
+  title: "Art Sunday",
   description: "Tư Vấn Thiết Kế & Thi Công",
 };
 
@@ -22,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn("font-IBMPlex antialiased", IBMPlex.variable)}>
+      <body className={inter.className}>
         <ThemeProvider
           attribute="class"
           defaultTheme='dark'
