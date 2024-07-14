@@ -1,5 +1,5 @@
-import About from "@/components/About"
 import { FloatingNav } from "@/components/ui/FloatingNav"
+import { Toaster } from "@/components/ui/toaster"
 import { navItems } from "@/constants"
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
@@ -12,6 +12,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
         {children}
       </div>
+      <Toaster />
     </main>
   )
 }
