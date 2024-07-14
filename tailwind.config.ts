@@ -14,7 +14,7 @@ const config = {
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
-    "./data/**/*.{ts,tsx}",
+    "./constants/**/*.{ts,tsx}",
   ],
   prefix: "",
   theme: {
@@ -32,6 +32,10 @@ const config = {
           100: "#000319",
           200: "rgba(17, 25, 40, 0.75)",
           300: "rgba(255, 255, 255, 0.125)",
+          400: "#7986AC",
+          500: "#606C80",
+          600: "#2B3674",
+          700: "#384262",
         },
         white: {
           DEFAULT: "#FFF",
@@ -41,7 +45,14 @@ const config = {
         blue: {
           "100": "#E4ECFF",
         },
-        purple: "#CBACF9",
+        purple: {
+          DEFAULT: "#CBACF9",
+          100: "#F4F7FE",
+          200: "#BCB6FF",
+          400: "#868CFF",
+          500: "#7857FF",
+          600: "#4318FF",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -165,7 +176,7 @@ const config = {
   plugins: [
     require("tailwindcss-animate"),
     addVariablesForColors,
-    function ({ matchUtilities, theme }: any) {
+    function ( { matchUtilities, theme }: any) {
       matchUtilities(
         {
           "bg-grid": (value: any) => ({
