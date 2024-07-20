@@ -215,3 +215,26 @@ export const socialMedia = [
     img: "/link.svg",
   },
 ];
+
+export const imageSliders = [
+  {
+    id: 1,
+    desc: "Thiết Kế Nội Thất Biệt Thự Phong Cách Hiện Đại - TDM Bình Dương",
+    img: "/assets/images/Art-sunday-thiet-ke-biet-thu-01.jpg",
+  },
+  {
+    id: 2,
+    desc: "Thiết Kế Nhà Phố Phong Cách Hiện Đại Tại Biên Hòa",
+    img: "/assets/images/Art-sunday-thiet-ke-nha-mai-thai-tan-uyen-binh-duong-03.jpg",
+  },
+  {
+    id: 3,
+    desc: "Biệt Thự Mini 2 Tầng Mái Thái 8,5x10m Tại Thanh Hóa",
+    img: "/assets/images/Art-sunday-thiet-ke-nha-pho-san-vuon-phong-cach-hien-dai-03.jpg",
+  },
+  {
+    id: 4,
+    desc: "Mẫu Thiết Kế Biệt Thự Cổ Điển Tại Tp.Thuận An, Bình Dương 8x20m",
+    img: "/assets/images/Art-sunday-thiet-ke-noi-that-biet-thu-phong-cach-hien-dai-TDM-01.jpg",
+  },
+]
