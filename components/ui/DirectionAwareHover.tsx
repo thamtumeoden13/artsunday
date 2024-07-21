@@ -66,13 +66,13 @@ export const DirectionAwareHover = ({
       onMouseEnter={handleMouseEnter}
       ref={ref}
       className={cn(
-        "xl:w-72 lg:w-80 md:w-94 w-full bg-transparent rounded-lg overflow-hidden group/card relative",
+        "w-full h-full bg-transparent rounded-lg overflow-hidden group/card relative",
         className
       )}
     >
       <AnimatePresence mode="wait">
         <motion.div
-          className="relative h-full min-w-full"
+          className="relative h-full w-full"
           initial="initial"
           whileHover={direction}
           exit="exit"
@@ -92,7 +92,7 @@ export const DirectionAwareHover = ({
                 "h-full w-full object-cover scale-[1.15]",
                 imageClassName
               )}
-              width="2000"
+              width="1000"
               height="1000"
               src={imageUrl}
             />
@@ -143,12 +143,12 @@ const textVariants = {
   initial: {
     y: 0,
     x: 0,
-    opacity: 0,
+    opacity: 1,
   },
   exit: {
     y: 0,
     x: 0,
-    opacity: 0,
+    opacity: 1,
   },
   top: {
     y: -20,
