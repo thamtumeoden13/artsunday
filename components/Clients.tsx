@@ -5,7 +5,7 @@ import { companies, testimonials } from "@/constants"
 const Clients = () => {
   return (
     <section id="clients" className="py-20">
-      <h1 className="heading">
+      <h1 className="heading" style={{textAlign:'left'}}>
         Kind words {''}
         <span className="text-purple">satisfield clients</span>
       </h1>
@@ -17,7 +17,7 @@ const Clients = () => {
           speed="slow"
         />
 
-        <div className="flex flex-wrap items-center justify-center gap-4 md:gap-16 max-lg:mt-10">
+        {/* <div className="flex flex-wrap items-center justify-center gap-4 md:gap-16 max-lg:mt-10">
           {companies.map(({ id, name, img, nameImg }) => (
             <div
               key={id}
@@ -27,7 +27,7 @@ const Clients = () => {
               <img src={nameImg} alt={name} className="md:w-24 w-20" />
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </section>
   )

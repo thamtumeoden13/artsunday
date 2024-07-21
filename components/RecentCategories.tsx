@@ -27,12 +27,12 @@ const RecentCategories = () => {
         />
         <div className="w-full mt-12 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
           {imageSliders.map((card, index) => (
-            <div className="border border-black/[0.2] dark:border-white/[0.2] flex flex-col items-start min-w-xs max-w-sm mx-auto p-4 relative h-[30rem]">
+            <div className="border border-black/[0.2] dark:border-white/[0.2] flex flex-col items-start md:ml-auto mx-auto min-w-xs max-w-sm p-4 relative h-[30rem]">
               <DirectionAwareHover
                 imageUrl={card.img}
                 key={index}
                 imageClassName="h-[20rem]"
-                className="min-w-[20rem]"
+                className="min-w-xs"
                 childrenClassName="opacity-1"
               >
                 <p className="font-bold text-lg overflow-hidden line-clamp-2">{card.desc}</p>
@@ -94,20 +94,7 @@ const RecentCategories = () => {
           {imageSliders.map((card) => (
             <CardContainer className="inter-var" containerClassName="py-0">
               <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] max-w-sm sm:w-[30rem] h-auto rounded-xl p-6 border  ">
-                <CardItem
-                  translateZ="50"
-                  className="text-xl font-bold text-neutral-600 dark:text-white"
-                >
-                  Make things float in air
-                </CardItem>
-                <CardItem
-                  as="p"
-                  translateZ="60"
-                  className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
-                >
-                  {card.desc}
-                </CardItem>
-                <CardItem translateZ="100" className="w-full mt-4">
+                <CardItem translateZ="100" className="w-full mt-2">
                   <Image
                     // src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                     src={card.img}
@@ -117,7 +104,21 @@ const RecentCategories = () => {
                     alt="thumbnail"
                   />
                 </CardItem>
-                <div className="flex justify-between items-center mt-20">
+                <CardItem
+                  translateZ="50"
+                  className="text-xl font-bold text-neutral-600 dark:text-white mt-10"
+                >
+                  {card.title}
+                </CardItem>
+                <CardItem
+                  as="p"
+                  translateZ="60"
+                  className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
+                >
+                  {card.desc}
+                </CardItem>
+
+                <div className="flex justify-between items-center">
                   <CardItem
                     translateZ={20}
                     // as={Link}

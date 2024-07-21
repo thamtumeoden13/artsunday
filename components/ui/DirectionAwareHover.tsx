@@ -77,7 +77,7 @@ export const DirectionAwareHover = ({
           whileHover={direction}
           exit="exit"
         >
-          <motion.div className="group-hover/card:block hidden absolute inset-0 w-full h-full bg-black/40 z-10 transition duration-500" />
+          <motion.div className="group-hover/card:hidden block absolute inset-0 w-full h-full bg-black/40 z-10 transition duration-500" />
           <motion.div
             variants={variants}
             className="h-full w-full relative bg-gray-50 dark:bg-black"
@@ -143,12 +143,12 @@ const textVariants = {
   initial: {
     y: 0,
     x: 0,
-    opacity: 1,
+    opacity: 0.8,
   },
   exit: {
     y: 0,
     x: 0,
-    opacity: 1,
+    opacity: 0.8,
   },
   top: {
     y: -20,

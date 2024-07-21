@@ -219,22 +219,52 @@ export const socialMedia = [
 export const imageSliders = [
   {
     id: 1,
+    title: 'Thiết Kế Biệt Thự Hiện Đại',
     desc: "Thiết Kế Nội Thất Biệt Thự Phong Cách Hiện Đại - TDM Bình Dương",
     img: "/assets/images/Art-sunday-thiet-ke-biet-thu-01.jpg",
   },
   {
     id: 2,
+    title: 'Thiết Kế Nhà Phố Hiện Đại',
     desc: "Thiết Kế Nhà Phố Phong Cách Hiện Đại Tại Biên Hòa",
     img: "/assets/images/Art-sunday-thiet-ke-nha-mai-thai-tan-uyen-binh-duong-03.jpg",
   },
   {
     id: 3,
+    title: 'Thiết Kế Biệt Thự Mini',
     desc: "Biệt Thự Mini 2 Tầng Mái Thái 8,5x10m Tại Thanh Hóa",
     img: "/assets/images/Art-sunday-thiet-ke-nha-pho-san-vuon-phong-cach-hien-dai-03.jpg",
   },
   {
     id: 4,
+    title: 'Thiết Kế Biệt Thự Cổ Điển',
     desc: "Mẫu Thiết Kế Biệt Thự Cổ Điển Tại Tp.Thuận An, Bình Dương 8x20m",
     img: "/assets/images/Art-sunday-thiet-ke-noi-that-biet-thu-phong-cach-hien-dai-TDM-01.jpg",
   },
 ]
+
+export const defaultValues = {
+  search: "",
+  type: "",
+};
+
+export const aspectRatioOptions = {
+  "1:1": {
+    aspectRatio: "1:1",
+    label: "Square (1:1)",
+    width: 1000,
+    height: 1000,
+  },
+  "3:4": {
+    aspectRatio: "3:4",
+    label: "Standard Portrait (3:4)",
+    width: 1000,
+    height: 1334,
+  },
+  "9:16": {
+    aspectRatio: "9:16",
+    label: "Phone Portrait (9:16)",
+    width: 1000,
+    height: 1778,
+  },
+};

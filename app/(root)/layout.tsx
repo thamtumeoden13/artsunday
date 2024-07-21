@@ -5,7 +5,7 @@ import { navItems } from "@/constants"
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <main className="root">
-      <div className="max-w-7xl w-full mx-auto">
+      <div className="max-w-7xl w-full mx-auto mt-16">
         <FloatingNav
           navItems={navItems}
         />
