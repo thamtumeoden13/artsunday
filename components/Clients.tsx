@@ -4,7 +4,7 @@ import { companies, testimonials } from "@/constants"
 
 const Clients = () => {
   return (
-    <section id="clients" className="py-20">
+    <section id="clients" className="py-10">
       <h1 className="heading" style={{textAlign:'left'}}>
         Kind words {''}
         <span className="text-purple">satisfield clients</span>

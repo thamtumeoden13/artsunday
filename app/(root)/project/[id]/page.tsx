@@ -2,10 +2,7 @@ import ProjectAlbum from "@/components/ProjectAlbum"
 import ProjectGeneral from "@/components/ProjectGeneral"
 import BreadcrumbComponent from "@/components/shared/Breadcrumb"
 import Header from "@/components/shared/Header"
-import { LayoutGrid } from "@/components/ui/LayoutGrid"
-import { TracingBeam } from "@/components/ui/TracingBeam"
 import React from 'react'
-import { twMerge } from "tailwind-merge"
 
 const ProjectDetail = () => {
   return (
@@ -18,7 +15,7 @@ const ProjectDetail = () => {
       />
 
       <section className="mt-10 w-full">
-        <div className="h-[40rem]">
+        <div className="h-[44rem] max-w-6xl">
           <ProjectAlbum />
         </div>
 

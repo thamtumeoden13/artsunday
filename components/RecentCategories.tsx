@@ -3,9 +3,6 @@ import { DirectionAwareHover } from "./ui/DirectionAwareHover"
 import { imageSliders } from "@/constants";
 import { FaLocationArrow } from "react-icons/fa6";
 import MagicButton from "./ui/MagicButton";
-import { LampContainer } from "./ui/Lamp";
-import { motion } from "framer-motion";
-import { Button } from "./ui/MovingBorder";
 import { EvervaultCard, Icon } from "./ui/EvervaultCard";
 import { CardBody, CardContainer, CardItem } from "./ui/3D-Card";
 import Image from "next/image";

@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { IBM_Plex_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./provider";
-import { cn } from "@/utils/cn";
-import About from "@/components/About";
 
 const IBMPlex = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -28,7 +26,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
-          defaultTheme='light'
+          defaultTheme='dark'
           enableSystem
           disableTransitionOnChange
         >

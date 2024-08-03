@@ -89,6 +89,12 @@
   .black-gradient {
     background: linear-gradient(90deg, #161a31 0%, #06091f 100%);
   }
+  .pink-gradient {
+    background: linear-gradient(rgb(255, 38, 142) 0%, rgb(255, 105, 79) 100%);
+  }
+  .blue-gradient{
+    background: linear-gradient(45deg, #56BBF1 0%, #4D77FF 100%);
+  }
   /* .wrapper {
     @apply max-w-5xl mx-auto px-5 md:px-10 w-full text-dark-400 p-16-regular;
   } */

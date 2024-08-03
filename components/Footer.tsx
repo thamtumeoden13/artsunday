@@ -10,7 +10,7 @@ const Footer = () => {
         <img src="/footer-grid.svg" alt="footer" className="w-full h-full opacity-50" />
       </div>
 
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center relative">
         <h1 className="heading">
           Ready to take <span className="text-purple">digital presence to the next level?</span>
         </h1>
@@ -28,7 +28,7 @@ const Footer = () => {
         </a>
       </div>
 
-      <div className="flex mt-16 md:flex-row flex-col justify-between items-center">
+      <div className="flex mt-16 md:flex-row flex-col justify-between items-center relative">
         <p className="md:text-base text-sm md:font-normal font-light">
           Copyright © 2024 Mr.Vu
         </p>

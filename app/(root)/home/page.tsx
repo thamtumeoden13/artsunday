@@ -10,7 +10,7 @@ const HomePage = () => {
     <>
       {/* <Header title="Home Page" /> */}
 
-      <section className="mt-10 h-[50rem] w-full" id="hero-images">
+      <section className="h-[50rem] w-full" id="hero-images">
         <HeroImageSilder />
       </section>
 
