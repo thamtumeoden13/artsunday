@@ -79,7 +79,7 @@ export const FloatingNav = ({
         )}
         style={{
           backdropFilter: "blur(16px) saturate(20%)",
-          backgroundColor: "rgba(255, 255, 255, 0.75) dark:rgba(32, 37, 48, 0.75) ",
+          backgroundColor: "rgba(32, 37, 48, 0.75) ",
           borderRadius: "12px",
           border: "1px solid #36354a dark:rgba(255, 255, 255, 0.125)",
         }}
@@ -96,7 +96,7 @@ export const FloatingNav = ({
           )}
         >
           {/* <span className="block sm:hidden">{<FaHouseMedical />}</span> */}
-          <span className=" text-sm !cursor-pointer">{'Home'}</span>
+          <span className=" text-sm !cursor-pointer">{'Dashboard'}</span>
         </Link>
         {navItems.map((navItem: any, idx: number) => (
           <Link

@@ -14,7 +14,7 @@ const ProjectDetail = () => {
         subtitle="Thông tin chi tiết dự án"
       />
 
-      <section className="mt-10 w-full">
+      <section className="w-full">
         <div className="h-[44rem] max-w-6xl">
           <ProjectAlbum />
         </div>
@@ -22,7 +22,6 @@ const ProjectDetail = () => {
         <ProjectGeneral />
 
       </section>
-
     </>
   )
 }

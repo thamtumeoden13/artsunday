@@ -10,11 +10,11 @@ const HomePage = () => {
     <>
       {/* <Header title="Home Page" /> */}
 
-      <section className="h-[50rem] w-full" id="hero-images">
+      <section className="h-[40rem] w-full" id="hero-images">
         <HeroImageSilder />
       </section>
 
-      <section className="mt-10 min-h-screen" id="recent-categories">
+      <section className="min-h-screen" id="recent-categories">
         <RecentCategories />
       </section>
 

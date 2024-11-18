@@ -1,3 +1,4 @@
+import BreadcrumbComponent from "@/components/shared/Breadcrumb";
 import Header from "@/components/shared/Header"
 import Search from "@/components/shared/Search"
 import { cn } from "@/lib/utils";
@@ -15,6 +16,7 @@ const Project = ({ searchParams }: SearchParamProps) => {
 
   return (
     <>
+      <BreadcrumbComponent />
       <Header
         title="Hạn mục dự án"
         subtitle="Thông tin hạng mục dự án"
@@ -26,8 +28,8 @@ const Project = ({ searchParams }: SearchParamProps) => {
           <Search />
         </div>
         <div className="grid lg:grid-cols-4 md:grid-cols-3 gird-cols-1 mx-auto gap-4">
-          {images.map((card) => (
-            <div className="max-w-xs w-full group/card">
+          {images.map((card, index) => (
+            <div key={index} className="max-w-xs w-full group/card">
               <div
                 className={cn(
                   " cursor-pointer overflow-hidden relative card h-96 rounded-md shadow-xl  max-w-sm mx-auto backgroundImage flex flex-col justify-between p-4",

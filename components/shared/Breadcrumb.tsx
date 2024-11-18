@@ -20,7 +20,7 @@ const BreadcrumbComponent = () => {
   const splitPathname = pathname.split('/');
 
   return (
-    <div className="my-8">
+    <div className="mb-8">
       <Breadcrumb>
         <BreadcrumbList>
           {splitPathname.map((name, index) => {

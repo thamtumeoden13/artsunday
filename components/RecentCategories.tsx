@@ -22,9 +22,9 @@ const RecentCategories = () => {
           position="right"
           otherClasses="bg-white text-slate-950 text-xl"
         />
-        <div className="w-full mt-12 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
+        <div className="w-full mt-12 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-20">
           {imageSliders.map((card, index) => (
-            <div className="border border-black/[0.2] dark:border-white/[0.2] flex flex-col items-start md:ml-auto mx-auto min-w-xs max-w-sm p-4 relative h-[30rem]">
+            <div key={card.id} className="border border-black/[0.2] dark:border-white/[0.2] flex flex-col items-start md:ml-auto mx-auto min-w-xs max-w-sm p-4 relative h-[30rem]">
               <DirectionAwareHover
                 imageUrl={card.img}
                 key={index}
@@ -52,7 +52,7 @@ const RecentCategories = () => {
         />
         <div className="w-full mt-10 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-20">
           {imageSliders.map((card) => (
-            <div className="border border-black/[0.2] dark:border-white/[0.2] flex flex-col items-star
+            <div key={card.id} className="border border-black/[0.2] dark:border-white/[0.2] flex flex-col items-star
             t max-w-sm sm:w-[30rem] mx-auto p-4 relative h-[28rem]">
               <Icon className="absolute h-6 w-6 -top-3 -left-3 dark:text-white text-black" />
               <Icon className="absolute h-6 w-6 -bottom-3 -left-3 dark:text-white text-black" />
@@ -89,7 +89,7 @@ const RecentCategories = () => {
         />
         <div className="w-full mt-10 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-20">
           {imageSliders.map((card) => (
-            <CardContainer className="inter-var" containerClassName="py-0">
+            <CardContainer key={card.id} className="inter-var" containerClassName="py-0">
               <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] max-w-sm sm:w-[30rem] h-auto rounded-xl p-6 border  ">
                 <CardItem translateZ="100" className="w-full mt-2">
                   <Image
