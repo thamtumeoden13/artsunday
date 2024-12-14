@@ -136,8 +136,3 @@ declare type TransformedImageProps = {
   hasDownload?: boolean;
   setIsTransforming?: React.Dispatch<React.SetStateAction<boolean>>;
 };
-
-
-declare type ProjectProps = {
-  data?: [] | null
-}

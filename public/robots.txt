@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://cococstudio.com/
+
+# Sitemaps
+Sitemap: https://cococstudio.com/sitemap.xml

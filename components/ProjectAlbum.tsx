@@ -1,5 +1,5 @@
 import React from 'react'
-import { LayoutGrid } from "@/components/ui/LayoutGrid"
+import {LayoutGrid} from "@/components/shared/LayoutGrid";
 
 const ProjectAlbum = () => {
   return (

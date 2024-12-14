@@ -1,22 +1,18 @@
-import Footer from "@/components/Footer"
-import { FloatingNav } from "@/components/ui/FloatingNav"
-import { LampContainer } from "@/components/ui/Lamp"
-import { Toaster } from "@/components/ui/toaster"
-import { navItems } from "@/constants"
+import Navbar from "@/components/Navbar";
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import Footer from "@/components/Footer";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+export default function Layout({children}: Readonly<{
+  children: React.ReactNode
+}>) {
+
   return (
-    <main className="root">
-      <div className="max-w-7xl w-full mx-auto mt-[8rem]">
-        <FloatingNav
-          navItems={navItems}
-        />
-        {children}
-        <Footer />
-      </div>
-      <Toaster />
+    <main className={"font-work-sans"}>
+      {/*<Navbar/>*/}
+      <Header />
+      {children}
+      <Footer />
     </main>
   )
 }
-
-export default Layout

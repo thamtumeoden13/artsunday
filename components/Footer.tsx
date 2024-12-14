@@ -1,51 +1,65 @@
-import React from 'react'
-import MagicButton from "./ui/MagicButton"
-import { FaLocationArrow } from "react-icons/fa"
-import { socialMedia } from "@/constants"
+'use client';
 
-const Footer = () => {
-  return (
-    <footer id="contact" className="w-full pt-10 relative overflow-hidden">
-      <div className="w-full absolute left-0 -bottom-72 min-h-96">
-        <img src="/footer-grid.svg" alt="footer" className="w-full h-full opacity-50" />
-      </div>
+import { motion } from 'framer-motion';
 
-      <div className="flex flex-col items-center relative">
-        <h1 className="heading">
-          Ready to take <span className="text-purple">digital presence to the next level?</span>
-        </h1>
+import { socials } from '../constants';
+import styles from '@/styles';
+import { footerVariants } from '@/lib/utils';
 
-        <p className="text-white-200 md:mt-10 my-5 text-center">
-          React out to me today let&apos;s discuss how I can help you achieve your goals.
-        </p>
+const Footer = () => (
+	<motion.footer
+		variants={footerVariants}
+		initial="hidden"
+		whileInView="show"
+		className={`${styles.paddings} py-8 relative bg-black overflow-hidden`}
+	>
+		<div className="footer-gradient" />
+		<div
+			className={`${styles.innerWidth} mx-auto flex flex-col gap-8 max-w-7xl`}
+		>
+			<div
+				className="flex items-center justify-between flex-wrap gap-5"
+			>
+				<h4
+					className="font-bold md:text-[64px] text-[44px] text-white"
+				>
+					Enter the Metaverse
+				</h4>
+				<button
+					type="button"
+					className="flex items-center h-fit py-4 px-6 bg-[#25618b] rounded-[32px] gap-[12px]"
+				>
+					<img
+						src="/headset.svg"
+						alt="headset"
+						className="w-[24px] h-[24px] object-contain"
+					/>
+					<span className="font-normal text-[16px] text-white">ENTER METAVERSE</span>
+				</button>
+			</div>
+			<div className="flex flex-col">
+				<div className="mb-[50px] h-[2px] bg-white opacity-10" />
+				<div
+					className="flex items-center justify-between flex-wrap gap-4"
+				>
+					<h4 className="font-extrabold text-[24px] text-white">Metaverse</h4>
+					<p className="font-normal text-[14px] text-white opacity-50">
+						Copyright © 2021 - 2022 Metaverse. All rights reserved.
+					</p>
+					<div className="flex gap-4">
+						{socials.map((social, index) => (
+							<img
+								key={social.name}
+								src={social.url}
+								alt={social.name}
+								className="w-[24px] h-[24px] object-contain cursor-pointer"
+							/>
+						))}
+					</div>
+				</div>
+			</div>
+		</div>
+	</motion.footer>
+);
 
-        <a href="mailto:ltv.mrvu@gmail.com">
-          <MagicButton
-            title="Let's get in touch"
-            icon={<FaLocationArrow />}
-            position="right"
-          />
-        </a>
-      </div>
-
-      <div className="flex mt-16 md:flex-row flex-col justify-between items-center relative">
-        <p className="md:text-base text-sm md:font-normal font-light">
-          Copyright © 2024 Mr.Vu
-        </p>
-
-        <div className="flex items-center md:gap-3 gap-6">
-          {socialMedia.map((profile) => (
-            <div
-              key={profile.id}
-              className="w-10 h-10 cursor-pointer flex justify-center items-center backdrop-filter backdrop-blur-lg saturate-180 bg-opacity-75 bg-black-200 rounded-lg border border-black-300"
-            >
-              <img src={profile.img} alt={profile.id.toString()} width={20} height={20} />
-            </div>
-          ))}
-        </div>
-      </div>
-    </footer>
-  )
-}
-
-export default Footer
+export default Footer;

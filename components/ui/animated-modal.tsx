@@ -1,5 +1,4 @@
 "use client";
-import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import React, {
   ReactNode,
@@ -9,6 +8,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { cn } from "@/lib/utils";
 
 interface ModalContextType {
   open: boolean;
@@ -39,18 +39,19 @@ export function Modal({ children }: { children: ReactNode }) {
   return <ModalProvider>{children}</ModalProvider>;
 }
 
-export const ModalTrigger = ({
-  children,
-  className,
-}: {
-  children: ReactNode;
-  className?: string;
-}) => {
+export const ModalTrigger = (
+  {
+    children,
+    className,
+  }: {
+    children: ReactNode;
+    className?: string;
+  }) => {
   const { setOpen } = useModal();
   return (
     <button
       className={cn(
-        "px-4 py-2 rounded-md text-black dark:text-white text-center relative overflow-hidden",
+        "py-2 rounded-md text-black dark:text-white text-center relative overflow-hidden",
         className
       )}
       onClick={() => setOpen(true)}

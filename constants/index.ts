@@ -1,108 +1,97 @@
-export const navItems = [
-  { name: "Home", link: "/home" },
-  { name: "Projects", link: "/project" },
-  { name: "Testimonials", link: "/#testimonials" },
-  { name: "Contact", link: "/#contact" },
+
+// export const socials = [
+//   {
+//     id: '0',
+//     title: 'x',
+//     icon: '/images/socials/x.svg',
+//     url: '#',
+//   },
+//   {
+//     id: '1',
+//     title: 'Threads',
+//     icon: '/images/socials/threads.svg',
+//     url: '#',
+//   },
+//   {
+//     id: '2',
+//     title: 'Instagram',
+//     icon: '/images/socials/instagram.svg',
+//     url: '#',
+//   },
+//   {
+//     id: '3',
+//     title: 'Discord',
+//     icon: '/images/socials/discord.svg',
+//     url: '#',
+//   },
+// ];
+
+export const socials = [
+  {
+    name: 'twitter',
+    url: '/twitter.svg',
+  },
+  {
+    name: 'linkedin',
+    url: '/linkedin.svg',
+  },
+  {
+    name: 'instagram',
+    url: '/instagram.svg',
+  },
+  {
+    name: 'facebook',
+    url: '/facebook.svg',
+  },
 ];
 
-export const gridItems = [
+export const insights = [
+  {
+    imgUrl: '/planet-06.png',
+    title: 'The launch of the Metaverse makes Elon musk ketar-ketir',
+    subtitle:
+        'Magna etiam tempor orci eu lobortis elementum nibh tellus molestie. Diam maecenas sed enim ut sem viverra alique.',
+  },
+  {
+    imgUrl: '/planet-07.png',
+    title: '7 tips to easily master the madness of the Metaverse',
+    subtitle:
+        'Vitae congue eu consequat ac felis donec. Et magnis dis parturient montes nascetur ridiculus mus. Convallis tellus id interdum',
+  },
+  {
+    imgUrl: '/planet-08.png',
+    title: 'With one platform you can explore the whole world virtually',
+    subtitle:
+        'Quam quisque id diam vel quam elementum. Viverra nam libero justo laoreet sit amet cursus sit. Mauris in aliquam sem',
+  },
+];
+
+export const imageSliders = [
   {
     id: 1,
-    title: "I prioritize client collaboration, fostering open communication ",
-    description: "",
-    className: "lg:col-span-3 md:col-span-6 md:row-span-4 lg:min-h-[60vh]",
-    imgClassName: "w-full h-full",
-    titleClassName: "justify-end",
-    img: "/b1.svg",
-    spareImg: "",
+    title: 'Thiết Kế Biệt Thự Hiện Đại',
+    desc: "Thiết Kế Nội Thất Biệt Thự Phong Cách Hiện Đại - TDM Bình Dương",
+    img: "/assets/images/Art-sunday-thiet-ke-biet-thu-01.jpg",
   },
   {
     id: 2,
-    title: "I'm very flexible with time zone communications",
-    description: "",
-    className: "lg:col-span-2 md:col-span-3 md:row-span-2",
-    imgClassName: "",
-    titleClassName: "justify-start",
-    img: "",
-    spareImg: "",
+    title: 'Thiết Kế Nhà Phố Hiện Đại',
+    desc: "Thiết Kế Nhà Phố Phong Cách Hiện Đại Tại Biên Hòa",
+    img: "/assets/images/Art-sunday-thiet-ke-nha-mai-thai-tan-uyen-binh-duong-03.jpg",
   },
   {
     id: 3,
-    title: "My tech stack",
-    description: "I constantly try to improve",
-    className: "lg:col-span-2 md:col-span-3 md:row-span-2",
-    imgClassName: "",
-    titleClassName: "justify-center",
-    img: "",
-    spareImg: "",
+    title: 'Thiết Kế Biệt Thự Mini',
+    desc: "Biệt Thự Mini 2 Tầng Mái Thái 8,5x10m Tại Thanh Hóa",
+    img: "/assets/images/Art-sunday-thiet-ke-nha-pho-san-vuon-phong-cach-hien-dai-03.jpg",
   },
   {
     id: 4,
-    title: "Tech enthusiast with a passion for development.",
-    description: "",
-    className: "lg:col-span-2 md:col-span-3 md:row-span-1",
-    imgClassName: "",
-    titleClassName: "justify-start",
-    img: "/grid.svg",
-    spareImg: "/b4.svg",
+    title: 'Thiết Kế Biệt Thự Cổ Điển',
+    desc: "Mẫu Thiết Kế Biệt Thự Cổ Điển Tại Tp.Thuận An, Bình Dương 8x20m",
+    img: "/assets/images/Art-sunday-thiet-ke-noi-that-biet-thu-phong-cach-hien-dai-TDM-01.jpg",
   },
-
-  {
-    id: 5,
-    title: "Currently building a JS Animation library",
-    description: "The Inside Scoop",
-    className: "md:col-span-3 md:row-span-2",
-    imgClassName: "absolute right-0 bottom-0 md:w-96 w-60",
-    titleClassName: "justify-center md:justify-start lg:justify-center",
-    img: "/b5.svg",
-    spareImg: "/grid.svg",
-  },
-  {
-    id: 6,
-    title: "Do you want to start a project together?",
-    description: "",
-    className: "lg:col-span-2 md:col-span-3 md:row-span-1",
-    imgClassName: "",
-    titleClassName: "justify-center md:max-w-full max-w-60 text-center",
-    img: "",
-    spareImg: "",
-  },
-];
-
-export const projects = [
-  {
-    id: 1,
-    title: "3D Solar System Planets to Explore",
-    des: "Explore the wonders of our solar system with this captivating 3D simulation of the planets using Three.js.",
-    img: "/p1.svg",
-    iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/fm.svg"],
-    link: "https://github.com/adrianhajdin?tab=repositories",
-  },
-  {
-    id: 2,
-    title: "Yoom - Video Conferencing App",
-    des: "Simplify your video conferencing experience with Yoom. Seamlessly connect with colleagues and friends.",
-    img: "/p2.svg",
-    iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/stream.svg", "/c.svg"],
-    link: "https://github.com/adrianhajdin/zoom-clone",
-  },
-  {
-    id: 3,
-    title: "AI Image SaaS - Canva Application",
-    des: "A REAL Software-as-a-Service app with AI features and a payments and credits system using the latest tech stack.",
-    img: "/p3.svg",
-    iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/c.svg"],
-    link: "https://github.com/adrianhajdin/ai_saas_app",
-  },
-  {
-    id: 4,
-    title: "Animated Apple Iphone 3D Website",
-    des: "Recreated the Apple iPhone 15 Pro website, combining GSAP animations and Three.js 3D effects..",
-    img: "/p4.svg",
-    iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/three.svg", "/gsap.svg"],
-    link: "https://github.com/adrianhajdin/iphone",
-  },
-];
+]
 
 export const testimonials = [
   {
@@ -137,38 +126,6 @@ export const testimonials = [
   },
 ];
 
-export const companies = [
-  {
-    id: 1,
-    name: "cloudinary",
-    img: "/cloud.svg",
-    nameImg: "/cloudName.svg",
-  },
-  {
-    id: 2,
-    name: "appwrite",
-    img: "/app.svg",
-    nameImg: "/appName.svg",
-  },
-  {
-    id: 3,
-    name: "HOSTINGER",
-    img: "/host.svg",
-    nameImg: "/hostName.svg",
-  },
-  {
-    id: 4,
-    name: "stream",
-    img: "/s.svg",
-    nameImg: "/streamName.svg",
-  },
-  {
-    id: 5,
-    name: "docker.",
-    img: "/dock.svg",
-    nameImg: "/dockerName.svg",
-  },
-];
 
 export const workExperience = [
   {
@@ -201,70 +158,93 @@ export const workExperience = [
   },
 ];
 
-export const socialMedia = [
+export const faq = [
   {
-    id: 1,
-    img: "/git.svg",
+      id: '0',
+      question: 'How easy is it to setup Xora?',
+      answer:
+          'Absolutely! Not only you can upgrade your plan at any time but you also get a prorated discount giving you maximum value for your subscription.',
   },
   {
-    id: 2,
-    img: "/twit.svg",
+      id: '1',
+      question: 'Can I integrate Xora with other platforms?',
+      answer:
+          'Absolutely! Not only you can upgrade your plan at any time but you also get a prorated discount giving you maximum value for your subscription.',
   },
   {
-    id: 3,
-    img: "/link.svg",
+      id: '2',
+      question: 'How often do you add new content?',
+      answer:
+          'Absolutely! Not only you can upgrade your plan at any time but you also get a prorated discount giving you maximum value for your subscription.',
+  },
+  {
+      id: '3',
+      question: 'What your refund policy?',
+      answer:
+          'Absolutely! Not only you can upgrade your plan at any time but you also get a prorated discount giving you maximum value for your subscription.',
+  },
+  {
+      id: '4',
+      question: 'Do you have corporate plans?',
+      answer:
+          'Absolutely! Not only you can upgrade your plan at any time but you also get a prorated discount giving you maximum value for your subscription.',
+  },
+  {
+      id: '5',
+      question: 'What happens when I’m out of storage?',
+      answer:
+          'Absolutely! Not only you can upgrade your plan at any time but you also get a prorated discount giving you maximum value for your subscription.',
+  },
+  {
+      id: '6',
+      question: 'Can I upgrade my plan?',
+      answer:
+          'Absolutely! Not only you can upgrade your plan at any time but you also get a prorated discount giving you maximum value for your subscription.',
+  },
+  {
+      id: '7',
+      question: 'How do I invite my team?',
+      answer:
+          'Absolutely! Not only you can upgrade your plan at any time but you also get a prorated discount giving you maximum value for your subscription.',
+  },
+  {
+      id: '8',
+      question: 'Do you offer training for individuals and teams?',
+      answer:
+          'Absolutely! Not only you can upgrade your plan at any time but you also get a prorated discount giving you maximum value for your subscription.',
+  },
+  {
+      id: '9',
+      question: 'I’m locked out of my account what do I do?',
+      answer:
+          'Absolutely! Not only you can upgrade your plan at any time but you also get a prorated discount giving you maximum value for your subscription.',
   },
 ];
 
-export const imageSliders = [
+export const exploreWorlds = [
   {
-    id: 1,
-    title: 'Thiết Kế Biệt Thự Hiện Đại',
-    desc: "Thiết Kế Nội Thất Biệt Thự Phong Cách Hiện Đại - TDM Bình Dương",
-    img: "/assets/images/Art-sunday-thiet-ke-biet-thu-01.jpg",
-  },
-  {
-    id: 2,
-    title: 'Thiết Kế Nhà Phố Hiện Đại',
-    desc: "Thiết Kế Nhà Phố Phong Cách Hiện Đại Tại Biên Hòa",
-    img: "/assets/images/Art-sunday-thiet-ke-nha-mai-thai-tan-uyen-binh-duong-03.jpg",
+    id: 'world-1',
+    imgUrl: '/planet-01.png',
+    title: 'The Hogwarts',
   },
   {
-    id: 3,
-    title: 'Thiết Kế Biệt Thự Mini',
-    desc: "Biệt Thự Mini 2 Tầng Mái Thái 8,5x10m Tại Thanh Hóa",
-    img: "/assets/images/Art-sunday-thiet-ke-nha-pho-san-vuon-phong-cach-hien-dai-03.jpg",
+    id: 'world-2',
+    imgUrl: '/planet-02.png',
+    title: 'The Upside Down',
   },
   {
-    id: 4,
-    title: 'Thiết Kế Biệt Thự Cổ Điển',
-    desc: "Mẫu Thiết Kế Biệt Thự Cổ Điển Tại Tp.Thuận An, Bình Dương 8x20m",
-    img: "/assets/images/Art-sunday-thiet-ke-noi-that-biet-thu-phong-cach-hien-dai-TDM-01.jpg",
+    id: 'world-3',
+    imgUrl: '/planet-03.png',
+    title: 'Kadirojo Permai',
   },
-]
-
-export const defaultValues = {
-  search: "",
-  type: "",
-};
-
-export const aspectRatioOptions = {
-  "1:1": {
-    aspectRatio: "1:1",
-    label: "Square (1:1)",
-    width: 1000,
-    height: 1000,
+  {
+    id: 'world-4',
+    imgUrl: '/planet-04.png',
+    title: 'Paradise Island',
   },
-  "3:4": {
-    aspectRatio: "3:4",
-    label: "Standard Portrait (3:4)",
-    width: 1000,
-    height: 1334,
+  {
+    id: 'world-5',
+    imgUrl: '/planet-05.png',
+    title: 'Hawkins Labs',
   },
-  "9:16": {
-    aspectRatio: "9:16",
-    label: "Phone Portrait (9:16)",
-    width: 1000,
-    height: 1778,
-  },
-};
+];
