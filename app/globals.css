@@ -210,7 +210,7 @@
   }
 
   .card_grid-xs {
-    @apply grid sm:grid-cols-1 gap-5;
+    @apply grid grid-cols-[repeat(1,330px)] gap-5;
   }
 
   .no-result {
@@ -308,7 +308,7 @@
   }
 
   .simple-card_img {
-    @apply w-full h-[164px] rounded-[10px] object-cover;
+    @apply w-[280px] h-[200px] rounded-[10px] object-cover;
   }
 
   .simple-card_btn {

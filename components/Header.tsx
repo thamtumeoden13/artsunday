@@ -108,7 +108,7 @@ const Header = () => {
                     )}
                   >
                     <Image
-                      src="/logo-1.png"
+                      src="/images/artsunday.png"
                       alt="logo"
                       width={60}
                       height={30}

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import SearchForm from "@/components/SearchForm";
 import StartupCard, { StartupCardType } from "@/components/StartupCard";
@@ -8,6 +9,8 @@ import { auth } from "@/auth";
 import Hero from "@/components/Hero";
 import ConstructionList from "@/components/ConstructionList";
 import MarkupSchema from "@/components/shared/MarkupSchema";
+import { AppleCardsCarousel } from "@/components/AppleCardsCarousel";
+import SimpleCard from "@/components/SimpleCard";
 
 export default async function Home({ searchParams }: {
   searchParams: Promise<{ query?: string }>
@@ -30,8 +33,10 @@ export default async function Home({ searchParams }: {
 
   return (
     <>
-      <MarkupSchema post={{}} path=""/>
-      <Hero />
+      <MarkupSchema post={{}} path="" />
+      <section className="section_container !max-w-full mt-16 bg-black-200 justify-items-center !overflow-hidden">
+        <AppleCardsCarousel />
+      </section>
       <section className={"pink_container"}>
         <h1 className={"heading"}>
           Pitch Your Startup, <br /> Connect With Entrepreneurs
@@ -42,18 +47,18 @@ export default async function Home({ searchParams }: {
           Competition
         </p>
 
-        <SearchForm query={query} search="Projects" />
+        <SearchForm query={query} search="Dự Án" />
       </section>
 
       {query ? (
-        <section className={"section_container"}>
+        <section className={"section_container !justify-items-center"}>
           <p className={"text-30-semibold"}>
             {`Tìm kiếm cho "${query}"`}
           </p>
           <ul className={"mt-7 card_grid"}>
             {searchForProjectDetails?.length > 0 ? (
               searchForProjectDetails.map((post: StartupCardType) => (
-                <StartupCard key={post?._id} post={post} path="project" />
+                <SimpleCard key={post?._id} post={post} path="du-an" />
               ))
             ) : (
               <p className={"no-result"}>
@@ -77,14 +82,14 @@ export default async function Home({ searchParams }: {
   );
 }
 
-export const metadata = {
-  title: "Thiết Kế, Xây Dựng | cococstudio",
-  description: "Mô tả ngắn gọn về sản phẩm, giúp tăng khả năng hiển thị trên Google.",
+export const metadata: Metadata = {
+  title: "CÔNG TY TNHH KIẾN TRÚC XÂY DỰNG ART SUNDAY",
+  description: "Thiết Kế Và Thi Công Kiến Trúc: Nhà Phố, Biệt Thự, Khách Sạn, Nhà Thờ, Nhà Giáo Lý Và Nội Thất Chuyên Nghiệp",
   keywords: ["Biệt Thự", "Nhà Phố", "Nội Thất", "Công Trình Công Giáo"],
   openGraph: {
-    title: "Thiết Kế, Xây Dựng | cococstudio",
-    description: "Mô tả chi tiết sản phẩm.",
-    url: "https://cococstudio.com/",
+    title: "Kiến Trúc, Xây Dựng | ART SUNDAY",
+    description: "Thiết Kế Và Thi Công Kiến Trúc: Nhà Phố, Biệt Thự, Khách Sạn, Nhà Thờ, Nhà Giáo Lý Và Nội Thất Chuyên Nghiệp.",
+    url: "https://artsunday.vn/",
     images: [
       {
         url: "https://images.pexels.com/photos/3797991/pexels-photo-3797991.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
@@ -95,8 +100,13 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@twitterhandle",
-    title: "Sản phẩm | Tên website",
-    description: "Mô tả chi tiết sản phẩm.",
-    images: ["https://example.com/image.jpg"],
+    title: "Kiến Trúc, Xây Dựng | ART SUNDAY",
+    description: "Thiết Kế Và Thi Công Kiến Trúc: Nhà Phố, Biệt Thự, Khách Sạn, Nhà Thờ, Nhà Giáo Lý Và Nội Thất Chuyên Nghiệp.",
+    images: [
+      {
+        url: "https://images.pexels.com/photos/3797991/pexels-photo-3797991.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        alt: "noi-that",
+      },
+    ],
   },
 };

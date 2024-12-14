@@ -9,6 +9,8 @@ import Hero from "@/components/Hero";
 import ProjectList from "@/components/ProjectList";
 import ProjectDetailList from "@/components/ProjectDetailList";
 import MarkupSchema from "@/components/shared/MarkupSchema";
+import { Metadata } from "next/types";
+import SimpleCard from "@/components/SimpleCard";
 // import BreadcrumbComponent from "@/components/shared/Breadcrumb";
 
 export default async function Home({ searchParams }: {
@@ -49,7 +51,7 @@ export default async function Home({ searchParams }: {
         <ul className={"mt-7 card_grid"}>
           {searchForProjects?.length > 0 ? (
             searchForProjects.map((post: StartupCardType) => (
-              <StartupCard key={post?._id} post={post} path="chi-tiet-du-an" />
+              <SimpleCard key={post?._id} post={post} path="chi-tiet-du-an" />
             ))
           ) : (
             <p className={"no-result"}>
@@ -74,3 +76,32 @@ export default async function Home({ searchParams }: {
     </>
   );
 }
+
+export const metadata: Metadata = {
+  title: "CÔNG TY TNHH KIẾN TRÚC XÂY DỰNG ART SUNDAY",
+  description: "Thiết Kế Và Thi Công Kiến Trúc: Nhà Phố, Biệt Thự, Khách Sạn, Nhà Thờ, Nhà Giáo Lý Và Nội Thất Chuyên Nghiệp",
+  keywords: ["Biệt Thự", "Nhà Phố", "Nội Thất", "Công Trình Công Giáo"],
+  openGraph: {
+    title: "Kiến Trúc, Xây Dựng | ART SUNDAY",
+    description: "Thiết Kế Và Thi Công Kiến Trúc: Nhà Phố, Biệt Thự, Khách Sạn, Nhà Thờ, Nhà Giáo Lý Và Nội Thất Chuyên Nghiệp.",
+    url: "https://artsunday.vn/",
+    images: [
+      {
+        url: "https://images.pexels.com/photos/3797991/pexels-photo-3797991.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        alt: "noi-that",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@twitterhandle",
+    title: "Kiến Trúc, Xây Dựng | ART SUNDAY",
+    description: "Thiết Kế Và Thi Công Kiến Trúc: Nhà Phố, Biệt Thự, Khách Sạn, Nhà Thờ, Nhà Giáo Lý Và Nội Thất Chuyên Nghiệp.",
+    images: [
+      {
+        url: "https://images.pexels.com/photos/3797991/pexels-photo-3797991.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        alt: "noi-that",
+      },
+    ],
+  },
+};

@@ -65,14 +65,13 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
                 <ul className={"mt-7 card_grid-xs "}>
                   {releatedPosts.map((post: StartupCardType, index: number) => (
-                    <SimpleCard key={index} post={post} />
+                    <SimpleCard key={index} post={post} path='chi-tiet-du-an' />
                   ))}
                 </ul>
               </div>
             )}
           </div>
         </div>
-        <AppleCardsCarousel />
 
         <hr className={"divider !max-w-full"} />
 

@@ -57,8 +57,8 @@ const workSans = localFont({
 })
 
 export const metadata: Metadata = {
-  title: "Coccoc Studio",
-  description: "Make your's brand larger",
+  title: "CÔNG TY TNHH KIẾN TRÚC XÂY DỰNG ART SUNDAY",
+  description: "Thiết Kế Và Thi Công Kiến Trúc: Nhà Phố, Biệt Thự, Khách Sạn, Nhà Thờ, Nhà Giáo Lý Và Nội Thất Chuyên Nghiệp",
 };
 
 export default function RootLayout({

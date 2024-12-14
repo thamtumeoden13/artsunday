@@ -233,7 +233,7 @@ export const PROJECTS_BY_CONSTRUCTION_ID_QUERY =
 }`);
 
 export const PROJECT_DETAILS_BY_QUERY =
-  defineQuery(`*[_type == "projectDetail" && !defined($search) || title match $search || author->name match $search] | order(_createdAt desc) {
+  defineQuery(`*[_type == "projectDetail" && defined(slug.current) && !defined($search) || title match $search || author->name match $search] | order(_createdAt desc) {
   _id, 
   title, 
   subtitle,

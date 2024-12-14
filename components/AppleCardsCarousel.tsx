@@ -3,16 +3,18 @@ import Image from "next/image";
 import React from "react";
 import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
 
-export function AppleCardsCarousel() {
+export function AppleCardsCarousel({ title }: { title?: string }) {
   const cards = data.map((card, index) => (
-    <Card key={card.src} card={card} index={index} />
+    <Card key={card.src} card={card} index={index} className="lg:h-[72vh] md:h-[60vh]" />
   ));
 
   return (
-    <div className="w-full h-full py-20">
-      <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-neutral-800 dark:text-neutral-200 font-sans">
-        Get to know your iSad.
-      </h2>
+    <div className="max-w-full h-full">
+      {title &&
+        <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-neutral-800 dark:text-neutral-200 font-sans">
+          {title}
+        </h2>
+      }
       <Carousel items={cards} />
     </div>
   );

@@ -32,14 +32,14 @@ const StartupCard = ({ post, path }: { post: StartupCardType, path: string }) =>
       </div>
 
       <div className={"flex-between mt-5 gap-5"}>
-        <div className={"flex-1"}>
+        <div className={"flex-1 h-20"}>
           <Link href={`/user/${author?._id}`}>
             <p className={"text-16-medium line-clamp-1"}>
               {author?.name}
             </p>
           </Link>
           <Link href={`/${path}/${slug?.current}`}>
-            <h3 className={"text-26-semibold line-clamp-2 h-20"}>{title}</h3>
+            <h3 className={"text-26-semibold line-clamp-2"}>{title}</h3>
           </Link>
         </div>
         <Link href={`/user/${author?._id}`}>

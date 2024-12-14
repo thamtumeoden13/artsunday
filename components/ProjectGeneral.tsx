@@ -28,6 +28,8 @@ const ProjectGeneral = ({ post }: { post: StartupCardType }) => {
   //   setImageSelected(image)
   // }
 
+  console.log(post)
+
   if (!post) return notFound();
 
   const parsedContent = md.render(post?.pitch || '');
@@ -58,7 +60,7 @@ const ProjectGeneral = ({ post }: { post: StartupCardType }) => {
               </div>
             </Link>
 
-            <p className={"category-tag"}>{post.category}</p>
+            <p className={"category-tag"}>{post?.project?.title}</p>
           </div>
           <div className="text-sm prose max-w-7xl dark:prose-invert">
             {post?.image && (
