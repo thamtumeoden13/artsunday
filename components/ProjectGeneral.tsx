@@ -76,14 +76,14 @@ const ProjectGeneral = ({ post }: { post: StartupCardType }) => {
             {/* {item.description} */}
           </div>
 
-          <h3 className={"text-30-bold"}>Pitch Details</h3>
+          <h3 className={"text-30-bold"}>Bài Viết Chi Tiết</h3>
           {parsedContent ? (
             <article
               className={"prose max-w-7xl font-work-sans break-all"}
               dangerouslySetInnerHTML={{ __html: parsedContent }}
             />
           ) : (
-            <p className={"no-result"}>No details provided</p>
+            <p className={"no-result"}>Không tìm thấy thông tin phù hợp</p>
           )}
         </div>
       </div>

@@ -53,14 +53,14 @@ export default async function Constructions({ params }: { params: Promise<{ slug
         <ProjectList key={data?._id} post={data} />
 
         <div className={"space-y-5 mt-10 max-w-7xl mx-auto"}>
-          <h3 className={"text-30-bold"}>Pitch Details</h3>
+          <h3 className={"text-30-bold"}>Bài Viết Chi Tiết</h3>
           {parsedContent ? (
             <article
               className={"prose max-w-4xl font-work-sans break-all"}
               dangerouslySetInnerHTML={{ __html: parsedContent }}
             />
           ) : (
-            <p className={"no-result"}>No details provided</p>
+            <p className={"no-result"}>Không tìm thấy thông tin phù hợp</p>
           )}
         </div>
 
@@ -79,26 +79,26 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { data } = await sanityFetch({ query: CONSTRUCTION_BY_SLUG_QUERY, params: { slug } });
 
   return {
-    title: `${data.title} - Cốc Cốc Studio`,
-    description: `${data.description}`,
+    title: `${data?.title} - Cốc Cốc Studio`,
+    description: `${data?.description}`,
     openGraph: {
-      title: `${data.title} - Cốc Cốc Studio`,
-      description: `${data.description}`,
+      title: `${data?.title} - Cốc Cốc Studio`,
+      description: `${data?.description}`,
       url: `http://cococstudio.com/hang-muc/${slug}`,
       images: [
         {
           url: data.image,
           width: 800,
           height: 600,
-          alt: data.title,
+          alt: data?.title,
         },
       ],
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${data.name} - Cốc Cốc Studio`,
-      description: `${data.description}`,
-      images: [data.image],
+      title: `${data?.name} - Cốc Cốc Studio`,
+      description: `${data?.description}`,
+      images: [data?.image],
     },
   };
 }

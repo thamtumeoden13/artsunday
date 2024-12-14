@@ -37,14 +37,13 @@ export default async function Home({ searchParams }: {
       <section className="section_container !max-w-full mt-16 bg-black-200 justify-items-center !overflow-hidden">
         <AppleCardsCarousel />
       </section>
-      <section className={"pink_container"}>
+      <section className={"pink_container !min-h-[230px]"}>
         <h1 className={"heading"}>
-          Pitch Your Startup, <br /> Connect With Entrepreneurs
+          Kết Nối Với Chúng Tôi
         </h1>
 
         <p className={"sub-heading !max-w-3xl"}>
-          Submit Ideas, Vote on Pitches, and Get Noticed in Virtual
-          Competition
+          Hãy Chọn Hạng mục, Dự Án Mà Bạn Quan Tâm.
         </p>
 
         <SearchForm query={query} search="Dự Án" />

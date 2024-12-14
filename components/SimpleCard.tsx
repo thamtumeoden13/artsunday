@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Author, Startup } from "@/sanity/types";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 
 export type SimpleCard = Omit<Startup, "author"> & { author?: Author };
 
@@ -40,7 +41,16 @@ const SimpleCard = ({ post, path }: { post: SimpleCard, path: string }) => {
             </p>
           </Link> */}
           <Link href={`/${path}/${slug?.current}`}>
-            <h3 className={"text-20-medium !font-semibold line-clamp-2 "}>{title}</h3>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
+                  <h3 className={"text-20-medium !font-semibold line-clamp-2 !text-left"}>{title}</h3>
+                </TooltipTrigger>
+                <TooltipContent side="bottom" align="start" >
+                  <p className='text-left text-white-100'> {title}</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </Link>
         </div>
         {/* <Link href={`/user/${author?._id}`}>

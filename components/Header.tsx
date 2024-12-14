@@ -6,6 +6,9 @@ import { usePathname } from 'next/navigation'
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
+import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
+import { HoveredLink, Menu, MenuItem, ProductItem } from "./ui/navbar-menu";
+import { constructionNavList, projectNavList } from "@/constants";
 
 const Header = () => {
 
@@ -17,6 +20,8 @@ const Header = () => {
   const [hasScrolled, setHasScrolled] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
+
+  const [active, setActive] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -84,23 +89,25 @@ const Header = () => {
               "w-full max-lg:relative max-lg:flex max-lg:flex-col max-lg:min-h-screen max-lg:p-6 max-lg:overflow-hidden sidebar-before max-md:px-4"
             }
           >
-            <nav className={"max-lg:relative max-lg:z-2 max-lg:my-auto"}>
+            <Menu setActive={setActive}>
               <ul className={"flex max-lg:block max-lg:px-12"}>
                 <li className={"nav-li"}>
                   <NavLink name={"Trang Chủ"} route={"/"} />
                   <div className={"dot"} />
-                  <NavLink name={"Hạng Mục"} route={"/hang-muc"} />
-                  </li>
+                  <MenuItem setActive={setActive} active={active} item="construction" name={"Hạng Mục"} route={"/hang-muc"}>
+                    <div className="  text-sm grid grid-cols-2 gap-10 p-4">
+                      {constructionNavList.map(({ title, href, src, description }) => (
+                        <ProductItem
+                          title={title}
+                          href={href}
+                          src={src}
+                          description={description}
+                        />
+                      ))}
+                    </div>
+                  </MenuItem>
+                </li>
                 <li className={"nav-logo"}>
-                  {/* <LinkScroll
-                    to={"hero"}
-                    offset={-250}
-                    spy
-                    smooth
-                    className={clsx(
-                      "max-lg:hidden transition-transform duration-500 cursor-pointer",
-                    )}
-                  > */}
                   <Link
                     href={`/`}
                     className={clsx(
@@ -118,12 +125,23 @@ const Header = () => {
                 </li>
 
                 <li className={"nav-li"}>
-                  <NavLink name={"Dự Án"} route={"/du-an"} />
+                  <MenuItem setActive={setActive} active={active} item="project" name={"Dự Án"} route={"/du-an"} >
+                    <div className="  text-sm grid grid-cols-2 gap-10 p-4">
+                      {projectNavList.map(({ title, href, src, description }) => (
+                        <ProductItem
+                          title={title}
+                          href={href}
+                          src={src}
+                          description={description}
+                        />
+                      ))}
+                    </div>
+                  </MenuItem>
                   <div className={"dot"} />
                   <NavLink name={"Thông Tin"} route={"/about"} />
                 </li>
               </ul>
-            </nav>
+            </Menu>
 
             <div
               className={
