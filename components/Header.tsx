@@ -91,7 +91,7 @@ const Header = () => {
           >
             <Menu setActive={setActive}>
               <ul className={"flex max-lg:block max-lg:px-12"}>
-                <li className={"nav-li"}>
+                <li className={"nav-li max-lg:mb-4"}>
                   <NavLink name={"Trang Chủ"} route={"/"} />
                   <div className={"dot"} />
                   <MenuItem setActive={setActive} active={active} item="construction" name={"Hạng Mục"} route={"/hang-muc"}>

@@ -68,8 +68,8 @@ const SimpleCard = ({ post, path }: { post: SimpleCard, path: string }) => {
         <Image
           src={image!}
           alt={title!}
-          height={300}
-          width={300}
+          width={280}
+          height={200}
           className={"simple-card_img"}
         />
       </Link>

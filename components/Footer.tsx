@@ -10,6 +10,7 @@ import { TextGenerateEffect } from './TextGenerateEffect';
 import { Button } from './shared/MovingBorder';
 import { IconDirectionSign } from '@tabler/icons-react';
 import Link from 'next/link';
+import { HoverBorderGradient } from './ui/hover-border-gradient';
 
 const Footer = () => (
   <motion.footer
@@ -97,12 +98,18 @@ const Footer = () => (
           </p>
           <div className="flex gap-4">
             {socials.map((social, index) => (
-              <img
+              <HoverBorderGradient
                 key={social.name}
-                src={social.url}
-                alt={social.name}
-                className="w-[24px] h-[24px] object-contain cursor-pointer"
-              />
+                containerClassName="rounded-full"
+                as="button"
+                className="bg-black flex items-center"
+              >
+                <img
+                  src={social.url}
+                  alt={social.name}
+                  className="object-contain cursor-pointer"
+                />
+              </HoverBorderGradient>
             ))}
           </div>
         </div>
