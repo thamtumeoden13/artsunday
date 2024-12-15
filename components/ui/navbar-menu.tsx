@@ -15,7 +15,7 @@ const transition = {
 };
 
 // eslint-disable-next-line react/prop-types
-const NavLink = ({ name, route, }: { name: string, route?: string, }) => {
+const NavLink = ({ name, route, setIsOpen }: { name: string, route?: string, setIsOpen: (isOpen: boolean) => void, }) => {
   if (route) {
     return (
       <Link
@@ -23,6 +23,7 @@ const NavLink = ({ name, route, }: { name: string, route?: string, }) => {
         className={
           "base-bold text-p4 uppercase transition-colors duration-500 cursor-pointer hover:text-p1 max-lg:my-4 max-lg:h5"
         }
+        onClick={() => setIsOpen(false)}
       >
         {name}
       </Link>
@@ -51,6 +52,7 @@ export const MenuItem = ({
   item,
   name,
   route,
+  setIsOpen,
   children,
 }: {
   setActive: (item: string) => void;
@@ -58,6 +60,7 @@ export const MenuItem = ({
   item: string;
   name: string;
   route?: string;
+  setIsOpen: (isOpen: boolean) => void;
   children?: React.ReactNode;
 }) => {
   return (
@@ -66,7 +69,7 @@ export const MenuItem = ({
         transition={{ duration: 0.3 }}
         className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white"
       >
-        <NavLink name={name} route={route} />
+        <NavLink name={name} route={route} setIsOpen={setIsOpen} />
       </motion.p>
       {active !== null && (
         <motion.div

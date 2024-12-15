@@ -23,9 +23,9 @@ const ProjectList = async ({ post }: { post: StartupCardType }) => {
   if (!searchForProjects?.length) return null;
 
   return (
-    <section className={"section_container"}>
-      <Link href={`/hang-muc/${slug?.current}`}>
-        <h1 className="heading-half hover:underline" style={{ textAlign: 'left' }}>
+    <section className={"section_container !justify-items-center"}>
+      <Link href={`/hang-muc/${slug?.current}`} className='flex lg:w-[65rem] md:w-[43rem] w-[22rem]'>
+        <h1 className="heading-half hover:underline w-full" style={{ textAlign: 'left' }}>
           Thiết kế{'  '}
           <span className="text-purple">{title}</span>
         </h1>

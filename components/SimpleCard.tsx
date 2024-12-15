@@ -76,7 +76,10 @@ const SimpleCard = ({ post, path }: { post: SimpleCard, path: string }) => {
 
       <div className={"flex-between gap-3 mt-5"}>
         <Link href={`/?query=${category?.toLowerCase()}`}>
-          <p className={"text-16-medium"}>{category}</p>
+          <div className={"flex gap-1.5"}>
+            <EyeIcon className={"size-6 text-primary"} />
+            <span className={"text-16-medium"}>{views}</span>
+          </div>
         </Link>
         <Button className={"simple-card_btn"} asChild>
           <Link href={`/${path}/${slug?.current}`}>

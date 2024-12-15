@@ -18,9 +18,9 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
       <section className={"pink_container !bg-black"}>
         <section className={"section_container"}>
           <Experience />
-          <About />
-          <Insights />
-          <Explore />
+          {/* <About />
+          <Insights /> */}
+          {/* <Explore /> */}
         </section>
       </section>
     </>

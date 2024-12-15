@@ -32,19 +32,18 @@ export default async function Construction({ searchParams }: {
 
   return (
     <>
-      <MarkupSchema path="hang-muc"/>
+      <MarkupSchema path="hang-muc" />
 
       <section className={"pink_container !mt-32"}>
         <h1 className={"heading"}>
-          Pitch Your Startup, <br /> Connect With Entrepreneurs
+          Kết Nối Với Chúng Tôi
         </h1>
 
         <p className={"sub-heading !max-w-3xl"}>
-          Submit Ideas, Vote on Pitches, and Get Noticed in Virtual
-          Competition
+          Hãy Chọn Hạng Mục Mà Bạn Quan Tâm.
         </p>
 
-        <SearchForm query={query} path="construction" search="Constructions" />
+        <SearchForm query={query} path="hang-muc" search="Hạng Mục" />
       </section>
 
 

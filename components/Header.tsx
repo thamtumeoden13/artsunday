@@ -43,6 +43,7 @@ const Header = () => {
           className={
             "base-bold text-p4 uppercase transition-colors duration-500 cursor-pointer hover:text-p1 max-lg:my-4 max-lg:h5"
           }
+          onClick={() => setIsOpen(false)}
         >
           {name}
         </Link>
@@ -74,9 +75,9 @@ const Header = () => {
       )}
     >
       <div className={"container flex h-14 items-center max-lg:px-5"}>
-        <a className={"lg:hidden flex-1 cursor-pointer z-2"}>
+        <Link href={"/"} className={"lg:hidden flex-1 cursor-pointer z-2"}>
           <Image src="/logo-1.png" alt="logo" width={60} height={30} />
-        </a>
+        </Link>
 
         <div
           className={clsx(
@@ -94,7 +95,10 @@ const Header = () => {
                 <li className={"nav-li max-lg:mb-4"}>
                   <NavLink name={"Trang Chủ"} route={"/"} />
                   <div className={"dot"} />
-                  <MenuItem setActive={setActive} active={active} item="construction" name={"Hạng Mục"} route={"/hang-muc"}>
+                  <MenuItem setActive={setActive} active={active}
+                    item="construction" name={"Hạng Mục"} route={"/hang-muc"}
+                    setIsOpen={setIsOpen}
+                  >
                     <div className="  text-sm grid grid-cols-2 gap-10 p-4">
                       {constructionNavList.map(({ title, href, src, description }) => (
                         <ProductItem
@@ -125,7 +129,11 @@ const Header = () => {
                 </li>
 
                 <li className={"nav-li"}>
-                  <MenuItem setActive={setActive} active={active} item="project" name={"Dự Án"} route={"/du-an"} >
+                  <MenuItem
+                    setActive={setActive} active={active}
+                    item="project" name={"Dự Án"} route={"/du-an"}
+                    setIsOpen={setIsOpen}
+                  >
                     <div className="  text-sm grid grid-cols-2 gap-10 p-4">
                       {projectNavList.map(({ title, href, src, description }) => (
                         <ProductItem

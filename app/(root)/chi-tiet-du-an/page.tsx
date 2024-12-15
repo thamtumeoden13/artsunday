@@ -31,20 +31,19 @@ export default async function Home({ searchParams }: {
 
   return (
     <>
-      <MarkupSchema  path={`chi-tiet-du-an`}/>
-      
+      <MarkupSchema path={`chi-tiet-du-an`} />
+
       <section className={"pink_container !min-h-[230px] mt-32"}>
         <h1 className={"heading"}>
-          Pitch Your Startup, <br /> Connect With Entrepreneurs
+          Kết Nối Với Chúng Tôi
         </h1>
 
         <p className={"sub-heading !max-w-3xl"}>
-          Submit Ideas, Vote on Pitches, and Get Noticed in Virtual
-          Competition
+          Hãy Chọn Dự Án Mà Bạn Quan Tâm.
         </p>
-        <SearchForm query={query} path="chi-tiet-du-an"/>
+        <SearchForm query={query} path="chi-tiet-du-an" search="Dự Án"/>
       </section>
-      <section className={"section_container"}>
+      <section className={"section_container justify-items-center"}>
         <p className={"text-30-semibold"}>
           {query ? `Tìm kiếm cho "${query}"` : 'Tất cả dự án'}
         </p>

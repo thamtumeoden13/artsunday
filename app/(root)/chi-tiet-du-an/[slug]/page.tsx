@@ -40,7 +40,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   return (
     <>
       <MarkupSchema path={`chi-tiet-du-an/${slug}`} post={post} />
-      
+
       <section className={"pink_container !min-h-[230px] mt-32"}>
         <p className={"tag"}>{formatDate(post?._createdAt)}</p>
 
@@ -61,9 +61,9 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
           <div className='hidden lg:flex flex-col w-[36rem]'>
             {releatedPosts?.length > 0 && (
               <div className={"flex flex-col"}>
-                <p className={"text-30-semibold"}>Quan Tâm</p>
+                <p className={"heading-half !leading-[16px] !text-left w-[330px] !bg-black-100 rounded-tl-2xl"}>Quan Tâm</p>
 
-                <ul className={"mt-7 card_grid-xs "}>
+                <ul className={"mt-2 card_grid-xs "}>
                   {releatedPosts.map((post: StartupCardType, index: number) => (
                     <SimpleCard key={index} post={post} path='chi-tiet-du-an' />
                   ))}

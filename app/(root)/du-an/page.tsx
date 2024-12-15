@@ -33,14 +33,13 @@ export default async function Projects({ searchParams }: {
 
       <section className={"pink_container !min-h-[230px] mt-32"}>
         <h1 className={"heading"}>
-          Pitch Your Startup, <br /> Connect With Entrepreneurs
+          Kết Nối Với Chúng Tôi
         </h1>
 
         <p className={"sub-heading !max-w-3xl"}>
-          Submit Ideas, Vote on Pitches, and Get Noticed in Virtual
-          Competition
+          Hãy Chọn Dự Án Mà Bạn Quan Tâm.
         </p>
-        <SearchForm query={query} path="project" search="Projects" />
+        <SearchForm query={query} path="du-an" search="Dự Án" />
       </section>
 
       {searchForProjects?.length > 0 ? (
