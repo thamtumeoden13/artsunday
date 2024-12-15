@@ -55,7 +55,7 @@ export default async function Constructions({ params }: { params: Promise<{ id: 
           <h3 className={"text-30-bold"}>Bài Viết Chi Tiết</h3>
           {parsedContent ? (
             <article
-              className={"prose max-w-4xl font-work-sans break-all"}
+              className={"prose max-w-4xl font-ibm-plex break-all"}
               dangerouslySetInnerHTML={{ __html: parsedContent }}
             />
           ) : (

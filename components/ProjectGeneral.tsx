@@ -39,7 +39,7 @@ const ProjectGeneral = ({ post }: { post: StartupCardType }) => {
       <div className="mx-auto antialiased pt-4 relative">
 
         <div className={"space-y-5 mt-10 px-4 max-w-6xl mx-auto"}>
-          <div className={"flex-between gap-5"}>
+          {/* <div className={"flex-between gap-5"}>
             <Link
               href={`/app/(root)/user/${post?.author?._id}`}
               className={"flex gap-2 items-center mb-3"}
@@ -61,7 +61,7 @@ const ProjectGeneral = ({ post }: { post: StartupCardType }) => {
             </Link>
 
             <p className={"category-tag"}>{post?.project?.title}</p>
-          </div>
+          </div> */}
           <div className="text-sm prose max-w-7xl dark:prose-invert">
             {post?.image && (
               <Image
@@ -79,7 +79,7 @@ const ProjectGeneral = ({ post }: { post: StartupCardType }) => {
           <h3 className={"text-30-bold"}>Bài Viết Chi Tiết</h3>
           {parsedContent ? (
             <article
-              className={"prose max-w-7xl font-work-sans break-all"}
+              className={"prose max-w-7xl font-ibm-plex break-all"}
               dangerouslySetInnerHTML={{ __html: parsedContent }}
             />
           ) : (

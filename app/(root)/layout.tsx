@@ -9,7 +9,7 @@ export default function Layout({children}: Readonly<{
 }>) {
 
   return (
-    <main className={"font-work-sans"}>
+    <main className={"font-ibm-plex"}>
       {/*<Navbar/>*/}
       {/* <NavbarMenu /> */}
       <Header />

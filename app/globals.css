@@ -178,15 +178,15 @@
   }
 
   .tag {
-    @apply bg-secondary px-6 py-3 font-work-sans font-bold rounded-sm uppercase relative tag-tri;
+    @apply bg-secondary px-6 py-3 font-ibm-plex font-bold rounded-sm uppercase relative tag-tri;
   }
 
   .heading {
-    @apply uppercase bg-black px-6 py-3 font-work-sans font-extrabold text-white sm:text-[54px] sm:leading-[64px] text-[36px] leading-[46px] max-w-5xl text-center my-5;
+    @apply uppercase bg-black px-6 py-3 font-ibm-plex font-extrabold text-white sm:text-[54px] sm:leading-[64px] text-[36px] leading-[46px] max-w-5xl text-center my-5;
   }
 
   .heading-half {
-    @apply uppercase bg-black px-3 py-3 font-work-sans font-bold text-white sm:text-[27px] sm:leading-[32px] text-[18px] leading-[23px] text-center my-2;
+    @apply uppercase bg-black px-3 py-3 font-ibm-plex font-bold text-white sm:text-[27px] sm:leading-[32px] text-[18px] leading-[23px] text-center my-2;
   }
 
   .sub-heading {
@@ -253,7 +253,7 @@
   }
 
   .login {
-    @apply border-[5px] py-4 border-black bg-white text-black relative shadow-100 font-work-sans font-medium hover:shadow-none transition-all duration-500 !important;
+    @apply border-[5px] py-4 border-black bg-white text-black relative shadow-100 font-ibm-plex font-medium hover:shadow-none transition-all duration-500 !important;
   }
 
   /* searchform */

@@ -3,7 +3,9 @@ import localFont from "next/font/local";
 import "./globals.css";
 import "easymde/dist/easymde.min.css"
 import { Toaster } from "@/components/ui/toaster";
+import { IBM_Plex_Sans } from "next/font/google";
 import { ThemeProvider } from "./provider";
+import { cn } from "@/lib/utils";
 
 const workSans = localFont({
   src: [
@@ -55,6 +57,11 @@ const workSans = localFont({
   ],
   variable: "--font-work-sans"
 })
+const IBMPlex = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-ibm-plex'
+});
 
 export const metadata: Metadata = {
   title: "CÔNG TY TNHH KIẾN TRÚC XÂY DỰNG ART SUNDAY",
@@ -69,7 +76,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${workSans.variable}`}
+        // className={`${workSans.variable}`}
+        className={cn("font-IBMPlex antialiased", IBMPlex.variable)}
       >
         {children}
 

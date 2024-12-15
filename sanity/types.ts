@@ -263,12 +263,6 @@ export type Startup = {
   category?: string;
   image?: string;
   pitch?: string;
-  project?: {
-    _id: string;
-    title: string;
-    thumbnail?: string;
-  };
-
 };
 
 export type Slug = {

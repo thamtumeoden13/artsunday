@@ -61,6 +61,7 @@ const config: Config = {
         s5: '#263466',
       },
       fontFamily: {
+        "ibm-plex": ["var(--font-ibm-plex)"],
         "work-sans": ["var(--font-work-sans)"],
       },
       borderRadius: {
