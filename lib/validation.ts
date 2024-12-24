@@ -16,3 +16,9 @@ export const formSchema = z.object({
   }),
   pitch: z.string().min(10),
 })
+
+export const formContactSchema = z.object({
+  name: z.string().min(3).max(1000),
+  email: z.string().email(),
+  message: z.string().min(10)
+})

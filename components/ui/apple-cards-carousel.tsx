@@ -15,18 +15,18 @@ import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import Image, { ImageProps } from "next/image";
 import { useOutsideClick } from "@/hooks/use-outside-click";
+import { Author, Construction, Project } from "@/sanity/types";
 
 interface CarouselProps {
   items: JSX.Element[];
   initialScroll?: number;
 }
 
-type Card = {
-  src: string;
-  title: string;
-  category: string;
-  content: React.ReactNode;
-};
+type CardType = Omit<Project, "author" | "construction">
+  & { author?: Author }
+  & { construction?: Construction }
+  & { content?: React.ReactNode }
+
 
 export const CarouselContext = createContext<{
   onCardClose: (index: number) => void;
@@ -159,7 +159,7 @@ export const Card = ({
   layout = false,
   className,
 }: {
-  card: Card;
+  card: CardType;
   index: number;
   layout?: boolean;
   className?: string;
@@ -212,7 +212,7 @@ export const Card = ({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               ref={containerRef}
-              layoutId={layout ? `card-${card.title}` : undefined}
+              layoutId={layout ? `card-${card._id}` : undefined}
               className="max-w-5xl mx-auto bg-white dark:bg-neutral-900 h-fit  z-[60] my-10 p-4 md:p-10 rounded-3xl font-sans relative"
             >
               <button
@@ -225,7 +225,7 @@ export const Card = ({
                 layoutId={layout ? `category-${card.title}` : undefined}
                 className="text-base font-medium text-black dark:text-white"
               >
-                {card.category}
+                {card?.construction?.title}
               </motion.p>
               <motion.p
                 layoutId={layout ? `title-${card.title}` : undefined}
@@ -233,7 +233,8 @@ export const Card = ({
               >
                 {card.title}
               </motion.p>
-              <div className="py-10">{card.content}</div>
+              {card.content && <div className="py-10">{card.content}</div>}
+              {card.pitch && <div className="py-10">{card.pitch}</div>}
             </motion.div>
           </div>
         )}
@@ -246,10 +247,10 @@ export const Card = ({
         <div className="absolute h-full top-0 inset-x-0 bg-gradient-to-b from-black/50 via-transparent to-transparent z-30 pointer-events-none" />
         <div className="relative z-40 p-8">
           <motion.p
-            layoutId={layout ? `category-${card.category}` : undefined}
+            layoutId={layout ? `category-${card.construction?._id}` : undefined}
             className="text-white text-sm md:text-base font-medium font-sans text-left"
           >
-            {card.category}
+            {card.construction?.title}
           </motion.p>
           <motion.p
             layoutId={layout ? `title-${card.title}` : undefined}
@@ -259,8 +260,8 @@ export const Card = ({
           </motion.p>
         </div>
         <BlurImage
-          src={card.src}
-          alt={card.title}
+          src={card.image!}
+          alt={card.title!}
           fill
           className="object-cover absolute z-10 inset-0"
         />

@@ -3,7 +3,7 @@ import Image from "next/image";
 import SearchForm from "@/components/SearchForm";
 import StartupCard, { StartupCardType } from "@/components/StartupCard";
 import { client } from "@/sanity/lib/client";
-import { CONSTRUCTIONS_QUERY, PROJECT_DETAILS_BY_QUERY, } from "@/sanity/lib/queries";
+import { CATEGORY_BY_SLUG_QUERY, CONSTRUCTIONS_QUERY, PROJECT_DETAILS_BY_QUERY, } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { auth } from "@/auth";
 import Hero from "@/components/Hero";
@@ -30,12 +30,14 @@ export default async function Home({ searchParams }: {
   const { data: searchForProjectDetails } = await sanityFetch({ query: PROJECT_DETAILS_BY_QUERY, params });
 
   const { data: searchForConstructions } = await sanityFetch({ query: CONSTRUCTIONS_QUERY, params });
+  
+  const { select: homeHeroPost } = await client.fetch(CATEGORY_BY_SLUG_QUERY, { slug: "home-hero" });
 
   return (
     <>
       <MarkupSchema post={{}} path="" />
       <section className="section_container !max-w-full mt-16 bg-black-200 justify-items-center !overflow-hidden">
-        <AppleCardsCarousel />
+        <AppleCardsCarousel data={homeHeroPost} />
       </section>
       <section className={"pink_container !min-h-[230px]"}>
         <h1 className={"heading"}>

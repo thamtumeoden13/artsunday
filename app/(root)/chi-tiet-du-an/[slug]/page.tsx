@@ -3,6 +3,7 @@ import {
   PLAYLIST_BY_SLUG_QUERY,
   PROJECT_DETAIL_BY_ID_QUERY,
   PROJECT_DETAIL_BY_SLUG_QUERY,
+  PROJECT_DETAIL_VIEWS_QUERY,
   PROJECT_DETAILS_BY_PROJECT_QUERY,
   STARTUP_BY_ID_QUERY
 } from "@/sanity/lib/queries";
@@ -75,6 +76,9 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
         <hr className={"divider !max-w-full"} />
 
+        <Suspense fallback={<Skeleton className={"view_skeleton"} />}>
+          <View query={PROJECT_DETAIL_VIEWS_QUERY} id={post._id} />
+        </Suspense>
       </section>
 
     </>

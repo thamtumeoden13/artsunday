@@ -2,10 +2,19 @@
 import Image from "next/image";
 import React from "react";
 import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
+import { Author, Construction, Project } from "@/sanity/types";
+import { AnimatedTestimonials } from "./ui/animated-testimonials";
+import { testimonials_2 } from "@/constants";
 
-export function AppleCardsCarousel({ title }: { title?: string }) {
-  const cards = data.map((card, index) => (
-    <Card key={card.src} card={card} index={index} className="lg:h-[72vh] md:h-[60vh]" />
+export type ProjectCardType = Omit<Project, "author" | "construction"> & { author?: Author } & { construction?: Construction };
+
+export function AppleCardsCarousel({ title, data }: { title?: string, data: ProjectCardType[] }) {
+  const cards = data.map((card: any, index: number) => (
+    <Card
+      key={card._id}
+      card={{ ...card, content: <AnimatedTestimonials testimonials={testimonials_2} /> }}
+      index={index} className="lg:h-[72vh] md:h-[60vh]"
+    />
   ));
 
   return (

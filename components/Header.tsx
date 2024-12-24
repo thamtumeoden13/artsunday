@@ -9,6 +9,11 @@ import Link from "next/link";
 import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
 import { HoveredLink, Menu, MenuItem, ProductItem } from "./ui/navbar-menu";
 import { constructionNavList, projectNavList } from "@/constants";
+import { CATEGORY_BY_SLUG_QUERY } from "@/sanity/lib/queries";
+import { client } from "@/sanity/lib/client";
+
+import { Author, Construction, Project } from "@/sanity/types";
+export type ProjectCardType = Omit<Project, "author" | "construction"> & { author?: Author } & { construction?: Construction };
 
 const Header = () => {
 
@@ -23,17 +28,25 @@ const Header = () => {
 
   const [active, setActive] = useState<string | null>(null);
 
+  const [navProjectRouter, setNavProjectRouter] = useState<ProjectCardType[]>([]);
+
   useEffect(() => {
     const handleScroll = () => {
       setHasScrolled(window.scrollY > 32);
     };
+    const getNavProjectRouter = async () => {
+      const { select: navProjectRouter } = await client.fetch(CATEGORY_BY_SLUG_QUERY, { slug: "nav-router" });
+      setNavProjectRouter(navProjectRouter)
+    }
 
     window.addEventListener("scroll", handleScroll);
+    getNavProjectRouter();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   // eslint-disable-next-line react/prop-types
   const NavLink = ({ name, route, }: { name: string, route?: string, }) => {
     if (route) {
@@ -135,18 +148,18 @@ const Header = () => {
                     setIsOpen={setIsOpen}
                   >
                     <div className="  text-sm grid grid-cols-2 gap-10 p-4">
-                      {projectNavList.map(({ title, href, src, description }) => (
+                      {navProjectRouter.map(({ title, slug, image, thumbnail, subtitle }) => (
                         <ProductItem
-                          title={title}
-                          href={href}
-                          src={src}
-                          description={description}
+                          title={title!}
+                          href={`/du-an/${slug?.current}`}
+                          src={thumbnail!}
+                          description={subtitle!}
                         />
                       ))}
                     </div>
                   </MenuItem>
                   <div className={"dot"} />
-                  <NavLink name={"Thông Tin"} route={"/about"} />
+                  <NavLink name={"Thông Tin"} route={"/thong-tin"} />
                 </li>
               </ul>
             </Menu>
