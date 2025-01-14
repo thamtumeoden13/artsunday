@@ -13,7 +13,7 @@ export default async function Construction({ searchParams }: {
 
   const query = (await searchParams).query;
 
-  const params = { search: query || null };
+  const params = { search: query ?? null };
 
   console.log(`params: ${query}`)
 

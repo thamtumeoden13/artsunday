@@ -1,5 +1,5 @@
 import React from 'react'
-import { formatDate } from "@/lib/utils";
+import { cn, formatDate } from "@/lib/utils";
 import { ArrowUpRight, EyeIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -12,7 +12,7 @@ import SimpleCard, { SimpleCardType } from './SimpleCard';
 
 export type StartupCardType = Omit<Startup, "author"> & { author?: Author };
 
-const ProjectList = async ({ post }: { post: StartupCardType }) => {
+const ProjectList = async ({ post, className }: { post: StartupCardType, className?: string }) => {
 
   const { _id: id, title, slug } = post
 
@@ -23,7 +23,7 @@ const ProjectList = async ({ post }: { post: StartupCardType }) => {
   if (!searchForProjects?.length) return null;
 
   return (
-    <section className={"section_container !justify-items-center"}>
+    <section className={cn("section_container !justify-items-center", className)}>
       <Link href={`/hang-muc/${slug?.current}`} className='flex lg:w-[65rem] md:w-[43rem] w-[22rem]'>
         <h1 className="heading-half">
           Thiết kế{'  '}

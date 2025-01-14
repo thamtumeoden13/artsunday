@@ -51,13 +51,13 @@ export default async function Constructions({ params }: { params: Promise<{ slug
           className="max-h-[44rem] rounded-lg w-full mb-10 object-cover"
         />
 
-        <ProjectList key={data?._id} post={data} />
+        <ProjectList key={data?._id} post={data} className="!justify-items-start !px-0" />
 
         <div className={"space-y-5 mt-10 max-w-7xl mx-auto"}>
           <h3 className={"text-30-bold"}>Bài Viết Chi Tiết</h3>
           {parsedContent ? (
             <article
-              className={"prose max-w-4xl font-ibm-plex text-justify"}
+              className={"prose max-w-7xl font-ibm-plex text-justify"}
               dangerouslySetInnerHTML={{ __html: parsedContent }}
             />
           ) : (

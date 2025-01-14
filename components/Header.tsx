@@ -6,10 +6,9 @@ import { usePathname } from 'next/navigation'
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
-import { HoveredLink, Menu, MenuItem, ProductItem } from "./ui/navbar-menu";
-import { constructionNavList, projectNavList } from "@/constants";
+import { Menu, MenuItem, ProductItem } from "./ui/navbar-menu";
 import { client } from "@/sanity/lib/client";
-import { CATEGORY_BY_SLUG_QUERY } from "@/sanity/lib/queries";
+import { CATEGORY_BY_SLUG_QUERY, CONSTRUCTIONS_BY_QUERY } from "@/sanity/lib/queries";
 import { Author, Construction, Project } from "@/sanity/types";
 
 export type ProjectCardType = Omit<Project, "author" | "construction"> & { author?: Author } & { construction?: Construction };
@@ -28,6 +27,7 @@ const Header = () => {
   const [active, setActive] = useState<string | null>(null);
 
   const [navProjectRouter, setNavProjectRouter] = useState<ProjectCardType[]>([]);
+  const [navConstructionRouter, setNavConstructionRouter] = useState<ProjectCardType[]>([]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,8 +38,14 @@ const Header = () => {
       setNavProjectRouter(navProjectRouter)
     }
 
-    window.addEventListener("scroll", handleScroll);
+    const getNavConstructionRouter = async () => {
+      const navConstructionRouter = await client.fetch(CONSTRUCTIONS_BY_QUERY, { search: null });
+      setNavConstructionRouter(navConstructionRouter)
+    }
     getNavProjectRouter();
+    getNavConstructionRouter();
+
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -112,13 +118,13 @@ const Header = () => {
                     setIsOpen={setIsOpen}
                   >
                     <div className="grid grid-cols-2 gap-10 p-4 text-sm ">
-                      {constructionNavList.map(({ title, href, src, description }) => (
+                      {navConstructionRouter.map(({ _id, title, slug, image, thumbnail, subtitle }) => (
                         <ProductItem
-                          key={title}
-                          title={title}
-                          href={href}
-                          src={src}
-                          description={description}
+                          key={_id}
+                          title={title!}
+                          href={`/hang-muc/${slug?.current}`}
+                          src={thumbnail!}
+                          description={subtitle!}
                         />
                       ))}
                     </div>
@@ -148,8 +154,9 @@ const Header = () => {
                     setIsOpen={setIsOpen}
                   >
                     <div className="grid grid-cols-2 gap-10 p-4 text-sm ">
-                      {navProjectRouter.map(({ title, slug, image, thumbnail, subtitle }) => (
+                      {navProjectRouter.map(({ _id, title, slug, image, thumbnail, subtitle }) => (
                         <ProductItem
+                          key={_id}
                           title={title!}
                           href={`/du-an/${slug?.current}`}
                           src={thumbnail!}
@@ -172,7 +179,6 @@ const Header = () => {
               <Image
                 src="/images/bg-outlines.svg"
                 alt=""
-                role="presentation"
                 width={960}
                 height={380}
                 className={"relative z-2"}
@@ -180,7 +186,6 @@ const Header = () => {
               <Image
                 src="/images/bg-outlines-fill.png"
                 alt=""
-                role="presentation"
                 width={960}
                 height={380}
                 className={"absolute inset-0 mix-blend-soft-light opacity-5"}

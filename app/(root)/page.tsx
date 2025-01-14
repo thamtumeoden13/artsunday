@@ -58,7 +58,7 @@ export default async function Home({ searchParams }: {
           <ul className={"mt-7 card_grid"}>
             {searchForProjectDetails?.length > 0 ? (
               searchForProjectDetails.map((post: SimpleCardType) => (
-                <SimpleCard key={post?._id} post={post} path="du-an" />
+                <SimpleCard key={post?._id} post={post} path="chi-tiet-du-an" />
               ))
             ) : (
               <p className={"no-result"}>

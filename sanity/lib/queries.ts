@@ -120,6 +120,7 @@ export const CONSTRUCTIONS_BY_QUERY =
   defineQuery(`*[_type == "construction" && !defined($search) || title match $search || author->name match $search] | order(_createdAt desc) {
   _id, 
   title, 
+  subtitle,
   slug,
   _createdAt,
   _updatedAt,

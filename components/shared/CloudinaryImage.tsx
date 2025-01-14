@@ -100,7 +100,7 @@ export const BlurImage = ({
       width={width}
       height={height}
       blurDataURL={typeof src === "string" ? getBlurDataURL(src) : undefined} // Sử dụng hàm tạo blurDataURL
-      alt={alt || "Cốc Cốc Studio"}
+      alt={alt || "Art Sunday"}
       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
       placeholder="blur" // Bật chế độ làm mờ
       priority={true}
