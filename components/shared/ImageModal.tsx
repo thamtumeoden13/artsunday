@@ -23,19 +23,19 @@ const ImageModal = ({ item }: { item: any }) => {
       <ModalTrigger className="flex justify-center group/modal-btn">
         <Image
           src={item.image}
-          alt="blog thumnail"
+          alt={item.subtitle || "blog thumnail"}
           width={760}
           height={540}
-          className="rounded-lg mb-10 object-cover"
+          className="object-cover mb-10 rounded-lg"
         />
       </ModalTrigger>
       <ModalBody className="md:max-w-[90%] max-w-[90%] rounded-2xl">
         <ModalContent>
-          <h4 className="text-lg md:text-2xl text-neutral-600 dark:text-neutral-100 font-bold text-center mb-8">
+          <h4 className="mb-8 text-lg font-bold text-center md:text-2xl text-neutral-600 dark:text-neutral-100">
             {item?.title}
           </h4>
           <div className='grid md:grid-cols-[330px_1fr] grid-cols-1 '>
-            <div className="flex flex-col max-md:flex-row justify-around items-center">
+            <div className="flex flex-col items-center justify-around max-md:flex-row">
               {imageSliders.map(({ id, title, desc, img, }, idx) => (
                 <motion.div
                   key={"images" + idx}
@@ -53,26 +53,27 @@ const ImageModal = ({ item }: { item: any }) => {
                     zIndex: 100,
                   }}
                   onClick={() => handleImageSelected(img)}
-                  className="rounded-xl -mr-4 mt-4 p-1 bg-white dark:bg-neutral-800 dark:border-neutral-700 border border-neutral-100 flex-shrink-0 overflow-hidden"
+                  className="flex-shrink-0 p-1 mt-4 -mr-4 overflow-hidden bg-white border rounded-xl dark:bg-neutral-800 dark:border-neutral-700 border-neutral-100"
                 >
                   <Image
                     src={img}
                     alt={title}
                     width={160}
                     height={114}
-                    className="rounded-lg object-cover flex-shrink-0"
+                    className="flex-shrink-0 object-cover rounded-lg"
                   />
                 </motion.div>
               ))}
             </div>
-            <div className="py-10 flex flex-wrap gap-x-4 gap-y-6 items-start justify-start max-w-4xl mx-auto">
+            <div className="flex flex-wrap items-start justify-start max-w-4xl py-10 mx-auto gap-x-4 gap-y-6">
               <Lens hovering={hovering} setHovering={setHovering}>
                 <Image
                   src={imageSelected}
-                  alt="blog thumnail"
+                  alt=""
+                  role="presentation"
                   height="1000"
                   width="1000"
-                  className="rounded-lg mb-4 object-cover"
+                  className="object-cover mb-4 rounded-lg"
                 />
               </Lens>
             </div>

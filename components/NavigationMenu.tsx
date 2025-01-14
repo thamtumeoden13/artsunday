@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 export function NavbarMenu() {
   return (
-    <div className="relative w-full flex items-center justify-center">
+    <div className="relative flex items-center justify-center w-full">
       <Navbar className="top-2" />
       <p className="text-black dark:text-white">
         The Navbar will show on top of the page
@@ -21,7 +21,7 @@ function Navbar({ className }: { className?: string }) {
       className={cn("fixed top-10 inset-x-0 max-w-2xl mx-auto z-50", className)}
     >
       <Menu setActive={setActive}>
-        <MenuItem setActive={setActive} active={active} item="Services" name="home">
+        <MenuItem setIsOpen={() => { }} setActive={setActive} active={active} item="Services" name="home">
           <div className="flex flex-col space-y-4 text-sm">
             <HoveredLink href="/web-dev">Web Development</HoveredLink>
             <HoveredLink href="/interface-design">Interface Design</HoveredLink>
@@ -29,8 +29,8 @@ function Navbar({ className }: { className?: string }) {
             <HoveredLink href="/branding">Branding</HoveredLink>
           </div>
         </MenuItem>
-        <MenuItem setActive={setActive} active={active} item="Products" name="product">
-          <div className="  text-sm grid grid-cols-2 gap-10 p-4">
+        <MenuItem setIsOpen={() => { }} setActive={setActive} active={active} item="Products" name="product">
+          <div className="grid grid-cols-2 gap-10 p-4 text-sm ">
             <ProductItem
               title="Algochurn"
               href="https://algochurn.com"
@@ -57,7 +57,7 @@ function Navbar({ className }: { className?: string }) {
             />
           </div>
         </MenuItem>
-        <MenuItem setActive={setActive} active={active} item="Pricing" name="pricing">
+        <MenuItem setIsOpen={() => { }} setActive={setActive} active={active} item="Pricing" name="pricing">
           <div className="flex flex-col space-y-4 text-sm">
             <HoveredLink href="/hobby">Hobby</HoveredLink>
             <HoveredLink href="/individual">Individual</HoveredLink>

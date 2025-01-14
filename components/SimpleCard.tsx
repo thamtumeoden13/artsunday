@@ -1,45 +1,26 @@
 import React from 'react'
-import { formatDate } from "@/lib/utils";
 import { EyeIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Author, Startup } from "@/sanity/types";
+import { Author, Construction } from "@/sanity/types";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
+import { CloudinaryImage } from "./shared/CloudinaryImage";
 
-export type SimpleCard = Omit<Startup, "author"> & { author?: Author };
+export type SimpleCardType = Omit<Construction, "author"> & { author?: Author };
 
-const SimpleCard = ({ post, path }: { post: SimpleCard, path: string }) => {
+const SimpleCard = ({ post, path }: { post: SimpleCardType, path: string }) => {
   const {
-    _createdAt,
-    views,
-    author,
     title,
-    category,
-    _id,
-    image,
-    description,
+    subtitle,
+    thumbnail,
     slug
   } = post;
 
   return (
     <li className={"simple-card group"}>
-      {/* <div className={"flex-between"}>
-        <p className={"simple-card_date"}> {formatDate(_createdAt)} </p>
-
-        <div className={"flex gap-1.5"}>
-          <EyeIcon className={"size-6 text-primary"} />
-          <span className={"text-16-medium"}>{views}</span>
-        </div>
-      </div> */}
-
       <div className={"flex-between mt-5 gap-5"}>
         <div className={"flex-1 h-20"}>
-          {/* <Link href={`/user/${author?._id}`}>
-            <p className={"text-16-medium line-clamp-1"}>
-              {author?.name}
-            </p>
-          </Link> */}
           <Link href={`/${path}/${slug?.current}`}>
             <TooltipProvider>
               <Tooltip>
@@ -53,40 +34,27 @@ const SimpleCard = ({ post, path }: { post: SimpleCard, path: string }) => {
             </TooltipProvider>
           </Link>
         </div>
-        {/* <Link href={`/user/${author?._id}`}>
-          <Image
-            src={author?.image || "https://placehold.co/48x48"}
-            alt={"placeholder"}
-            width={48} height={48} className={"rounded-full"}
-          />
-        </Link> */}
       </div>
       <Link href={`/${path}/${slug?.current}`}>
-        {/* <p className={"simple-card_desc"}>
-          {description}
-        </p> */}
-        <Image
-          src={image!}
-          alt={title!}
+        <CloudinaryImage
+          src={thumbnail!}
+          alt={subtitle || "Art Sunday"}
           width={280}
           height={200}
           className={"simple-card_img"}
         />
       </Link>
 
-      <div className={"flex-between gap-3 mt-5"}>
-        <Link href={`/?query=${category?.toLowerCase()}`}>
-          <div className={"flex gap-1.5"}>
-            <EyeIcon className={"size-6 text-primary"} />
-            <span className={"text-16-medium"}>{views}</span>
-          </div>
-        </Link>
+      {/* <div className={"flex-between gap-3 mt-5"}>
+        <div className={"flex gap-1.5"}>
+          <EyeIcon className={"size-6 text-primary"} />
+        </div>
         <Button className={"simple-card_btn"} asChild>
           <Link href={`/${path}/${slug?.current}`}>
             Chi Tiết
           </Link>
         </Button>
-      </div>
+      </div> */}
     </li>
   )
 }

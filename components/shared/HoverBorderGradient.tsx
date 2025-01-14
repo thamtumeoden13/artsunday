@@ -4,11 +4,11 @@ import { HoverBorderGradient } from "../ui/hover-border-gradient";
 
 export function HoverButtonBorderGradient() {
   return (
-    <div className="m-40 flex justify-center text-center">
+    <div className="flex justify-center m-40 text-center">
       <HoverBorderGradient
         containerClassName="rounded-full"
         as="button"
-        className="dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2"
+        className="flex items-center space-x-2 text-black bg-white dark:bg-black dark:text-white"
       >
         <AceternityLogo />
         <span>Aceternity UI</span>
@@ -25,7 +25,7 @@ const AceternityLogo = () => {
       viewBox="0 0 66 65"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="h-3 w-3 text-black dark:text-white"
+      className="w-3 h-3 text-black dark:text-white"
     >
       <path
         d="M8 8.05571C8 8.05571 54.9009 18.1782 57.8687 30.062C60.8365 41.9458 9.05432 57.4696 9.05432 57.4696"

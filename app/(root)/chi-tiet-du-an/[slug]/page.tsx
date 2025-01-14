@@ -21,10 +21,12 @@ import StartupCard, { StartupCardType } from "@/components/StartupCard";
 
 import ProjectAlbum from "@/components/ProjectAlbum"
 import ProjectGeneral from "@/components/ProjectGeneral"
-import SimpleCard from '@/components/SimpleCard';
+import SimpleCard, { SimpleCardType } from '@/components/SimpleCard';
 import { AppleCardsCarousel } from '@/components/AppleCardsCarousel';
 import { sanityFetch } from '@/sanity/lib/live';
 import MarkupSchema from '@/components/shared/MarkupSchema';
+import { CarouselPlugin } from '@/components/shared/CarouselPlugin';
+import { CloudinaryImage } from '@/components/shared/CloudinaryImage';
 // import BreadcrumbComponent from "@/components/shared/Breadcrumb"
 // import Header from "@/components/shared/Header"
 const md = markdownit();
@@ -37,6 +39,9 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const releatedPosts = await client.fetch(PROJECT_DETAILS_BY_PROJECT_QUERY, { id: post.project._id },)
 
   if (!post) return notFound();
+
+  const parsedContent = md.render(post?.pitch || '');
+
 
   return (
     <>
@@ -55,17 +60,37 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
         </div>
       </section> */}
 
-      <section className="section_container !max-w-screen-xl">
+      <section className="section_container">
+        {/* <ProjectGeneral post={post} /> */}
+        <CloudinaryImage
+          src={post.thumbnail}
+          alt={post.subtitle || "Art Sunday"}
+          width={760}
+          height={540}
+          className="max-h-[44rem] rounded-lg w-full mb-10 object-cover"
+        />
+
         <div className="flex justify-between items-start gap-1">
-          <ProjectGeneral post={post} />
+
+          <div className={"space-y-5 mt-10 max-w-4xl mx-auto"}>
+            <h3 className={"text-30-bold"}>Bài Viết Chi Tiết</h3>
+            {parsedContent ? (
+              <article
+                className={"prose max-w-7xl font-ibm-plex text-justify"}
+                dangerouslySetInnerHTML={{ __html: parsedContent }}
+              />
+            ) : (
+              <p className={"no-result"}>Không tìm thấy thông tin phù hợp</p>
+            )}
+          </div>
 
           <div className='hidden lg:flex flex-col w-[36rem]'>
             {releatedPosts?.length > 0 && (
-              <div className={"flex flex-col"}>
+              <div className={"flex flex-col items-center"}>
                 <p className={"heading-half !leading-[16px] !text-left w-[330px] !bg-black-100 rounded-tl-2xl"}>Quan Tâm</p>
 
                 <ul className={"mt-2 card_grid-xs "}>
-                  {releatedPosts.map((post: StartupCardType, index: number) => (
+                  {releatedPosts.map((post: SimpleCardType, index: number) => (
                     <SimpleCard key={index} post={post} path='chi-tiet-du-an' />
                   ))}
                 </ul>

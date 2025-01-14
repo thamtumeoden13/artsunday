@@ -1,6 +1,6 @@
+import { client, clientNoCache } from "@/sanity/lib/client";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -195,4 +195,31 @@ export const footerVariants = {
       delay: 0.5,
     },
   },
+};
+
+const MAX_SLUG_LENGTH = 100;
+type SearchFn = (subString: string) => Promise<boolean>;
+
+const slugify = ({ title }: { title: string }) => {
+  return title
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
+    .replace(/\s+/g, '-') // Replace spaces with dashes
+    .replace(/-+/g, '-'); // Remove multiple dashes
+};
+
+export const generateUniqueSlug = async ({ title, query }: { title: string, query: string }) => {
+  let baseSlug = slugify({ title });
+  let uniqueSlug = baseSlug;
+
+  const { data } = await clientNoCache.fetch(query, { slug: baseSlug });
+
+  if (data) {
+    uniqueSlug = `${baseSlug}-${data.length}`;
+  }
+
+  uniqueSlug = uniqueSlug.slice(0, MAX_SLUG_LENGTH);
+
+  return uniqueSlug;
 };

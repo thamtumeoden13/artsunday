@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Author, Startup } from "@/sanity/types";
 import StartupCard from './StartupCard';
-import { PROJECTS_BY_CONSTRUCTION_QUERY, PROJECTS_QUERY } from '@/sanity/lib/queries';
+import { PROJECTS_BY_CONSTRUCTION_ID_QUERY, PROJECTS_BY_QUERY } from '@/sanity/lib/queries';
 import { sanityFetch } from '@/sanity/lib/live';
 
 export type StartupCardType = Omit<Startup, "author"> & { author?: Author };
@@ -17,7 +17,7 @@ const StartupList = async ({ post }: { post: StartupCardType }) => {
 
   const params = { id }
 
-  const { data: searchForProjects } = await sanityFetch({ query: PROJECTS_BY_CONSTRUCTION_QUERY, params });
+  const { data: searchForProjects } = await sanityFetch({ query: PROJECTS_BY_CONSTRUCTION_ID_QUERY, params });
 
   return (
     <section className={"section_container"}>

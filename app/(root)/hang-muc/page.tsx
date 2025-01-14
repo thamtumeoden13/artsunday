@@ -1,12 +1,8 @@
-import Image from "next/image";
 import SearchForm from "@/components/SearchForm";
 import StartupCard, { StartupCardType } from "@/components/StartupCard";
-import { client } from "@/sanity/lib/client";
-import { CONSTRUCTIONS_QUERY, PROJECT_DETAILS_BY_QUERY, PROJECTS_QUERY, STARTUPS_QUERY } from "@/sanity/lib/queries";
+import { CONSTRUCTIONS_BY_QUERY } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { auth } from "@/auth";
-import Hero from "@/components/Hero";
-import StartupList from "@/components/StartupList";
 import ConstructionList from "@/components/ConstructionList";
 import MarkupSchema from "@/components/shared/MarkupSchema";
 import { Metadata } from "next/types";
@@ -25,9 +21,7 @@ export default async function Construction({ searchParams }: {
 
   console.log(`session -> ${session?.id}`);
 
-  // const posts = await client.fetch(STARTUPS_QUERY);
-
-  const { data: searchForConstructions } = await sanityFetch({ query: CONSTRUCTIONS_QUERY });
+  const { data: searchForConstructions } = await sanityFetch({ query: CONSTRUCTIONS_BY_QUERY, params });
   console.log(`searchForConstructions -> ${params}: ${searchForConstructions}`)
 
   return (

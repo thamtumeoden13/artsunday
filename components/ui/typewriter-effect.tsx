@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import { motion, stagger, useAnimate, useInView } from "framer-motion";
 import { useEffect } from "react";
+import Image from "next/image";
 
 export const TypewriterEffect = ({
   words,
@@ -126,7 +127,7 @@ export const TypewriterEffectSmooth = ({
               {word.text.map((char, index) => (
                 <span
                   key={`char-${index}`}
-                  className={cn(`dark:text-white text-black `, word.className)}
+                  className={cn(`dark:text-white text-black text-lg md:text-4xl`, word.className)}
                 >
                   {char}
                 </span>
@@ -142,7 +143,7 @@ export const TypewriterEffectSmooth = ({
   return (
     <div className={cn("flex space-x-1 my-6 items-center", className)}>
       <motion.div
-        className="overflow-hidden py-2"
+        className="py-2 overflow-hidden"
         initial={{
           width: "0%",
         }}
@@ -156,7 +157,7 @@ export const TypewriterEffectSmooth = ({
         }}
       >
         <div
-          className="text-3xl lg:text-5xl font-bold"
+          className="text-3xl font-bold lg:text-5xl"
           style={{
             whiteSpace: "nowrap",
           }}
@@ -185,3 +186,23 @@ export const TypewriterEffectSmooth = ({
     </div>
   );
 };
+
+
+export const TitleComponent = ({
+  title,
+  avatar,
+}: {
+  title: string;
+  avatar: string;
+}) => (
+  <div className="flex items-center space-x-2">
+    <Image
+      src={avatar}
+      height="20"
+      width="20"
+      alt="thumbnail"
+      className="border-2 border-white rounded-full"
+    />
+    <p>{title}</p>
+  </div>
+);

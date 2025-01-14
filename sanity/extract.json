@@ -1631,10 +1631,27 @@
           "type": "string"
         }
       },
+      "type": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "github"
+            },
+            {
+              "type": "string",
+              "value": "google"
+            }
+          ]
+        },
+        "optional": true
+      },
       "id": {
         "type": "objectAttribute",
         "value": {
-          "type": "number"
+          "type": "string"
         },
         "optional": true
       },
@@ -1670,6 +1687,27 @@
         "type": "objectAttribute",
         "value": {
           "type": "string"
+        },
+        "optional": true
+      },
+      "role": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "viewer"
+            },
+            {
+              "type": "string",
+              "value": "editor"
+            },
+            {
+              "type": "string",
+              "value": "admin"
+            }
+          ]
         },
         "optional": true
       }

@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
 import { NavbarMenu } from "@/components/NavigationMenu";
+import { ContactButton } from "@/components/shared/ContactButton";
 
 export default function Layout({children}: Readonly<{
   children: React.ReactNode
@@ -14,6 +15,7 @@ export default function Layout({children}: Readonly<{
       {/* <NavbarMenu /> */}
       <Header />
       {children}
+      <ContactButton />
       <Footer />
     </main>
   )

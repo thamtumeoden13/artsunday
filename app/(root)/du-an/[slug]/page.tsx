@@ -19,6 +19,7 @@ import ProjectList from '@/components/ProjectList';
 import ProjectDetailList from '@/components/ProjectDetailList';
 import { sanityFetch } from '@/sanity/lib/live';
 import MarkupSchema from '@/components/shared/MarkupSchema';
+import { CloudinaryImage } from '@/components/shared/CloudinaryImage';
 
 const md = markdownit();
 
@@ -35,8 +36,8 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
   return (
     <>
-      <MarkupSchema  path={`du-an/${slug}`} post={data} />
-      
+      <MarkupSchema path={`du-an/${slug}`} post={data} />
+
       <section className={"pink_container !min-h-[230px] mt-32"}>
         <p className={"tag"}>{formatDate(data?._createdAt)}</p>
 
@@ -45,12 +46,12 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
       </section>
 
       <section className={"section_container"}>
-        <Image
-          src={data.image}
-          alt="thumbnail"
-          height={1000}
-          width={1000}
-          className={"h-[44rem] w-full rounded-xl"}
+        <CloudinaryImage
+          src={data.thumbnail}
+          alt={data.subtitle || "Art Sunday"}
+          width={760}
+          height={540}
+          className="max-h-[44rem] rounded-lg w-full mb-10 object-cover"
         />
 
         <ProjectDetailList key={data?._id} post={data} />
@@ -59,7 +60,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
           <h3 className={"text-30-bold"}>Bài Viết Chi Tiết</h3>
           {parsedContent ? (
             <article
-              className={"prose max-w-4xl font-ibm-plex break-all"}
+              className={"prose max-w-4xl font-ibm-plex text-justify"}
               dangerouslySetInnerHTML={{ __html: parsedContent }}
             />
           ) : (

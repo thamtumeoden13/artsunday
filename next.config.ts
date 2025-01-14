@@ -22,7 +22,7 @@ const nextConfig: NextConfig = {
     appIsrStatus: true,
     buildActivity: true,
     buildActivityPosition: "bottom-right",
-  }
+  },
 };
 
 export default nextConfig;

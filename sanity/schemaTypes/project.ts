@@ -56,9 +56,7 @@ export const project = defineType({
     }),
     defineField({
       name: 'tags',
-      type: 'string',
-      validation: (Rule) => Rule.required().min(1).max(20).error("Please" +
-        " enter a tags")
+      type: 'string'
     }),
     defineField({
       name: 'orderIndex',

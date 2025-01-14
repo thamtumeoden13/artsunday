@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"); */
 
 @tailwind base;
 @tailwind components;
@@ -62,7 +62,7 @@
 }
 
 .root {
-  @apply relative dark:bg-black-100 bg-white flex justify-center items-center flex-col mx-auto sm:px-10 px-5 overflow-x-hidden;
+  @apply relative flex flex-col items-center justify-center px-5 mx-auto overflow-x-hidden bg-white dark:bg-black-100 sm:px-10;
 }
 
 .root-container {
@@ -138,7 +138,7 @@
 
   /* END of Typography */
   .flex-between {
-    @apply flex justify-between items-center;
+    @apply flex items-center justify-between;
   }
 
   .text-30-extrabold {
@@ -170,7 +170,7 @@
   }
 
   .text-14-normal {
-    @apply font-normal text-sm text-white-100/80;
+    @apply text-sm font-normal text-white-100/80;
   }
 
   .pink_container {
@@ -178,7 +178,7 @@
   }
 
   .tag {
-    @apply bg-secondary px-6 py-3 font-ibm-plex font-bold rounded-sm uppercase relative tag-tri;
+    @apply relative px-6 py-3 font-bold uppercase rounded-sm bg-secondary font-ibm-plex tag-tri;
   }
 
   .heading {
@@ -186,15 +186,15 @@
   }
 
   .heading-half {
-    @apply uppercase bg-black px-3 py-3 font-ibm-plex font-bold text-white sm:text-[27px] sm:leading-[32px] text-[18px] leading-[23px] text-center my-2;
+    @apply uppercase hover:underline w-full bg-black px-3 py-3 font-ibm-plex font-bold text-white sm:text-[27px] sm:leading-[32px] text-[18px] leading-[23px] text-left my-2 ;
   }
 
   .sub-heading {
-    @apply font-medium text-[20px] text-white max-w-2xl text-center break-words;
+    @apply font-medium text-[20px] text-white max-w-2xl text-justify break-words;
   }
 
   .section_container {
-    @apply px-6 py-10 max-w-7xl mx-auto;
+    @apply px-6 py-10 mx-auto max-w-7xl;
   }
 
   .card_grid {
@@ -202,11 +202,11 @@
   }
 
   .card_grid-md {
-    @apply grid md:grid-cols-3 sm:grid-cols-2 gap-5;
+    @apply grid gap-5 md:grid-cols-3 sm:grid-cols-2;
   }
 
   .card_grid-sm {
-    @apply grid sm:grid-cols-2 gap-5;
+    @apply grid gap-5 sm:grid-cols-2;
   }
 
   .card_grid-xs {
@@ -214,12 +214,12 @@
   }
 
   .no-result {
-    @apply text-black-100 text-sm font-normal;
+    @apply text-sm font-normal text-black-100;
   }
 
   /* profile */
   .profile_container {
-    @apply w-full pb-10 pt-20 px-6 max-w-7xl mx-auto lg:flex-row flex-col flex gap-10;
+    @apply flex flex-col w-full gap-10 px-6 pt-20 pb-10 mx-auto max-w-7xl lg:flex-row;
   }
 
   .profile_card {
@@ -236,11 +236,11 @@
 
   /* idea details */
   .divider {
-    @apply border-dotted bg-zinc-400 max-w-4xl my-10 mx-auto;
+    @apply max-w-4xl mx-auto my-10 border-dotted bg-zinc-400;
   }
 
   .view_skeleton {
-    @apply bg-zinc-400 h-10 w-24 rounded-lg fixed bottom-3 right-3;
+    @apply fixed w-24 h-10 rounded-lg bg-zinc-400 bottom-3 right-3;
   }
 
   /* navbar */
@@ -262,7 +262,7 @@
   }
 
   .search-input {
-    @apply flex-1 font-bold placeholder:font-semibold placeholder:text-black-100 w-full h-auto outline-none;
+    @apply flex-1 w-full h-auto font-bold outline-none placeholder:font-semibold placeholder:text-black-100;
   }
 
   .search-btn {
@@ -321,7 +321,7 @@
 
   /* startupform */
   .startup-form {
-    @apply max-w-2xl mx-auto bg-white my-10 space-y-8 px-6;
+    @apply max-w-2xl px-6 mx-auto my-10 space-y-8 bg-white;
   }
 
   .startup-form_label {
@@ -329,15 +329,15 @@
   }
 
   .startup-form_input {
-    @apply border-[3px] border-black px-5 py-7 text-[18px] text-black font-semibold rounded-full mt-3 placeholder:text-black-300 !important;
+    @apply border-[3px] border-black px-5 py-7 text-[18px] text-black font-semibold rounded-full mt-3 placeholder:text-black-300 ;
   }
 
   .startup-form_textarea {
-    @apply border-[3px] border-black p-5 text-[18px] text-black font-semibold rounded-[20px] mt-3 placeholder:text-black-300 !important;
+    @apply border-[3px] border-black p-5 text-[18px] text-black font-semibold rounded-[20px] mt-3 placeholder:text-black-300 ;
   }
 
   .startup-form_error {
-    @apply text-red-500 mt-2 ml-5;
+    @apply mt-2 ml-5 text-red-500;
   }
 
   .startup-form_editor {
@@ -345,12 +345,12 @@
   }
 
   .startup-form_btn {
-    @apply bg-primary border-[4px] border-black rounded-full p-5 min-h-[70px] w-full font-bold text-[18px] !important;
+    @apply bg-primary border-[4px] border-black rounded-full p-5 min-h-[70px] w-full font-bold text-[18px];
   }
 
   /* view */
   .view-container {
-    @apply flex justify-end items-center mt-5 fixed bottom-3 right-3;
+    @apply fixed flex items-center justify-end mt-5 bottom-3;
   }
 
   .view-text {
@@ -420,7 +420,7 @@
   }
 
   .caption {
-    @apply small-2 mb-5 uppercase text-p3;
+    @apply mb-5 uppercase small-2 text-p3;
   }
 
   .scroll-hide::-webkit-scrollbar {
@@ -441,11 +441,11 @@
   }
 
   .nav-li {
-    @apply relative flex flex-1 items-center justify-between max-lg:flex-col max-lg:items-start;
+    @apply relative flex items-center justify-between flex-1 max-lg:flex-col max-lg:items-start;
   }
 
   .nav-logo {
-    @apply relative flex flex-1 items-center justify-center;
+    @apply relative flex items-center justify-center flex-1;
   }
 
   .dot {
@@ -489,7 +489,7 @@
   }
 
   .pricing-head_btn {
-    @apply base-bold relative z-2 h-16 flex-1 uppercase text-p5 transition-colors duration-500 hover:text-p4;
+    @apply relative flex-1 h-16 uppercase transition-colors duration-500 base-bold z-2 text-p5 hover:text-p4;
   }
 
   .pricing-head_btn_before {
@@ -559,7 +559,7 @@
   }
 
   .download_tech-icon {
-    @apply relative z-2 flex size-full items-center justify-center transition-all duration-500;
+    @apply relative flex items-center justify-center transition-all duration-500 z-2 size-full;
   }
 
   .download_tech-icon_before {
@@ -589,7 +589,7 @@
   }
 
   .social-icon {
-    @apply flex size-10 items-center justify-center rounded-full border-2 border-s4/25 bg-s1/5 transition-all duration-500 hover:border-s4;
+    @apply flex items-center justify-center transition-all duration-500 border-2 rounded-full size-10 border-s4/25 bg-s1/5 hover:border-s4;
   }
 
   .footer-gradient {
@@ -606,6 +606,83 @@
   /*  END of Footer*/
 }
 
+.gradient-01 {
+  background-image: linear-gradient(
+    270deg,
+    hsl(295deg 76% 51%) 0%,
+    hsl(284deg 70% 73%) 26%,
+    hsl(257deg 70% 86%) 39%,
+    hsl(202deg 92% 90%) 50%,
+    hsl(215deg 77% 81%) 61%,
+    hsl(221deg 73% 70%) 74%,
+    hsl(220deg 76% 51%) 100%
+  );
+  filter: blur(125px);
+}
+
+.hero-gradient {
+  background: linear-gradient(
+    97.86deg,
+    #a509ff 0%,
+    #34acc7 53.65%,
+    #a134c7 100%
+  );
+}
+
+.gradient-02 {
+  position: absolute;
+  width: 200px;
+  height: 438px;
+  top: 0px;
+  right: 0px;
+
+  background: #7aebfb;
+  filter: blur(190px);
+}
+
+.gradient-03 {
+  position: absolute;
+  width: 404px;
+  height: 800px;
+  left: 20%;
+  top: 5%;
+
+  background: rgba(149, 66, 232, 0.35);
+  filter: blur(175px);
+  transform: rotate(-114.2deg);
+}
+
+.gradient-04 {
+  position: absolute;
+  width: 304px;
+  height: 100vh;
+  left: 30%;
+  top: 10%;
+
+  background: rgba(45, 72, 152, 0.75);
+  filter: blur(200px);
+  transform: rotate(-53.13deg);
+}
+
+.gradient-05 {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+.feedback-gradient {
+  position: absolute;
+  width: 200px;
+  height: 316px;
+  left: 0px;
+  top: 0px;
+
+  background: #8d39a3;
+  filter: blur(175px);
+}
+
 .w-md-editor-toolbar {
   padding: 10px !important;
 }
@@ -616,4 +693,14 @@
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.no-visible-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.no-visible-scrollbar::-webkit-scrollbar {
+  display: none;
 }

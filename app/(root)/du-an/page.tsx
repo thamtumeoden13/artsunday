@@ -1,16 +1,12 @@
 import Image from "next/image";
 import SearchForm from "@/components/SearchForm";
 import StartupCard, { StartupCardType } from "@/components/StartupCard";
-import { client } from "@/sanity/lib/client";
-import { PROJECTS_QUERY, STARTUPS_QUERY } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { auth } from "@/auth";
-import Hero from "@/components/Hero";
-import ProjectList from "@/components/ProjectList";
 import ProjectDetailList from "@/components/ProjectDetailList";
 import MarkupSchema from "@/components/shared/MarkupSchema";
 import { Metadata } from "next/types";
-// import BreadcrumbComponent from "@/components/shared/Breadcrumb";
+import { PROJECTS_BY_QUERY } from "@/sanity/lib/queries";
 
 export default async function Projects({ searchParams }: {
   searchParams: Promise<{ query?: string }>
@@ -24,7 +20,7 @@ export default async function Projects({ searchParams }: {
 
   console.log(`params -> ${JSON.stringify(params)}`);
 
-  const { data: searchForProjects } = await sanityFetch({ query: PROJECTS_QUERY, params });
+  const { data: searchForProjects } = await sanityFetch({ query: PROJECTS_BY_QUERY, params });
   console.log(`searchForProjects -> ${searchForProjects.length}`);
 
   return (

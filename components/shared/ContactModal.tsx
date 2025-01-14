@@ -35,7 +35,7 @@ const ContactModal = () => {
       </ModalTrigger>
       <ModalBody className="md:max-w-[720px] md:min-w-[720px] rounded-2xl">
         <ModalContent className="overflow-y-scroll">
-          <div className="flex flex-col max-md:flex-row justify-around items-center">
+          <div className="flex flex-col items-center justify-around max-md:flex-row">
             <Contact className="md:min-w-[640px] min-w-[430px]" />
           </div>
         </ModalContent>

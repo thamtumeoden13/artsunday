@@ -38,6 +38,18 @@ export const STARTUP_VIEWS_QUERY = defineQuery(`
   }
 `);
 
+export const AUTHORS_BY_QUERY =
+  defineQuery(`*[_type == "author" && !defined($search) || title match $search] | order(_createdAt desc) {
+    _id,
+    id,
+    name,
+    username,
+    email,
+    image,
+    bio,
+    role
+}`);
+
 export const AUTHOR_BY_GITHUB_ID_QUERY = defineQuery(`
 *[_type == "author" && id == $id][0]{
     _id,
@@ -46,7 +58,8 @@ export const AUTHOR_BY_GITHUB_ID_QUERY = defineQuery(`
     username,
     email,
     image,
-    bio
+    bio,
+    role
   }
 `);
 
@@ -58,7 +71,8 @@ export const AUTHOR_BY_ID_QUERY = defineQuery(`
     username,
     email,
     image,
-    bio
+    bio,
+    role
 }
 `);
 
@@ -102,12 +116,13 @@ export const PLAYLIST_BY_SLUG_QUERY =
   }
 }`);
 
-export const CONSTRUCTIONS_QUERY =
-  defineQuery(`*[_type == "construction"] | order(_createdAt desc) {
+export const CONSTRUCTIONS_BY_QUERY =
+  defineQuery(`*[_type == "construction" && !defined($search) || title match $search || author->name match $search] | order(_createdAt desc) {
   _id, 
   title, 
   slug,
   _createdAt,
+  _updatedAt,
   author->{
     _id, name, image, bio
   }, 
@@ -152,13 +167,14 @@ export const CONSTRUCTION_BY_SLUG_QUERY =
   pitch,
 }`);
 
-export const PROJECTS_QUERY =
+export const PROJECTS_BY_QUERY =
   defineQuery(`*[_type == "project" && !defined($search) || title match $search || author->name match $search] | order(_createdAt desc) {
   _id, 
   title, 
   subtitle,
   slug,
   _createdAt,
+  _updatedAt,
   author->{
     _id, name, image, bio
   }, 
@@ -239,6 +255,7 @@ export const PROJECT_DETAILS_BY_QUERY =
   subtitle,
   slug,
   _createdAt,
+  _updatedAt,
   author->{
     _id, name, image, bio
   }, 
@@ -319,6 +336,7 @@ export const PROJECT_DETAIL_VIEWS_QUERY = defineQuery(`
     }
   `);
 
+
 export const CATEGORY_BY_SLUG_QUERY =
   defineQuery(`*[_type == "category" && slug.current == $slug][0]{
 _id,
@@ -327,6 +345,34 @@ slug,
 select[]->{
     _id,
     _createdAt,
+    title,
+    subtitle,
+    slug,
+    description,
+    image,
+    thumbnail,
+    author->{
+      _id,
+      name,
+      slug,
+      image,
+      bio
+    },
+    construction->{
+      _id, title, subtitle, description, image, thumbnail, slug
+    }, 
+  }
+}`);
+
+export const CATEGORY_BY_ID_QUERY =
+  defineQuery(`*[_type == "category" && _id == $id][0]{
+_id,
+title,
+slug,
+select[]->{
+    _id,
+    _createdAt,
+    _key,
     title,
     subtitle,
     slug,

@@ -294,12 +294,14 @@ export type Author = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  id?: number;
+  type?: "github" | "google";
+  id?: string;
   name?: string;
   username?: string;
   email?: string;
   image?: string;
   bio?: string;
+  role?: "viewer" | "editor" | "admin";
 };
 
 export type Markdown = string;

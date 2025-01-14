@@ -2,20 +2,20 @@
 
 import { motion } from 'framer-motion';
 
-import { projectNavList, socials } from '../constants';
+import {  socials } from '../constants';
 import styles from '@/styles';
 import { footerVariants } from '@/lib/utils';
 import Image from 'next/image';
-import { TextGenerateEffect } from './TextGenerateEffect';
 import { Button } from './shared/MovingBorder';
 import { IconDirectionSign } from '@tabler/icons-react';
 import Link from 'next/link';
 import { HoverBorderGradient } from './ui/hover-border-gradient';
-import ContactModal from './shared/ContactModal';
+import { useEffect, useState } from "react";
+import { client } from "@/sanity/lib/client";
 import { Author, Construction, Project } from "@/sanity/types";
-import { useEffect, useState } from 'react';
-import { client } from '@/sanity/lib/client';
-import { CATEGORY_BY_SLUG_QUERY } from '@/sanity/lib/queries';
+import { CATEGORY_BY_SLUG_QUERY } from "@/sanity/lib/queries";
+import ContactModal from "./shared/ContactModal";
+import { TextGenerateEffect } from './TextGenerateEffect';
 
 export type ProjectCardType = Omit<Project, "author" | "construction"> & { author?: Author } & { construction?: Construction };
 
@@ -45,8 +45,8 @@ const Footer = () => {
         className={`${styles.innerWidth} mx-auto flex flex-col gap-8 max-w-7xl`}
       >
         <div
-          // className="flex items-center justify-between flex-wrap gap-5"
-          className=' grid gap-5 md:grid-cols-2 grid-cols-1'
+          // className="flex flex-wrap items-center justify-between gap-5"
+          className='grid grid-cols-1 gap-5 md:grid-cols-2'
         >
           {/* <h4
 					className="font-bold md:text-[64px] text-[44px] text-white"
@@ -56,7 +56,7 @@ const Footer = () => {
           <div className="flex flex-col">
             <Image
               src={"/bg-artsunday.png"}
-              alt='logo'
+              alt='Art Sunday'
               width={500}
               height={500}
               className='object-contain w-[360px] h-[100px]'
@@ -81,7 +81,7 @@ const Footer = () => {
             className="flex flex-col items-start gap-5"
           >
             <h4 className="w-full font-extrabold text-[24px] text-white">Dự Án</h4>
-            <div className='flex items-center flex-wrap gap-2'>
+            <div className='flex flex-wrap items-center gap-2'>
               {footerCategory.map(({ title, slug }) => (
                 <Button
                   key={title}
@@ -89,8 +89,8 @@ const Footer = () => {
                   borderRadius="1.75rem"
                   className="flex-1 text-white border-slate-800"
                 >
-                  <Link href={`/du-an/${slug?.current}`} className='flex p-2 gap-2'>
-                    <IconDirectionSign className="h-6 w-6 text-white" />
+                  <Link href={`/du-an/${slug?.current}`} className='flex gap-2 p-2'>
+                    <IconDirectionSign className="w-6 h-6 text-white" />
                     <span className="font-normal text-[16px] text-white hover:text-purple">{title}</span>
                   </Link>
                 </Button>
@@ -101,7 +101,7 @@ const Footer = () => {
         <div className="flex flex-col">
           <div className="mb-[50px] h-[2px] bg-white opacity-10" />
           <div
-            className="flex items-center justify-between flex-wrap gap-4"
+            className="flex flex-wrap items-center justify-between gap-4"
           >
             <ContactModal />
             <p className="font-normal text-[14px] text-white opacity-50">
@@ -113,7 +113,7 @@ const Footer = () => {
                   key={social.name}
                   containerClassName="rounded-full"
                   as="button"
-                  className="bg-black flex items-center"
+                  className="flex items-center bg-black"
                 >
                   <img
                     src={social.url}

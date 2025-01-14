@@ -1,9 +1,9 @@
 "use client"
 
-import React, {MouseEventHandler} from "react";
-import clsx, {ClassValue} from "clsx";
+import React, { MouseEventHandler } from "react";
+import clsx, { ClassValue } from "clsx";
 import Marker from "./Marker";
-import {Element, Link as LinkScroll} from "react-scroll";
+import { Element, Link as LinkScroll } from "react-scroll";
 
 const Button = (
   {
@@ -25,7 +25,7 @@ const Button = (
       onClick?: MouseEventHandler<HTMLButtonElement>,
     }
 ) => {
-  const Inner = ({to = ""}: { to?: string }) => (
+  const Inner = ({ to = "" }: { to?: string }) => (
     <LinkScroll to={to} offset={-100} spy={true} smooth={true}>
       <span
         className={
@@ -33,7 +33,7 @@ const Button = (
         }
       >
         <span className={"absolute -left-[1px]"}>
-          <Marker fill={markerFill}/>
+          <Marker fill={markerFill} />
         </span>
         {icon && (
           <img
@@ -49,7 +49,7 @@ const Button = (
         </span>
       </span>
 
-      <span className={"glow-before glow-after"}/>
+      <span className={"glow-before glow-after"} />
     </LinkScroll>
   );
 
@@ -61,7 +61,7 @@ const Button = (
       )}
       href={href}
     >
-      <Inner/>
+      <Inner />
     </a>
   ) : (
     <button
@@ -71,7 +71,7 @@ const Button = (
       )}
       onClick={onClick}
     >
-      <Inner to={to}/>
+      <Inner to={to} />
     </button>
   );
 };

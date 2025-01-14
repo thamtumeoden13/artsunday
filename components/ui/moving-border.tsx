@@ -32,7 +32,7 @@ export function Button({
   return (
     <Component
       className={cn(
-        "bg-transparent relative text-xl p-[1px] overflow-hidden md:col-span-2",
+        "bg-transparent relative text-xl p-[1px] overflow-hidden ",
         containerClassName
       )}
       style={{
@@ -109,7 +109,7 @@ export const MovingBorder = ({
       <svg
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="none"
-        className="absolute h-full w-full"
+        className="absolute w-full h-full"
         width="100%"
         height="100%"
         {...otherProps}

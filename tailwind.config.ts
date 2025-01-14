@@ -22,11 +22,20 @@ const config: Config = {
       animation: {
         scroll:
           "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
+        "meteor-effect": "meteor 5s linear infinite",
       },
       keyframes: {
         scroll: {
           to: {
             transform: "translate(calc(-50% - 0.5rem))",
+          },
+        },
+        meteor: {
+          "0%": { transform: "rotate(215deg) translateX(0)", opacity: "1" },
+          "70%": { opacity: "1" },
+          "100%": {
+            transform: "rotate(215deg) translateX(-500px)",
+            opacity: "0",
           },
         },
       },
@@ -59,6 +68,10 @@ const config: Config = {
         s3: '#334679',
         s4: '#1959AD',
         s5: '#263466',
+      },
+      destructive: {
+        DEFAULT: "hsl(var(--destructive))",
+        foreground: "hsl(var(--destructive-foreground))",
       },
       fontFamily: {
         "ibm-plex": ["var(--font-ibm-plex)"],

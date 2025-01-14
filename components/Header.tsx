@@ -6,13 +6,12 @@ import { usePathname } from 'next/navigation'
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
-import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
 import { HoveredLink, Menu, MenuItem, ProductItem } from "./ui/navbar-menu";
 import { constructionNavList, projectNavList } from "@/constants";
-import { CATEGORY_BY_SLUG_QUERY } from "@/sanity/lib/queries";
 import { client } from "@/sanity/lib/client";
-
+import { CATEGORY_BY_SLUG_QUERY } from "@/sanity/lib/queries";
 import { Author, Construction, Project } from "@/sanity/types";
+
 export type ProjectCardType = Omit<Project, "author" | "construction"> & { author?: Author } & { construction?: Construction };
 
 const Header = () => {
@@ -89,7 +88,7 @@ const Header = () => {
     >
       <div className={"container flex h-14 items-center max-lg:px-5"}>
         <Link href={"/"} className={"lg:hidden flex-1 cursor-pointer z-2"}>
-          <Image src="/logo-1.png" alt="logo" width={60} height={30} />
+          <Image src="/logo-1.png" alt="Art Sunday" width={60} height={30} />
         </Link>
 
         <div
@@ -112,9 +111,10 @@ const Header = () => {
                     item="construction" name={"Hạng Mục"} route={"/hang-muc"}
                     setIsOpen={setIsOpen}
                   >
-                    <div className="  text-sm grid grid-cols-2 gap-10 p-4">
+                    <div className="grid grid-cols-2 gap-10 p-4 text-sm ">
                       {constructionNavList.map(({ title, href, src, description }) => (
                         <ProductItem
+                          key={title}
                           title={title}
                           href={href}
                           src={src}
@@ -133,7 +133,7 @@ const Header = () => {
                   >
                     <Image
                       src="/images/artsunday.png"
-                      alt="logo"
+                      alt="Art Sunday"
                       width={60}
                       height={30}
                     />
@@ -147,7 +147,7 @@ const Header = () => {
                     item="project" name={"Dự Án"} route={"/du-an"}
                     setIsOpen={setIsOpen}
                   >
-                    <div className="  text-sm grid grid-cols-2 gap-10 p-4">
+                    <div className="grid grid-cols-2 gap-10 p-4 text-sm ">
                       {navProjectRouter.map(({ title, slug, image, thumbnail, subtitle }) => (
                         <ProductItem
                           title={title!}
@@ -171,14 +171,16 @@ const Header = () => {
             >
               <Image
                 src="/images/bg-outlines.svg"
-                alt="outline"
+                alt=""
+                role="presentation"
                 width={960}
                 height={380}
                 className={"relative z-2"}
               />
               <Image
                 src="/images/bg-outlines-fill.png"
-                alt="outline"
+                alt=""
+                role="presentation"
                 width={960}
                 height={380}
                 className={"absolute inset-0 mix-blend-soft-light opacity-5"}

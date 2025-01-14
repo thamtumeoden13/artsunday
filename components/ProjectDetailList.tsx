@@ -8,7 +8,7 @@ import { Author, Startup } from "@/sanity/types";
 import StartupCard from './StartupCard';
 import { PROJECT_DETAILS_BY_PROJECT_QUERY } from '@/sanity/lib/queries';
 import { sanityFetch } from '@/sanity/lib/live';
-import SimpleCard from './SimpleCard';
+import SimpleCard, { SimpleCardType } from './SimpleCard';
 
 export type StartupCardType = Omit<Startup, "author"> & { author?: Author };
 
@@ -32,7 +32,7 @@ const ProjectDetailList = async ({ post }: { post: StartupCardType }) => {
       </Link>
       <ul className={"mt-7 card_grid"}>
         {searchForProjectDetails?.length > 0 && (
-          searchForProjectDetails.map((post: StartupCardType) => (
+          searchForProjectDetails.map((post: SimpleCardType) => (
             <SimpleCard key={post?._id} post={post} path='chi-tiet-du-an' />
           ))
         )}

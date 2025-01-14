@@ -114,10 +114,10 @@ const Contact = ({ className }: { className?: string }) => {
       <form
         ref={formRef}
         action={formAction}
-        className='mt-12 flex flex-col gap-8'
+        className='flex flex-col gap-8 mt-12'
       >
         <label className='flex flex-col'>
-          <span className='text-white font-medium mb-4'>
+          <span className='mb-4 font-medium text-white'>
             Tên của bạn
           </span>
           <Input
@@ -125,34 +125,30 @@ const Contact = ({ className }: { className?: string }) => {
             id="name"
             name='name'
             placeholder="what's your name?"
-            className='bg-tertiary py-4 px-6 h-12
-            placeholder:text-primary 
-            text-black rounded-lg outline-none border-none font-medium'
+            className='h-12 px-6 py-4 font-medium text-black border-none rounded-lg outline-none bg-tertiary placeholder:text-primary'
           />
           {errors.name && (
             <p className={"startup-form_error"}>{errors.name}</p>
           )}
         </label>
         <label className='flex flex-col'>
-          <span className='text-white font-medium mb-4'>
-            Your Email
+          <span className='mb-4 font-medium text-white'>
+            Địa chỉ Email
           </span>
           <Input
             required
             id="name"
             name='email'
             placeholder="what's your email?"
-            className='bg-tertiary py-4 px-6 h-12
-            placeholder:text-primary 
-            text-black rounded-lg outline-none border-none font-medium'
+            className='h-12 px-6 py-4 font-medium text-black border-none rounded-lg outline-none bg-tertiary placeholder:text-primary'
           />
           {errors.email && (
             <p className={"startup-form_error"}>{errors.email}</p>
           )}
         </label>
         <label className='flex flex-col'>
-          <span className='text-white font-medium mb-4'>
-            Your Message
+          <span className='mb-4 font-medium text-white'>
+            Nội dung 
           </span>
           <Textarea
             required
@@ -160,9 +156,7 @@ const Contact = ({ className }: { className?: string }) => {
             id="message"
             name='message'
             placeholder="what do you want to say?"
-            className='bg-tertiary py-4 px-6 
-            placeholder:text-primary 
-            text-black rounded-lg outline-none border-none font-medium'
+            className='px-6 py-4 font-medium text-black border-none rounded-lg outline-none bg-tertiary placeholder:text-primary'
           />
           {errors.message && (
             <p className={"startup-form_error"}>{errors.message}</p>
@@ -174,7 +168,7 @@ const Contact = ({ className }: { className?: string }) => {
           className={"startup-form_btn text-white"}
           disabled={isPending}
         >
-          {isPending ? "Submitting..." : "Send Your Message"}
+          {isPending ? "Đang Gửi..." : "Gửi tin nhắn"}
           <Send className={"size-6 ml-2"} />
         </Button>
       </form>

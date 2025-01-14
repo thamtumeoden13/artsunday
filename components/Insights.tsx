@@ -22,7 +22,7 @@ const Insights = () => (
         textStyles="text-center"
       />
       <div
-        className="mt-[50px] flex flex-col gap-[30px]"
+        className="mt-[50px] flex flex-col gap-5"
       >
         {insights.map((insight, index) => (
           <InsightCard

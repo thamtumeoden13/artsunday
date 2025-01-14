@@ -20,7 +20,7 @@ export function PlaceholdersAndVanishInputComponent() {
   };
   return (
     <div className="h-[40rem] flex flex-col justify-center  items-center px-4">
-      <h2 className="mb-10 sm:mb-20 text-xl text-center sm:text-5xl dark:text-white text-black">
+      <h2 className="mb-10 text-xl text-center text-black sm:mb-20 sm:text-5xl dark:text-white">
         Ask Aceternity UI Anything
       </h2>
       <PlaceholdersAndVanishInput

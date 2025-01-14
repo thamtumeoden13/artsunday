@@ -3,14 +3,13 @@ import Image from "next/image";
 import SearchForm from "@/components/SearchForm";
 import StartupCard, { StartupCardType } from "@/components/StartupCard";
 import { client } from "@/sanity/lib/client";
-import { CATEGORY_BY_SLUG_QUERY, CONSTRUCTIONS_QUERY, PROJECT_DETAILS_BY_QUERY, } from "@/sanity/lib/queries";
+import { CATEGORY_BY_SLUG_QUERY, CONSTRUCTIONS_BY_QUERY, PROJECT_DETAILS_BY_QUERY, } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { auth } from "@/auth";
-import Hero from "@/components/Hero";
 import ConstructionList from "@/components/ConstructionList";
 import MarkupSchema from "@/components/shared/MarkupSchema";
 import { AppleCardsCarousel } from "@/components/AppleCardsCarousel";
-import SimpleCard from "@/components/SimpleCard";
+import SimpleCard, { SimpleCardType } from "@/components/SimpleCard";
 
 export default async function Home({ searchParams }: {
   searchParams: Promise<{ query?: string }>
@@ -29,8 +28,8 @@ export default async function Home({ searchParams }: {
   // const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY, params });
   const { data: searchForProjectDetails } = await sanityFetch({ query: PROJECT_DETAILS_BY_QUERY, params });
 
-  const { data: searchForConstructions } = await sanityFetch({ query: CONSTRUCTIONS_QUERY, params });
-  
+  const { data: searchForConstructions } = await sanityFetch({ query: CONSTRUCTIONS_BY_QUERY, params });
+
   const { select: homeHeroPost } = await client.fetch(CATEGORY_BY_SLUG_QUERY, { slug: "home-hero" });
 
   return (
@@ -58,7 +57,7 @@ export default async function Home({ searchParams }: {
           </p>
           <ul className={"mt-7 card_grid"}>
             {searchForProjectDetails?.length > 0 ? (
-              searchForProjectDetails.map((post: StartupCardType) => (
+              searchForProjectDetails.map((post: SimpleCardType) => (
                 <SimpleCard key={post?._id} post={post} path="du-an" />
               ))
             ) : (
