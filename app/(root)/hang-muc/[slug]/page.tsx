@@ -80,12 +80,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { data } = await sanityFetch({ query: CONSTRUCTION_BY_SLUG_QUERY, params: { slug } });
 
   return {
-    title: `${data?.title} - Cốc Cốc Studio`,
+    title: `${data?.title} - Art Sunday`,
     description: `${data?.description}`,
     openGraph: {
-      title: `${data?.title} - Cốc Cốc Studio`,
+      title: `${data?.title} - Art Sunday`,
       description: `${data?.description}`,
-      url: `http://cococstudio.com/hang-muc/${slug}`,
+      url: `http://artsunday.vn/hang-muc/${slug}`,
       images: [
         {
           url: data.image,
@@ -97,7 +97,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${data?.name} - Cốc Cốc Studio`,
+      title: `${data?.name} - Art Sunday`,
       description: `${data?.description}`,
       images: [data?.image],
     },

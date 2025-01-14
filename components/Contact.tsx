@@ -44,7 +44,7 @@ const Contact = ({ className }: { className?: string }) => {
       const result = await emailjs.send('service_djy948a', 'template_jd2t2tf',
         {
           from_name: formValues.name,
-          to_name: 'Cococ Studio',
+          to_name: 'Art Sunday',
           from_email: formValues.email,
           to_email: 'ltv.mrvu@gmail.com',
           message: formValues.message

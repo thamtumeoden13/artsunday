@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://cococstudio.com/
+Host: https://artsunday.vn/
 
 # Sitemaps
-Sitemap: https://cococstudio.com/sitemap.xml
+Sitemap: https://artsunday.vn/sitemap.xml

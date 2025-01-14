@@ -72,7 +72,7 @@ export const CloudinaryImage = ({
       )}
       width={width}
       height={height}
-      alt={alt || "Cốc Cốc Studio"}
+      alt={alt || "Art Sunday"}
       {...rest}
     />
   )

@@ -83,12 +83,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const data = await client.fetch(PROJECT_BY_SLUG_QUERY, { slug })
 
   return {
-    title: `${data.title} - Cốc Cốc Studio`,
+    title: `${data.title} - Art Sunday`,
     description: `${data.description}`,
     openGraph: {
-      title: `${data.title} - Cốc Cốc Studio`,
+      title: `${data.title} - Art Sunday`,
       description: `${data.description}`,
-      url: `http://cococstudio.com/du-an/${slug}`,
+      url: `http://artsunday.vn/du-an/${slug}`,
       images: [
         {
           url: data.image,
@@ -100,7 +100,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${data.name} - Cốc Cốc Studio`,
+      title: `${data.name} - Art Sunday`,
       description: `${data.description}`,
       images: [data.image],
     },

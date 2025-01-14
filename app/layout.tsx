@@ -38,7 +38,7 @@ export default function RootLayout({
       <body
         className={cn("font-IBMPlex antialiased", IBMPlex.variable)}
       >
-        <GoogleAnalytics />
+        {/* <GoogleAnalytics /> */}
         {children}
         <Toaster />
       </body>
