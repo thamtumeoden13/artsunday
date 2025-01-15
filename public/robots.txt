@@ -1,6 +1,8 @@
 # *
 User-agent: *
 Allow: /
+Disallow: /auth/
+Disallow: /_next/static/media/
 
 # Host
 Host: https://artsunday.vn/
