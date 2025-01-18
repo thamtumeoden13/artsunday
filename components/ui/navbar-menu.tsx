@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
@@ -15,7 +15,7 @@ const transition = {
 };
 
 // eslint-disable-next-line react/prop-types
-const NavLink = ({ name, route, setIsOpen }: { name: string, route?: string, setIsOpen: (isOpen: boolean) => void, }) => {
+const NavLink = ({ name, route }: { name: string, route?: string, }) => {
   if (route) {
     return (
       <Link
@@ -23,7 +23,6 @@ const NavLink = ({ name, route, setIsOpen }: { name: string, route?: string, set
         className={
           "base-bold text-p4 uppercase transition-colors duration-500 cursor-pointer hover:text-p1 max-lg:my-4 max-lg:h5"
         }
-        onClick={() => setIsOpen(false)}
       >
         {name}
       </Link>
@@ -39,7 +38,6 @@ const NavLink = ({ name, route, setIsOpen }: { name: string, route?: string, set
       className={
         "base-bold text-p4 uppercase transition-colors duration-500 cursor-pointer hover:text-p1 max-lg:my-4 max-lg:h5"
       }
-    // onClick={() => setIsOpen(false)}
     >
       {name}
     </LinkScroll>
@@ -52,7 +50,6 @@ export const MenuItem = ({
   item,
   name,
   route,
-  setIsOpen,
   children,
 }: {
   setActive: (item: string) => void;
@@ -60,16 +57,43 @@ export const MenuItem = ({
   item: string;
   name: string;
   route?: string;
-  setIsOpen: (isOpen: boolean) => void;
   children?: React.ReactNode;
 }) => {
+
+  const [isMobile, setIsMobile] = useState(false);
+
+
+  const handleEvent = () => {
+    console.log("Action triggered for", item);
+    // Xử lý hành động khi hover hoặc click
+    setActive(item)
+  };
+
+  // Kiểm tra kích thước màn hình
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 1024); // Tailwind `lg` breakpoint là 1024px
+    };
+
+    handleResize(); // Gọi khi component mount
+    window.addEventListener("resize", handleResize); // Lắng nghe thay đổi kích thước
+
+    return () => {
+      window.removeEventListener("resize", handleResize); // Dọn dẹp listener
+    };
+  }, []);
+
   return (
-    <div onMouseEnter={() => setActive(item)} className="relative ">
+    <div
+      className="relative "
+      onMouseEnter={!isMobile ? handleEvent : undefined}
+      onClick={isMobile ? handleEvent : undefined}
+    >
       <motion.p
         transition={{ duration: 0.3 }}
         className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white"
       >
-        <NavLink name={name} route={route} setIsOpen={setIsOpen} />
+        <NavLink name={name} route={route} />
       </motion.p>
       {active !== null && (
         <motion.div
@@ -78,11 +102,11 @@ export const MenuItem = ({
           transition={transition}
         >
           {active === item && (
-            <div className="absolute top-[calc(100%_+_1.2rem)] left-1/2 transform -translate-x-1/2 pt-4 max-lg:hidden">
+            <div className="absolute top-[calc(100%_+_1.2rem)] left-1/2 transform -translate-x-1/2 pt-4 max-lg:relative">
               <motion.div
                 transition={transition}
                 layoutId="active" // layoutId ensures smooth animation
-                className="bg-white dark:bg-black backdrop-blur-sm rounded-2xl overflow-hidden border border-black/[0.2] dark:border-white/[0.2] shadow-xl"
+                className="bg-white backdrop-blur-xl max-lg:bg-transparent rounded-2xl overflow-hidden border border-black/[0.2] shadow-xl"
               >
                 <motion.div
                   layout // layout ensures smooth animation
@@ -121,31 +145,39 @@ export const ProductItem = ({
   description,
   href,
   src,
+  setIsOpen
 }: {
   title: string;
   description: string;
   href: string;
   src: string;
+  setIsOpen: (isOpen: boolean) => void;
 }) => {
   return (
-    <Link href={href} className="flex space-x-2">
-      <Image
-        src={src}
-        width={140}
-        height={100}
-        alt=""
-        role="presentation"
-        className="flex-shrink-0 rounded-md shadow-2xl w-[140px] h-[100px]"
-      />
-      <div>
-        <h4 className="mb-1 text-xl font-bold text-black dark:text-white">
+    <>
+      <Link href={href} className="flex space-x-2 max-lg:hidden">
+        <Image
+          src={src}
+          width={140}
+          height={100}
+          alt=""
+          className="flex-shrink-0 rounded-md shadow-2xl w-[140px] h-[100px]"
+        />
+        <div>
+          <h4 className="mb-1 text-xl font-bold text-black hover:text-p1">
+            {title}
+          </h4>
+          <p className="text-neutral-700 text-sm max-w-[10rem] hover:text-p1">
+            {description}
+          </p>
+        </div>
+      </Link>
+      <Link href={href} className="flex space-x-2 lg:hidden"  onClick={() => setIsOpen(false)}>
+        <h4 className="mb-1 text-xl font-bold text-white hover:text-p1">
           {title}
         </h4>
-        <p className="text-neutral-700 text-sm max-w-[10rem] dark:text-neutral-300">
-          {description}
-        </p>
-      </div>
-    </Link>
+      </Link>
+    </>
   );
 };
 

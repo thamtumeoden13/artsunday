@@ -15,10 +15,6 @@ export type ProjectCardType = Omit<Project, "author" | "construction"> & { autho
 
 const Header = () => {
 
-  const pathname = usePathname()
-  console.log({ pathname })
-
-
   const [hasScrolled, setHasScrolled] = useState(false);
 
   const [scrollDirection, setScrollDirection] = useState<string | null>(null);
@@ -128,16 +124,16 @@ const Header = () => {
                   <div className={"dot"} />
                   <MenuItem setActive={setActive} active={active}
                     item="construction" name={"Công Trình"} route={"/cong-trinh"}
-                    setIsOpen={setIsOpen}
                   >
-                    <div className="grid grid-cols-2 gap-10 p-4 text-sm ">
+                    <div className="grid grid-cols-2 max-lg:grid-cols-1 gap-10 p-4 text-md ">
                       {navConstructionRouter.map(({ _id, title, slug, image, thumbnail, subtitle }) => (
                         <ProductItem
                           key={_id}
                           title={title!}
-                          href={`/cong-trinh/${slug?.current}`}
+                          href={`/du-an/${slug?.current}`}
                           src={thumbnail!}
                           description={subtitle!}
+                          setIsOpen={setIsOpen}
                         />
                       ))}
                     </div>
@@ -163,16 +159,16 @@ const Header = () => {
                   <MenuItem
                     setActive={setActive} active={active}
                     item="project" name={"Thiết Kế"} route={"/thiet-ke"}
-                    setIsOpen={setIsOpen}
                   >
-                    <div className="grid grid-cols-2 gap-10 p-4 text-sm ">
+                    <div className="grid grid-cols-2 max-lg:grid-cols-1 gap-10 p-4 text-md ">
                       {navDesignRouter.map(({ _id, title, slug, image, thumbnail, subtitle }) => (
                         <ProductItem
                           key={_id}
                           title={title!}
-                          href={`/thiet-ke/${slug?.current}`}
+                          href={`/du-an/${slug?.current}`}
                           src={thumbnail!}
                           description={subtitle!}
+                          setIsOpen={setIsOpen}
                         />
                       ))}
                     </div>

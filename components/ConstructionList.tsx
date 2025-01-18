@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from "next/link";
-import { Author, Startup } from "@/sanity/types";
 import { PROJECTS_BY_CONSTRUCTION_ID_QUERY } from '@/sanity/lib/queries';
 import { sanityFetch } from '@/sanity/lib/live';
 import SimpleCard, { SimpleCardType } from './SimpleCard';

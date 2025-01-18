@@ -2,7 +2,6 @@ import SearchForm from "@/components/SearchForm";
 import { DESIGNS_BY_QUERY } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { auth } from "@/auth";
-import ConstructionList from "@/components/ConstructionList";
 import MarkupSchema from "@/components/shared/MarkupSchema";
 import { Metadata } from "next/types";
 import { SimpleCardType } from "@/components/SimpleCard";
@@ -23,7 +22,6 @@ export default async function Construction({ searchParams }: {
   console.log(`session -> ${session?.id}`);
 
   const { data: searchForConstructions } = await sanityFetch({ query: DESIGNS_BY_QUERY, params });
-  console.log(`searchForConstructions -> ${params}: ${searchForConstructions}`)
 
   return (
     <>
