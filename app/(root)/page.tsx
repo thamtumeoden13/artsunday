@@ -71,7 +71,7 @@ export default async function Home({ searchParams }: {
         <>
           {searchForConstructions?.length > 0 && (
             searchForConstructions.map((post: SimpleCardType) => (
-              <ConstructionList key={post?._id} post={post} className="!justify-items-center" />
+              <ConstructionList key={post?._id} post={post} />
             ))
           )}
         </>

@@ -26,7 +26,7 @@ const ProjectDetailList = async ({ post, className }: { post: StartupCardType, c
           <span className="text-purple">{title}</span>
         </h1>
       </Link>
-      <ul className={"mt-7 card_grid max-7-xl w-full"}>
+      <ul className={cn("mt-7 card_grid max-7-xl w-full ", className)}>
         {searchForProjectDetails?.length > 0 && (
           searchForProjectDetails.map((post: SimpleCardType) => (
             <SimpleCard key={post?._id} post={post} path='chi-tiet-du-an' className='xs:w-full justify-items-center' />

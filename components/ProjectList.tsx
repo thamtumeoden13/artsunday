@@ -29,7 +29,7 @@ const ProjectList = async ({ post, parentPath = 'cong-trinh', className, }: { po
           <span className="text-purple">{title}</span>
         </h1>
       </Link>
-      <ul className={"mt-7 card_grid max-7-xl w-full !justify-start"}>
+      <ul className={cn("mt-7 card_grid max-7-xl w-full !justify-center", className)}>
         {searchForProjects.map((post: SimpleCardType) => (
           <SimpleCard key={post?._id} post={post} path='du-an' className='xs:w-full justify-items-center' />
         ))}

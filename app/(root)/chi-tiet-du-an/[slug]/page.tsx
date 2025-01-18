@@ -76,7 +76,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
               <div className={"flex flex-col items-center"}>
                 <p className={"heading-half !leading-[16px] !text-left w-[330px] !bg-black-100 rounded-tl-2xl"}>Quan Tâm</p>
 
-                <ul className={"mt-2 card_grid-xs  !justify-start"}>
+                <ul className={"mt-2 card_grid-xs !justify-start"}>
                   {releatedPosts.map((post: SimpleCardType) => (
                     <SimpleCard key={post._id} post={post} path='chi-tiet-du-an' className='xs:w-full justify-items-center' />
                   ))}

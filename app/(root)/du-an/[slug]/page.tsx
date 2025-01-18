@@ -45,7 +45,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
           className="max-h-[44rem] rounded-lg w-full mb-10 object-cover"
         />
 
-        <ProjectDetailList key={data?._id} post={data} className="!justify-items-start !px-0"/>
+        <ProjectDetailList key={data?._id} post={data} className="!px-0 "/>
 
         <div className={"space-y-5 mt-10 max-w-7xl mx-auto"}>
           <h3 className={"text-30-bold"}>Bài Viết Chi Tiết</h3>

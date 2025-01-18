@@ -2,13 +2,12 @@
 
 import { Link as LinkScroll } from "react-scroll";
 import { useEffect, useState } from "react";
-import { usePathname } from 'next/navigation'
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, MenuItem, ProductItem } from "./ui/navbar-menu";
 import { client } from "@/sanity/lib/client";
-import { CATEGORY_BY_SLUG_QUERY, CONSTRUCTIONS_BY_QUERY } from "@/sanity/lib/queries";
+import { CATEGORY_BY_SLUG_QUERY } from "@/sanity/lib/queries";
 import { Author, Construction, Project } from "@/sanity/types";
 
 export type ProjectCardType = Omit<Project, "author" | "construction"> & { author?: Author } & { construction?: Construction };
