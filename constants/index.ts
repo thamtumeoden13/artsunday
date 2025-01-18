@@ -266,27 +266,27 @@ export const exploreWorlds = [
 export const constructionNavList = [
   {
     title: "Chụp Ảnh Sản Phẩm",
-    href: "/hang-muc/chup-anh-san-pham",
+    href: "/cong-trinh/chup-anh-san-pham",
     src: "https://images.pexels.com/photos/3797991/pexels-photo-3797991.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    description: "Hạng mục chụp ảnh sản phẩm",
+    description: "Công Trình chụp ảnh sản phẩm",
   },
   {
     title: "Chụp Ảnh Đồ Ăn",
-    href: "/hang-muc/chup-anh-do-an",
+    href: "/cong-trinh/chup-anh-do-an",
     src: "https://images.pexels.com/photos/9146390/pexels-photo-9146390.jpeg?auto=compress&cs=tinysrgb&w=800",
-    description: "Hạng mục chụp ảnh đồ ăn",
+    description: "Công Trình chụp ảnh đồ ăn",
   },
   {
     title: "Chụp Ảnh Nội Thất",
-    href: "/hang-muc/chup-anh-noi-that",
+    href: "/cong-trinh/chup-anh-noi-that",
     src: "https://images.pexels.com/photos/89887/pexels-photo-89887.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    description: "Hạng mục chụp ảnh nội thất",
+    description: "Công Trình chụp ảnh nội thất",
   },
   {
     title: "Cho Thuê Phòng Chụp Theo Giờ",
-    href: "/hang-muc/cho-thue-phong-chup-theo-gio",
+    href: "/cong-trinh/cho-thue-phong-chup-theo-gio",
     src: "https://images.pexels.com/photos/32870/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    description: "Hạng mục cho thuê phòng chụp theo giờ",
+    description: "Công Trình cho thuê phòng chụp theo giờ",
   },
 ]
 

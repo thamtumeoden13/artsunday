@@ -1,27 +1,26 @@
 import React from 'react'
 import Link from "next/link";
-import { Author, Startup } from "@/sanity/types";
-import { PROJECTS_BY_CONSTRUCTION_ID_QUERY } from '@/sanity/lib/queries';
+import { PROJECTS_BY_DESIGN_ID_QUERY } from '@/sanity/lib/queries';
 import { sanityFetch } from '@/sanity/lib/live';
 import SimpleCard, { SimpleCardType } from './SimpleCard';
 import { cn } from '@/lib/utils';
 
 
-const ConstructionList = async ({ post, className }: { post: SimpleCardType, className?: string }) => {
+const DesignList = async ({ post, className }: { post: SimpleCardType, className?: string }) => {
 
   const { _id: id, title, slug } = post
 
   const params = { id }
 
-  const { data: searchForProjects } = await sanityFetch({ query: PROJECTS_BY_CONSTRUCTION_ID_QUERY, params });
+  const { data: searchForProjects } = await sanityFetch({ query: PROJECTS_BY_DESIGN_ID_QUERY, params });
 
   if (!searchForProjects?.length) return null;
 
   return (
     <section className={cn("section_container !justify-items-center !px-2", className)}>
-      <Link href={`/cong-trinh/${slug?.current}`} className='flex lg:w-[65rem] md:w-[43rem] w-full'>
+      <Link href={`/thiet-ke/${slug?.current}`} className='flex lg:w-[65rem] md:w-[43rem] w-full'>
         <h1 className="w-full heading-half hover:underline" style={{ textAlign: 'left' }}>
-          Công Trình{'  '}
+          Thiết Kế{'  '}
           <span className="text-purple">{title}</span>
         </h1>
       </Link>
@@ -35,4 +34,4 @@ const ConstructionList = async ({ post, className }: { post: SimpleCardType, cla
     </section>
   )
 }
-export default ConstructionList
+export default DesignList

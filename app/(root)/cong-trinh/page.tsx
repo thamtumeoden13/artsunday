@@ -1,11 +1,11 @@
 import SearchForm from "@/components/SearchForm";
-import StartupCard, { StartupCardType } from "@/components/StartupCard";
 import { CONSTRUCTIONS_BY_QUERY } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { auth } from "@/auth";
 import ConstructionList from "@/components/ConstructionList";
 import MarkupSchema from "@/components/shared/MarkupSchema";
 import { Metadata } from "next/types";
+import { SimpleCardType } from "@/components/SimpleCard";
 
 export default async function Construction({ searchParams }: {
   searchParams: Promise<{ query?: string }>
@@ -26,7 +26,7 @@ export default async function Construction({ searchParams }: {
 
   return (
     <>
-      <MarkupSchema path="hang-muc" />
+      <MarkupSchema path="cong-trinh" />
 
       <section className={"pink_container"}>
         <h1 className={"heading"}>
@@ -34,21 +34,21 @@ export default async function Construction({ searchParams }: {
         </h1>
 
         <p className={"sub-heading !max-w-3xl"}>
-          Hãy Chọn Hạng Mục Mà Bạn Quan Tâm.
+          Hãy Chọn Công Trình Mà Bạn Quan Tâm.
         </p>
 
-        <SearchForm query={query} path="hang-muc" search="Hạng Mục" />
+        <SearchForm query={query} path="cong-trinh" search="Công Trình" />
       </section>
 
 
       {searchForConstructions?.length > 0 ? (
-        searchForConstructions.map((post: StartupCardType) => (
+        searchForConstructions.map((post: SimpleCardType) => (
           <ConstructionList key={post?._id} post={post} />
         ))
       ) : (
         <section className={"section_container"}>
           <p className={"no-result"}>
-            Không tìm thấy hạn mục
+            Không tìm thấy công trình
           </p>
         </section>
       )}

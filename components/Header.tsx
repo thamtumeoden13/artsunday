@@ -27,8 +27,8 @@ const Header = () => {
 
   const [active, setActive] = useState<string | null>(null);
 
-  const [navProjectRouter, setNavProjectRouter] = useState<ProjectCardType[]>([]);
   const [navConstructionRouter, setNavConstructionRouter] = useState<ProjectCardType[]>([]);
+  const [navDesignRouter, setNavDesignRouter] = useState<ProjectCardType[]>([]);
 
   let prevScrollY = 0;
 
@@ -45,16 +45,17 @@ const Header = () => {
 
       prevScrollY = currentScrollY;
     };
-    const getNavProjectRouter = async () => {
-      const { select: navProjectRouter } = await client.fetch(CATEGORY_BY_SLUG_QUERY, { slug: "nav-router" });
-      setNavProjectRouter(navProjectRouter)
+    const getNavDesignRouter = async () => {
+      const { select: navDesignRouter } = await client.fetch(CATEGORY_BY_SLUG_QUERY, { slug: "designs-router" });
+      setNavDesignRouter(navDesignRouter)
     }
 
     const getNavConstructionRouter = async () => {
-      const navConstructionRouter = await client.fetch(CONSTRUCTIONS_BY_QUERY, { search: null });
+      const { select: navConstructionRouter } = await client.fetch(CATEGORY_BY_SLUG_QUERY, { slug: "constructions-router" });
       setNavConstructionRouter(navConstructionRouter)
     }
-    getNavProjectRouter();
+
+    getNavDesignRouter();
     getNavConstructionRouter();
 
     window.addEventListener("scroll", handleScroll);
@@ -96,8 +97,6 @@ const Header = () => {
     );
   };
 
-  console.log('scrollDirection', scrollDirection)
-
   return (
     <header
       className={clsx(
@@ -128,7 +127,7 @@ const Header = () => {
                   <NavLink name={"Trang Chủ"} route={"/"} />
                   <div className={"dot"} />
                   <MenuItem setActive={setActive} active={active}
-                    item="construction" name={"Hạng Mục"} route={"/hang-muc"}
+                    item="construction" name={"Công Trình"} route={"/cong-trinh"}
                     setIsOpen={setIsOpen}
                   >
                     <div className="grid grid-cols-2 gap-10 p-4 text-sm ">
@@ -136,7 +135,7 @@ const Header = () => {
                         <ProductItem
                           key={_id}
                           title={title!}
-                          href={`/hang-muc/${slug?.current}`}
+                          href={`/cong-trinh/${slug?.current}`}
                           src={thumbnail!}
                           description={subtitle!}
                         />
@@ -163,15 +162,15 @@ const Header = () => {
                 <li className={"nav-li"}>
                   <MenuItem
                     setActive={setActive} active={active}
-                    item="project" name={"Dự Án"} route={"/du-an"}
+                    item="project" name={"Thiết Kế"} route={"/thiet-ke"}
                     setIsOpen={setIsOpen}
                   >
                     <div className="grid grid-cols-2 gap-10 p-4 text-sm ">
-                      {navProjectRouter.map(({ _id, title, slug, image, thumbnail, subtitle }) => (
+                      {navDesignRouter.map(({ _id, title, slug, image, thumbnail, subtitle }) => (
                         <ProductItem
                           key={_id}
                           title={title!}
-                          href={`/du-an/${slug?.current}`}
+                          href={`/thiet-ke/${slug?.current}`}
                           src={thumbnail!}
                           description={subtitle!}
                         />

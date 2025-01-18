@@ -47,6 +47,33 @@ export const formConstructionSchema = z.object({
   pitch: z.string().min(20),
 })
 
+export const formDesignSchema = z.object({
+  title: z.string().min(10).max(100),
+  subtitle: z.string().max(100),
+  description: z.string().max(500),
+  thumbnail: z.string().url().refine(async (url) => {
+    try {
+      const res = await fetch(url, { method: "HEAD" });
+      const contentType = res.headers.get("content-type");
+
+      return !!contentType?.startsWith("image/");
+    } catch (e) {
+      return false
+    }
+  }),
+  image: z.string().url().refine(async (url) => {
+    try {
+      const res = await fetch(url, { method: "HEAD" });
+      const contentType = res.headers.get("content-type");
+
+      return !!contentType?.startsWith("image/");
+    } catch (e) {
+      return false
+    }
+  }),
+  pitch: z.string().min(20),
+})
+
 export const formProjectSchema = z.object({
   title: z.string().min(10).max(100),
   subtitle: z.string().max(100),

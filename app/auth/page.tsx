@@ -3,7 +3,7 @@ import { auth, signIn, signOut } from "@/auth";
 import { LogOut, } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { IconBrandGithub, IconBrandGoogle } from "@tabler/icons-react";
-import { client, clientNoCache } from '@/sanity/lib/client';
+import { clientNoCache } from '@/sanity/lib/client';
 import { AUTHOR_BY_ID_QUERY } from '@/sanity/lib/queries';
 import { TabManagement } from '@/components/TabManagement';
 import Image from 'next/image';

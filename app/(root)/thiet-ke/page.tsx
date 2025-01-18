@@ -1,61 +1,63 @@
 import SearchForm from "@/components/SearchForm";
-import { PROJECT_DETAILS_BY_QUERY } from "@/sanity/lib/queries";
+import { DESIGNS_BY_QUERY } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { auth } from "@/auth";
+import ConstructionList from "@/components/ConstructionList";
 import MarkupSchema from "@/components/shared/MarkupSchema";
 import { Metadata } from "next/types";
-import SimpleCard, { SimpleCardType } from "@/components/SimpleCard";
+import { SimpleCardType } from "@/components/SimpleCard";
+import DesignList from "@/components/DesignList";
 
-export default async function Home({ searchParams }: {
+export default async function Construction({ searchParams }: {
   searchParams: Promise<{ query?: string }>
 }) {
 
   const query = (await searchParams).query;
 
-  const params = { search: query || null };
+  const params = { search: query ?? null };
+
+  console.log(`params: ${query}`)
 
   const session = await auth();
 
   console.log(`session -> ${session?.id}`);
 
-  const { data: searchForProjects } = await sanityFetch({ query: PROJECT_DETAILS_BY_QUERY, params });
-
-  console.log('searchForProjects', searchForProjects)
+  const { data: searchForConstructions } = await sanityFetch({ query: DESIGNS_BY_QUERY, params });
+  console.log(`searchForConstructions -> ${params}: ${searchForConstructions}`)
 
   return (
     <>
-      <MarkupSchema path={`chi-tiet-du-an`} />
+      <MarkupSchema path="thiet-ke" />
 
-      <section className={"pink_container !min-h-[230px] mt-32"}>
+      <section className={"pink_container"}>
         <h1 className={"heading"}>
           Kết Nối Với Chúng Tôi
         </h1>
 
         <p className={"sub-heading !max-w-3xl"}>
-          Hãy Chọn Dự Án Mà Bạn Quan Tâm.
+          Hãy Chọn Thiết Kế Mà Bạn Quan Tâm.
         </p>
-        <SearchForm query={query} path="chi-tiet-du-an" search="Dự Án"/>
+
+        <SearchForm query={query} path="thiet-ke" search="Thiết kế" />
       </section>
-      <section className={"section_container justify-items-center"}>
-        <p className={"text-30-semibold"}>
-          {query ? `Tìm kiếm cho "${query}"` : 'Tất cả dự án'}
-        </p>
-        <ul className={"mt-7 card_grid"}>
-          {searchForProjects?.length > 0 ? (
-            searchForProjects.map((post: SimpleCardType) => (
-              <SimpleCard key={post?._id} post={post} path="chi-tiet-du-an" className='xs:w-full justify-items-center' />
-            ))
-          ) : (
-            <p className={"no-result"}>
-              Không tìm thấy dự án phù hợp
-            </p>
-          )}
-        </ul>
-      </section>
+
+
+      {searchForConstructions?.length > 0 ? (
+        searchForConstructions.map((post: SimpleCardType) => (
+          <DesignList key={post?._id} post={post} />
+        ))
+      ) : (
+        <section className={"section_container"}>
+          <p className={"no-result"}>
+            Không tìm thấy thiết kế
+          </p>
+        </section>
+      )}
       <SanityLive />
     </>
   );
 }
+
 
 export const metadata: Metadata = {
   title: "CÔNG TY TNHH KIẾN TRÚC XÂY DỰNG ART SUNDAY",

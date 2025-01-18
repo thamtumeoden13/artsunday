@@ -6,16 +6,16 @@ import { Textarea } from "@/components/ui/textarea";
 import MDEditor from "@uiw/react-md-editor";
 import { Button } from "@/components/ui/button";
 import { Send } from "lucide-react";
-import { formConstructionSchema } from "@/lib/validation";
+import { formDesignSchema } from "@/lib/validation";
 import z from "zod";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
-import { createConstruction, updateConstruction } from "@/lib/actions";
-import { Construction } from '@/sanity/types';
+import { createDesign, updateDesign } from "@/lib/actions";
+import { Design } from '@/sanity/types';
 
-type FormDataType = Omit<Construction, "author">;
+type FormDataType = Omit<Design, "author">;
 
-const ConstructionForm = ({ post }: { post?: Construction }) => {
+const DesignForm = ({ post }: { post?: Design }) => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [pitch, setPitch] = useState("");
   const [formData, setFormData] = useState<FormDataType>();
@@ -33,18 +33,18 @@ const ConstructionForm = ({ post }: { post?: Construction }) => {
         pitch,
       }
 
-      await formConstructionSchema.parseAsync(formValues);
+      await formDesignSchema.parseAsync(formValues);
 
       console.log(formValues);
 
       const response = post
-        ? await updateConstruction(prevState, formDataSubmit, pitch, formData?._id!)
-        : await createConstruction(prevState, formDataSubmit, pitch);
+        ? await updateDesign(prevState, formDataSubmit, pitch, formData?._id!)
+        : await createDesign(prevState, formDataSubmit, pitch);
 
       if (response.status === "SUCCESS") {
         toast({
           title: "Success",
-          description: "Your construction pitch has been created successfully",
+          description: "Your design pitch has been created successfully",
         })
       }
 
@@ -120,7 +120,7 @@ const ConstructionForm = ({ post }: { post?: Construction }) => {
           id={"title"}
           name={"title"}
           className={"startup-form_input"}
-          placeholder={"Construction Title"}
+          placeholder={"Design Title"}
           required
           value={formData?.title}
           onChange={handleChangeForm}
@@ -137,7 +137,7 @@ const ConstructionForm = ({ post }: { post?: Construction }) => {
           id={"subtitle"}
           name={"subtitle"}
           className={"startup-form_input"}
-          placeholder={"Construction Subtitle"}
+          placeholder={"Design Subtitle"}
           required
           value={formData?.subtitle}
           onChange={handleChangeForm}
@@ -154,7 +154,7 @@ const ConstructionForm = ({ post }: { post?: Construction }) => {
           id={"description"}
           name={"description"}
           className={"startup-form_textarea"}
-          placeholder={"Construction Description"}
+          placeholder={"Design Description"}
           required
           value={formData?.description}
           onChange={handleChangeForm}
@@ -172,7 +172,7 @@ const ConstructionForm = ({ post }: { post?: Construction }) => {
           id={"thumbnail"}
           name={"thumbnail"}
           className={"startup-form_input"}
-          placeholder={"Construction Thumbnail URL"}
+          placeholder={"Design Thumbnail URL"}
           required
           value={formData?.thumbnail}
           onChange={handleChangeForm}
@@ -190,7 +190,7 @@ const ConstructionForm = ({ post }: { post?: Construction }) => {
           id={"image"}
           name={"image"}
           className={"startup-form_input"}
-          placeholder={"Construction Image URL"}
+          placeholder={"Design Image URL"}
           value={formData?.image}
           required
           onChange={handleChangeForm}
@@ -230,4 +230,4 @@ const ConstructionForm = ({ post }: { post?: Construction }) => {
     </form>
   )
 }
-export default ConstructionForm
+export default DesignForm

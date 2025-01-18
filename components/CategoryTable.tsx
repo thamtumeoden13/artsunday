@@ -84,7 +84,7 @@ const CategoryTable = ({ slug, title, role }: { slug: string, title: string, rol
     <section className={"section_container !justify-items-center !mt-0 overflow-auto h-full"}>
 
       <div className='absolute top-0 left-0 right-0 flex items-center justify-between w-full h-24 px-10 py-4 '>
-        <p className='w-[200px]'>{title}</p>
+        <p className='w-96'>{title}</p>
         {(role == 'admin' || role == 'editor') && <div className='flex items-center justify-end flex-1 gap-10 py-10'>
           <Combobox
             data={projects}

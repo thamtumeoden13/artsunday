@@ -6,6 +6,7 @@ import { Author } from "@/sanity/types";
 import ConstructionTable from "./ConstructionTable";
 import ProjectTable from "./ProjectTable";
 import PermissionTable from "./PermissionTable";
+import DesignTable from "./DesignTable";
 
 export const TabManagement = async ({ user }: { user: Author }) => {
 
@@ -15,11 +16,20 @@ export const TabManagement = async ({ user }: { user: Author }) => {
 
   const tabs = [
     {
-      title: "Hạng Mục",
-      value: "hang-muc",
+      title: "Công Trình",
+      value: "cong-trinh",
       content: (
         <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
-          <ConstructionTable title='Hạng Mục' role={role} />
+          <ConstructionTable title='Công Trình' role={role} />
+        </div>
+      ),
+    },
+    {
+      title: "Thiết Kế",
+      value: "thiet-ke",
+      content: (
+        <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
+          <DesignTable title='Thiết kế' role={role} />
         </div>
       ),
     },
@@ -42,39 +52,52 @@ export const TabManagement = async ({ user }: { user: Author }) => {
       ),
     },
     {
-      title: "Home Hero",
+      title: "Danh Mục Trang Chủ",
       value: "home-hero",
       content: (
         <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
           <CategoryTable
             slug="home-hero"
-            title="Trang Chủ"
+            title="Danh Mục Trang Chủ"
             role={role}
           />
         </div>
       ),
     },
     {
-      title: "Nav Router",
-      value: "nav-router",
+      title: "Danh Mục Công Trình",
+      value: "constructions-router",
       content: (
         <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
           <CategoryTable
-            slug="nav-router"
-            title="Nav Router"
+            slug="constructions-router"
+            title="Danh Mục Công Trình"
             role={role}
           />
         </div>
       ),
     },
     {
-      title: "Footer",
+      title: "Danh Mục Thiết Kế",
+      value: "designs-router",
+      content: (
+        <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
+          <CategoryTable
+            slug="designs-router"
+            title="Danh Mục Thiết Kế"
+            role={role}
+          />
+        </div>
+      ),
+    },
+    {
+      title: "Danh Mục Cuối Trang",
       value: "footer",
       content: (
         <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
           <CategoryTable
             slug="footer"
-            title="Footer"
+            title="Danh Mục Cuối Trang"
             role={role}
           />
         </div>

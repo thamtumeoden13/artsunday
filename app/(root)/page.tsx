@@ -44,7 +44,7 @@ export default async function Home({ searchParams }: {
         </h1>
 
         <p className={"sub-heading !max-w-3xl"}>
-          Hãy Chọn Hạng mục, Dự Án Mà Bạn Quan Tâm.
+          Hãy Chọn Công Trình, Dự Án Mà Bạn Quan Tâm.
         </p>
 
         <SearchForm query={query} search="Dự Án" />
@@ -58,7 +58,7 @@ export default async function Home({ searchParams }: {
           <ul className={"mt-7 card_grid"}>
             {searchForProjectDetails?.length > 0 ? (
               searchForProjectDetails.map((post: SimpleCardType) => (
-                <SimpleCard key={post?._id} post={post} path="chi-tiet-du-an" />
+                <SimpleCard key={post?._id} post={post} path="chi-tiet-du-an" className='xs:w-full justify-items-center'  />
               ))
             ) : (
               <p className={"no-result"}>
@@ -70,8 +70,8 @@ export default async function Home({ searchParams }: {
       ) : (
         <>
           {searchForConstructions?.length > 0 && (
-            searchForConstructions.map((post: StartupCardType) => (
-              <ConstructionList key={post?._id} post={post} />
+            searchForConstructions.map((post: SimpleCardType) => (
+              <ConstructionList key={post?._id} post={post} className="!justify-items-center" />
             ))
           )}
         </>

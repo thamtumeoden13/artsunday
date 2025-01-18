@@ -1,7 +1,7 @@
 import React from 'react'
-import StartupForm from "@/components/StartupForm";
 import {auth} from "@/auth";
 import {redirect} from "next/navigation";
+import DesignForm from '@/components/DesignForm';
 
 const Page = async () => {
   const session = await auth();
@@ -11,10 +11,10 @@ const Page = async () => {
   return (
     <>
       <section className={"pink_container !min-h-[230px]"}>
-        <h1 className={"heading"}>Submit Your Startup</h1>
+        <h1 className={"heading"}>Submit Your Design</h1>
       </section>
 
-      <StartupForm/>
+      <DesignForm/>
     </>
   )
 }

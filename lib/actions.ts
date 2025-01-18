@@ -5,7 +5,7 @@ import { parseServerActionResponse } from "@/lib/utils";
 import slugify from "slugify";
 import { writeClient } from "@/sanity/lib/write-client";
 import { client, clientNoCache } from "@/sanity/lib/client";
-import { CATEGORY_BY_ID_QUERY, CONSTRUCTION_BY_SLUG_QUERY, PROJECT_BY_SLUG_QUERY, PROJECT_DETAIL_BY_SLUG_QUERY } from "@/sanity/lib/queries";
+import { CATEGORY_BY_ID_QUERY, CONSTRUCTION_BY_SLUG_QUERY, DESIGN_BY_SLUG_QUERY, PROJECT_BY_SLUG_QUERY, PROJECT_DETAIL_BY_SLUG_QUERY } from "@/sanity/lib/queries";
 import { v4 as uuidv4 } from 'uuid';
 import { Author } from "@/sanity/types";
 
@@ -164,6 +164,131 @@ export const updateConstruction = async (state: any, form: FormData, pitch: stri
 
     const result = await writeClient.patch(_id)
       .set({ ...construction })
+      .commit()
+
+    return parseServerActionResponse({
+      result,
+      error: "",
+      status: "SUCCESS",
+    })
+  } catch (error) {
+    console.log(error)
+
+    return parseServerActionResponse({
+      error: JSON.stringify(error),
+      status: "ERROR",
+    });
+
+  }
+}
+
+
+export const createDesign = async (state: any, form: FormData, pitch: string,) => {
+  const session = await auth();
+
+  console.log('createDesign -> session', session)
+
+  if (!session) return parseServerActionResponse({
+    error: "Not signed in",
+    status: "ERROR"
+  });
+
+  const { _id, title, subtitle, description, thumbnail, image } = Object.fromEntries(
+    Array.from(form).filter(([key]) => key !== 'pitch'),
+  );
+
+  const baseSlug = slugify(title as string, { lower: true, strict: true });
+  let uniqueSlug = baseSlug;
+
+  const resultQuery = await clientNoCache.fetch(DESIGN_BY_SLUG_QUERY, { slug: baseSlug });
+
+  console.log(resultQuery);
+
+  if (resultQuery?.data) {
+    uniqueSlug = `${baseSlug}-${resultQuery.data.length}`;
+  }
+
+  try {
+    const design = {
+      title,
+      subtitle,
+      description,
+      thumbnail,
+      image,
+      slug: {
+        _type: uniqueSlug,
+        current: uniqueSlug,
+      },
+      author: {
+        _type: "reference",
+        _ref: session?.id,
+      },
+      pitch
+    }
+
+    const result = await writeClient.create({ _type: "design", ...design });
+
+    return parseServerActionResponse({
+      result,
+      error: "",
+      status: "SUCCESS",
+    })
+  } catch (error) {
+    console.log(error)
+
+    return parseServerActionResponse({
+      error: JSON.stringify(error),
+      status: "ERROR",
+    });
+
+  }
+}
+
+export const updateDesign = async (state: any, form: FormData, pitch: string, _id: string) => {
+  const session = await auth();
+
+  console.log('updateDesign -> session', session)
+
+  if (!session) return parseServerActionResponse({
+    error: "Not signed in",
+    status: "ERROR"
+  });
+
+  const { title, subtitle, description, thumbnail, image } = Object.fromEntries(
+    Array.from(form).filter(([key]) => key !== 'pitch'),
+  );
+
+  const baseSlug = slugify(title as string, { lower: true, strict: true });
+  let uniqueSlug = baseSlug;
+
+  const resultQuery = await clientNoCache.fetch(DESIGN_BY_SLUG_QUERY, { slug: baseSlug });
+
+  console.log(resultQuery);
+
+  if (resultQuery?.data) {
+    uniqueSlug = `${baseSlug}-${resultQuery.data.length}`;
+  }
+
+  try {
+    const design = {
+      title,
+      subtitle,
+      description,
+      thumbnail,
+      image,
+      slug: {
+        _type: uniqueSlug,
+        current: uniqueSlug,
+      },
+      author: {
+        _type: "reference",
+        _ref: session?.id,
+      },
+      pitch
+    }
+
+    const result = await writeClient.patch(_id)
+      .set({ ...design })
       .commit()
 
     return parseServerActionResponse({

@@ -10,6 +10,7 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem("playlist").title("Playlists"),
       S.documentTypeListItem("category").title("Categories"),
       S.documentTypeListItem("construction").title("Constructions"),
+      S.documentTypeListItem("design").title("Designs"),
       S.documentTypeListItem("project").title("Projects"),
       S.documentTypeListItem("projectDetail").title("ProjectDetails"),
     ]);
