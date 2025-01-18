@@ -28,7 +28,7 @@ export default async function Construction({ searchParams }: {
     <>
       <MarkupSchema path="hang-muc" />
 
-      <section className={"pink_container !mt-32"}>
+      <section className={"pink_container"}>
         <h1 className={"heading"}>
           Kết Nối Với Chúng Tôi
         </h1>

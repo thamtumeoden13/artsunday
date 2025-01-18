@@ -18,9 +18,10 @@ const Header = () => {
   const pathname = usePathname()
   console.log({ pathname })
 
-  const isScrolled = pathname.includes('/user/');
 
   const [hasScrolled, setHasScrolled] = useState(false);
+
+  const [scrollDirection, setScrollDirection] = useState<string | null>(null);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -29,9 +30,20 @@ const Header = () => {
   const [navProjectRouter, setNavProjectRouter] = useState<ProjectCardType[]>([]);
   const [navConstructionRouter, setNavConstructionRouter] = useState<ProjectCardType[]>([]);
 
+  let prevScrollY = 0;
+
   useEffect(() => {
     const handleScroll = () => {
-      setHasScrolled(window.scrollY > 32);
+      const currentScrollY = window.scrollY;
+      setHasScrolled(currentScrollY > 32);
+
+      if (currentScrollY > prevScrollY) {
+        setScrollDirection("down");
+      } else if (currentScrollY < prevScrollY) {
+        setScrollDirection("up");
+      }
+
+      prevScrollY = currentScrollY;
     };
     const getNavProjectRouter = async () => {
       const { select: navProjectRouter } = await client.fetch(CATEGORY_BY_SLUG_QUERY, { slug: "nav-router" });
@@ -84,17 +96,19 @@ const Header = () => {
     );
   };
 
+  console.log('scrollDirection', scrollDirection)
+
   return (
     <header
       className={clsx(
-        "fixed top-0 left-0 z-50 w-full py-10 transition-all duration-500" +
-        " max-lg:py-4 bg-black",
-        (hasScrolled || isScrolled) && "py-2 bg-black-200" + " backdrop-blur-[8px]",
+        "fixed top-0 left-0 z-50 w-full py-10 transition-all duration-500 max-lg:py-4 bg-black opacity-0",
+        hasScrolled && "py-2 bg-black-200" + " backdrop-blur-[8px]",
+        scrollDirection === "down" ? "opacity-0" : "opacity-100",
       )}
     >
       <div className={"container flex h-14 items-center max-lg:px-5"}>
         <Link href={"/"} className={"lg:hidden flex-1 cursor-pointer z-2"}>
-          <Image src="/logo-1.png" alt="Art Sunday" width={60} height={30} />
+          <Image src="/images/artsunday.png" alt="Art Sunday" width={60} height={30} />
         </Link>
 
         <div
@@ -144,7 +158,6 @@ const Header = () => {
                       height={30}
                     />
                   </Link>
-                  {/* </LinkScroll> */}
                 </li>
 
                 <li className={"nav-li"}>

@@ -1,11 +1,7 @@
 import React from 'react'
-import { cn, formatDate } from "@/lib/utils";
-import { ArrowUpRight, EyeIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import { Author, Startup } from "@/sanity/types";
-import StartupCard from './StartupCard';
 import { PROJECT_DETAILS_BY_PROJECT_QUERY } from '@/sanity/lib/queries';
 import { sanityFetch } from '@/sanity/lib/live';
 import SimpleCard, { SimpleCardType } from './SimpleCard';
@@ -23,17 +19,17 @@ const ProjectDetailList = async ({ post, className }: { post: StartupCardType, c
   if (!searchForProjectDetails?.length) return null
 
   return (
-    <section className={cn("section_container !justify-items-center", className)}>
-      <Link href={`/du-an/${slug?.current}`} className='flex lg:w-[65rem] md:w-[43rem] w-[22rem]'>
+    <section className={cn("section_container !justify-items-center !px-2", className)}>
+      <Link href={`/du-an/${slug?.current}`} className='flex lg:w-[65rem] md:w-[43rem] w-full'>
         <h1 className="heading-half hover:underline w-full" style={{ textAlign: 'left' }}>
           Dự Án: {'  '}
           <span className="text-purple">{title}</span>
         </h1>
       </Link>
-      <ul className={"mt-7 card_grid"}>
+      <ul className={"mt-7 card_grid max-7-xl w-full"}>
         {searchForProjectDetails?.length > 0 && (
           searchForProjectDetails.map((post: SimpleCardType) => (
-            <SimpleCard key={post?._id} post={post} path='chi-tiet-du-an' />
+            <SimpleCard key={post?._id} post={post} path='chi-tiet-du-an' className='xs:w-full justify-items-center' />
           ))
         )}
       </ul>

@@ -1,17 +1,10 @@
-import Image from "next/image";
 import SearchForm from "@/components/SearchForm";
-import StartupCard, { StartupCardType } from "@/components/StartupCard";
-import { client } from "@/sanity/lib/client";
-import { PROJECT_DETAILS_BY_QUERY, PROJECTS_QUERY, STARTUPS_QUERY } from "@/sanity/lib/queries";
+import { PROJECT_DETAILS_BY_QUERY } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { auth } from "@/auth";
-import Hero from "@/components/Hero";
-import ProjectList from "@/components/ProjectList";
-import ProjectDetailList from "@/components/ProjectDetailList";
 import MarkupSchema from "@/components/shared/MarkupSchema";
 import { Metadata } from "next/types";
-import SimpleCard from "@/components/SimpleCard";
-// import BreadcrumbComponent from "@/components/shared/Breadcrumb";
+import SimpleCard, { SimpleCardType } from "@/components/SimpleCard";
 
 export default async function Home({ searchParams }: {
   searchParams: Promise<{ query?: string }>
@@ -49,7 +42,7 @@ export default async function Home({ searchParams }: {
         </p>
         <ul className={"mt-7 card_grid"}>
           {searchForProjects?.length > 0 ? (
-            searchForProjects.map((post: StartupCardType) => (
+            searchForProjects.map((post: SimpleCardType) => (
               <SimpleCard key={post?._id} post={post} path="chi-tiet-du-an" />
             ))
           ) : (
@@ -59,18 +52,6 @@ export default async function Home({ searchParams }: {
           )}
         </ul>
       </section>
-      {/* {searchForProjects?.length > 0 ? (
-        searchForProjects.map((post: StartupCardType) => (
-          <ProjectDetailList key={post?._id} post={post} />
-        ))
-      ) : (
-        <section className={"section_container"}>
-          <p className={"no-result"}>
-            Không tìm thấy dự án
-          </p>
-        </section>
-      )} */}
-
       <SanityLive />
     </>
   );
