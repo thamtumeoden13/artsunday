@@ -105,6 +105,7 @@ export const formProjectSchema = z.object({
 export const formProjectDetailSchema = z.object({
   title: z.string().min(10).max(100),
   subtitle: z.string().max(100),
+  tags: z.string().max(100),
   description: z.string().max(500),
   thumbnail: z.string().url().refine(async (url) => {
     try {

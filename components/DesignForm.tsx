@@ -114,7 +114,7 @@ const DesignForm = ({ post }: { post?: Design }) => {
     >
       <div>
         <label htmlFor="title" className={"startup-form_label"}>
-          {"Title"}
+          {"Tiêu Đề"}
         </label>
         <Input
           id={"title"}
@@ -131,7 +131,7 @@ const DesignForm = ({ post }: { post?: Design }) => {
       </div>
       <div>
         <label htmlFor="subtitle" className={"startup-form_label"}>
-          {"Subtitle"}
+          {"Phụ Đề"}
         </label>
         <Input
           id={"subtitle"}
@@ -148,7 +148,7 @@ const DesignForm = ({ post }: { post?: Design }) => {
       </div>
       <div>
         <label htmlFor="description" className={"startup-form_label"}>
-          {"Description"}
+          {"Mô Tả"}
         </label>
         <Textarea
           id={"description"}
@@ -166,7 +166,7 @@ const DesignForm = ({ post }: { post?: Design }) => {
 
       <div>
         <label htmlFor="thumbnail" className={"startup-form_label"}>
-          {"Thumbnail URL"}
+          {"Ảnh Đại Diện"}
         </label>
         <Input
           id={"thumbnail"}
@@ -184,7 +184,7 @@ const DesignForm = ({ post }: { post?: Design }) => {
 
       <div>
         <label htmlFor="image" className={"startup-form_label"}>
-          {"Image URL"}
+          {"Hình Ảnh"}
         </label>
         <Input
           id={"image"}

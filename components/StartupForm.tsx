@@ -87,7 +87,7 @@ const StartupForm = () => {
     >
       <div>
         <label htmlFor="title" className={"startup-form_label"}>
-          {"Title"}
+          {"Tiêu Đề"}
         </label>
         <Input
           id={"title"}
@@ -102,7 +102,7 @@ const StartupForm = () => {
       </div>
       <div>
         <label htmlFor="description" className={"startup-form_label"}>
-          {"Description"}
+          {"Mô Tả"}
         </label>
         <Textarea
           id={"description"}
@@ -134,7 +134,7 @@ const StartupForm = () => {
 
       <div>
         <label htmlFor="link" className={"startup-form_label"}>
-          {"Image URL"}
+          {"Hình Ảnh"}
         </label>
         <Input
           id={"link"}

@@ -446,7 +446,7 @@ export const createProjectDetail = async (state: any, form: FormData, pitch: str
     status: "ERROR"
   });
 
-  const { title, subtitle, description, thumbnail, image } = Object.fromEntries(
+  const { title, subtitle, tags, description, thumbnail, image } = Object.fromEntries(
     Array.from(form).filter(([key]) => key !== 'pitch'),
   );
 
@@ -468,6 +468,7 @@ export const createProjectDetail = async (state: any, form: FormData, pitch: str
       description,
       thumbnail,
       image,
+      tags,
       slug: {
         _type: uniqueSlug,
         current: uniqueSlug,
@@ -509,7 +510,7 @@ export const updateProjectDetail = async (state: any, form: FormData, pitch: str
     status: "ERROR"
   });
 
-  const { title, subtitle, description, thumbnail, image } = Object.fromEntries(
+  const { title, subtitle, tags, description, thumbnail, image } = Object.fromEntries(
     Array.from(form).filter(([key]) => key !== 'pitch'),
   );
 
@@ -529,6 +530,7 @@ export const updateProjectDetail = async (state: any, form: FormData, pitch: str
       title,
       subtitle,
       description,
+      tags,
       thumbnail,
       image,
       slug: {

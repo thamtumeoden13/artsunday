@@ -16,7 +16,7 @@ import { client, clientNoCache } from "@/sanity/lib/client";
 import { PROJECTS_BY_QUERY } from "@/sanity/lib/queries";
 import { Author, Project, ProjectDetail } from '@/sanity/types';
 
-type FormDataType = Omit<ProjectDetail, "author" | "construction">;
+type FormDataType = Omit<ProjectDetail, "author" | "project">;
 type ProjectDetailFormType = Omit<ProjectDetail, "author" | "project"> & { author?: Author } & { project?: Project };
 
 const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
@@ -38,6 +38,7 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
       const formValues = {
         title: formData.get("title") as string,
         subtitle: formData.get("subtitle") as string,
+        tags: formData.get("tags") as string,
         description: formData.get("description") as string,
         thumbnail: formData.get("thumbnail") as string,
         image: formData.get("image") as string,
@@ -127,9 +128,9 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
   useEffect(() => {
     if (post) {
 
-      const { title, subtitle, description, thumbnail, image, project } = post;
+      const { title, subtitle, tags, description, thumbnail, image, project } = post;
 
-      setFormData({ ...formData!, title, subtitle, description, thumbnail, image });
+      setFormData({ ...formData!, title, subtitle, tags, description, thumbnail, image });
 
       if (post.pitch) {
         setPitch(post.pitch)
@@ -147,7 +148,7 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
     >
       <div>
         <label htmlFor="title" className={"startup-form_label"}>
-          {"Title"}
+          {"Tiêu Đề"}
         </label>
         <Input
           id={"title"}
@@ -164,7 +165,7 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
       </div>
       <div>
         <label htmlFor="subtitle" className={"startup-form_label"}>
-          {"Subtitle"}
+          {"Phụ Đề"}
         </label>
         <Input
           id={"subtitle"}
@@ -181,7 +182,7 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
       </div>
       <div>
         <label htmlFor="description" className={"startup-form_label"}>
-          {"Description"}
+          {"Mô Tả"}
         </label>
         <Textarea
           id={"description"}
@@ -198,8 +199,25 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
       </div>
 
       <div>
+        <label htmlFor="tags" className={"startup-form_label"}>
+          {"Dán Nhãn"}
+        </label>
+        <Input
+          id={"tags"}
+          name={"tags"}
+          className={"startup-form_input"}
+          required
+          placeholder={"Project Tags"}
+          value={formData?.tags}
+          onChange={handleChangeForm}
+        />
+        {errors.subtitle && (
+          <p className={"startup-form_error"}>{errors.subtitle}</p>
+        )}
+      </div>
+      <div>
         <label htmlFor="thumbnail" className={"startup-form_label"}>
-          {"Thumbnail URL"}
+          {"Ảnh Đại Diện"}
         </label>
         <Input
           id={"thumbnail"}
@@ -217,7 +235,7 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
 
       <div>
         <label htmlFor="image" className={"startup-form_label"}>
-          {"Image URL"}
+          {"Hình Ảnh"}
         </label>
         <Input
           id={"image"}
@@ -235,7 +253,7 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
 
       <div>
         <label htmlFor="image" className={"startup-form_label"}>
-          {"Project"}
+          {"Dự Án"}
         </label>
         <Combobox
           data={projects}
