@@ -6,6 +6,7 @@ import ConstructionList from "@/components/ConstructionList";
 import MarkupSchema from "@/components/shared/MarkupSchema";
 import { Metadata } from "next/types";
 import { SimpleCardType } from "@/components/SimpleCard";
+import { notFound } from "next/navigation";
 
 export default async function Construction({ searchParams }: Readonly<{
   searchParams: Promise<{ query?: string }>
@@ -22,6 +23,8 @@ export default async function Construction({ searchParams }: Readonly<{
   console.log(`session -> ${session?.id}`);
 
   const { data: searchForConstructions } = await sanityFetch({ query: CONSTRUCTIONS_BY_QUERY, params });
+
+  if (!searchForConstructions) return notFound();
 
   return (
     <>

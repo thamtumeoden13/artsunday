@@ -5,6 +5,7 @@ import MarkupSchema from "@/components/shared/MarkupSchema";
 import { Metadata } from "next/types";
 import { PROJECTS_BY_QUERY } from "@/sanity/lib/queries";
 import { SimpleCardType } from "@/components/SimpleCard";
+import { notFound } from "next/navigation";
 
 async function Page({ searchParams }: Readonly<{
   searchParams: Promise<{ query?: string }>
@@ -17,7 +18,8 @@ async function Page({ searchParams }: Readonly<{
   console.log(`params -> ${JSON.stringify(params)}`);
 
   const { data: searchForProjects } = await sanityFetch({ query: PROJECTS_BY_QUERY, params });
-  console.log(`searchForProjects -> ${searchForProjects.length}`);
+
+  if (!searchForProjects) return notFound();
 
   return (
     <>

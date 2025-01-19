@@ -10,7 +10,7 @@ import { CloudinaryImage } from "@/components/shared/CloudinaryImage";
 
 const md = markdownit();
 
-export default async function Designs({ params }: { params: Promise<{ slug: string }> }) {
+export default async function Designs({ params }: { readonly params: Promise<{ readonly slug: string }> }) {
 
   const slug = (await params).slug;
 

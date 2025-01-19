@@ -2,7 +2,7 @@ import React, { Suspense } from 'react'
 import {
   PROJECT_DETAIL_BY_SLUG_QUERY,
   PROJECT_DETAIL_VIEWS_QUERY,
-  PROJECT_DETAILS_BY_PROJECT_QUERY,
+  PROJECT_DETAILS_BY_TAG,
 } from "@/sanity/lib/queries";
 import { client } from "@/sanity/lib/client";
 import { notFound } from "next/navigation";
@@ -24,7 +24,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
   const { data: post } = await sanityFetch({ query: PROJECT_DETAIL_BY_SLUG_QUERY, params: { slug } })
 
-  const releatedPosts = await client.fetch(PROJECT_DETAILS_BY_PROJECT_QUERY, { id: post.project._id },)
+  const releatedPosts = post && await client.fetch(PROJECT_DETAILS_BY_TAG, { tag: post?.tags, id: post._id },) || []
 
   if (!post) return notFound();
 

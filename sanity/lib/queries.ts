@@ -389,6 +389,7 @@ export const PROJECT_DETAIL_BY_SLUG_QUERY =
   title,
   subtitle,
   slug,
+  tags,
   _createdAt,
   author->{
     _id, name, username, image, bio
@@ -402,6 +403,28 @@ export const PROJECT_DETAIL_BY_SLUG_QUERY =
   thumbnail,
   pitch,
 }`);
+
+export const PROJECT_DETAILS_BY_TAG =
+  defineQuery(`*[_type == "projectDetail" && defined($tag) && _id != $id && ($tag match tags || tags match $tag)] | order(_createdAt desc) {
+  _id,
+  title,
+  subtitle,
+  slug,
+  tags,
+  _createdAt,
+  author->{
+    _id, name, username, image, bio
+  },
+  project->{
+    _id, title, subtitle, description, image, thumbnail, slug
+  }, 
+  views,
+  description,
+  image,
+  thumbnail,
+  pitch,
+}`);
+
 
 export const PROJECT_DETAIL_VIEWS_QUERY = defineQuery(`
   *[_type == "projectDetail" && _id == $id][0]{

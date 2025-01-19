@@ -5,6 +5,7 @@ import { auth } from "@/auth";
 import MarkupSchema from "@/components/shared/MarkupSchema";
 import { Metadata } from "next/types";
 import SimpleCard, { SimpleCardType } from "@/components/SimpleCard";
+import { notFound } from "next/navigation";
 
 export default async function Home({ searchParams }: {
   readonly searchParams: Promise<{ query?: string }>
@@ -14,13 +15,10 @@ export default async function Home({ searchParams }: {
 
   const params = { search: query ?? null };
 
-  const session = await auth();
-
-  console.log(`session -> ${session?.id}`);
-
   const { data: searchForProjects } = await sanityFetch({ query: PROJECT_DETAILS_BY_QUERY, params });
 
   console.log('searchForProjects', searchForProjects)
+  if (!searchForProjects) return notFound();
 
   return (
     <>
