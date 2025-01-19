@@ -16,11 +16,11 @@ export const TabManagement = async ({ user }: { user: Author }) => {
 
   const tabs = [
     {
-      title: "Công Trình",
-      value: "cong-trinh",
+      title: "Thi Công",
+      value: "thi-cong",
       content: (
         <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
-          <ConstructionTable title='Công Trình' role={role} />
+          <ConstructionTable title='Thi Công' role={role} />
         </div>
       ),
     },
@@ -65,13 +65,13 @@ export const TabManagement = async ({ user }: { user: Author }) => {
       ),
     },
     {
-      title: "Danh Mục Công Trình",
+      title: "Danh Mục Thi Công",
       value: "constructions-router",
       content: (
         <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
           <CategoryTable
             slug="constructions-router"
-            title="Danh Mục Công Trình"
+            title="Danh Mục Thi Công"
             role={role}
           />
         </div>

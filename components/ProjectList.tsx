@@ -8,14 +8,14 @@ import SimpleCard, { SimpleCardType } from './SimpleCard';
 
 export type StartupCardType = Omit<Startup, "author"> & { author?: Author };
 
-const ProjectList = async ({ post, parentPath = 'cong-trinh', className, }: { post: StartupCardType, parentPath?: 'cong-trinh' | 'thiet-ke', className?: string, }) => {
+const ProjectList = async ({ post, parentPath = 'thi-cong', className, }: { post: StartupCardType, parentPath?: 'thi-cong' | 'thiet-ke', className?: string, }) => {
 
   const { _id: id, title, slug } = post
 
   const params = { id }
 
   const { data: searchForProjects } = await sanityFetch({
-    query: parentPath === "cong-trinh" ? PROJECTS_BY_CONSTRUCTION_ID_QUERY : PROJECTS_BY_DESIGN_ID_QUERY,
+    query: parentPath === "thi-cong" ? PROJECTS_BY_CONSTRUCTION_ID_QUERY : PROJECTS_BY_DESIGN_ID_QUERY,
     params
   });
 
@@ -24,9 +24,8 @@ const ProjectList = async ({ post, parentPath = 'cong-trinh', className, }: { po
   return (
     <section className={cn("section_container !justify-items-center !px-2", className)}>
       <Link href={`/${parentPath}/${slug?.current}`} className='flex lg:w-[65rem] md:w-[43rem] w-full'>
-        <h1 className="heading-half">
-          Thiết kế{'  '}
-          <span className="text-purple">{title}</span>
+        <h1 className="heading-half hover:text-p1 ">
+          <span className="">{title}</span>
         </h1>
       </Link>
       <ul className={cn("mt-7 card_grid max-7-xl w-full !justify-center", className)}>

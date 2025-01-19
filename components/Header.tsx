@@ -121,11 +121,13 @@ const Header = () => {
                 <li className={"nav-li max-lg:mb-4"}>
                   <NavLink name={"Trang Chủ"} route={"/"} />
                   <div className={"dot"} />
-                  <MenuItem setActive={setActive} active={active}
-                    item="construction" name={"Công Trình"} route={"/cong-trinh"}
+
+                  <MenuItem
+                    setActive={setActive} active={active}
+                    item="project" name={"Thiết Kế"} route={"/thiet-ke"}
                   >
                     <div className="grid grid-cols-2 max-lg:grid-cols-1 gap-10 p-4 text-md ">
-                      {navConstructionRouter.map(({ _id, title, slug, image, thumbnail, subtitle }) => (
+                      {navDesignRouter.map(({ _id, title, slug, image, thumbnail, subtitle }) => (
                         <ProductItem
                           key={_id}
                           title={title!}
@@ -155,12 +157,11 @@ const Header = () => {
                 </li>
 
                 <li className={"nav-li"}>
-                  <MenuItem
-                    setActive={setActive} active={active}
-                    item="project" name={"Thiết Kế"} route={"/thiet-ke"}
+                  <MenuItem setActive={setActive} active={active}
+                    item="construction" name={"Thi Công"} route={"/thi-cong"}
                   >
                     <div className="grid grid-cols-2 max-lg:grid-cols-1 gap-10 p-4 text-md ">
-                      {navDesignRouter.map(({ _id, title, slug, image, thumbnail, subtitle }) => (
+                      {navConstructionRouter.map(({ _id, title, slug, image, thumbnail, subtitle }) => (
                         <ProductItem
                           key={_id}
                           title={title!}

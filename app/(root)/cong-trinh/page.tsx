@@ -8,7 +8,7 @@ import { Metadata } from "next/types";
 import { SimpleCardType } from "@/components/SimpleCard";
 
 export default async function Construction({ searchParams }: {
-  searchParams: Promise<{ query?: string }>
+  readonly searchParams: Promise<{ query?: string }>
 }) {
 
   const query = (await searchParams).query;
@@ -25,7 +25,7 @@ export default async function Construction({ searchParams }: {
 
   return (
     <>
-      <MarkupSchema path="cong-trinh" />
+      <MarkupSchema path="thi-cong" />
 
       <section className={"pink_container"}>
         <h1 className={"heading"}>
@@ -36,7 +36,7 @@ export default async function Construction({ searchParams }: {
           Hãy Chọn Công Trình Mà Bạn Quan Tâm.
         </p>
 
-        <SearchForm query={query} path="cong-trinh" search="Công Trình" />
+        <SearchForm query={query} path="thi-cong" search="Công Trình" />
       </section>
 
 

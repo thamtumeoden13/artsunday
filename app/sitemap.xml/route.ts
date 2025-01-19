@@ -24,7 +24,7 @@ async function fetchPosts() {
   console.log({ searchForConstructions, searchForDesigns, searchForProjects, searchForProjectDetails })
 
   const sitemapConstructions = searchForConstructions?.map((post: PostType) => ({
-    loc: `${baseUrl}/cong-trinh/${post.slug?.current}`,
+    loc: `${baseUrl}/thi-cong/${post.slug?.current}`,
     lastmod: new Date(post._updatedAt).toISOString(),
   })) || [];
 
@@ -50,7 +50,7 @@ export async function GET() {
   const dynamicRoutes = await fetchPosts();
   const staticRoutes = [
     { loc: `${baseUrl}/`, lastmod: new Date().toISOString() },
-    { loc: `${baseUrl}/cong-trinh`, lastmod: new Date().toISOString() },
+    { loc: `${baseUrl}/thi-cong`, lastmod: new Date().toISOString() },
     { loc: `${baseUrl}/thiet-ke`, lastmod: new Date().toISOString() },
     { loc: `${baseUrl}/du-an`, lastmod: new Date().toISOString() },
     { loc: `${baseUrl}/chi-tiet-du-an`, lastmod: new Date().toISOString() },

@@ -61,7 +61,7 @@ export function Combobox({
         >
           {value
             ? data.find((item) => item._id === value)?.title
-            : "Choose Items..."}
+            : "Vui lòng chọn..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>

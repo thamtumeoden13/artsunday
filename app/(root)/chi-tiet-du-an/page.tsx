@@ -7,7 +7,7 @@ import { Metadata } from "next/types";
 import SimpleCard, { SimpleCardType } from "@/components/SimpleCard";
 
 export default async function Home({ searchParams }: {
-  searchParams: Promise<{ query?: string }>
+  readonly searchParams: Promise<{ query?: string }>
 }) {
 
   const query = (await searchParams).query;

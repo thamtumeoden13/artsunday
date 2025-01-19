@@ -186,7 +186,7 @@
   }
 
   .heading-half {
-    @apply uppercase hover:underline w-full bg-black px-3 py-3 font-ibm-plex font-bold text-white sm:text-[27px] sm:leading-[32px] text-[18px] leading-[23px] text-left my-2 ;
+    @apply uppercase w-full bg-black px-3 py-3 font-ibm-plex font-bold text-white sm:text-[27px] sm:leading-[32px] text-[18px] leading-[23px] text-left my-2 ;
   }
 
   .sub-heading {

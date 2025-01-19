@@ -1,12 +1,13 @@
 import SearchForm from "@/components/SearchForm";
+import { CONSTRUCTIONS_BY_QUERY } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
-import ProjectDetailList from "@/components/ProjectDetailList";
+import { auth } from "@/auth";
+import ConstructionList from "@/components/ConstructionList";
 import MarkupSchema from "@/components/shared/MarkupSchema";
 import { Metadata } from "next/types";
-import { PROJECTS_BY_QUERY } from "@/sanity/lib/queries";
 import { SimpleCardType } from "@/components/SimpleCard";
 
-async function Page({ searchParams }: Readonly<{
+export default async function Construction({ searchParams }: Readonly<{
   searchParams: Promise<{ query?: string }>
 }>) {
 
@@ -14,44 +15,47 @@ async function Page({ searchParams }: Readonly<{
 
   const params = { search: query ?? null };
 
-  console.log(`params -> ${JSON.stringify(params)}`);
+  console.log(`params: ${query}`)
 
-  const { data: searchForProjects } = await sanityFetch({ query: PROJECTS_BY_QUERY, params });
-  console.log(`searchForProjects -> ${searchForProjects.length}`);
+  const session = await auth();
+
+  console.log(`session -> ${session?.id}`);
+
+  const { data: searchForConstructions } = await sanityFetch({ query: CONSTRUCTIONS_BY_QUERY, params });
 
   return (
     <>
-      <MarkupSchema path={`du-an`} />
+      <MarkupSchema path="thi-cong" />
 
-      <section className={"pink_container !min-h-[230px] mt-32"}>
+      <section className={"pink_container"}>
         <h1 className={"heading"}>
           Kết Nối Với Chúng Tôi
         </h1>
 
         <p className={"sub-heading !max-w-3xl"}>
-          Hãy Chọn Dự Án Mà Bạn Quan Tâm.
+          Hãy Chọn Công Trình Mà Bạn Quan Tâm.
         </p>
-        <SearchForm query={query} path="du-an" search="Dự Án" />
+
+        <SearchForm query={query} path="thi-cong" search="hạng mục thi công" />
       </section>
 
-      {searchForProjects?.length > 0 ? (
-        searchForProjects.map((post: SimpleCardType) => (
-          <ProjectDetailList key={post?._id} post={post} />
+
+      {searchForConstructions?.length > 0 ? (
+        searchForConstructions.map((post: SimpleCardType) => (
+          <ConstructionList key={post?._id} post={post} />
         ))
       ) : (
         <section className={"section_container"}>
           <p className={"no-result"}>
-            Không tìm thấy dự án
+            Không tìm thấy công trình phù hợp
           </p>
         </section>
       )}
-
       <SanityLive />
     </>
   );
 }
 
-export default Page
 
 export const metadata: Metadata = {
   title: "CÔNG TY TNHH KIẾN TRÚC XÂY DỰNG ART SUNDAY",

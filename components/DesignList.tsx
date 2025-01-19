@@ -19,9 +19,8 @@ const DesignList = async ({ post, className }: { post: SimpleCardType, className
   return (
     <section className={cn("section_container !justify-items-center !px-2", className)}>
       <Link href={`/thiet-ke/${slug?.current}`} className='flex lg:w-[65rem] md:w-[43rem] w-full'>
-        <h1 className="w-full heading-half hover:underline" style={{ textAlign: 'left' }}>
-          Thiết Kế{'  '}
-          <span className="text-purple">{title}</span>
+        <h1 className="w-full heading-half hover:underline hover:text-p1" style={{ textAlign: 'left' }}>
+          <span className="">{title}</span>
         </h1>
       </Link>
       <ul className={"mt-7 card_grid max-7-xl w-full"}>

@@ -7,9 +7,9 @@ import { Metadata } from "next/types";
 import { SimpleCardType } from "@/components/SimpleCard";
 import DesignList from "@/components/DesignList";
 
-export default async function Construction({ searchParams }: {
+export default async function Construction({ searchParams }: Readonly<{
   searchParams: Promise<{ query?: string }>
-}) {
+}>) {
 
   const query = (await searchParams).query;
 
@@ -36,7 +36,7 @@ export default async function Construction({ searchParams }: {
           Hãy Chọn Thiết Kế Mà Bạn Quan Tâm.
         </p>
 
-        <SearchForm query={query} path="thiet-ke" search="Thiết kế" />
+        <SearchForm query={query} path="thiet-ke" search="hạng mục Thiết kế" />
       </section>
 
 
@@ -47,7 +47,7 @@ export default async function Construction({ searchParams }: {
       ) : (
         <section className={"section_container"}>
           <p className={"no-result"}>
-            Không tìm thấy thiết kế
+            Không tìm thấy thiết kế phù hợp
           </p>
         </section>
       )}

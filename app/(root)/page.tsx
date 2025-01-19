@@ -1,31 +1,21 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import SearchForm from "@/components/SearchForm";
-import StartupCard, { StartupCardType } from "@/components/StartupCard";
 import { client } from "@/sanity/lib/client";
 import { CATEGORY_BY_SLUG_QUERY, CONSTRUCTIONS_BY_QUERY, PROJECT_DETAILS_BY_QUERY, } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
-import { auth } from "@/auth";
 import ConstructionList from "@/components/ConstructionList";
 import MarkupSchema from "@/components/shared/MarkupSchema";
 import { AppleCardsCarousel } from "@/components/AppleCardsCarousel";
 import SimpleCard, { SimpleCardType } from "@/components/SimpleCard";
 
 export default async function Home({ searchParams }: {
-  searchParams: Promise<{ query?: string }>
+  readonly searchParams: Promise<{ query?: string }>
 }) {
 
   const query = (await searchParams).query;
 
-  const params = { search: query || null };
+  const params = { search: query ?? null };
 
-  const session = await auth();
-
-  console.log(`session -> ${session?.id}`);
-
-  // const posts = await client.fetch(STARTUPS_QUERY);
-
-  // const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY, params });
   const { data: searchForProjectDetails } = await sanityFetch({ query: PROJECT_DETAILS_BY_QUERY, params });
 
   const { data: searchForConstructions } = await sanityFetch({ query: CONSTRUCTIONS_BY_QUERY, params });
@@ -38,13 +28,13 @@ export default async function Home({ searchParams }: {
       <section className="section_container !max-w-full mt-16 bg-black-200 justify-items-center !overflow-hidden">
         <AppleCardsCarousel data={homeHeroPost} />
       </section>
-      <section className={"pink_container !min-h-[230px]"}>
+      <section className={"pink_container !min-h-[230px] !mt-0"}>
         <h1 className={"heading"}>
           Kết Nối Với Chúng Tôi
         </h1>
 
         <p className={"sub-heading !max-w-3xl"}>
-          Hãy Chọn Công Trình, Dự Án Mà Bạn Quan Tâm.
+          Hãy Chọn Hạng Mục Thi Công, Thiết Kế Mà Bạn Quan Tâm.
         </p>
 
         <SearchForm query={query} search="Dự Án" />
