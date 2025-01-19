@@ -23,7 +23,7 @@ async function Page({ searchParams }: Readonly<{
     <>
       <MarkupSchema path={`du-an`} />
 
-      <section className={"pink_container !min-h-[230px] mt-32"}>
+      <section className={"pink_container"}>
         <h1 className={"heading"}>
           Kết Nối Với Chúng Tôi
         </h1>

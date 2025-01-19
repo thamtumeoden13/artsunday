@@ -1,7 +1,6 @@
 import { CONSTRUCTION_BY_SLUG_QUERY } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import markdownit from "markdown-it";
-import { auth } from "@/auth";
 import ProjectList from "@/components/ProjectList";
 import { formatDate } from "@/lib/utils";
 import { notFound } from "next/navigation";
@@ -10,7 +9,7 @@ import { CloudinaryImage } from "@/components/shared/CloudinaryImage";
 
 const md = markdownit();
 
-export default async function Constructions({ params }: { params: Promise<{ slug: string }> }) {
+export default async function Constructions({ params }: { readonly params: Promise<{ slug: string }> }) {
 
   const slug = (await params).slug;
 

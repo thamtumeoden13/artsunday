@@ -12,7 +12,7 @@ export default async function Home({ searchParams }: {
 
   const query = (await searchParams).query;
 
-  const params = { search: query || null };
+  const params = { search: query ?? null };
 
   const session = await auth();
 
@@ -26,7 +26,7 @@ export default async function Home({ searchParams }: {
     <>
       <MarkupSchema path={`chi-tiet-du-an`} />
 
-      <section className={"pink_container !min-h-[230px] mt-32"}>
+      <section className={"pink_container"}>
         <h1 className={"heading"}>
           Kết Nối Với Chúng Tôi
         </h1>

@@ -24,7 +24,7 @@ export default async function Constructions({ params }: { readonly params: Promi
     <>
       <MarkupSchema post={data} path={`thi-cong/${slug}`} />
 
-      <section className={"pink_container !min-h-[320px] !mt-18 md:mt-24"}>
+      <section className={"pink_container !min-h-[320px] !mt-18 md:mt-24 "}>
         <p className={"tag"}>{formatDate(data?._createdAt)}</p>
 
         <h1 className={"heading"}>{data.title}</h1>
