@@ -150,7 +150,7 @@ const StartupForm = () => {
 
       <div data-color-mode={"light"}>
         <label htmlFor="pitch" className={"startup-form_label"}>
-          {"Pitch"}
+          {"Bài viết"}
         </label>
         <MDEditor
           value={pitch}
@@ -172,7 +172,7 @@ const StartupForm = () => {
         className={"startup-form_btn text-white"}
         disabled={isPending}
       >
-        {isPending ? "Submitting..." : "Submit Your Pitch"}
+        {isPending ? "Đang lưu..." : "Lưu"}
         <Send className={"size-6 ml-2"}/>
       </Button>
     </form>

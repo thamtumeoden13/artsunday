@@ -1,7 +1,6 @@
 import SearchForm from "@/components/SearchForm";
 import { CONSTRUCTIONS_BY_QUERY } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
-import { auth } from "@/auth";
 import ConstructionList from "@/components/ConstructionList";
 import MarkupSchema from "@/components/shared/MarkupSchema";
 import { Metadata } from "next/types";
@@ -15,8 +14,6 @@ export default async function Construction({ searchParams }: {
   const query = (await searchParams).query;
 
   const params = { search: query ?? null };
-
-  console.log(`params: ${query}`)
 
   const { data: searchForConstructions } = await sanityFetch({ query: CONSTRUCTIONS_BY_QUERY, params });
 

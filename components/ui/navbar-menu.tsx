@@ -15,7 +15,7 @@ const transition = {
 };
 
 // eslint-disable-next-line react/prop-types
-const NavLink = ({ name, route }: { name: string, route?: string, }) => {
+const NavLink = ({ name, route, isMobile }: { name: string, route?: string, isMobile: boolean }) => {
   if (route) {
     return (
       <Link
@@ -23,6 +23,7 @@ const NavLink = ({ name, route }: { name: string, route?: string, }) => {
         className={
           "base-bold text-p4 uppercase transition-colors duration-500 cursor-pointer hover:text-p1 max-lg:my-4 max-lg:h5"
         }
+      // onClick={() => setIsOpen(false)}
       >
         {name}
       </Link>
@@ -51,41 +52,45 @@ export const MenuItem = ({
   name,
   route,
   children,
+  setIsOpen,
 }: {
   setActive: (item: string) => void;
   active: string | null;
   item: string;
   name: string;
   route?: string;
+  setIsOpen?: (isOpen: boolean) => void,
   children?: React.ReactNode;
 }) => {
 
   const [isMobile, setIsMobile] = useState(false);
 
-
   const handleEvent = () => {
     console.log("Action triggered for", item);
-    // Xử lý hành động khi hover hoặc click
     setActive(item)
+    if (isMobile && item === active) {
+      console.log("Action triggered for setIsOpen", isMobile);
+      setIsOpen && setIsOpen(false);
+    }
   };
 
-  // Kiểm tra kích thước màn hình
+
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 1024); // Tailwind `lg` breakpoint là 1024px
+      setIsMobile(window.innerWidth <= 1024);
     };
 
-    handleResize(); // Gọi khi component mount
-    window.addEventListener("resize", handleResize); // Lắng nghe thay đổi kích thước
+    handleResize();
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener("resize", handleResize); // Dọn dẹp listener
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
   return (
     <div
-      className="relative "
+      className="relative"
       onMouseEnter={!isMobile ? handleEvent : undefined}
       onClick={isMobile ? handleEvent : undefined}
     >
@@ -93,7 +98,7 @@ export const MenuItem = ({
         transition={{ duration: 0.3 }}
         className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white"
       >
-        <NavLink name={name} route={route} />
+        <NavLink name={name} route={route} isMobile={isMobile} />
       </motion.p>
       {active !== null && (
         <motion.div
@@ -172,7 +177,7 @@ export const ProductItem = ({
           </p>
         </div>
       </Link>
-      <Link href={href} className="flex space-x-2 lg:hidden"  onClick={() => setIsOpen(false)}>
+      <Link href={href} className="flex space-x-2 lg:hidden" onClick={() => setIsOpen(false)}>
         <h4 className="mb-1 text-xl font-bold text-white hover:text-p1">
           {title}
         </h4>

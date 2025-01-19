@@ -27,6 +27,13 @@ const Header = () => {
 
   let prevScrollY = 0;
 
+  const handleIsOpen = (isOpen: boolean) => {
+    setIsOpen(isOpen)
+    if (isOpen) {
+      setActive(null)
+    }
+  }
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -125,6 +132,7 @@ const Header = () => {
                   <MenuItem
                     setActive={setActive} active={active}
                     item="project" name={"Thiết Kế"} route={"/thiet-ke"}
+                    setIsOpen={handleIsOpen}
                   >
                     <div className="grid grid-cols-2 max-lg:grid-cols-1 gap-10 p-4 text-md ">
                       {navDesignRouter.map(({ _id, title, slug, image, thumbnail, subtitle }) => (
@@ -134,7 +142,7 @@ const Header = () => {
                           href={`/du-an/${slug?.current}`}
                           src={thumbnail!}
                           description={subtitle!}
-                          setIsOpen={setIsOpen}
+                          setIsOpen={handleIsOpen}
                         />
                       ))}
                     </div>
@@ -159,6 +167,7 @@ const Header = () => {
                 <li className={"nav-li"}>
                   <MenuItem setActive={setActive} active={active}
                     item="construction" name={"Thi Công"} route={"/thi-cong"}
+                    setIsOpen={handleIsOpen}
                   >
                     <div className="grid grid-cols-2 max-lg:grid-cols-1 gap-10 p-4 text-md ">
                       {navConstructionRouter.map(({ _id, title, slug, image, thumbnail, subtitle }) => (
@@ -168,7 +177,7 @@ const Header = () => {
                           href={`/du-an/${slug?.current}`}
                           src={thumbnail!}
                           description={subtitle!}
-                          setIsOpen={setIsOpen}
+                          setIsOpen={handleIsOpen}
                         />
                       ))}
                     </div>
@@ -206,7 +215,7 @@ const Header = () => {
           className={
             "lg:hidden z-2 size-10 border-2 border-s4/25 rounded-full flex justify-center items-center"
           }
-          onClick={() => setIsOpen((prevState) => !prevState)}
+          onClick={() => handleIsOpen(!isOpen)}
         >
           <img
             src={`/images/${isOpen ? "close" : "magic"}.svg`}

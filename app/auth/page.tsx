@@ -54,7 +54,7 @@ const AuthPage = async () => {
               className={"startup-form_btn text-white gap-4 !w-80 rounded-full"}
             // disabled={isPending}
             >
-              <span>Logout</span>
+              <span>{"Đăng Xuất"}</span>
               <LogOut className={"size-6 text-white"} />
             </Button>
           </form>
@@ -74,7 +74,7 @@ const AuthPage = async () => {
               className={"startup-form_btn text-white gap-4"}
             // disabled={isPending}
             >
-              {"Login By GitHub"}
+              {"Đăng Nhập Bằng GitHub"}
               <IconBrandGithub className={"size-12"} />
             </Button>
           </form>
@@ -88,7 +88,7 @@ const AuthPage = async () => {
               className={"startup-form_btn text-white gap-4 bg-secondary"}
             // disabled={isPending}
             >
-              {"Login By Google"}
+              {"Đăng Nhập Bằng Google"}
               <IconBrandGoogle className={"size-12"} />
             </Button>
           </form>

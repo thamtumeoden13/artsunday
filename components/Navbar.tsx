@@ -2,7 +2,7 @@ import React from 'react'
 import Link from "next/link";
 import Image from "next/image";
 import { auth, signIn, signOut } from "@/auth";
-import { BadgePlus, BadgePlusIcon, LogOut } from "lucide-react";
+import { BadgePlus, LogOut } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Navbar = async () => {
@@ -16,7 +16,7 @@ const Navbar = async () => {
         </Link>
 
         <div className={"flex items-center gap-5 text-black "}>
-          {session && session?.user ? (
+          {session?.user ? (
             <>
               <Link href={"/startup/create"}>
                 <span className={"max-sm:hidden"}>Create</span>
@@ -27,7 +27,7 @@ const Navbar = async () => {
                 await signOut({ redirectTo: "/" });
               }}>
                 <button type={"submit"}>
-                  <span className={"max-sm:hidden"}>Logout</span>
+                  <span className={"max-sm:hidden"}>{"Đăng Xuất"}</span>
                   <LogOut className={"size-6 sm:hidden text-red-500"} />
                 </button>
               </form>

@@ -76,7 +76,7 @@ const PermissionTable = ({ title, role, }: { title: string, role?: string }) => 
       <div className='flex justify-end w-full h-full'>
         <TableComponent
           data={users}
-          headers={['Name', 'Email', 'Image', 'Role']}
+          headers={['Tên', 'Email', 'Ảnh Đại Diện', 'Cấp/Quyền']}
           customType={'author'}
           title={title}
           path='chi-tiet-du-an'

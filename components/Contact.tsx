@@ -108,7 +108,7 @@ const Contact = ({ className }: { className?: string }) => {
       variants={staggerContainer()}
       className={cn('flex-[0.75] bg-black p-8 rounded-2xl border-white border', className)}
     >
-      <p className={styles.sectionSubText}>Get in touch</p>
+      <p className={styles.sectionSubText}>Liên Hệ</p>
       <TypewriterEffectSmooth words={words_1} cursorClassName="bg-primary" />
 
       <form
@@ -124,7 +124,7 @@ const Contact = ({ className }: { className?: string }) => {
             required
             id="name"
             name='name'
-            placeholder="what's your name?"
+            placeholder="Tên của bạn?"
             className='h-12 px-6 py-4 font-medium text-black border-none rounded-lg outline-none bg-tertiary placeholder:text-primary'
           />
           {errors.name && (
@@ -139,7 +139,7 @@ const Contact = ({ className }: { className?: string }) => {
             required
             id="name"
             name='email'
-            placeholder="what's your email?"
+            placeholder="Địa chỉ Email của bạn?"
             className='h-12 px-6 py-4 font-medium text-black border-none rounded-lg outline-none bg-tertiary placeholder:text-primary'
           />
           {errors.email && (
@@ -155,7 +155,7 @@ const Contact = ({ className }: { className?: string }) => {
             rows={7}
             id="message"
             name='message'
-            placeholder="what do you want to say?"
+            placeholder="Vui lòng cho chúng tôi biết yêu cầu của bạn"
             className='px-6 py-4 font-medium text-black border-none rounded-lg outline-none bg-tertiary placeholder:text-primary'
           />
           {errors.message && (
@@ -181,23 +181,23 @@ export default Contact; // SectionWrapper(Contact, 'contact')
 
 const words_1 = [
   {
-    text: "LIÊN",
+    text: "YÊU",
     className: "text-white",
   },
   {
-    text: "HỆ",
+    text: "CẦU",
     className: "text-white",
   },
   {
-    text: "VỚI",
-    className: "text-white",
-  },
-  {
-    text: "CHÚNG",
+    text: "TƯ",
     className: "text-primary",
   },
   {
-    text: "TÔI.",
+    text: "VẤN",
     className: "text-primary",
+  },
+  {
+    text: "DỊCH VỤ",
+    className: "text-white",
   },
 ];

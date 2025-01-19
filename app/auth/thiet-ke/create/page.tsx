@@ -1,6 +1,6 @@
 import React from 'react'
-import {auth} from "@/auth";
-import {redirect} from "next/navigation";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 import DesignForm from '@/components/DesignForm';
 
 const Page = async () => {
@@ -11,10 +11,10 @@ const Page = async () => {
   return (
     <>
       <section className={"pink_container !min-h-[230px]"}>
-        <h1 className={"heading"}>Submit Your Design</h1>
+        <h1 className={"heading"}>TẠO MỚI HẠNG MỤC THIẾT KẾ</h1>
       </section>
 
-      <DesignForm/>
+      <DesignForm />
     </>
   )
 }

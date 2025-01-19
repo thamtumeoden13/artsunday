@@ -59,14 +59,14 @@ export const TableComponent = ({
     if (customType === 'author') {
       return (
         <>
-          <TableCell>{item.name}</TableCell>
-          <TableCell>{item.email}</TableCell>
-          <TableCell width={200} height={100}>
+          <TableCell width={200}>{item.name}</TableCell>
+          <TableCell >{item.email}</TableCell>
+          <TableCell width={500} >
             <Image
               src={item.image}
               alt={'avatar'}
-              width={100}
-              height={100}
+              width={500}
+              height={200}
               className="object-cover w-full rounded-sm"
             />
 
