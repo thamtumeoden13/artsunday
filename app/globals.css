@@ -296,7 +296,7 @@
 
   /* simplecard */
   .simple-card {
-    @apply bg-white border-[5px] border-black p-2 rounded-[22px] shadow-200 hover:border-primary transition-all duration-500 hover:shadow-300 hover:bg-primary-100;
+    @apply bg-white border-l-0 border-r-0 md:border-[5px] border-black md:p-2 md:rounded-[22px] shadow-none md:shadow-200 hover:border-primary transition-all duration-500 hover:shadow-300 hover:bg-primary-100;
   }
 
   .simple-card_date {
@@ -308,7 +308,7 @@
   }
 
   .simple-card_img {
-    @apply w-full h-full sm:w-[280px] sm:h-[200px] rounded-[10px] object-cover;
+    @apply w-full h-full sm:w-[280px] sm:h-[200px] md:rounded-[10px] object-cover;
   }
 
   .simple-card_btn {
