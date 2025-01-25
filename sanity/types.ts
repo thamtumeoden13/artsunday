@@ -185,12 +185,13 @@ export type Project = {
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "author";
   };
-  construction?: {
+  construction?: Array<{
     _ref: string;
     _type: "reference";
     _weak?: boolean;
+    _key: string;
     [internalGroqTypeReferenceTo]?: "construction";
-  };
+  }>;
   thumbnail?: string;
   image?: string;
   tags?: string;
@@ -265,7 +266,7 @@ export type Category = {
     _type: "reference";
     _weak?: boolean;
     _key: string;
-    [internalGroqTypeReferenceTo]?: "project";
+    [internalGroqTypeReferenceTo]?: "projectDetail";
   }>;
 };
 

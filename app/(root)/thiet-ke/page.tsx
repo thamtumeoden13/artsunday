@@ -1,10 +1,13 @@
 import SearchForm from "@/components/SearchForm";
-import { DESIGNS_BY_QUERY } from "@/sanity/lib/queries";
+import { CONSTRUCTION_BY_SLUG_QUERY, DESIGNS_BY_QUERY, PROJECT_DETAILS_BY_QUERY, PROJECTS_BY_CONSTRUCTION_ID_QUERY } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import MarkupSchema from "@/components/shared/MarkupSchema";
 import { Metadata } from "next/types";
-import { SimpleCardType } from "@/components/SimpleCard";
+import SimpleCard, { SimpleCardType } from "@/components/SimpleCard";
 import DesignList from "@/components/DesignList";
+import { client } from "@/sanity/lib/client";
+import { notFound } from "next/navigation";
+import ProjectDetailList from "@/components/ProjectDetailList";
 
 export default async function Construction({ searchParams }: Readonly<{
   searchParams: Promise<{ query?: string }>
@@ -14,13 +17,21 @@ export default async function Construction({ searchParams }: Readonly<{
 
   const params = { search: query ?? null };
 
-  const { data: searchForConstructions } = await sanityFetch({ query: DESIGNS_BY_QUERY, params });
+  const post = await client.fetch(CONSTRUCTION_BY_SLUG_QUERY, { 'slug': 'thiet-ke' });
+
+  const { data: searchForProjectDetails } = await sanityFetch({ query: PROJECT_DETAILS_BY_QUERY, params });
+
+  if (!post) return notFound();
+
+  const { data: searchForProjects } = await sanityFetch({ query: PROJECTS_BY_CONSTRUCTION_ID_QUERY, params: { id: post._id } });
+
+  if (!searchForProjects) return notFound();
 
   return (
     <>
       <MarkupSchema path="thiet-ke" />
 
-      <section className={"pink_container"}>
+      <section className={"pink_container md:!min-h-[28rem] !flex !mt-0 !md:my-0 !pb-4 !pt-16 "}>
         <h1 className={"heading"}>
           Kết Nối Với Chúng Tôi
         </h1>
@@ -32,18 +43,33 @@ export default async function Construction({ searchParams }: Readonly<{
         <SearchForm query={query} path="thiet-ke" search="hạng mục Thiết kế" />
       </section>
 
-
-      {searchForConstructions?.length > 0 ? (
-        searchForConstructions.map((post: SimpleCardType) => (
-          <DesignList key={post?._id} post={post} />
-        ))
-      ) : (
-        <section className={"section_container"}>
-          <p className={"no-result"}>
-            Không tìm thấy thiết kế phù hợp
+      {query ? (
+        <section className={"section_container !justify-items-center"}>
+          <p className={"text-30-semibold"}>
+            {`Tìm kiếm cho "${query}"`}
           </p>
+          <ul className={"mt-7 card_grid"}>
+            {searchForProjectDetails?.length > 0 ? (
+              searchForProjectDetails.map((post: SimpleCardType) => (
+                <SimpleCard key={post?._id} post={post} path="chi-tiet-du-an" className='xs:w-full justify-items-center' />
+              ))
+            ) : (
+              <p className={"no-result"}>
+                Không tìm thấy dự án
+              </p>
+            )}
+          </ul>
         </section>
+      ) : (
+        <>
+          {searchForProjects?.length > 0 && (
+            searchForProjects.map((post: SimpleCardType) => (
+              <ProjectDetailList key={post?._id} post={post} className="!px-0" />
+            ))
+          )}
+        </>
       )}
+
       <SanityLive />
     </>
   );

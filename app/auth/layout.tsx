@@ -1,3 +1,4 @@
+import Navbar from "@/components/Navbar";
 import Head from "next/head";
 
 export default function Layout({ children }: Readonly<{
@@ -10,6 +11,7 @@ export default function Layout({ children }: Readonly<{
         {/* Chặn index cho các trang trong /auth */}
         <meta name="robots" content="noindex, nofollow" />
       </Head>
+      <Navbar />
       {children}
     </main>
   )

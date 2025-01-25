@@ -22,8 +22,8 @@ export const category = defineType({
       name: "select",
       type: "array",
       of: [
-        // { type: "reference", to: [{ type: "construction" }] },
-        { type: "reference", to: [{ type: "project" }] }
+        { type: "reference", to: [{ type: "projectDetail" }] },
+        // { type: "reference", to: [{ type: "project" }] }
       ],
     }),
   ],

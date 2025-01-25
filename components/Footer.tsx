@@ -101,13 +101,13 @@ const Footer = () => {
         <div className="flex flex-col">
           <div className="mb-[50px] h-[2px] bg-white opacity-10" />
           <div
-            className="flex flex-wrap items-center justify-between gap-4"
+            className="flex flex-wrap items-center justify-end gap-4 md:justify-between"
           >
             <ContactModal />
             <p className="font-normal text-[14px] text-white opacity-50">
               Copyright © 2023 - 2025 Art Sunday. All rights reserved.
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-4 ">
               {socials.map((social, index) => (
                 <HoverBorderGradient
                   key={social.name}

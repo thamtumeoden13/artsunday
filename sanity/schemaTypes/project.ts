@@ -34,9 +34,11 @@ export const project = defineType({
       to: { type: 'author' }
     }),
     defineField({
-      name: 'construction',
-      type: 'reference',
-      to: { type: 'construction' }
+      name: "construction",
+      type: "array",
+      of: [
+        { type: "reference", to: [{ type: "construction" }] },
+      ],
     }),
     defineField({
       name: 'thumbnail',

@@ -20,7 +20,7 @@ const AuthPage = async () => {
   }
 
   return (
-    <section className={"section_container min-h-[32rem] mt-8 w-full"}>
+    <section className={"section_container min-h-[100rem] mt-8 w-full"}>
       {user ? (
         <>
           <div className={"profile_card  my-4 "}>

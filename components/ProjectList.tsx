@@ -1,14 +1,12 @@
 import React from 'react'
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { Author, Startup } from "@/sanity/types";
 import { PROJECTS_BY_CONSTRUCTION_ID_QUERY, PROJECTS_BY_DESIGN_ID_QUERY } from '@/sanity/lib/queries';
 import { sanityFetch } from '@/sanity/lib/live';
 import SimpleCard, { SimpleCardType } from './SimpleCard';
 
-export type StartupCardType = Omit<Startup, "author"> & { author?: Author };
 
-const ProjectList = async ({ post, parentPath = 'thi-cong', className, }: { post: StartupCardType, parentPath?: 'thi-cong' | 'thiet-ke', className?: string, }) => {
+const ProjectList = async ({ post, parentPath = 'thi-cong', className, }: { post: SimpleCardType, parentPath?: 'thi-cong' | 'thiet-ke', className?: string, }) => {
 
   const { _id: id, title, slug } = post
 

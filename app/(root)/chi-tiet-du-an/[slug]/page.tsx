@@ -34,7 +34,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     <>
       <MarkupSchema path={`chi-tiet-du-an/${slug}`} post={post} />
 
-      <section className={"pink_container !min-h-[320px] !mt-18 md:mt-24"}>
+      <section className={"pink_container md:!min-h-[28rem] !flex !mt-0 !md:my-0 !pb-4 !pt-24 md:!pt-32 "}>
         <p className={"tag"}>{formatDate(post?._createdAt)}</p>
 
         <h1 className={"heading"}>{post.title}</h1>

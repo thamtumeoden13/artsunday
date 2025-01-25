@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import SearchForm from "@/components/SearchForm";
 import { client } from "@/sanity/lib/client";
-import { CATEGORY_BY_SLUG_QUERY, CONSTRUCTIONS_BY_QUERY, PROJECT_DETAILS_BY_QUERY, } from "@/sanity/lib/queries";
+import { CATEGORY_BY_SLUG_QUERY, PROJECT_DETAILS_BY_QUERY, PROJECTS_BY_QUERY, } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
-import ConstructionList from "@/components/ConstructionList";
 import MarkupSchema from "@/components/shared/MarkupSchema";
 import { AppleCardsCarousel } from "@/components/AppleCardsCarousel";
 import SimpleCard, { SimpleCardType } from "@/components/SimpleCard";
+import ProjectDetailList from "@/components/ProjectDetailList";
 
 export default async function Home({ searchParams }: {
   readonly searchParams: Promise<{ query?: string }>
@@ -18,17 +18,17 @@ export default async function Home({ searchParams }: {
 
   const { data: searchForProjectDetails } = await sanityFetch({ query: PROJECT_DETAILS_BY_QUERY, params });
 
-  const { data: searchForConstructions } = await sanityFetch({ query: CONSTRUCTIONS_BY_QUERY, params });
+  const { data: searchForProjects } = await sanityFetch({ query: PROJECTS_BY_QUERY, params });
 
   const { select: homeHeroPost } = await client.fetch(CATEGORY_BY_SLUG_QUERY, { slug: "home-hero" });
 
   return (
     <>
       <MarkupSchema post={{}} path="" />
-      <section className="section_container !max-w-full mt-16 bg-black-200 justify-items-center !overflow-hidden">
+      <section className="section_container md:min-h-screen !max-w-full !py-16 bg-black-200 justify-items-center !overflow-hidden">
         <AppleCardsCarousel data={homeHeroPost} />
       </section>
-      <section className={"pink_container !min-h-[230px] !mt-0"}>
+      <section className={"pink_container !min-h-[230px] !mt-0 "}>
         <h1 className={"heading"}>
           Kết Nối Với Chúng Tôi
         </h1>
@@ -48,7 +48,7 @@ export default async function Home({ searchParams }: {
           <ul className={"mt-7 card_grid"}>
             {searchForProjectDetails?.length > 0 ? (
               searchForProjectDetails.map((post: SimpleCardType) => (
-                <SimpleCard key={post?._id} post={post} path="chi-tiet-du-an" className='xs:w-full justify-items-center'  />
+                <SimpleCard key={post?._id} post={post} path="chi-tiet-du-an" className='xs:w-full justify-items-center' />
               ))
             ) : (
               <p className={"no-result"}>
@@ -59,9 +59,9 @@ export default async function Home({ searchParams }: {
         </section>
       ) : (
         <>
-          {searchForConstructions?.length > 0 && (
-            searchForConstructions.map((post: SimpleCardType) => (
-              <ConstructionList key={post?._id} post={post} className="!px-0" />
+          {searchForProjects?.length > 0 && (
+            searchForProjects.map((post: SimpleCardType) => (
+              <ProjectDetailList key={post?._id} post={post} className="!px-0" />
             ))
           )}
         </>

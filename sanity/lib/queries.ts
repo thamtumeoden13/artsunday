@@ -282,25 +282,26 @@ export const PROJECT_BY_SLUG_QUERY =
   pitch,
 }`);
 
-export const PROJECTS_BY_CONSTRUCTION_ID_QUERY =
-  defineQuery(`*[_type == "project" && construction._ref == $id] | order(_createdAt desc) {
-  _id, 
-  title, 
-  subtitle,
-  slug,
-  _createdAt,
-  author->{
-    _id, name, image, bio
-  }, 
-  construction->{
-    _id, title, subtitle, description, image, thumbnail, slug
-  }, 
-  views,
-  description,
-  image,
-  thumbnail,
-  pitch,
-}`);
+export const PROJECTS_BY_CONSTRUCTION_ID_QUERY = defineQuery(`
+  *[_type == "project" && $id in construction[]._ref] | order(_createdAt desc) {
+    _id, 
+    title, 
+    subtitle,
+    slug,
+    _createdAt,
+    author->{
+      _id, name, image, bio
+    }, 
+    construction[]{
+      _id, title, subtitle, description, image, thumbnail, slug
+    }, 
+    views,
+    description,
+    image,
+    thumbnail,
+    pitch,
+  }
+`);
 
 export const PROJECTS_BY_DESIGN_ID_QUERY =
   defineQuery(`*[_type == "project" && design._ref == $id] | order(_createdAt desc) {
