@@ -1,14 +1,12 @@
 import SearchForm from "@/components/SearchForm";
-import { CONSTRUCTION_BY_SLUG_QUERY, CONSTRUCTIONS_BY_QUERY, PROJECT_BY_SLUG_QUERY, PROJECT_DETAILS_BY_QUERY, PROJECTS_BY_CONSTRUCTION_ID_QUERY, PROJECTS_BY_QUERY } from "@/sanity/lib/queries";
+import { CONSTRUCTION_BY_SLUG_QUERY, PROJECT_DETAILS_BY_QUERY, PROJECTS_BY_CONSTRUCTION_ID_QUERY, } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
-import ConstructionList from "@/components/ConstructionList";
 import MarkupSchema from "@/components/shared/MarkupSchema";
 import { Metadata } from "next/types";
 import SimpleCard, { SimpleCardType } from "@/components/SimpleCard";
 import { notFound } from "next/navigation";
 import { client } from "@/sanity/lib/client";
 import ProjectDetailList from "@/components/ProjectDetailList";
-import ProjectList from "@/components/ProjectList";
 
 export default async function Construction({ searchParams }: Readonly<{
   searchParams: Promise<{ query?: string }>

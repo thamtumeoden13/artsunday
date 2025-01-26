@@ -308,7 +308,7 @@ export const updateDesign = async (state: any, form: FormData, pitch: string, _i
 }
 
 
-export const createProject = async (state: any, form: FormData, pitch: string, constructionId: string,) => {
+export const createProject = async (state: any, form: FormData, pitch: string, constructionIds: string[],) => {
   const session = await auth();
 
   if (!session) return parseServerActionResponse({
@@ -326,6 +326,10 @@ export const createProject = async (state: any, form: FormData, pitch: string, c
   const resultQuery = await clientNoCache.fetch(PROJECT_BY_SLUG_QUERY, { slug: baseSlug });
 
   console.log(resultQuery);
+
+  const constructions = constructionIds?.map((_id: string) => ({ _type: "reference", _ref: _id, _key: uuidv4() }));
+
+  console.log('updateProject -> constructions', constructions)
 
   if (resultQuery?.data) {
     uniqueSlug = `${baseSlug}-${resultQuery.data.length}`;
@@ -346,10 +350,7 @@ export const createProject = async (state: any, form: FormData, pitch: string, c
         _type: "reference",
         _ref: session?.id,
       },
-      construction: {
-        _type: "reference",
-        _ref: constructionId,
-      },
+      construction: constructions,
       pitch
     }
 
@@ -371,7 +372,8 @@ export const createProject = async (state: any, form: FormData, pitch: string, c
   }
 }
 
-export const updateProject = async (state: any, form: FormData, pitch: string, constructionId: string, _id: string) => {
+export const updateProject = async (state: any, form: FormData, pitch: string, constructionIds: string[], _id: string) => {
+  console.log('updateProject-1')
   const session = await auth();
 
   if (!session) return parseServerActionResponse({
@@ -383,6 +385,7 @@ export const updateProject = async (state: any, form: FormData, pitch: string, c
     Array.from(form).filter(([key]) => key !== 'pitch'),
   );
 
+
   const baseSlug = slugify(title as string, { lower: true, strict: true });
   let uniqueSlug = baseSlug;
 
@@ -393,6 +396,10 @@ export const updateProject = async (state: any, form: FormData, pitch: string, c
   if (resultQuery?.data) {
     uniqueSlug = `${baseSlug}-${resultQuery.data.length}`;
   }
+
+  const constructions = constructionIds?.map((_id: string) => ({ _type: "reference", _ref: _id, _key: uuidv4() }));
+
+  console.log('updateProject -> constructions', constructions)
 
   try {
     const projectData = {
@@ -409,13 +416,11 @@ export const updateProject = async (state: any, form: FormData, pitch: string, c
         _type: "reference",
         _ref: session?.id,
       },
-      construction: {
-        _type: "reference",
-        _ref: constructionId,
-      },
+      construction: constructions,
       pitch
     }
 
+    console.log(projectData);
 
     const result = await writeClient.patch(_id)
       .set({ ...projectData })

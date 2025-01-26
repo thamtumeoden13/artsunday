@@ -11,7 +11,6 @@ export default function Layout({ children }: Readonly<{
         {/* Chặn index cho các trang trong /auth */}
         <meta name="robots" content="noindex, nofollow" />
       </Head>
-      <Navbar />
       {children}
     </main>
   )

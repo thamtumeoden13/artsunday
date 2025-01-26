@@ -231,10 +231,10 @@ export const PROJECTS_BY_QUERY =
   _updatedAt,
   author->{
     _id, name, image, bio
-  }, 
-  construction->{
+  },
+  construction[]->{
     _id, title, subtitle, description, image, thumbnail, slug
-  }, 
+  },
   views,
   description,
   image,
@@ -251,8 +251,8 @@ export const PROJECT_BY_ID_QUERY =
   _createdAt,
   author->{
     _id, name, username, image, bio
-  }, 
-  construction->{
+  },
+  construction[]->{
     _id, title, subtitle, description, image, thumbnail, slug
   }, 
   views,
@@ -272,7 +272,7 @@ export const PROJECT_BY_SLUG_QUERY =
   author->{
     _id, name, username, image, bio
   }, 
-  construction->{
+  construction[]->{
     _id, title, subtitle, description, image, thumbnail, slug
   }, 
   views,
@@ -292,7 +292,7 @@ export const PROJECTS_BY_CONSTRUCTION_ID_QUERY = defineQuery(`
     author->{
       _id, name, image, bio
     }, 
-    construction[]{
+    construction[]->{
       _id, title, subtitle, description, image, thumbnail, slug
     }, 
     views,
@@ -456,7 +456,7 @@ select[]->{
       image,
       bio
     },
-    construction->{
+    construction[]->{
       _id, title, subtitle, description, image, thumbnail, slug
     }, 
   }
@@ -484,7 +484,7 @@ select[]->{
       image,
       bio
     },
-    construction->{
+    construction[]->{
       _id, title, subtitle, description, image, thumbnail, slug
     }, 
   }

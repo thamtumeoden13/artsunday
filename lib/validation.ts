@@ -21,7 +21,7 @@ export const formSchema = z.object({
 })
 
 export const formConstructionSchema = z.object({
-  title: z.string().min(10).max(100),
+  title: z.string().min(5).max(100),
   subtitle: z.string().max(100),
   description: z.string().max(500),
   thumbnail: z.string().url().refine(async (url) => {
@@ -48,7 +48,7 @@ export const formConstructionSchema = z.object({
 })
 
 export const formDesignSchema = z.object({
-  title: z.string().min(10).max(100),
+  title: z.string().min(5).max(100),
   subtitle: z.string().max(100),
   description: z.string().max(500),
   thumbnail: z.string().url().refine(async (url) => {
@@ -75,7 +75,7 @@ export const formDesignSchema = z.object({
 })
 
 export const formProjectSchema = z.object({
-  title: z.string().min(10).max(100),
+  title: z.string().min(5).max(100),
   subtitle: z.string().max(100),
   description: z.string().max(500),
   thumbnail: z.string().url().refine(async (url) => {
@@ -98,12 +98,12 @@ export const formProjectSchema = z.object({
       return false
     }
   }),
-  constructionId: z.string().min(10),
+  constructionIds: z.array(z.string()).min(1),
   pitch: z.string().min(20),
 })
 
 export const formProjectDetailSchema = z.object({
-  title: z.string().min(10).max(100),
+  title: z.string().min(5).max(100),
   subtitle: z.string().max(100),
   tags: z.string().max(100),
   description: z.string().max(500),

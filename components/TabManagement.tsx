@@ -15,24 +15,16 @@ export const TabManagement = async ({ user }: { user: Author }) => {
   console.log('TabManagement -> user', user)
 
   const tabs = [
-    {
-      title: "Thi Công",
-      value: "thi-cong",
-      content: (
-        <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
-          <ConstructionTable title='Thi Công' role={role} />
-        </div>
-      ),
-    },
-    {
-      title: "Thiết Kế",
-      value: "thiet-ke",
-      content: (
-        <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
-          <DesignTable title='Thiết kế' role={role} />
-        </div>
-      ),
-    },
+
+    // {
+    //   title: "Thiết Kế",
+    //   value: "thiet-ke",
+    //   content: (
+    //     <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
+    //       <DesignTable title='Thiết kế' role={role} />
+    //     </div>
+    //   ),
+    // },
     {
       title: "Dự Án",
       value: "du-an",
@@ -48,6 +40,15 @@ export const TabManagement = async ({ user }: { user: Author }) => {
       content: (
         <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
           <ProjectDetailTable title="Bài Viết" role={role} />
+        </div>
+      ),
+    },
+    {
+      title: "Hạng Mục",
+      value: "hang-muc",
+      content: (
+        <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
+          <ConstructionTable title='Hạng Mục' role={role} />
         </div>
       ),
     },

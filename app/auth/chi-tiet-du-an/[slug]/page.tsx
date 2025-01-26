@@ -14,8 +14,6 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
   const post = await clientNoCache.fetch(PROJECT_DETAIL_BY_SLUG_QUERY, { slug })
 
-  console.log('postpostpostpost',post)
-
   if (!post) return redirect("/auth");
 
 

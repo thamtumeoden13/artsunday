@@ -11,28 +11,25 @@ import z from "zod";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { createProject, updateProject } from "@/lib/actions";
-import { Combobox, ComboboxDataType } from "./shared/ComboBox";
 import { client, clientNoCache } from "@/sanity/lib/client";
 import { CONSTRUCTIONS_BY_QUERY } from "@/sanity/lib/queries";
 import { Author, Construction, Project } from '@/sanity/types';
+import { MultiSelect, MultiSelectOption } from './shared/MultiSelect';
 
 type FormDataType = Omit<Project, "author" | "construction">;
-type ProjectFormType = Omit<Project, "author" | "construction"> & { author?: Author } & { construction?: Construction };
+type ProjectFormType = Omit<Project, "author" | "construction"> & { author?: Author } & { construction?: Construction[] };
 
 const ProjectForm = ({ post }: { post?: ProjectFormType }) => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [pitch, setPitch] = useState<string>("");
   const [formData, setFormData] = useState<FormDataType | null>(null);
-  const [selected, setSelected] = useState<ComboboxDataType | null>(null);
-  const [initValue, setInitValue] = useState<string>('');
-  const [constructions, setConstructions] = useState<ComboboxDataType[]>([])
+  const [selected, setSelected] = useState<string[]>([]);
+  const [constructions, setConstructions] = useState<MultiSelectOption[]>([])
   const { toast } = useToast()
   const router = useRouter();
 
   const handleFormSubmit = async (prevState: any, formDataSubmit: FormData) => {
     try {
-
-      const constructionId = selected?._id ?? initValue;
 
       const formValues = {
         title: formDataSubmit.get("title") as string,
@@ -40,18 +37,17 @@ const ProjectForm = ({ post }: { post?: ProjectFormType }) => {
         description: formDataSubmit.get("description") as string,
         thumbnail: formDataSubmit.get("thumbnail") as string,
         image: formDataSubmit.get("image") as string,
-        constructionId,
+        selected,
         pitch,
       }
 
-      console.log('handleFormSubmit', formValues);
       await formProjectSchema.parseAsync(formValues);
 
-      console.log(formValues);
+      console.log('handleFormSubmit', formValues);
 
       const response = post
-        ? await updateProject(prevState, formDataSubmit, pitch, constructionId, formData?._id!)
-        : await createProject(prevState, formDataSubmit, pitch, constructionId);
+        ? await updateProject(prevState, formDataSubmit, pitch, selected, formData?._id!)
+        : await createProject(prevState, formDataSubmit, pitch, selected);
 
       if (response.status === "SUCCESS") {
         toast({
@@ -67,7 +63,7 @@ const ProjectForm = ({ post }: { post?: ProjectFormType }) => {
     } catch (error) {
       if (error instanceof z.ZodError) {
         const fieldErrors = error.flatten().fieldErrors;
-
+          console.log(fieldErrors)
         setErrors(fieldErrors as unknown as Record<string, string>);
 
         toast({
@@ -131,7 +127,9 @@ const ProjectForm = ({ post }: { post?: ProjectFormType }) => {
       }
 
       if (construction) {
-        setInitValue(construction._id)
+        const initValue = construction?.map(item => item._id) || [];
+        console.log('initValue', initValue)
+        setSelected(initValue)
       }
 
     }
@@ -232,13 +230,20 @@ const ProjectForm = ({ post }: { post?: ProjectFormType }) => {
 
       <div>
         <label htmlFor="image" className={"startup-form_label"}>
-          {"Construction"}
+          {"Hạng mục"}
         </label>
-        <Combobox
+        {/* <Combobox
           data={constructions}
           initValue={initValue}
           className={"startup-form_input justify-between"}
-          onChange={(value: ComboboxDataType) => { setSelected(value) }}
+          onChange={(value: MultiSelectOption) => { setSelected(value) }}
+        /> */}
+        <MultiSelect
+          options={constructions}
+          selected={selected}
+          onChange={setSelected}
+          className={"startup-form_input justify-between"}
+          placeholder={"Add Team Members"}
         />
         {errors.image && (
           <p className={"startup-form_error"}>{errors.image}</p>
