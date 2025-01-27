@@ -54,11 +54,11 @@ export const TabManagement = async ({ user }: { user: Author }) => {
     },
     {
       title: "Danh Mục Trang Chủ",
-      value: "home-hero",
+      value: "danh-muc-trang-chu",
       content: (
         <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
           <CategoryTable
-            slug="home-hero"
+            slug="danh-muc-trang-chu"
             title="Danh Mục Trang Chủ"
             role={role}
           />
@@ -67,11 +67,11 @@ export const TabManagement = async ({ user }: { user: Author }) => {
     },
     {
       title: "Danh Mục Thi Công",
-      value: "constructions-router",
+      value: "danh-muc-thi-cong",
       content: (
         <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
           <CategoryTable
-            slug="constructions-router"
+            slug="danh-muc-thi-cong"
             title="Danh Mục Thi Công"
             role={role}
           />
@@ -80,11 +80,11 @@ export const TabManagement = async ({ user }: { user: Author }) => {
     },
     {
       title: "Danh Mục Thiết Kế",
-      value: "designs-router",
+      value: "danh-muc-thiet-ke",
       content: (
         <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
           <CategoryTable
-            slug="designs-router"
+            slug="danh-muc-thiet-ke"
             title="Danh Mục Thiết Kế"
             role={role}
           />
@@ -93,11 +93,11 @@ export const TabManagement = async ({ user }: { user: Author }) => {
     },
     {
       title: "Danh Mục Cuối Trang",
-      value: "footer",
+      value: "danh-muc-cuoi-trang",
       content: (
         <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
           <CategoryTable
-            slug="footer"
+            slug="danh-muc-cuoi-trang"
             title="Danh Mục Cuối Trang"
             role={role}
           />

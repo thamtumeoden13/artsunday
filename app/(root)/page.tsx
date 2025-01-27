@@ -18,7 +18,7 @@ export default async function Home({ searchParams }: {
 
   const { data: searchForProjects } = await sanityFetch({ query: PROJECTS_BY_QUERY, params });
 
-  const { select: homeHeroPost } = await client.fetch(CATEGORY_BY_SLUG_QUERY, { slug: "home-hero" });
+  const { select: homeHeroPost } = await client.fetch(CATEGORY_BY_SLUG_QUERY, { slug: "danh-muc-trang-chu" });
 
   return (
     <>

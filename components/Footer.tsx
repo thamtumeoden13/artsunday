@@ -25,7 +25,7 @@ const Footer = () => {
 
   useEffect(() => {
     const getNavProjectRouter = async () => {
-      const { select: footerCategory } = await client.fetch(CATEGORY_BY_SLUG_QUERY, { slug: "footer" });
+      const { select: footerCategory } = await client.fetch(CATEGORY_BY_SLUG_QUERY, { slug: "danh-muc-cuoi-trang" });
       setFooterCategory(footerCategory)
     }
 

@@ -23,11 +23,6 @@ const Header = () => {
 
   const { y: currenScrollY } = useWindowScroll();
 
-
-  const [hasScrolled, setHasScrolled] = useState(false);
-
-  const [scrollDirection, setScrollDirection] = useState<string | null>(null);
-
   const [isOpen, setIsOpen] = useState(false);
 
   const [active, setActive] = useState<string | null>(null);
@@ -44,12 +39,12 @@ const Header = () => {
 
   useEffect(() => {
     const getNavDesignRouter = async () => {
-      const { select: navDesignRouter } = await client.fetch(CATEGORY_BY_SLUG_QUERY, { slug: "designs-router" });
+      const { select: navDesignRouter } = await client.fetch(CATEGORY_BY_SLUG_QUERY, { slug: "danh-muc-thiet-ke" });
       setNavDesignRouter(navDesignRouter)
     }
 
     const getNavConstructionRouter = async () => {
-      const { select: navConstructionRouter } = await client.fetch(CATEGORY_BY_SLUG_QUERY, { slug: "constructions-router" });
+      const { select: navConstructionRouter } = await client.fetch(CATEGORY_BY_SLUG_QUERY, { slug: "danh-muc-thi-cong" });
       setNavConstructionRouter(navConstructionRouter)
     }
 
@@ -155,7 +150,7 @@ const Header = () => {
                       item="project" name={"Thiết Kế"} route={"/thiet-ke"}
                       setIsOpen={handleIsOpen}
                     >
-                      <div className="grid grid-cols-2 max-lg:grid-cols-1 gap-10 p-4 text-md ">
+                      <div className="grid grid-cols-2 gap-10 p-4 max-lg:grid-cols-1 text-md ">
                         {navDesignRouter.map(({ _id, title, slug, image, thumbnail, subtitle }) => (
                           <ProductItem
                             key={_id}
@@ -190,7 +185,7 @@ const Header = () => {
                       item="construction" name={"Thi Công"} route={"/thi-cong"}
                       setIsOpen={handleIsOpen}
                     >
-                      <div className="grid grid-cols-2 max-lg:grid-cols-1 gap-10 p-4 text-md ">
+                      <div className="grid grid-cols-2 gap-10 p-4 max-lg:grid-cols-1 text-md ">
                         {navConstructionRouter.map(({ _id, title, slug, image, thumbnail, subtitle }) => (
                           <ProductItem
                             key={_id}
