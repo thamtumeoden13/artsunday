@@ -1,5 +1,5 @@
 import { client } from "@/sanity/lib/client";
-import { CONSTRUCTIONS_BY_QUERY, DESIGNS_BY_QUERY, PROJECT_DETAILS_BY_QUERY, PROJECTS_BY_QUERY } from "@/sanity/lib/queries";
+import { CONSTRUCTION_BY_SLUG_QUERY, CONSTRUCTIONS_BY_QUERY, DESIGNS_BY_QUERY, PROJECT_DETAILS_BY_QUERY, PROJECTS_BY_CONSTRUCTION_ID_QUERY, PROJECTS_BY_QUERY } from "@/sanity/lib/queries";
 import { ProjectDetail } from "@/sanity/types";
 import { getServerSideSitemap } from 'next-sitemap'
 
@@ -9,14 +9,19 @@ const baseUrl = 'https://artsunday.vn';
 type PostType = Pick<ProjectDetail, "slug" | "_updatedAt">;
 
 async function fetchPosts() {
+  const [construction, design] = await Promise.all([
+    client.fetch(CONSTRUCTION_BY_SLUG_QUERY, { 'slug': 'thi-cong' }),
+    client.fetch(CONSTRUCTION_BY_SLUG_QUERY, { 'slug': 'thiet-ke' })
+  ]);
+
   const [
     searchForConstructions,
     searchForDesigns,
     searchForProjects,
     searchForProjectDetails,
   ] = await Promise.all([
-    client.fetch(CONSTRUCTIONS_BY_QUERY, { search: null }),
-    client.fetch(DESIGNS_BY_QUERY, { search: null }),
+    client.fetch(PROJECTS_BY_CONSTRUCTION_ID_QUERY, { id: construction._id }),
+    client.fetch(PROJECTS_BY_CONSTRUCTION_ID_QUERY, { id: design._id }),
     client.fetch(PROJECTS_BY_QUERY, { search: null }),
     client.fetch(PROJECT_DETAILS_BY_QUERY, { search: null }),
   ]);
@@ -24,12 +29,12 @@ async function fetchPosts() {
   console.log({ searchForConstructions, searchForDesigns, searchForProjects, searchForProjectDetails })
 
   const sitemapConstructions = searchForConstructions?.map((post: PostType) => ({
-    loc: `${baseUrl}/thi-cong/${post.slug?.current}`,
+    loc: `${baseUrl}/du-an/${post.slug?.current}`,
     lastmod: new Date(post._updatedAt).toISOString(),
   })) || [];
 
   const sitemapDesigns = searchForDesigns?.map((post: PostType) => ({
-    loc: `${baseUrl}/thiet-ke/${post.slug?.current}`,
+    loc: `${baseUrl}/du-an/${post.slug?.current}`,
     lastmod: new Date(post._updatedAt).toISOString(),
   })) || [];
 

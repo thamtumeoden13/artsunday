@@ -14,11 +14,8 @@ export default async function Construction({ searchParams }: Readonly<{
 
   const query = (await searchParams).query;
 
-  const params = { search: query ?? null };
-
   const post = await client.fetch(CONSTRUCTION_BY_SLUG_QUERY, { 'slug': 'thi-cong' });
 
-  const { data: searchForProjectDetails } = await sanityFetch({ query: PROJECT_DETAILS_BY_QUERY, params });
   if (!post) return notFound();
 
   const { data: searchForProjects } = await sanityFetch({ query: PROJECTS_BY_CONSTRUCTION_ID_QUERY, params: { id: post._id } });
@@ -38,35 +35,16 @@ export default async function Construction({ searchParams }: Readonly<{
           Hãy Chọn Công Trình Mà Bạn Quan Tâm.
         </p>
 
-        <SearchForm query={query} path="thi-cong" search="hạng mục thi công" />
+        <SearchForm query={query} path="du-an" search="hạng mục thi công" />
       </section>
 
-      {query ? (
-        <section className={"section_container !justify-items-center"}>
-          <p className={"text-30-semibold"}>
-            {`Tìm kiếm cho "${query}"`}
-          </p>
-          <ul className={"mt-7 card_grid"}>
-            {searchForProjectDetails?.length > 0 ? (
-              searchForProjectDetails.map((post: SimpleCardType) => (
-                <SimpleCard key={post?._id} post={post} path="chi-tiet-du-an" className='xs:w-full justify-items-center' />
-              ))
-            ) : (
-              <p className={"no-result"}>
-                Không tìm thấy dự án
-              </p>
-            )}
-          </ul>
-        </section>
-      ) : (
-        <>
-          {searchForProjects?.length > 0 && (
-            searchForProjects.map((post: SimpleCardType) => (
-              <ProjectDetailList key={post?._id} post={post} className="!px-0" />
-            ))
-          )}
-        </>
-      )}
+      <>
+        {searchForProjects?.length > 0 && (
+          searchForProjects.map((post: SimpleCardType) => (
+            <ProjectDetailList key={post?._id} post={post} className="!px-0" />
+          ))
+        )}
+      </>
       <SanityLive />
     </>
   );

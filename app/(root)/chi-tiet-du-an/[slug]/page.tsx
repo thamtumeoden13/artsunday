@@ -54,10 +54,10 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
           alt={post.subtitle || "Art Sunday"}
           width={760}
           height={540}
-          className="max-h-[44rem] rounded-lg w-full mb-10 object-cover"
+          className="object-cover w-full mb-10 rounded-lg"
         />
 
-        <div className="flex justify-between items-start gap-1">
+        <div className="flex items-start justify-between gap-1">
 
           <div className={"space-y-5 mt-10 max-w-4xl mx-auto"}>
             <h3 className={"text-30-bold"}>Bài Viết Chi Tiết</h3>
@@ -106,12 +106,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   // Fetch dữ liệu sản phẩm từ API hoặc database
   const data = await client.fetch(PROJECT_DETAIL_BY_SLUG_QUERY, { slug })
 
+  if (!data) return null;
+
   return {
     title: `${data.title} - Art Sunday`,
     description: `${data.description}`,
     openGraph: {
-      title: `${data.title} - Art Sunday`,
-      description: `${data.description}`,
+      title: `${data?.title} - Art Sunday`,
+      description: `${data?.description}`,
       url: `http://artsunday.vn/chi-tiet-du-an/${slug}`,
       images: [
         {

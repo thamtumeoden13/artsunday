@@ -1,7 +1,6 @@
 import SearchForm from "@/components/SearchForm";
 import { PROJECT_DETAILS_BY_QUERY } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
-import { auth } from "@/auth";
 import MarkupSchema from "@/components/shared/MarkupSchema";
 import { Metadata } from "next/types";
 import SimpleCard, { SimpleCardType } from "@/components/SimpleCard";
@@ -13,7 +12,7 @@ export default async function Home({ searchParams }: {
 
   const query = (await searchParams).query;
 
-  const params = { search: query ?? null };
+  const params = { search: query || null };
 
   const { data: searchForProjects } = await sanityFetch({ query: PROJECT_DETAILS_BY_QUERY, params });
 

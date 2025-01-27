@@ -7,10 +7,12 @@ export const TextGenerateEffect = ({
   words,
   idxTranfer = 3,
   className,
+  link,
 }: {
   words: string;
   idxTranfer?: number;
   className?: string;
+  link?: string;
 }) => {
   const [scope, animate] = useAnimate();
   let wordsArray = words.split(" ");
@@ -45,7 +47,7 @@ export const TextGenerateEffect = ({
   };
 
   return (
-    <div className={cn("font-bold", className)}>
+    <div className={cn("font-bold", className)} onClick={() => link && window.open(link,'_blank')}>
       <div className="leading-snug tracking-wide text-white">
         {renderWords()}
       </div>

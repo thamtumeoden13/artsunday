@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import SearchForm from "@/components/SearchForm";
 import { client } from "@/sanity/lib/client";
-import { CATEGORY_BY_SLUG_QUERY, PROJECT_DETAILS_BY_QUERY, PROJECTS_BY_QUERY, } from "@/sanity/lib/queries";
+import { CATEGORY_BY_SLUG_QUERY, PROJECTS_BY_QUERY, } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import MarkupSchema from "@/components/shared/MarkupSchema";
 import { AppleCardsCarousel } from "@/components/AppleCardsCarousel";
-import SimpleCard, { SimpleCardType } from "@/components/SimpleCard";
+import { SimpleCardType } from "@/components/SimpleCard";
 import ProjectDetailList from "@/components/ProjectDetailList";
 
 export default async function Home({ searchParams }: {
@@ -14,9 +14,7 @@ export default async function Home({ searchParams }: {
 
   const query = (await searchParams).query;
 
-  const params = { search: query ?? null };
-
-  const { data: searchForProjectDetails } = await sanityFetch({ query: PROJECT_DETAILS_BY_QUERY, params });
+  const params = { search: query || null };
 
   const { data: searchForProjects } = await sanityFetch({ query: PROJECTS_BY_QUERY, params });
 
@@ -37,35 +35,16 @@ export default async function Home({ searchParams }: {
           Hãy Chọn Hạng Mục Thi Công, Thiết Kế Mà Bạn Quan Tâm.
         </p>
 
-        <SearchForm query={query} search="Dự Án" />
+        <SearchForm query={query} path="chi-tiet-du-an" search="Dự Án" />
       </section>
 
-      {query ? (
-        <section className={"section_container !justify-items-center"}>
-          <p className={"text-30-semibold"}>
-            {`Tìm kiếm cho "${query}"`}
-          </p>
-          <ul className={"mt-7 card_grid"}>
-            {searchForProjectDetails?.length > 0 ? (
-              searchForProjectDetails.map((post: SimpleCardType) => (
-                <SimpleCard key={post?._id} post={post} path="chi-tiet-du-an" className='xs:w-full justify-items-center' />
-              ))
-            ) : (
-              <p className={"no-result"}>
-                Không tìm thấy dự án
-              </p>
-            )}
-          </ul>
-        </section>
-      ) : (
-        <>
-          {searchForProjects?.length > 0 && (
-            searchForProjects.map((post: SimpleCardType) => (
-              <ProjectDetailList key={post?._id} post={post} className="!px-0" />
-            ))
-          )}
-        </>
-      )}
+      <>
+        {searchForProjects?.length > 0 && (
+          searchForProjects.map((post: SimpleCardType) => (
+            <ProjectDetailList key={post?._id} post={post} className="!px-0" />
+          ))
+        )}
+      </>
 
       <SanityLive />
     </>

@@ -37,7 +37,7 @@ export default async function Constructions({ params }: { readonly params: Promi
           alt={data.subtitle || "Art Sunday"}
           width={760}
           height={540}
-          className="max-h-[44rem] rounded-lg w-full mb-10 object-cover"
+          className="object-cover w-full mb-10 rounded-lg"
         />
 
         <ProjectList key={data?._id} post={data} className="!px-0" />
@@ -67,12 +67,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   // Fetch dữ liệu sản phẩm từ API hoặc database
   const { data } = await sanityFetch({ query: CONSTRUCTION_BY_SLUG_QUERY, params: { slug } });
+  
+  if (!data) return null;
 
   return {
-    title: `${data?.title} - Art Sunday`,
+    title: `${data.title} - Art Sunday`,
     description: `${data?.description}`,
     openGraph: {
-      title: `${data?.title} - Art Sunday`,
+      title: `${data.title} - Art Sunday`,
       description: `${data?.description}`,
       url: `http://artsunday.vn/thi-cong/${slug}`,
       images: [
@@ -80,7 +82,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
           url: data.image,
           width: 800,
           height: 600,
-          alt: data?.title,
+          alt: data.title,
         },
       ],
     },

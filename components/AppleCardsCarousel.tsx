@@ -13,7 +13,8 @@ export function AppleCardsCarousel({ title, data }: { readonly title?: string, r
     <AppleCard
       key={card._id}
       card={{ ...card, content: <AnimatedTestimonials testimonials={testimonials_2} /> }}
-      index={index} className="lg:h-[72vh] md:h-[60vh]"
+      index={index}
+      className="lg:h-[72vh] md:h-[60vh]"
     />
   ));
 

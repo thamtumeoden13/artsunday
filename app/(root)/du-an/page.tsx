@@ -13,7 +13,7 @@ async function Page({ searchParams }: Readonly<{
 
   const query = (await searchParams).query;
 
-  const params = { search: query ?? null };
+  const params = { search: query || null };
 
   console.log(`params -> ${JSON.stringify(params)}`);
 

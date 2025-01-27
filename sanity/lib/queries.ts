@@ -222,7 +222,7 @@ export const DESIGN_BY_SLUG_QUERY =
 }`);
 
 export const PROJECTS_BY_QUERY =
-  defineQuery(`*[_type == "project" && !defined($search) || title match $search || author->name match $search] | order(_createdAt desc) {
+  defineQuery(`*[_type == "project" && !defined($search) || title match $search ] | order(_createdAt desc) {
   _id, 
   title, 
   subtitle,
@@ -324,7 +324,7 @@ export const PROJECTS_BY_DESIGN_ID_QUERY =
 }`);
 
 export const PROJECT_DETAILS_BY_QUERY =
-  defineQuery(`*[_type == "projectDetail" && defined(slug.current) && !defined($search) || title match $search || author->name match $search] | order(_createdAt desc) {
+  defineQuery(`*[_type == "projectDetail" && !defined($search) || (project != null && title match $search)] | order(_createdAt desc) {
   _id, 
   title, 
   subtitle,

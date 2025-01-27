@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 
-import {  socials } from '../constants';
+import { socials } from '../constants';
 import styles from '@/styles';
 import { footerVariants } from '@/lib/utils';
 import Image from 'next/image';
@@ -62,19 +62,22 @@ const Footer = () => {
               className='object-contain w-[360px] h-[100px]'
             />
             <TextGenerateEffect
-              className="font-medium text-left my-1 text-white-100 text-[20px] md:text-md lg:text-lg"
+              className="font-medium text-left my-1 text-white-100 text-[20px] md:text-md lg:text-lg hover:cursor-pointer hover:underline"
               words="Địa Chỉ: 17/13 Huỳnh Văn Luỹ, P.Phú Lợi, TP.Thủ Dầu Một, T.Bình Dương"
               idxTranfer={1}
+              link='https://maps.app.goo.gl/ph342D3v2YKs3Soq5'
             />
             <TextGenerateEffect
-              className="font-medium text-left  my-1 text-white-100 text-[20px] md:text-md lg:text-lg"
+              className="font-medium text-left  my-1 text-white-100 text-[20px] md:text-md lg:text-lg hover:cursor-pointer hover:underline"
               words="Số Điện Thoại: 0904 177 100"
               idxTranfer={2}
+              link='tel:0904177100'
             />
             <TextGenerateEffect
-              className="font-medium text-left  my-1 text-white-100 text-[20px] md:text-md lg:text-lg"
+              className="font-medium text-left  my-1 text-white-100 text-[20px] md:text-md lg:text-lg hover:cursor-pointer hover:underline"
               words="Mã Số Thuế: 3702962067"
               idxTranfer={2}
+              link='https://masothue.com/3702962067-cong-ty-tnhh-kien-truc-xay-dung-art-sunday'
             />
           </div>
           <div
