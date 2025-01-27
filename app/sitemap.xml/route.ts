@@ -1,5 +1,5 @@
 import { client } from "@/sanity/lib/client";
-import { CONSTRUCTION_BY_SLUG_QUERY, CONSTRUCTIONS_BY_QUERY, DESIGNS_BY_QUERY, PROJECT_DETAILS_BY_QUERY, PROJECTS_BY_CONSTRUCTION_ID_QUERY, PROJECTS_BY_QUERY } from "@/sanity/lib/queries";
+import { CONSTRUCTION_BY_SLUG_QUERY, PROJECT_DETAILS_BY_QUERY, PROJECTS_BY_QUERY } from "@/sanity/lib/queries";
 import { ProjectDetail } from "@/sanity/types";
 import { getServerSideSitemap } from 'next-sitemap'
 
@@ -14,29 +14,31 @@ async function fetchPosts() {
     client.fetch(CONSTRUCTION_BY_SLUG_QUERY, { 'slug': 'thiet-ke' })
   ]);
 
+  console.log({ construction, design })
+
   const [
-    searchForConstructions,
-    searchForDesigns,
+    // searchForConstructions,
+    // searchForDesigns,
     searchForProjects,
     searchForProjectDetails,
   ] = await Promise.all([
-    client.fetch(PROJECTS_BY_CONSTRUCTION_ID_QUERY, { id: construction._id }),
-    client.fetch(PROJECTS_BY_CONSTRUCTION_ID_QUERY, { id: design._id }),
+    // client.fetch(PROJECTS_BY_CONSTRUCTION_ID_QUERY, { id: construction._id }),
+    // client.fetch(PROJECTS_BY_CONSTRUCTION_ID_QUERY, { id: design._id }),
     client.fetch(PROJECTS_BY_QUERY, { search: null }),
     client.fetch(PROJECT_DETAILS_BY_QUERY, { search: null }),
   ]);
 
-  console.log({ searchForConstructions, searchForDesigns, searchForProjects, searchForProjectDetails })
+  console.log({ searchForProjects, searchForProjectDetails })
 
-  const sitemapConstructions = searchForConstructions?.map((post: PostType) => ({
-    loc: `${baseUrl}/du-an/${post.slug?.current}`,
-    lastmod: new Date(post._updatedAt).toISOString(),
-  })) || [];
+  // const sitemapConstructions = searchForConstructions?.map((post: PostType) => ({
+  //   loc: `${baseUrl}/du-an/${post.slug?.current}`,
+  //   lastmod: new Date(post._updatedAt).toISOString(),
+  // })) || [];
 
-  const sitemapDesigns = searchForDesigns?.map((post: PostType) => ({
-    loc: `${baseUrl}/du-an/${post.slug?.current}`,
-    lastmod: new Date(post._updatedAt).toISOString(),
-  })) || [];
+  // const sitemapDesigns = searchForDesigns?.map((post: PostType) => ({
+  //   loc: `${baseUrl}/du-an/${post.slug?.current}`,
+  //   lastmod: new Date(post._updatedAt).toISOString(),
+  // })) || [];
 
   const sitemapProjects = searchForProjects?.map((post: PostType) => ({
     loc: `${baseUrl}/du-an/${post.slug?.current}`,
@@ -48,7 +50,7 @@ async function fetchPosts() {
     lastmod: new Date(post._updatedAt).toISOString(),
   })) || [];
 
-  return [...sitemapConstructions, ...sitemapDesigns, ...sitemapProjects, ...sitemapProjectDetails];
+  return [...sitemapProjects, ...sitemapProjectDetails];
 }
 
 export async function GET() {
