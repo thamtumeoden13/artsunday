@@ -296,7 +296,7 @@
 
   /* simplecard */
   .simple-card {
-    @apply bg-white border-[1px] border-black md:rounded-[22px] overflow-hidden shadow-none hover:border-primary transition-all duration-500 hover:shadow-300 hover:bg-primary-100;
+    @apply bg-white border-[1px] border-slate-400 md:rounded-[22px] overflow-hidden shadow-none hover:border-primary transition-all duration-500 hover:shadow-300 hover:bg-primary-100;
   }
 
   .simple-card_date {
