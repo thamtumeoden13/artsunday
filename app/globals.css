@@ -194,11 +194,11 @@
   }
 
   .section_container {
-    @apply px-6 py-10 mx-auto max-w-7xl;
+    @apply px-6 py-10 mx-auto max-w-[96rem];
   }
 
   .card_grid {
-    @apply grid lg:grid-cols-[repeat(3,330px)] md:grid-cols-[repeat(2,330px)] grid-cols-1 gap-5 justify-center items-center;
+    @apply grid xl:grid-cols-[repeat(4,310px)] lg:grid-cols-[repeat(3,330px)] md:grid-cols-[repeat(2,330px)] grid-cols-1 gap-4 justify-center items-center;
   }
 
   .card_grid-md {
@@ -219,7 +219,7 @@
 
   /* profile */
   .profile_container {
-    @apply flex flex-col w-full gap-10 px-6 pt-20 pb-10 mx-auto max-w-7xl lg:flex-row;
+    @apply flex flex-col w-full gap-10 px-6 pt-20 pb-10 mx-auto max-w-[96rem] lg:flex-row;
   }
 
   .profile_card {
@@ -296,7 +296,7 @@
 
   /* simplecard */
   .simple-card {
-    @apply bg-white border-l-0 border-r-0 md:border-[5px] border-black md:p-2 md:rounded-[22px] shadow-none md:shadow-200 hover:border-primary transition-all duration-500 hover:shadow-300 hover:bg-primary-100;
+    @apply bg-white border-[1px] border-black md:rounded-[22px] overflow-hidden shadow-none hover:border-primary transition-all duration-500 hover:shadow-300 hover:bg-primary-100;
   }
 
   .simple-card_date {
@@ -308,7 +308,7 @@
   }
 
   .simple-card_img {
-    @apply w-full h-full sm:w-[280px] sm:h-[200px] md:rounded-[10px] object-cover;
+    @apply w-full h-full xl:w-[310px] xl:h-[220px] sm:w-[330px] sm:h-[230px] object-cover;
   }
 
   .simple-card_btn {

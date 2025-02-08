@@ -20,13 +20,13 @@ const SimpleCard = ({ post, path, className }: { post: SimpleCardType, path: str
 
   return (
     <li className={cn("simple-card group", className)}>
-      <div className={"flex w-full md:mt-5 gap-5"}>
-        <div className={"flex-1 md:h-20"}>
+      <div className={"flex w-full gap-5"}>
+        <div className={"flex-1"}>
           <Link href={`/${path}/${slug?.current}`}>
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger>
-                  <h3 className={"text-20-medium !font-semibold md:line-clamp-2 !text-left p-2"}>{title}</h3>
+                  <h3 className={"text-16-medium !font-semibold md:line-clamp-2 !text-left px-2 pt-1"}>{title}</h3>
                 </TooltipTrigger>
                 <TooltipContent side="bottom" align="start" >
                   <p className='text-left text-white-100'> {title}</p>
