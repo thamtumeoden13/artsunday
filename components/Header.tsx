@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Menu, MenuItem, ProductItem } from "./ui/navbar-menu";
 import { client } from "@/sanity/lib/client";
-import { CATEGORY_BY_SLUG_QUERY } from "@/sanity/lib/queries";
+import { ROUTE_BY_SLUG_QUERY } from "@/sanity/lib/queries";
 import { Author, Construction, Project } from "@/sanity/types";
 import { useWindowScroll } from "react-use";
 import gsap from 'gsap';
@@ -39,12 +39,12 @@ const Header = () => {
 
   useEffect(() => {
     const getNavDesignRouter = async () => {
-      const { select: navDesignRouter } = await client.fetch(CATEGORY_BY_SLUG_QUERY, { slug: "danh-muc-thiet-ke" });
+      const { select: navDesignRouter } = await client.fetch(ROUTE_BY_SLUG_QUERY, { slug: "danh-muc-thiet-ke" });
       setNavDesignRouter(navDesignRouter)
     }
 
     const getNavConstructionRouter = async () => {
-      const { select: navConstructionRouter } = await client.fetch(CATEGORY_BY_SLUG_QUERY, { slug: "danh-muc-thi-cong" });
+      const { select: navConstructionRouter } = await client.fetch(ROUTE_BY_SLUG_QUERY, { slug: "danh-muc-thi-cong" });
       setNavConstructionRouter(navConstructionRouter)
     }
 
@@ -151,13 +151,13 @@ const Header = () => {
                       setIsOpen={handleIsOpen}
                     >
                       <div className="grid grid-cols-2 gap-10 p-4 max-lg:grid-cols-1 text-md ">
-                        {navDesignRouter.map(({ _id, title, slug, image, thumbnail, subtitle }) => (
+                        {navDesignRouter.map(({ _id, title, slug, description, image, thumbnail, subtitle }) => (
                           <ProductItem
                             key={_id}
                             title={title!}
+                            description={subtitle!}
                             href={`/chi-tiet-du-an/${slug?.current}`}
                             src={thumbnail!}
-                            description={subtitle!}
                             setIsOpen={handleIsOpen}
                           />
                         ))}

@@ -13,7 +13,7 @@ import { HoverBorderGradient } from './ui/hover-border-gradient';
 import { useEffect, useState } from "react";
 import { client } from "@/sanity/lib/client";
 import { Author, Construction, Project } from "@/sanity/types";
-import { CATEGORY_BY_SLUG_QUERY } from "@/sanity/lib/queries";
+import { ROUTE_BY_SLUG_QUERY } from "@/sanity/lib/queries";
 import ContactModal from "./shared/ContactModal";
 import { TextGenerateEffect } from './TextGenerateEffect';
 
@@ -21,12 +21,12 @@ export type ProjectCardType = Omit<Project, "author" | "construction"> & { autho
 
 const Footer = () => {
 
-  const [footerCategory, setFooterCategory] = useState<ProjectCardType[]>([]);
+  const [footerRoute, setFooterRoute] = useState<ProjectCardType[]>([]);
 
   useEffect(() => {
     const getNavProjectRouter = async () => {
-      const { select: footerCategory } = await client.fetch(CATEGORY_BY_SLUG_QUERY, { slug: "danh-muc-cuoi-trang" });
-      setFooterCategory(footerCategory)
+      const { select: footerRoute } = await client.fetch(ROUTE_BY_SLUG_QUERY, { slug: "danh-muc-cuoi-trang" });
+      setFooterRoute(footerRoute)
     }
 
     getNavProjectRouter();
@@ -85,7 +85,7 @@ const Footer = () => {
           >
             <h4 className="w-full font-extrabold text-[24px] text-white">Dự Án</h4>
             <div className='flex flex-wrap items-center gap-2'>
-              {footerCategory.map(({ title, slug }) => (
+              {footerRoute.map(({ title, slug }) => (
                 <Button
                   key={title}
                   duration={Math.floor(Math.random() * 10000) + 10000}

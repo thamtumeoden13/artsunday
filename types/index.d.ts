@@ -152,4 +152,6 @@ declare global {
   }
 }
 
+declare module 'markdown-it-video';
+
 export {};

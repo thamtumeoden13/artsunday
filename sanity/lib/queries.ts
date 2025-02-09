@@ -456,7 +456,7 @@ select[]->{
       image,
       bio
     },
-    construction[]->{
+    project->{
       _id, title, subtitle, description, image, thumbnail, slug
     }, 
   }
@@ -484,7 +484,62 @@ select[]->{
       image,
       bio
     },
-    construction[]->{
+    project->{
+      _id, title, subtitle, description, image, thumbnail, slug
+    }, 
+  }
+}`);
+
+export const ROUTE_BY_SLUG_QUERY =
+  defineQuery(`*[_type == "route" && slug.current == $slug][0]{
+_id,
+title,
+slug,
+select[]->{
+    _id,
+    _createdAt,
+    title,
+    subtitle,
+    slug,
+    description,
+    image,
+    thumbnail,
+    author->{
+      _id,
+      name,
+      slug,
+      image,
+      bio
+    },
+    construction->{
+      _id, title, subtitle, description, image, thumbnail, slug
+    }, 
+  }
+}`);
+
+export const ROUTE_BY_ID_QUERY =
+  defineQuery(`*[_type == "route" && _id == $id][0]{
+_id,
+title,
+slug,
+select[]->{
+    _id,
+    _createdAt,
+    _key,
+    title,
+    subtitle,
+    slug,
+    description,
+    image,
+    thumbnail,
+    author->{
+      _id,
+      name,
+      slug,
+      image,
+      bio
+    },
+    construction->{
       _id, title, subtitle, description, image, thumbnail, slug
     }, 
   }

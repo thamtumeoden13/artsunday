@@ -3,7 +3,7 @@
 import React, { useState, useActionState, useEffect } from 'react'
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import MDEditor from "@uiw/react-md-editor";
+import MDEditor, { commands } from "@uiw/react-md-editor";
 import { Button } from "@/components/ui/button";
 import { Send } from "lucide-react";
 import { formProjectDetailSchema } from "@/lib/validation";
@@ -15,6 +15,7 @@ import { Combobox, ComboboxDataType } from "./shared/ComboBox";
 import { client, clientNoCache } from "@/sanity/lib/client";
 import { PROJECTS_BY_QUERY } from "@/sanity/lib/queries";
 import { Author, Project, ProjectDetail } from '@/sanity/types';
+import { video } from './ui/video-markdown';
 
 type FormDataType = Omit<ProjectDetail, "author" | "project">;
 type ProjectDetailFormType = Omit<ProjectDetail, "author" | "project"> & { author?: Author } & { project?: Project };
@@ -283,6 +284,7 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
           previewOptions={{
             disallowedElements: ["style"]
           }}
+          commands={[...commands.getCommands(), video]}
         />
       </div>
       <Button

@@ -9,15 +9,17 @@ import { notFound } from "next/navigation";
 import { formatDate } from "@/lib/utils";
 
 import markdownit from "markdown-it";
+import markdownItVideo from "markdown-it-video";
 import { Skeleton } from "@/components/ui/skeleton";
 import View from "@/components/View";
-
 
 import SimpleCard, { SimpleCardType } from '@/components/SimpleCard';
 import { sanityFetch } from '@/sanity/lib/live';
 import MarkupSchema from '@/components/shared/MarkupSchema';
 import { CloudinaryImage } from '@/components/shared/CloudinaryImage';
-const md = markdownit();
+const md = markdownit().use(markdownItVideo,{
+  youtube: { width: "100%", height: "640px" },
+});
 
 const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const slug = (await params).slug;
@@ -59,7 +61,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
         <div className="flex items-start justify-between gap-1">
 
-          <div className={"space-y-5 mt-10 max-w-4xl mx-auto"}>
+          <div className={"space-y-5 mt-10 pr-10 max-w-7xl mx-auto"}>
             <h3 className={"text-30-bold"}>Bài Viết Chi Tiết</h3>
             {parsedContent ? (
               <article
@@ -71,7 +73,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
             )}
           </div>
 
-          <div className='hidden lg:flex flex-col w-[36rem]'>
+          <div className='hidden lg:flex flex-col]'>
             {releatedPosts?.length > 0 && (
               <div className={"flex flex-col items-center"}>
                 <p className={"heading-half !leading-[16px] !text-left w-[330px] !bg-black-100 rounded-tl-2xl"}>Quan Tâm</p>

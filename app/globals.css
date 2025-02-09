@@ -210,7 +210,7 @@
   }
 
   .card_grid-xs {
-    @apply grid grid-cols-[repeat(1,330px)] gap-5;
+    @apply grid xl:grid-cols-[repeat(1,310px)] grid-cols-[repeat(1,330px)] gap-5;
   }
 
   .no-result {

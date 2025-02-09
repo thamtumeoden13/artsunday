@@ -7,6 +7,7 @@ import ConstructionTable from "./ConstructionTable";
 import ProjectTable from "./ProjectTable";
 import PermissionTable from "./PermissionTable";
 import DesignTable from "./DesignTable";
+import RouteTable from "./RouteTable";
 
 export const TabManagement = async ({ user }: { user: Author }) => {
 
@@ -70,7 +71,7 @@ export const TabManagement = async ({ user }: { user: Author }) => {
       value: "danh-muc-thi-cong",
       content: (
         <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
-          <CategoryTable
+          <RouteTable
             slug="danh-muc-thi-cong"
             title="Danh Mục Thi Công"
             role={role}
@@ -83,7 +84,7 @@ export const TabManagement = async ({ user }: { user: Author }) => {
       value: "danh-muc-thiet-ke",
       content: (
         <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
-          <CategoryTable
+          <RouteTable
             slug="danh-muc-thiet-ke"
             title="Danh Mục Thiết Kế"
             role={role}
@@ -96,7 +97,7 @@ export const TabManagement = async ({ user }: { user: Author }) => {
       value: "danh-muc-cuoi-trang",
       content: (
         <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
-          <CategoryTable
+          <RouteTable
             slug="danh-muc-cuoi-trang"
             title="Danh Mục Cuối Trang"
             role={role}

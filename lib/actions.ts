@@ -5,7 +5,7 @@ import { parseServerActionResponse } from "@/lib/utils";
 import slugify from "slugify";
 import { writeClient } from "@/sanity/lib/write-client";
 import { client, clientNoCache } from "@/sanity/lib/client";
-import { CATEGORY_BY_ID_QUERY, CONSTRUCTION_BY_SLUG_QUERY, DESIGN_BY_SLUG_QUERY, PROJECT_BY_SLUG_QUERY, PROJECT_DETAIL_BY_SLUG_QUERY } from "@/sanity/lib/queries";
+import { CATEGORY_BY_ID_QUERY, CONSTRUCTION_BY_SLUG_QUERY, DESIGN_BY_SLUG_QUERY, PROJECT_BY_SLUG_QUERY, PROJECT_DETAIL_BY_SLUG_QUERY, ROUTE_BY_ID_QUERY } from "@/sanity/lib/queries";
 import { v4 as uuidv4 } from 'uuid';
 import { Author } from "@/sanity/types";
 
@@ -581,14 +581,14 @@ export const updateCategory = async (state: any, _id: string, projectId: string,
     status: "ERROR"
   });
 
-  const { select: homeHeroPost } = await clientNoCache.fetch(CATEGORY_BY_ID_QUERY, { id: _id });
+  const { select } = await clientNoCache.fetch(CATEGORY_BY_ID_QUERY, { id: _id });
 
-  console.log(homeHeroPost);
+  console.log(select);
 
   try {
 
     if (isDelete) {
-      const categorySelect = homeHeroPost
+      const categorySelect = select
         .filter((item: any) => item._id !== projectId)
         .map((item: any) => ({ _type: "reference", _ref: item._id, _key: item._key || uuidv4() }));
       const categoryData = {
@@ -606,7 +606,7 @@ export const updateCategory = async (state: any, _id: string, projectId: string,
       })
     }
 
-    const isExist = homeHeroPost.find((item: any) => item._id === projectId);
+    const isExist = select.find((item: any) => item._id === projectId);
 
     if (isExist) {
       return parseServerActionResponse({
@@ -615,13 +615,78 @@ export const updateCategory = async (state: any, _id: string, projectId: string,
       })
     };
 
-    const categorySelect = homeHeroPost.map((item: any) => ({ _type: "reference", _ref: item._id, _key: item._key || uuidv4() }));
+    const categorySelect = select.map((item: any) => ({ _type: "reference", _ref: item._id, _key: item._key || uuidv4() }));
     const categoryData = {
       select: [...categorySelect, { _type: "reference", _ref: projectId, _key: uuidv4() }]
     }
 
     const result = await writeClient.patch(_id)
       .set({ ...categoryData })
+      .commit()
+
+    return parseServerActionResponse({
+      result,
+      error: "",
+      status: "SUCCESS",
+    })
+  } catch (error) {
+
+    return parseServerActionResponse({
+      error: JSON.stringify(error),
+      status: "ERROR",
+    });
+  }
+}
+
+export const updateRoute = async (state: any, _id: string, projectId: string, isDelete: boolean = false) => {
+  const session = await auth();
+
+  if (!session) return parseServerActionResponse({
+    error: "Not signed in",
+    status: "ERROR"
+  });
+
+  const { select } = await clientNoCache.fetch(ROUTE_BY_ID_QUERY, { id: _id });
+
+  console.log(select);
+
+  try {
+
+    if (isDelete) {
+      const routeSelect = select
+        .filter((item: any) => item._id !== projectId)
+        .map((item: any) => ({ _type: "reference", _ref: item._id, _key: item._key || uuidv4() }));
+      const routeData = {
+        select: [...routeSelect]
+      }
+
+      const result = await writeClient.patch(_id)
+        .set({ ...routeData })
+        .commit()
+
+      return parseServerActionResponse({
+        result,
+        error: "",
+        status: "SUCCESS",
+      })
+    }
+
+    const isExist = select.find((item: any) => item._id === projectId);
+
+    if (isExist) {
+      return parseServerActionResponse({
+        error: "This item is already exist",
+        status: "ERROR",
+      })
+    };
+
+    const routeSelect = select.map((item: any) => ({ _type: "reference", _ref: item._id, _key: item._key || uuidv4() }));
+    const routeData = {
+      select: [...routeSelect, { _type: "reference", _ref: projectId, _key: uuidv4() }]
+    }
+
+    const result = await writeClient.patch(_id)
+      .set({ ...routeData })
       .commit()
 
     return parseServerActionResponse({

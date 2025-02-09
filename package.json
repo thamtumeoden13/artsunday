@@ -47,6 +47,7 @@
     "lucide-react": "^0.456.0",
     "maath": "^0.10.8",
     "markdown-it": "^14.1.0",
+    "markdown-it-video": "^0.6.3",
     "mongodb": "^6.11.0",
     "mongoose": "^8.8.3",
     "next": "^15.2.0-canary.27",

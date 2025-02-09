@@ -1,5 +1,6 @@
 import { client, clientNoCache } from "@/sanity/lib/client";
 import { clsx, type ClassValue } from "clsx";
+import MarkdownIt from "markdown-it";
 import { twMerge } from "tailwind-merge";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -223,3 +224,23 @@ export const generateUniqueSlug = async ({ title, query }: { title: string, quer
 
   return uniqueSlug;
 };
+
+export const mdParser = new MarkdownIt({
+  html: true,
+}).use((md) => {
+  const defaultRender = md.renderer.rules.link_open || function (tokens, idx, options, env, self) {
+    return self.renderToken(tokens, idx, options);
+  };
+
+  md.renderer.rules.link_open = function (tokens, idx, options, env, self) {
+    const hrefAttr = tokens[idx].attrs?.find(attr => attr[0] === "href");
+    const href = hrefAttr ? hrefAttr[1] : null;
+
+    if (href?.includes("youtube.com") || href?.includes("youtu.be")) {
+      const videoId = href.split("v=")[1]?.split("&")[0] || href.split("/").pop();
+      return `<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`;
+    }
+
+    return defaultRender(tokens, idx, options, env, self);
+  };
+});
