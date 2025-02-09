@@ -64,13 +64,13 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
 
   const scrollLeft = () => {
     if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: -300, behavior: "smooth" });
+      carouselRef.current.scrollBy({ left: -400, behavior: "smooth" });
     }
   };
 
   const scrollRight = () => {
     if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: 300, behavior: "smooth" });
+      carouselRef.current.scrollBy({ left: 400, behavior: "smooth" });
     }
   };
 
@@ -105,7 +105,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
             className={cn(
               "absolute right-0  z-[1000] h-auto  w-[5%] overflow-hidden bg-gradient-to-l"
             )}
-          ></div>
+          />
 
           <div
             className={cn(
@@ -216,18 +216,20 @@ export const AppleCard = ({
       designation: card.subtitle!,
       quote: card.description!,
       src: card.thumbnail!,
+      path: card.slug?.current,
     }];
 
-    if (searchForProjects?.length) {
-      testimonials_2 = searchForProjects.map((post: ProjectDetail) => ({
-        name: post.title!,
-        designation: post.subtitle!,
-        quote: post.description!,
-        src: post.thumbnail!,
-      }));
-    }
+    // if (searchForProjects?.length) {
+    //   testimonials_2 = searchForProjects.map((post: ProjectDetail) => ({
+    //     name: post.title!,
+    //     designation: post.subtitle!,
+    //     quote: post.description!,
+    //     src: post.thumbnail!,
+    //     path: post.slug?.current,
+    //   }));
+    // }
 
-    const content = <AnimatedTestimonials testimonials={testimonials_2} />
+    const content = <AnimatedTestimonials testimonials={testimonials_2} path={`/chi-tiet-du-an/${card.slug?.current}`} onChange={handleClose} />
     setCardContent(content);
   }
 
@@ -253,7 +255,7 @@ export const AppleCard = ({
               exit={{ opacity: 0 }}
               ref={containerRef}
               layoutId={layout ? `card-${card._id}` : undefined}
-              className="max-w-5xl mx-auto bg-white dark:bg-neutral-900 h-fit  z-[60] my-10 p-4 md:p-10 rounded-3xl font-sans relative"
+              className="max-w-5xl mx-auto bg-white dark:bg-neutral-900 h-fit z-[60] my-10 p-4 md:p-10 rounded-3xl font-sans relative"
             >
               <button
                 className="sticky right-0 flex items-center justify-center w-8 h-8 ml-auto bg-black rounded-full top-4 dark:bg-white"
@@ -263,18 +265,17 @@ export const AppleCard = ({
               </button>
               <motion.p
                 layoutId={layout ? `category-${card.title}` : undefined}
-                className="text-base font-medium text-black dark:text-white"
+                className="text-base font-medium text-primary px-[2rem]"
               >
                 {card?.project?.title}
               </motion.p>
               <motion.p
                 layoutId={layout ? `title-${card.title}` : undefined}
-                className="mt-4 text-2xl font-semibold md:text-5xl text-neutral-700 dark:text-white"
+                className="mt-4 text-2xl font-semibold md:text-3xl text-neutral-700 dark:text-white px-[2rem]"
               >
                 {card.title}
               </motion.p>
-              {card.content && <div className="py-10"><AppleCardContent>{cardContent}</AppleCardContent></div>}
-              {card.pitch && <div className="py-10">{card.pitch}</div>}
+              {card.content && <AppleCardContent className="p-0">{cardContent}</AppleCardContent>}
             </motion.div>
           </div>
         )}
