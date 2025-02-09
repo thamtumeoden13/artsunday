@@ -2,6 +2,7 @@ import z from "zod";
 import { generateUniqueSlug } from "./utils";
 import { client } from "@/sanity/lib/client";
 import { CONSTRUCTION_BY_SLUG_QUERY } from "@/sanity/lib/queries";
+import { Phone } from "lucide-react";
 
 export const formSchema = z.object({
   title: z.string().min(3).max(1000),
@@ -133,6 +134,7 @@ export const formProjectDetailSchema = z.object({
 
 export const formContactSchema = z.object({
   name: z.string().min(3).max(1000),
+  phone: z.string().min(10).max(15),
   email: z.string().email(),
   message: z.string().min(10)
 })

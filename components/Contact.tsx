@@ -33,6 +33,7 @@ const Contact = ({ className }: { className?: string }) => {
     try {
       const formValues = {
         name: formData.get("name") as string,
+        phone: formData.get("phone") as string,
         email: formData.get("email") as string,
         message: formData.get("message") as string
       }
@@ -47,7 +48,7 @@ const Contact = ({ className }: { className?: string }) => {
           to_name: 'Art Sunday',
           from_email: formValues.email,
           to_email: 'ltv.mrvu@gmail.com',
-          message: formValues.message
+          message: `Số điện thoại: ${formValues.phone} \n Nội dung: ${formValues.message}`
         },
         'ugaUp8luB88w0ka3B'
       )
@@ -59,7 +60,7 @@ const Contact = ({ className }: { className?: string }) => {
         })
       }
 
-      
+
       return {
         // ...prevState,
         error: "",
@@ -133,6 +134,22 @@ const Contact = ({ className }: { className?: string }) => {
         </label>
         <label className='flex flex-col'>
           <span className='mb-4 font-medium text-white'>
+            Số điện thoại
+          </span>
+          <Input
+            required
+            id="name"
+            name='phone'
+            type='tel'
+            placeholder="Số điện thoại của bạn?"
+            className='h-12 px-6 py-4 font-medium text-black border-none rounded-lg outline-none bg-tertiary placeholder:text-primary'
+          />
+          {errors.email && (
+            <p className={"startup-form_error"}>{errors.email}</p>
+          )}
+        </label>
+        <label className='flex flex-col'>
+          <span className='mb-4 font-medium text-white'>
             Địa chỉ Email
           </span>
           <Input
@@ -148,7 +165,7 @@ const Contact = ({ className }: { className?: string }) => {
         </label>
         <label className='flex flex-col'>
           <span className='mb-4 font-medium text-white'>
-            Nội dung 
+            Nội dung
           </span>
           <Textarea
             required
