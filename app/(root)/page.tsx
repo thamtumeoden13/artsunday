@@ -23,7 +23,7 @@ export default async function Home({ searchParams }: {
   return (
     <>
       <MarkupSchema post={{}} path="" />
-      <section className="section_container md:min-h-screen !max-w-full !py-16 bg-black-200 justify-items-center !overflow-hidden">
+      <section className="section_container !px-0 !pb-0 !max-w-full bg-black-200 justify-items-center !overflow-hidden">
         <AppleCardsCarousel data={homeHeroPost} />
       </section>
       <section className={"pink_container !min-h-[230px] !mt-0 "}>

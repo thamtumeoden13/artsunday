@@ -18,7 +18,7 @@ import { Author, Construction, Project, ProjectDetail } from "@/sanity/types";
 import { BlurImage } from "../shared/CloudinaryImage";
 import { useRouter } from "next/navigation";
 import { client } from "@/sanity/lib/client";
-import { PROJECT_DETAILS_BY_PROJECT_QUERY, PROJECT_DETAILS_BY_QUERY } from "@/sanity/lib/queries";
+import { PROJECT_DETAILS_BY_PROJECT_QUERY } from "@/sanity/lib/queries";
 import { AnimatedTestimonials, Testimonial } from "./animated-testimonials";
 
 interface CarouselProps {
@@ -26,9 +26,9 @@ interface CarouselProps {
   initialScroll?: number;
 }
 
-export type AppleCardType = Omit<Project, "author" | "construction">
+export type AppleCardType = Omit<ProjectDetail, "author" | "project">
   & { author?: Author }
-  & { construction?: Construction }
+  & { project?: Project }
   & { content?: React.ReactNode }
   & { path?: string }
 
@@ -97,7 +97,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
     >
       <div className="relative w-full">
         <div
-          className="flex w-full overflow-x-scroll overscroll-x-auto py-10 scroll-smooth [scrollbar-width:none]"
+          className="flex w-full overflow-x-scroll overscroll-x-auto py-16 scroll-smooth [scrollbar-width:none]"
           ref={carouselRef}
           onScroll={checkScrollability}
         >
@@ -109,8 +109,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
 
           <div
             className={cn(
-              "flex flex-row justify-start gap-4 pl-4",
-              "max-w-7xl mx-auto" // remove max-w-4xl if you want the carousel to span the full width of its container
+              "flex flex-row justify-start gap-4 mx-auto max-w-full md:max-w-[96rem] ",
             )}
           >
             {items.map((item, index) => (
@@ -130,14 +129,14 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
                 //   },
                 // }}
                 key={"card" + index}
-                className="last:pr-[5%] rounded-3xl"
+                className="rounded-xl"
               >
                 {item}
               </motion.div>
             ))}
           </div>
         </div>
-        <div className="flex justify-end gap-2 mr-10">
+        <div className="justify-end hidden gap-2 mb-4 mr-10 lg:flex">
           <button
             className="relative z-40 flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full disabled:opacity-50"
             onClick={scrollLeft}
@@ -266,7 +265,7 @@ export const AppleCard = ({
                 layoutId={layout ? `category-${card.title}` : undefined}
                 className="text-base font-medium text-black dark:text-white"
               >
-                {card?.construction?.title}
+                {card?.project?.title}
               </motion.p>
               <motion.p
                 layoutId={layout ? `title-${card.title}` : undefined}
@@ -283,19 +282,13 @@ export const AppleCard = ({
       <motion.button
         layoutId={layout ? `card-${card.title}` : undefined}
         onClick={() => handleOpen(card)}
-        className={cn("rounded-3xl bg-gray-100 dark:bg-neutral-900 h-80 w-56 md:h-[40rem] md:w-96 overflow-hidden flex flex-col items-start justify-start relative z-10", className)}
+        className={cn("rounded-2xl bg-gray-100 dark:bg-neutral-900 h-[28rem] w-[16rem] md:h-[40rem] md:w-[24rem] overflow-hidden flex flex-col items-start justify-start relative z-10", className)}
       >
         <div className="absolute inset-x-0 top-0 z-30 h-full pointer-events-none bg-gradient-to-b from-black/50 via-transparent to-transparent" />
-        <div className="relative z-40 p-8">
-          <motion.p
-            layoutId={layout ? `category-${card.construction?._id}` : undefined}
-            className="font-sans text-sm font-medium text-left text-white md:text-base"
-          >
-            {card.construction?.title}
-          </motion.p>
+        <div className="absolute bottom-0 z-40 p-2 backdrop-blur-sm">
           <motion.p
             layoutId={layout ? `title-${card.title}` : undefined}
-            className="text-white text-xl md:text-3xl font-semibold max-w-xs text-left [text-wrap:balance] font-sans mt-2"
+            className="text-white text-sm md:text-xl font-semibold max-w-xs text-left [text-wrap:balance] font-sans mt-2"
           >
             {card.title}
           </motion.p>

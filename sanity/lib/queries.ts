@@ -337,6 +337,16 @@ export const PROJECT_DETAILS_BY_QUERY =
   project->{
     _id, title, subtitle, description, image, thumbnail, slug
   }, 
+  overview {
+    investor,
+    address,
+    scale,
+    function,
+    expense,
+    designTeam,
+    designYear,
+    estimatedTime
+  },
   views,
   description,
   image,
@@ -356,6 +366,16 @@ export const PROJECT_DETAIL_BY_ID_QUERY =
   },
   project->{
     _id, title, subtitle, description, image, thumbnail, slug
+  },
+  overview {
+    investor,
+    address,
+    scale,
+    function,
+    expense,
+    designTeam,
+    designYear,
+    estimatedTime
   },
   views,
   description,
@@ -377,6 +397,16 @@ export const PROJECT_DETAILS_BY_PROJECT_QUERY =
   project->{
     _id, title, subtitle, description, image, thumbnail, slug
   }, 
+  overview {
+    investor,
+    address,
+    scale,
+    function,
+    expense,
+    designTeam,
+    designYear,
+    estimatedTime
+  },
   views,
   description,
   image,
@@ -397,6 +427,16 @@ export const PROJECT_DETAIL_BY_SLUG_QUERY =
   },
   project->{
     _id, title, subtitle, description, image, thumbnail, slug
+  },
+  overview {
+    investor,
+    address,
+    scale,
+    function,
+    expense,
+    designTeam,
+    designYear,
+    estimatedTime
   },
   views,
   description,
@@ -419,6 +459,16 @@ export const PROJECT_DETAILS_BY_TAG =
   project->{
     _id, title, subtitle, description, image, thumbnail, slug
   }, 
+  overview {
+    investor,
+    address,
+    scale,
+    function,
+    expense,
+    designTeam,
+    designYear,
+    estimatedTime
+  },
   views,
   description,
   image,

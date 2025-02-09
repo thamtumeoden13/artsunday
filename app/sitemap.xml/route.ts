@@ -30,16 +30,6 @@ async function fetchPosts() {
 
   console.log({ searchForProjects, searchForProjectDetails })
 
-  // const sitemapConstructions = searchForConstructions?.map((post: PostType) => ({
-  //   loc: `${baseUrl}/du-an/${post.slug?.current}`,
-  //   lastmod: new Date(post._updatedAt).toISOString(),
-  // })) || [];
-
-  // const sitemapDesigns = searchForDesigns?.map((post: PostType) => ({
-  //   loc: `${baseUrl}/du-an/${post.slug?.current}`,
-  //   lastmod: new Date(post._updatedAt).toISOString(),
-  // })) || [];
-
   const sitemapProjects = searchForProjects?.map((post: PostType) => ({
     loc: `${baseUrl}/du-an/${post.slug?.current}`,
     lastmod: new Date(post._updatedAt).toISOString(),

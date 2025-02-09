@@ -17,7 +17,8 @@ import SimpleCard, { SimpleCardType } from '@/components/SimpleCard';
 import { sanityFetch } from '@/sanity/lib/live';
 import MarkupSchema from '@/components/shared/MarkupSchema';
 import { CloudinaryImage } from '@/components/shared/CloudinaryImage';
-const md = markdownit().use(markdownItVideo,{
+import { overvewTranslate } from '@/constants';
+const md = markdownit().use(markdownItVideo, {
   youtube: { width: "100%", height: "640px" },
 });
 
@@ -58,6 +59,16 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
           height={540}
           className="object-cover w-full mb-10 rounded-lg"
         />
+        <div className='flex flex-col gap-4 pb-4 border-b border-black-100'>
+          <ul className="grid items-center justify-center grid-cols-1 gap-4 lg:grid-cols-3 md:grid-cols-2">
+            {post.overview && (Object.keys(post.overview) as Array<keyof typeof overvewTranslate>).map((key) => (
+              <li key={key} className="flex items-center gap-2">
+                <span>{overvewTranslate[key]}:</span>
+                <span className="text-20-medium">{post.overview[key]}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
 
         <div className="flex items-start justify-between gap-1">
 
@@ -73,7 +84,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
             )}
           </div>
 
-          <div className='hidden lg:flex flex-col]'>
+          <div className='hidden lg:flex flex-col] mt-4'>
             {releatedPosts?.length > 0 && (
               <div className={"flex flex-col items-center"}>
                 <p className={"heading-half !leading-[16px] !text-left w-[330px] !bg-black-100 rounded-tl-2xl"}>Quan Tâm</p>

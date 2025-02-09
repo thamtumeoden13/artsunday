@@ -15,6 +15,7 @@ import { client, clientNoCache } from "@/sanity/lib/client";
 import { CONSTRUCTIONS_BY_QUERY } from "@/sanity/lib/queries";
 import { Author, Construction, Project } from '@/sanity/types';
 import { MultiSelect, MultiSelectOption } from './shared/MultiSelect';
+import MDEditorComponent from './shared/MDEditor';
 
 type FormDataType = Omit<Project, "author" | "construction">;
 type ProjectFormType = Omit<Project, "author" | "construction"> & { author?: Author } & { construction?: Construction[] };
@@ -254,19 +255,9 @@ const ProjectForm = ({ post }: { post?: ProjectFormType }) => {
         <label htmlFor="pitch" className={"startup-form_label"}>
           {"Bài viết"}
         </label>
-        <MDEditor
+        <MDEditorComponent
           value={pitch}
           onChange={(value) => setPitch(value as string)}
-          id={"pitch"}
-          preview={"edit"}
-          height={300}
-          style={{ borderRadius: 20, overflow: "hidden" }}
-          textareaProps={{
-            placeholder: "Briefly describe your idea and what problem is solves",
-          }}
-          previewOptions={{
-            disallowedElements: ["style"]
-          }}
         />
       </div>
       <Button

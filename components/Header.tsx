@@ -125,7 +125,7 @@ const Header = () => {
       >
         <div className={"container flex h-14 items-center max-lg:px-5"}>
           <Link href={"/"} className={"lg:hidden flex-1 cursor-pointer z-2"}>
-            <Image src="/images/artsunday.png" alt="Art Sunday" width={60} height={30} />
+            <Image src="/bg-artsunday.png" alt="Art Sunday" width={160} height={200} />
           </Link>
 
           <div
@@ -156,7 +156,7 @@ const Header = () => {
                             key={_id}
                             title={title!}
                             description={subtitle!}
-                            href={`/chi-tiet-du-an/${slug?.current}`}
+                            href={`/du-an/${slug?.current}`}
                             src={thumbnail!}
                             setIsOpen={handleIsOpen}
                           />
@@ -190,7 +190,7 @@ const Header = () => {
                           <ProductItem
                             key={_id}
                             title={title!}
-                            href={`/chi-tiet-du-an/${slug?.current}`}
+                            href={`/du-an/${slug?.current}`}
                             src={thumbnail!}
                             description={subtitle!}
                             setIsOpen={handleIsOpen}

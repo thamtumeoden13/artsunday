@@ -16,6 +16,7 @@ import { client, clientNoCache } from "@/sanity/lib/client";
 import { PROJECTS_BY_QUERY } from "@/sanity/lib/queries";
 import { Author, Project, ProjectDetail } from '@/sanity/types';
 import { video } from './ui/video-markdown';
+import MDEditorComponent from './shared/MDEditor';
 
 type FormDataType = Omit<ProjectDetail, "author" | "project">;
 type ProjectDetailFormType = Omit<ProjectDetail, "author" | "project"> & { author?: Author } & { project?: Project };
@@ -271,20 +272,9 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
         <label htmlFor="pitch" className={"startup-form_label"}>
           {"Bài viết"}
         </label>
-        <MDEditor
+        <MDEditorComponent
           value={pitch}
           onChange={(value) => setPitch(value as string)}
-          id={"pitch"}
-          preview={"edit"}
-          height={300}
-          style={{ borderRadius: 20, overflow: "hidden" }}
-          textareaProps={{
-            placeholder: "Briefly describe your idea and what problem is solves",
-          }}
-          previewOptions={{
-            disallowedElements: ["style"]
-          }}
-          commands={[...commands.getCommands(), video]}
         />
       </div>
       <Button

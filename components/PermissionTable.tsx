@@ -79,7 +79,6 @@ const PermissionTable = ({ title, role, }: { title: string, role?: string }) => 
           headers={['Tên', 'Email', 'Ảnh Đại Diện', 'Cấp/Quyền']}
           customType={'author'}
           title={title}
-          path='chi-tiet-du-an'
           actions={['Delete', 'Edit']}
           onDelete={handleDelete}
           onEdit={handleEdit}

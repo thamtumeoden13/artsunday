@@ -1,20 +1,17 @@
 "use client";
 
 import React from "react";
-import { Carousel, AppleCard } from "@/components/ui/apple-cards-carousel";
-import { Author, Construction, Project } from "@/sanity/types";
+import { Carousel, AppleCard, AppleCardType } from "@/components/ui/apple-cards-carousel";
 import { AnimatedTestimonials } from "./ui/animated-testimonials";
 import { testimonials_2 } from "@/constants";
 
-export type ProjectCardType = Omit<Project, "author" | "construction"> & { author?: Author } & { construction?: Construction };
-
-export function AppleCardsCarousel({ title, data }: { readonly title?: string, readonly data: readonly ProjectCardType[] }) {
-  const cards = data.map((card: ProjectCardType, index: number) => (
+export function AppleCardsCarousel({ title, data }: { readonly title?: string, readonly data: readonly AppleCardType[] }) {
+  const cards = data.map((card: AppleCardType, index: number) => (
     <AppleCard
       key={card._id}
       card={{ ...card, content: <AnimatedTestimonials testimonials={testimonials_2} /> }}
       index={index}
-      className="lg:h-[72vh] md:h-[60vh]"
+      className=""
     />
   ));
 

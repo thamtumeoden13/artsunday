@@ -12,6 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { createDesign, updateDesign } from "@/lib/actions";
 import { Design } from '@/sanity/types';
+import MDEditorComponent from './shared/MDEditor';
 
 type FormDataType = Omit<Design, "author">;
 
@@ -204,19 +205,10 @@ const DesignForm = ({ post }: { post?: Design }) => {
         <label htmlFor="pitch" className={"startup-form_label"}>
           {"Bài viết"}
         </label>
-        <MDEditor
+
+        <MDEditorComponent
           value={pitch}
           onChange={(value) => setPitch(value as string)}
-          id={"pitch"}
-          preview={"edit"}
-          height={300}
-          style={{ borderRadius: 20, overflow: "hidden" }}
-          textareaProps={{
-            placeholder: "Briefly describe your idea and what problem is solves",
-          }}
-          previewOptions={{
-            disallowedElements: ["style"]
-          }}
         />
       </div>
       <Button
