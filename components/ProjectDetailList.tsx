@@ -18,7 +18,7 @@ const ProjectDetailList = async ({ post, className }: { post: SimpleCardType, cl
   return (
     <section className={cn("section_container !justify-items-center !px-2", className)}>
       <Link href={`/du-an/${slug?.current}`} className='flex xl:w-[80rem] lg:w-[65rem] md:w-[43rem] w-full'>
-        <h1 className="heading-half hover:underline hover:text-p1 w-full" style={{ textAlign: 'left' }}>
+        <h1 className="heading-half hover:underline hover:text-primary w-full" style={{ textAlign: 'left' }}>
           <span className="">{title}</span>
         </h1>
       </Link>

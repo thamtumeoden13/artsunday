@@ -22,7 +22,7 @@ const ProjectList = async ({ post, parentPath = 'thi-cong', className, }: { post
   return (
     <section className={cn("section_container !justify-items-center !px-2", className)}>
       <Link href={`/${parentPath}/${slug?.current}`} className='flex lg:w-[65rem] md:w-[43rem] w-full'>
-        <h1 className="heading-half hover:text-p1 ">
+        <h1 className="heading-half hover:text-primary ">
           <span className="">{title}</span>
         </h1>
       </Link>

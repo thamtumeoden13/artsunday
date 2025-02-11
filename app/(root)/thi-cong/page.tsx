@@ -39,7 +39,7 @@ export default async function Construction({ searchParams }: Readonly<{
       </section>
 
       <>
-        {searchForProjects?.length > 0 && (
+        { (
           searchForProjects.map((post: SimpleCardType) => (
             <ProjectDetailList key={post?._id} post={post} className="!px-0" />
           ))

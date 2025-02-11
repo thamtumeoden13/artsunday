@@ -63,6 +63,7 @@ const Header = () => {
     } else if (currenScrollY < lastScrollY) {
       setIsNavVisible(true)
       navContainerRef.current?.classList.add('floating-nav')
+      setActive(null)
     }
 
     setLastScrollY(currenScrollY);
@@ -84,7 +85,7 @@ const Header = () => {
         <Link
           href={route}
           className={
-            "base-bold text-p4 uppercase transition-colors duration-500 cursor-pointer hover:text-p1 max-lg:my-4 max-lg:h5"
+            "base-bold text-p4 uppercase transition-colors duration-500 cursor-pointer hover:text-primary max-lg:my-4 max-lg:h5"
           }
           onClick={() => setIsOpen(false)}
         >
@@ -100,7 +101,7 @@ const Header = () => {
         smooth
         activeClass={"nav-active"}
         className={
-          "base-bold text-p4 uppercase transition-colors duration-500 cursor-pointer hover:text-p1 max-lg:my-4 max-lg:h5"
+          "base-bold text-p4 uppercase transition-colors duration-500 cursor-pointer hover:text-primary max-lg:my-4 max-lg:h5"
         }
         onClick={() => setIsOpen(false)}
       >

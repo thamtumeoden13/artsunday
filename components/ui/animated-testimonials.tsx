@@ -153,7 +153,7 @@ export const AnimatedTestimonials = ({
               onChange && onChange();
             }, 1000)} className='flex xl:w-[80rem] lg:w-[65rem] md:w-[43rem] w-full'>
               <motion.p
-                className="w-full text-2xl font-medium text-primary px-[2rem] text-right hover:text-p1"
+                className="w-full text-2xl font-medium text-p1 px-[2rem] text-right hover:text-primary"
               >
                 {"Xem thêm"}
               </motion.p>

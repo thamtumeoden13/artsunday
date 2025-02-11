@@ -229,7 +229,9 @@ export const AppleCard = ({
     //   }));
     // }
 
-    const content = <AnimatedTestimonials testimonials={testimonials_2} path={`/chi-tiet-du-an/${card.slug?.current}`} onChange={handleClose} />
+    const path = `/chi-tiet-du-an/${card.slug?.current}`
+
+    const content = <AnimatedTestimonials testimonials={testimonials_2} path={path} onChange={handleClose} />
     setCardContent(content);
   }
 

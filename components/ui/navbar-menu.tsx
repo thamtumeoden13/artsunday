@@ -21,7 +21,7 @@ const NavLink = ({ name, route, isMobile }: { name: string, route?: string, isMo
       <Link
         href={route}
         className={
-          "max-w-200px base-bold text-p4 uppercase transition-colors duration-500 cursor-pointer hover:text-p1 max-lg:my-4 max-lg:h5"
+          "max-w-200px base-bold text-p4 uppercase transition-colors duration-500 cursor-pointer hover:text-primary max-lg:my-4 max-lg:h5"
         }
       // onClick={() => setIsOpen(false)}
       >
@@ -37,7 +37,7 @@ const NavLink = ({ name, route, isMobile }: { name: string, route?: string, isMo
       smooth
       activeClass={"nav-active"}
       className={
-        "base-bold text-p4 uppercase transition-colors duration-500 cursor-pointer hover:text-p1 max-lg:my-4 max-lg:h5"
+        "base-bold text-p4 uppercase transition-colors duration-500 cursor-pointer hover:text-primary max-lg:my-4 max-lg:h5"
       }
     >
       {name}
@@ -169,16 +169,16 @@ export const ProductItem = ({
           className="flex-shrink-0 rounded-md shadow-2xl w-[140px] h-[100px]"
         />
         <div>
-          <h4 className="mb-1 text-xl font-bold text-black hover:text-p1 md:max-w-48">
+          <h4 className="mb-1 text-xl font-bold text-black hover:text-primary md:max-w-48">
             {title}
           </h4>
-          <p className="text-neutral-700 text-sm max-w-[10rem] hover:text-p1">
+          <p className="text-neutral-700 text-sm max-w-[10rem] hover:text-primary">
             {description}
           </p>
         </div>
       </Link>
       <Link href={href} className="flex space-x-2 lg:hidden" onClick={() => setIsOpen(false)}>
-        <h4 className="mb-1 text-xl font-bold text-white hover:text-p1 max-w-sm md:max-w-md">
+        <h4 className="mb-1 text-xl font-bold text-white hover:text-primary max-w-sm md:max-w-md">
           {title}
         </h4>
       </Link>
