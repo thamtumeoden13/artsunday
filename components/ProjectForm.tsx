@@ -16,6 +16,7 @@ import { CONSTRUCTIONS_BY_QUERY } from "@/sanity/lib/queries";
 import { Author, Construction, Project } from '@/sanity/types';
 import { MultiSelect, MultiSelectOption } from './shared/MultiSelect';
 import MDEditorComponent from './shared/MDEditor';
+import { CloudinaryImage } from './shared/CloudinaryImage';
 
 type FormDataType = Omit<Project, "author" | "construction">;
 type ProjectFormType = Omit<Project, "author" | "construction"> & { author?: Author } & { construction?: Construction[] };
@@ -177,20 +178,35 @@ const ProjectForm = ({ post }: { post?: ProjectFormType }) => {
           )}
         </div>
       </div>
+
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
         <div>
           <label htmlFor="thumbnail" className={"startup-form_label"}>
             {"Ảnh Đại Diện(tỉ lệ 3:4)"}
           </label>
-          <Input
-            id={"thumbnail"}
-            name={"thumbnail"}
-            value={formData?.thumbnail}
-            className={"startup-form_input"}
-            required
-            placeholder={"Project Thumbnail URL"}
-            onChange={handleChangeForm}
-          />
+          <div>
+
+            <Input
+              id={"thumbnail"}
+              name={"thumbnail"}
+              className={"startup-form_input"}
+              required
+              placeholder={"Project Thumbnail URL"}
+              value={formData?.thumbnail}
+              onChange={handleChangeForm}
+            />
+            {formData?.thumbnail && (
+              <div className='w-[280px] h-[200px] overflow-hidden mt-2 p-2 border border-black-100'>
+                <CloudinaryImage
+                  src={formData.thumbnail}
+                  alt={"Project Thumbnail URL"}
+                  width={280}
+                  height={200}
+                  className="object-cover w-full rounded-lg"
+                />
+              </div>
+            )}
+          </div>
           {errors.thumbnail && (
             <p className={"startup-form_error"}>{errors.thumbnail}</p>
           )}
@@ -198,21 +214,38 @@ const ProjectForm = ({ post }: { post?: ProjectFormType }) => {
 
         <div>
           <label htmlFor="image" className={"startup-form_label"}>
-            {"Hình Ảnh(tỉ lệ 16:9)"}
+            {"Hình Ảnh(tỉ lệ 6:9)"}
           </label>
-          <Input
-            id={"image"}
-            name={"image"}
-            value={formData?.image}
-            className={"startup-form_input"}
-            required
-            placeholder={"Project Image URL"}
-            onChange={handleChangeForm}
-          />
+          <div>
+
+            <Input
+              id={"image"}
+              name={"image"}
+              className={"startup-form_input"}
+              required
+              placeholder={"Project Image URL"}
+              value={formData?.image}
+              onChange={handleChangeForm}
+            />
+
+            {formData?.image && (
+              <div className='w-[116px] h-[200px] overflow-hidden mt-2 p-2 border border-black-100'>
+                <CloudinaryImage
+                  src={formData.image}
+                  alt={"Project Image URL"}
+                  width={200}
+                  height={200}
+                  className="object-cover w-full rounded-lg"
+                />
+              </div>
+            )}
+
+          </div>
           {errors.image && (
             <p className={"startup-form_error"}>{errors.image}</p>
           )}
         </div>
+
       </div>
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
         <div>

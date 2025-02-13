@@ -15,8 +15,8 @@ import { Combobox, ComboboxDataType } from "./shared/ComboBox";
 import { client, clientNoCache } from "@/sanity/lib/client";
 import { PROJECTS_BY_QUERY } from "@/sanity/lib/queries";
 import { Author, Project, ProjectDetail } from '@/sanity/types';
-import { video } from './ui/video-markdown';
 import MDEditorComponent from './shared/MDEditor';
+import { CloudinaryImage } from './shared/CloudinaryImage';
 
 type FormDataType = Omit<ProjectDetail, "author" | "project">;
 type ProjectDetailFormType = Omit<ProjectDetail, "author" | "project"> & { author?: Author } & { project?: Project };
@@ -189,15 +189,29 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
           <label htmlFor="thumbnail" className={"startup-form_label"}>
             {"Ảnh Đại Diện(tỉ lệ 3:4)"}
           </label>
-          <Input
-            id={"thumbnail"}
-            name={"thumbnail"}
-            className={"startup-form_input"}
-            required
-            placeholder={"Project Thumbnail URL"}
-            value={formData?.thumbnail}
-            onChange={handleChangeForm}
-          />
+          <div>
+
+            <Input
+              id={"thumbnail"}
+              name={"thumbnail"}
+              className={"startup-form_input"}
+              required
+              placeholder={"Project Thumbnail URL"}
+              value={formData?.thumbnail}
+              onChange={handleChangeForm}
+            />
+            {formData?.thumbnail && (
+              <div className='w-[280px] h-[200px] overflow-hidden mt-2 p-2 border border-black-100'>
+                <CloudinaryImage
+                  src={formData.thumbnail}
+                  alt={"Project Thumbnail URL"}
+                  width={280}
+                  height={200}
+                  className="object-cover w-full rounded-lg"
+                />
+              </div>
+            )}
+          </div>
           {errors.thumbnail && (
             <p className={"startup-form_error"}>{errors.thumbnail}</p>
           )}
@@ -207,15 +221,31 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
           <label htmlFor="image" className={"startup-form_label"}>
             {"Hình Ảnh(tỉ lệ 6:9)"}
           </label>
-          <Input
-            id={"image"}
-            name={"image"}
-            className={"startup-form_input"}
-            required
-            placeholder={"Project Image URL"}
-            value={formData?.image}
-            onChange={handleChangeForm}
-          />
+          <div>
+
+            <Input
+              id={"image"}
+              name={"image"}
+              className={"startup-form_input"}
+              required
+              placeholder={"Project Image URL"}
+              value={formData?.image}
+              onChange={handleChangeForm}
+            />
+
+            {formData?.image && (
+              <div className='w-[116px] h-[200px] overflow-hidden mt-2 p-2 border border-black-100'>
+                <CloudinaryImage
+                  src={formData.image}
+                  alt={"Project Image URL"}
+                  width={200}
+                  height={200}
+                  className="object-cover w-full rounded-lg"
+                />
+              </div>
+            )}
+
+          </div>
           {errors.image && (
             <p className={"startup-form_error"}>{errors.image}</p>
           )}
