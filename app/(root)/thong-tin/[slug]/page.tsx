@@ -11,10 +11,11 @@ import ProjectDetailList from "@/components/ProjectDetailList";
 
 const md = markdownit();
 
-export default async function Designs({ params }: { readonly params: Promise<{ readonly slug: string }> }) {
+export default async function InfoBySlug({ params }: { readonly params: Promise<{ readonly slug: string }> }) {
 
   const slug = (await params).slug;
 
+  console.log(`slug -> ${slug}`);
   const session = await auth();
 
   console.log(`session -> ${session?.id}`);
@@ -27,7 +28,7 @@ export default async function Designs({ params }: { readonly params: Promise<{ r
 
   return (
     <>
-      <MarkupSchema post={data} path={`thiet-ke/${slug}`} />
+      <MarkupSchema post={data} path={`thong-tin/${slug}`} />
 
       <section className={"pink_container !min-h-[360px] !mt-4 "}>
         <p className={"tag"}>{formatDate(data?._createdAt)}</p>

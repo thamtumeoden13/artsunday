@@ -21,7 +21,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
   return (
     <>
-      <section className={"pink_container !min-h-[230px]"}>
+      <section className={"pink_container !min-h-[230px] !mt-0"}>
         <h1 className={"heading"}>CẬP NHẬT HẠNG MỤC THI CÔNG</h1>
       </section>
 

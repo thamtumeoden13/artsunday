@@ -35,7 +35,7 @@ export default async function Home({ searchParams }: {
           Hãy Chọn Hạng Mục Thi Công, Thiết Kế Mà Bạn Quan Tâm.
         </p>
 
-        <SearchForm query={query} path="chi-tiet-du-an" search="Dự Án" />
+        <SearchForm query={query} path="bai-viet" search="Dự Án" />
       </section>
 
       <>

@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from 'react'
-import { CATEGORY_BY_SLUG_QUERY, PROJECTS_BY_QUERY } from '@/sanity/lib/queries';
+import { CATEGORY_BY_SLUG_QUERY, PROJECT_DETAILS_BY_QUERY, PROJECTS_BY_QUERY } from '@/sanity/lib/queries';
 import { TableComponent } from './shared/Table';
 import { Combobox, ComboboxDataType } from './shared/ComboBox';
 import { client, clientNoCache } from '@/sanity/lib/client';
@@ -19,7 +19,7 @@ const CategoryTable = ({ slug, title, role }: { slug: string, title: string, rol
   const [selected, setSelected] = useState<ComboboxDataType | null>(null);
 
   const getProjects = async () => {
-    const projects = await clientNoCache.fetch(PROJECTS_BY_QUERY, { search: null });
+    const projects = await clientNoCache.fetch(PROJECT_DETAILS_BY_QUERY, { search: null });
     setProjects(projects);
   }
 

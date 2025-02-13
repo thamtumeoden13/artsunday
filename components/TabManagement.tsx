@@ -6,7 +6,6 @@ import { Author } from "@/sanity/types";
 import ConstructionTable from "./ConstructionTable";
 import ProjectTable from "./ProjectTable";
 import PermissionTable from "./PermissionTable";
-import DesignTable from "./DesignTable";
 import RouteTable from "./RouteTable";
 
 export const TabManagement = async ({ user }: { user: Author }) => {
@@ -16,16 +15,6 @@ export const TabManagement = async ({ user }: { user: Author }) => {
   console.log('TabManagement -> user', user)
 
   const tabs = [
-
-    // {
-    //   title: "Thiết Kế",
-    //   value: "thiet-ke",
-    //   content: (
-    //     <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
-    //       <DesignTable title='Thiết kế' role={role} />
-    //     </div>
-    //   ),
-    // },
     {
       title: "Dự Án",
       value: "du-an",
@@ -67,26 +56,28 @@ export const TabManagement = async ({ user }: { user: Author }) => {
       ),
     },
     {
-      title: "Danh Mục Thi Công",
-      value: "danh-muc-thi-cong",
+      title: "Danh Mục Thiết Kế",
+      value: "danh-muc-thiet-ke",
       content: (
         <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
           <RouteTable
-            slug="danh-muc-thi-cong"
-            title="Danh Mục Thi Công"
+            slug="thiet-ke"
+            route_slug="danh-muc-thiet-ke"
+            title="Danh Mục Thiết Kế"
             role={role}
           />
         </div>
       ),
     },
     {
-      title: "Danh Mục Thiết Kế",
-      value: "danh-muc-thiet-ke",
+      title: "Danh Mục Thi Công",
+      value: "danh-muc-thi-cong",
       content: (
         <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
           <RouteTable
-            slug="danh-muc-thiet-ke"
-            title="Danh Mục Thiết Kế"
+            slug="thi-cong"
+            route_slug="danh-muc-thi-cong"
+            title="Danh Mục Thi Công"
             role={role}
           />
         </div>
@@ -98,8 +89,21 @@ export const TabManagement = async ({ user }: { user: Author }) => {
       content: (
         <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
           <RouteTable
-            slug="danh-muc-cuoi-trang"
+            route_slug="danh-muc-cuoi-trang"
             title="Danh Mục Cuối Trang"
+            role={role}
+          />
+        </div>
+      ),
+    },
+    {
+      title: "Danh Mục Thông Tin",
+      value: "danh-muc-thong-tin",
+      content: (
+        <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
+          <RouteTable
+            route_slug="danh-muc-thong-tin"
+            title="Danh Mục Thông Tin"
             role={role}
           />
         </div>

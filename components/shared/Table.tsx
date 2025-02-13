@@ -44,7 +44,6 @@ export const TableComponent = ({
   }
 
   const handleEditRow = (item: ComboboxDataType) => {
-    console.log('TableComponent -> handleChangeCombobox', item)
 
     const newData = dataList.map((data) => {
       if (data._id === item._id) {

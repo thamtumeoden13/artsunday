@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from "next/link";
-import { PROJECTS_BY_DESIGN_ID_QUERY } from '@/sanity/lib/queries';
+import { PROJECTS_BY_CONSTRUCTION_ID_QUERY } from '@/sanity/lib/queries';
 import { sanityFetch } from '@/sanity/lib/live';
 import SimpleCard, { SimpleCardType } from './SimpleCard';
 import { cn } from '@/lib/utils';
@@ -12,7 +12,7 @@ const DesignList = async ({ post, className }: { post: SimpleCardType, className
 
   const params = { id }
 
-  const { data: searchForProjects } = await sanityFetch({ query: PROJECTS_BY_DESIGN_ID_QUERY, params });
+  const { data: searchForProjects } = await sanityFetch({ query: PROJECTS_BY_CONSTRUCTION_ID_QUERY, params });
 
   if (!searchForProjects?.length) return null;
 

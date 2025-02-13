@@ -42,7 +42,7 @@ export function CarouselPlugin({ data, className }: { data: AppleCardType[], cla
               card={{
                 ...card,
                 // content: <AnimatedTestimonials testimonials={testimonials_2} />,
-                path: "chi-tiet-du-an"
+                path: "bai-viet"
               }}
               index={index}
               className="lg:h-[72vh] md:h-[60vh]"

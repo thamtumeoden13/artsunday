@@ -300,7 +300,7 @@ export const parallaxCards = [
     ctaText: "Visit",
     thumbnail: "https://images.unsplash.com/photo-1505144808419-1957a94ca61e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3070&q=80",
     content: "Lana Del Rey, an iconic American singer-songwriter, is celebrated forher melancholic and cinematic music style. Born Elizabeth WoolridgeGrant in New York City, she has captivated audiences worldwide withher haunting voice and introspective lyrics. <br /> <br /> Her songsoften explore themes of tragic romance, glamour, and melancholia,drawing inspiration from both contemporary and vintage pop culture.With a career that has seen numerous critically acclaimed albums, LanaDel Rey has established herself as a unique and influential figure inthe music industry, earning a dedicated fan base and numerousaccolades.",
-    path: "/chi-tiet-du-an/coc-coc-studio-khac-biet-va-sang-tao"
+    path: "/bai-viet/coc-coc-studio-khac-biet-va-sang-tao"
   },
   {
     description: "Babbu Maan",
@@ -309,7 +309,7 @@ export const parallaxCards = [
     ctaText: "Visit",
     thumbnail: "https://images.unsplash.com/photo-1505144808419-1957a94ca61e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3070&q=80",
     content: "Lana Del Rey, an iconic American singer-songwriter, is celebrated forher melancholic and cinematic music style. Born Elizabeth WoolridgeGrant in New York City, she has captivated audiences worldwide withher haunting voice and introspective lyrics. <br /> <br /> Her songsoften explore themes of tragic romance, glamour, and melancholia,drawing inspiration from both contemporary and vintage pop culture.With a career that has seen numerous critically acclaimed albums, LanaDel Rey has established herself as a unique and influential figure inthe music industry, earning a dedicated fan base and numerousaccolades.",
-    path: "/chi-tiet-du-an/coc-coc-studio-khac-biet-va-sang-tao"
+    path: "/bai-viet/coc-coc-studio-khac-biet-va-sang-tao"
   },
   {
     description: "Metallica",
@@ -318,7 +318,7 @@ export const parallaxCards = [
     ctaText: "Visit",
     thumbnail: "https://images.unsplash.com/photo-1505144808419-1957a94ca61e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3070&q=80",
     content: "Lana Del Rey, an iconic American singer-songwriter, is celebrated forher melancholic and cinematic music style. Born Elizabeth WoolridgeGrant in New York City, she has captivated audiences worldwide withher haunting voice and introspective lyrics. <br /> <br /> Her songsoften explore themes of tragic romance, glamour, and melancholia,drawing inspiration from both contemporary and vintage pop culture.With a career that has seen numerous critically acclaimed albums, LanaDel Rey has established herself as a unique and influential figure inthe music industry, earning a dedicated fan base and numerousaccolades.",
-    path: "/chi-tiet-du-an/coc-coc-studio-khac-biet-va-sang-tao"
+    path: "/bai-viet/coc-coc-studio-khac-biet-va-sang-tao"
   },
   {
     description: "Lord Himesh",
@@ -327,7 +327,7 @@ export const parallaxCards = [
     ctaText: "Visit",
     thumbnail: "https://images.unsplash.com/photo-1505144808419-1957a94ca61e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3070&q=80",
     content: "Lana Del Rey, an iconic American singer-songwriter, is celebrated forher melancholic and cinematic music style. Born Elizabeth WoolridgeGrant in New York City, she has captivated audiences worldwide withher haunting voice and introspective lyrics. <br /> <br /> Her songsoften explore themes of tragic romance, glamour, and melancholia,drawing inspiration from both contemporary and vintage pop culture.With a career that has seen numerous critically acclaimed albums, LanaDel Rey has established herself as a unique and influential figure inthe music industry, earning a dedicated fan base and numerousaccolades.",
-    path: "/chi-tiet-du-an/coc-coc-studio-khac-biet-va-sang-tao"
+    path: "/bai-viet/coc-coc-studio-khac-biet-va-sang-tao"
   },
   {
     description: "Lana Del Rey",
@@ -336,7 +336,7 @@ export const parallaxCards = [
     ctaText: "Visit",
     thumbnail: "https://images.unsplash.com/photo-1505144808419-1957a94ca61e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3070&q=80",
     content: "Lana Del Rey, an iconic American singer-songwriter, is celebrated forher melancholic and cinematic music style. Born Elizabeth WoolridgeGrant in New York City, she has captivated audiences worldwide withher haunting voice and introspective lyrics. <br /> <br /> Her songsoften explore themes of tragic romance, glamour, and melancholia,drawing inspiration from both contemporary and vintage pop culture.With a career that has seen numerous critically acclaimed albums, LanaDel Rey has established herself as a unique and influential figure inthe music industry, earning a dedicated fan base and numerousaccolades.",
-    path: "/chi-tiet-du-an/coc-coc-studio-khac-biet-va-sang-tao"
+    path: "/bai-viet/coc-coc-studio-khac-biet-va-sang-tao"
   },
   {
     description: "Babbu Maan",
@@ -345,7 +345,7 @@ export const parallaxCards = [
     ctaText: "Visit",
     thumbnail: "https://images.unsplash.com/photo-1505144808419-1957a94ca61e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3070&q=80",
     content: "Lana Del Rey, an iconic American singer-songwriter, is celebrated forher melancholic and cinematic music style. Born Elizabeth WoolridgeGrant in New York City, she has captivated audiences worldwide withher haunting voice and introspective lyrics. <br /> <br /> Her songsoften explore themes of tragic romance, glamour, and melancholia,drawing inspiration from both contemporary and vintage pop culture.With a career that has seen numerous critically acclaimed albums, LanaDel Rey has established herself as a unique and influential figure inthe music industry, earning a dedicated fan base and numerousaccolades.",
-    path: "/chi-tiet-du-an/coc-coc-studio-khac-biet-va-sang-tao"
+    path: "/bai-viet/coc-coc-studio-khac-biet-va-sang-tao"
   },
   {
     description: "Metallica",
@@ -354,7 +354,7 @@ export const parallaxCards = [
     ctaText: "Visit",
     thumbnail: "https://images.unsplash.com/photo-1505144808419-1957a94ca61e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3070&q=80",
     content: "Lana Del Rey, an iconic American singer-songwriter, is celebrated forher melancholic and cinematic music style. Born Elizabeth WoolridgeGrant in New York City, she has captivated audiences worldwide withher haunting voice and introspective lyrics. <br /> <br /> Her songsoften explore themes of tragic romance, glamour, and melancholia,drawing inspiration from both contemporary and vintage pop culture.With a career that has seen numerous critically acclaimed albums, LanaDel Rey has established herself as a unique and influential figure inthe music industry, earning a dedicated fan base and numerousaccolades.",
-    path: "/chi-tiet-du-an/coc-coc-studio-khac-biet-va-sang-tao"
+    path: "/bai-viet/coc-coc-studio-khac-biet-va-sang-tao"
   },
   {
     description: "Lord Himesh",
@@ -363,7 +363,7 @@ export const parallaxCards = [
     ctaText: "Visit",
     thumbnail: "https://images.unsplash.com/photo-1505144808419-1957a94ca61e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3070&q=80",
     content: "Lana Del Rey, an iconic American singer-songwriter, is celebrated forher melancholic and cinematic music style. Born Elizabeth WoolridgeGrant in New York City, she has captivated audiences worldwide withher haunting voice and introspective lyrics. <br /> <br /> Her songsoften explore themes of tragic romance, glamour, and melancholia,drawing inspiration from both contemporary and vintage pop culture.With a career that has seen numerous critically acclaimed albums, LanaDel Rey has established herself as a unique and influential figure inthe music industry, earning a dedicated fan base and numerousaccolades.",
-    path: "/chi-tiet-du-an/coc-coc-studio-khac-biet-va-sang-tao"
+    path: "/bai-viet/coc-coc-studio-khac-biet-va-sang-tao"
   },
   {
     description: "Lana Del Rey",
@@ -372,7 +372,7 @@ export const parallaxCards = [
     ctaText: "Visit",
     thumbnail: "https://images.unsplash.com/photo-1505144808419-1957a94ca61e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3070&q=80",
     content: "Lana Del Rey, an iconic American singer-songwriter, is celebrated forher melancholic and cinematic music style. Born Elizabeth WoolridgeGrant in New York City, she has captivated audiences worldwide withher haunting voice and introspective lyrics. <br /> <br /> Her songsoften explore themes of tragic romance, glamour, and melancholia,drawing inspiration from both contemporary and vintage pop culture.With a career that has seen numerous critically acclaimed albums, LanaDel Rey has established herself as a unique and influential figure inthe music industry, earning a dedicated fan base and numerousaccolades.",
-    path: "/chi-tiet-du-an/coc-coc-studio-khac-biet-va-sang-tao"
+    path: "/bai-viet/coc-coc-studio-khac-biet-va-sang-tao"
   },
   {
     description: "Babbu Maan",
@@ -381,7 +381,7 @@ export const parallaxCards = [
     ctaText: "Visit",
     thumbnail: "https://images.unsplash.com/photo-1505144808419-1957a94ca61e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3070&q=80",
     content: "Lana Del Rey, an iconic American singer-songwriter, is celebrated forher melancholic and cinematic music style. Born Elizabeth WoolridgeGrant in New York City, she has captivated audiences worldwide withher haunting voice and introspective lyrics. <br /> <br /> Her songsoften explore themes of tragic romance, glamour, and melancholia,drawing inspiration from both contemporary and vintage pop culture.With a career that has seen numerous critically acclaimed albums, LanaDel Rey has established herself as a unique and influential figure inthe music industry, earning a dedicated fan base and numerousaccolades.",
-    path: "/chi-tiet-du-an/coc-coc-studio-khac-biet-va-sang-tao"
+    path: "/bai-viet/coc-coc-studio-khac-biet-va-sang-tao"
   },
   {
     description: "Metallica",
@@ -390,7 +390,7 @@ export const parallaxCards = [
     ctaText: "Visit",
     thumbnail: "https://images.unsplash.com/photo-1505144808419-1957a94ca61e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3070&q=80",
     content: "Lana Del Rey, an iconic American singer-songwriter, is celebrated forher melancholic and cinematic music style. Born Elizabeth WoolridgeGrant in New York City, she has captivated audiences worldwide withher haunting voice and introspective lyrics. <br /> <br /> Her songsoften explore themes of tragic romance, glamour, and melancholia,drawing inspiration from both contemporary and vintage pop culture.With a career that has seen numerous critically acclaimed albums, LanaDel Rey has established herself as a unique and influential figure inthe music industry, earning a dedicated fan base and numerousaccolades.",
-    path: "/chi-tiet-du-an/coc-coc-studio-khac-biet-va-sang-tao"
+    path: "/bai-viet/coc-coc-studio-khac-biet-va-sang-tao"
   },
   {
     description: "Lord Himesh",
@@ -399,7 +399,7 @@ export const parallaxCards = [
     ctaText: "Visit",
     thumbnail: "https://images.unsplash.com/photo-1505144808419-1957a94ca61e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3070&q=80",
     content: "Lana Del Rey, an iconic American singer-songwriter, is celebrated forher melancholic and cinematic music style. Born Elizabeth WoolridgeGrant in New York City, she has captivated audiences worldwide withher haunting voice and introspective lyrics. <br /> <br /> Her songsoften explore themes of tragic romance, glamour, and melancholia,drawing inspiration from both contemporary and vintage pop culture.With a career that has seen numerous critically acclaimed albums, LanaDel Rey has established herself as a unique and influential figure inthe music industry, earning a dedicated fan base and numerousaccolades.",
-    path: "/chi-tiet-du-an/coc-coc-studio-khac-biet-va-sang-tao"
+    path: "/bai-viet/coc-coc-studio-khac-biet-va-sang-tao"
   },
 ];
 

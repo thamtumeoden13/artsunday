@@ -43,11 +43,11 @@ const ProjectDetailTable = ({ title, role }: { title: string, role?: string }) =
 
   const handleEdit = async (post: ProjectDetail) => {
     console.log('TableComponent -> path', post)
-    router.push(`/auth/chi-tiet-du-an/${post.slug?.current}`)
+    router.push(`/auth/bai-viet/${post.slug?.current}`)
   }
 
   const handleAddProjectDetail = async () => {
-    router.push(`/auth/chi-tiet-du-an/create`)
+    router.push(`/auth/bai-viet/create`)
   }
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const ProjectDetailTable = ({ title, role }: { title: string, role?: string }) =
         <TableComponent
           data={projects}
           title={title}
-          path='chi-tiet-du-an'
+          path='bai-viet'
           actions={role == 'admin' || role == 'editor' ? ['Edit', 'Delete'] : []}
           onDelete={handleDelete}
           onEdit={handleEdit}

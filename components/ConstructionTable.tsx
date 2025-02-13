@@ -43,11 +43,11 @@ const ConstructionTable = ({ title, role }: { title: string, role?: string }) =>
 
   const handleEdit = async (post: Construction) => {
     console.log('TableComponent -> path', post)
-    router.push(`/auth/thi-cong/${post.slug?.current}`)
+    router.push(`/auth/hang-muc/${post.slug?.current}`)
   }
 
   const handleAddConstruction = async () => {
-    router.push(`/auth/thi-cong/create`)
+    router.push(`/auth/hang-muc/create`)
   }
 
   useEffect(() => {
@@ -67,7 +67,7 @@ const ConstructionTable = ({ title, role }: { title: string, role?: string }) =>
         <TableComponent
           data={constructions}
           title={title}
-          path='thi-cong'
+          path='hang-muc'
           actions={role == 'admin' || role == 'editor' ? ['Edit', 'Delete'] : []}
           onDelete={handleDelete}
           onEdit={handleEdit}

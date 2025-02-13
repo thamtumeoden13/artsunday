@@ -54,7 +54,7 @@ export const MenuItem = ({
   children,
   setIsOpen,
 }: {
-  setActive: (item: string) => void;
+  setActive: (item: string | null) => void;
   active: string | null;
   item: string;
   name: string;
@@ -66,9 +66,9 @@ export const MenuItem = ({
   const [isMobile, setIsMobile] = useState(false);
 
   const handleEvent = () => {
-    console.log("Action triggered for", item);
+    console.log("Action triggered for", { item, active, isMobile });
     setActive(item)
-    if (isMobile && item === active) {
+    if (isMobile && item !== active) {
       console.log("Action triggered for setIsOpen", isMobile);
       setIsOpen && setIsOpen(false);
     }

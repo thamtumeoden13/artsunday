@@ -21,7 +21,7 @@ export default async function Home({ searchParams }: {
 
   return (
     <>
-      <MarkupSchema path={`chi-tiet-du-an`} />
+      <MarkupSchema path={`bai-viet`} />
 
       <section className={"pink_container"}>
         <h1 className={"heading"}>
@@ -31,7 +31,7 @@ export default async function Home({ searchParams }: {
         <p className={"sub-heading !max-w-3xl"}>
           Hãy Chọn Dự Án Mà Bạn Quan Tâm.
         </p>
-        <SearchForm query={query} path="chi-tiet-du-an" search="Dự Án"/>
+        <SearchForm query={query} path="bai-viet" search="Dự Án"/>
       </section>
       <section className={"section_container justify-items-center"}>
         <p className={"text-30-semibold"}>
@@ -40,7 +40,7 @@ export default async function Home({ searchParams }: {
         <ul className={"mt-7 card_grid"}>
           {searchForProjects?.length > 0 ? (
             searchForProjects.map((post: SimpleCardType) => (
-              <SimpleCard key={post?._id} post={post} path="chi-tiet-du-an" className='xs:w-full justify-items-center' />
+              <SimpleCard key={post?._id} post={post} path="bai-viet" className='xs:w-full justify-items-center' />
             ))
           ) : (
             <p className={"no-result"}>

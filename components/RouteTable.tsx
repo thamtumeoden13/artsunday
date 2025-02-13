@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from 'react'
-import { ROUTE_BY_SLUG_QUERY, PROJECTS_BY_QUERY } from '@/sanity/lib/queries';
+import { ROUTE_BY_SLUG_QUERY, PROJECTS_BY_QUERY, CONSTRUCTION_BY_SLUG_QUERY, PROJECTS_BY_CONSTRUCTION_ID_QUERY } from '@/sanity/lib/queries';
 import { TableComponent } from './shared/Table';
 import { Combobox, ComboboxDataType } from './shared/ComboBox';
 import { client, clientNoCache } from '@/sanity/lib/client';
@@ -10,8 +10,7 @@ import { Project } from '@/sanity/types';
 import { updateRoute } from '@/lib/actions';
 import { toast } from '@/hooks/use-toast';
 
-const RouteTable = ({ slug, title, role }: { slug: string, title: string, role?: string }) => {
-  const params = { slug }
+const RouteTable = ({ route_slug, slug, title, role }: { route_slug: string, slug?: string, title: string, role?: string }) => {
 
   const [projects, setProjects] = useState<ComboboxDataType[] | null>(null)
   const [homeHeroPost, setHomeHeroPost] = useState<Project[] | null>([])
@@ -19,15 +18,29 @@ const RouteTable = ({ slug, title, role }: { slug: string, title: string, role?:
   const [selected, setSelected] = useState<ComboboxDataType | null>(null);
 
   const getProjects = async () => {
+    if (slug) {
+      const post = await client.fetch(CONSTRUCTION_BY_SLUG_QUERY, { slug });
+
+      console.log('getRouteSelect -> post', post)
+
+      if (!post) return;
+
+      const projects = await clientNoCache.fetch(PROJECTS_BY_CONSTRUCTION_ID_QUERY, { id: post._id });
+
+      setProjects(projects);
+      return;
+    }
+
     const projects = await clientNoCache.fetch(PROJECTS_BY_QUERY, { search: null });
     setProjects(projects);
   }
 
   const getRouteSelect = async () => {
-    const { _id, select: homeHeroPost } = await clientNoCache.fetch(ROUTE_BY_SLUG_QUERY, params)
+    const data = await clientNoCache.fetch(ROUTE_BY_SLUG_QUERY, { slug: route_slug });
 
-    setHomeHeroPost(homeHeroPost);
-    setRouteId(_id);
+    if (!data) return;
+    setHomeHeroPost(data.select);
+    setRouteId(data._id);
   }
 
   const handleAddRouteSelect = async () => {

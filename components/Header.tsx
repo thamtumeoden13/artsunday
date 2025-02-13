@@ -29,6 +29,7 @@ const Header = () => {
 
   const [navConstructionRouter, setNavConstructionRouter] = useState<ProjectCardType[]>([]);
   const [navDesignRouter, setNavDesignRouter] = useState<ProjectCardType[]>([]);
+  const [navInfoRouter, setNavInfoRouter] = useState<ProjectCardType[]>([]);
 
   const handleIsOpen = (isOpen: boolean) => {
     setIsOpen(isOpen)
@@ -48,8 +49,14 @@ const Header = () => {
       setNavConstructionRouter(navConstructionRouter)
     }
 
+    const getNavInfoRouter = async () => {
+      const { select: navConstructionRouter } = await client.fetch(ROUTE_BY_SLUG_QUERY, { slug: "danh-muc-thong-tin" });
+      setNavInfoRouter(navConstructionRouter)
+    }
+
     getNavDesignRouter();
     getNavConstructionRouter();
+    getNavInfoRouter();
 
   }, []);
 
@@ -65,8 +72,9 @@ const Header = () => {
       navContainerRef.current?.classList.add('floating-nav')
       setActive(null)
     }
-
-    setLastScrollY(currenScrollY);
+    if (currenScrollY !== lastScrollY) {
+      setLastScrollY(currenScrollY);
+    }
 
   }, [currenScrollY, lastScrollY])
 
@@ -148,7 +156,7 @@ const Header = () => {
 
                     <MenuItem
                       setActive={setActive} active={active}
-                      item="project" name={"Thiết Kế"} route={"/thiet-ke"}
+                      item="deisgner" name={"Thiết Kế"} route={"/thiet-ke"}
                       setIsOpen={handleIsOpen}
                     >
                       <div className="grid grid-cols-2 gap-10 p-4 max-lg:grid-cols-1 text-md ">
@@ -157,7 +165,7 @@ const Header = () => {
                             key={_id}
                             title={title!}
                             description={subtitle!}
-                            href={`/du-an/${slug?.current}`}
+                            href={`/thiet-ke/${slug?.current}`}
                             src={thumbnail!}
                             setIsOpen={handleIsOpen}
                           />
@@ -191,7 +199,7 @@ const Header = () => {
                           <ProductItem
                             key={_id}
                             title={title!}
-                            href={`/du-an/${slug?.current}`}
+                            href={`/thiet-ke/${slug?.current}`}
                             src={thumbnail!}
                             description={subtitle!}
                             setIsOpen={handleIsOpen}
@@ -200,7 +208,23 @@ const Header = () => {
                       </div>
                     </MenuItem>
                     <div className={"dot"} />
-                    <NavLink name={"Thông Tin"} route={"/thong-tin"} />
+                    <MenuItem setActive={setActive} active={active}
+                      item="info" name={"Thông Tin"} route={"/thong-tin"}
+                      setIsOpen={handleIsOpen}
+                    >
+                      <div className="grid grid-cols-2 gap-10 p-4 max-lg:grid-cols-1 text-md ">
+                        {navInfoRouter.map(({ _id, title, slug, image, thumbnail, subtitle }) => (
+                          <ProductItem
+                            key={_id}
+                            title={title!}
+                            href={`/thong-tin/${slug?.current}`}
+                            src={thumbnail!}
+                            description={subtitle!}
+                            setIsOpen={handleIsOpen}
+                          />
+                        ))}
+                      </div>
+                    </MenuItem>
                   </li>
                 </ul>
               </Menu>

@@ -21,8 +21,8 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
   return (
     <>
-      <section className={"pink_container !min-h-[230px]"}>
-        <h1 className={"heading"}>CẬP NHẬT HẠNG MỤC THI CÔNG</h1>
+      <section className={"pink_container !min-h-[230px] !mt-0"}>
+        <h1 className={"heading"}>CẬP NHẬT HẠNG MỤC</h1>
       </section>
 
       <ConstructionForm post={post} />

@@ -21,6 +21,7 @@ const MDEditorComponent = ({ value, onChange }: { value: string, onChange: React
                 disallowedElements: ["style"]
             }}
             commands={[...commands.getCommands(), video]}
+            className='min-h-[40rem]'
         />
     )
 }

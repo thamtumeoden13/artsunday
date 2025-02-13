@@ -35,7 +35,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
   return (
     <>
-      <MarkupSchema path={`chi-tiet-du-an/${slug}`} post={post} />
+      <MarkupSchema path={`bai-viet/${slug}`} post={post} />
 
       <section className={"pink_container md:!min-h-[28rem] !flex !mt-0 !md:my-0 !pb-4 !pt-24 md:!pt-32 "}>
         <p className={"tag"}>{formatDate(post?._createdAt)}</p>
@@ -91,7 +91,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
                 <ul className={"mt-2 card_grid-xs !justify-start"}>
                   {releatedPosts.map((post: SimpleCardType) => (
-                    <SimpleCard key={post._id} post={post} path='chi-tiet-du-an' className='xs:w-full justify-items-center' />
+                    <SimpleCard key={post._id} post={post} path='bai-viet' className='xs:w-full justify-items-center' />
                   ))}
                 </ul>
               </div>
@@ -127,7 +127,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: {
       title: `${data?.title} - Art Sunday`,
       description: `${data?.description}`,
-      url: `http://artsunday.vn/chi-tiet-du-an/${slug}`,
+      url: `http://artsunday.vn/bai-viet/${slug}`,
       images: [
         {
           url: data.image,

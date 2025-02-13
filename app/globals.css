@@ -321,7 +321,7 @@
 
   /* startupform */
   .startup-form {
-    @apply max-w-2xl px-6 mx-auto my-10 space-y-8 bg-white;
+    @apply max-w-7xl px-6 mx-auto my-10 space-y-8 bg-white;
   }
 
   .startup-form_label {
@@ -333,7 +333,7 @@
   }
 
   .startup-form_textarea {
-    @apply border-[3px] border-black p-5 text-[18px] text-black font-semibold rounded-[20px] mt-3 placeholder:text-black-300 ;
+    @apply border-[3px] min-h-36 border-black p-5 text-[18px] text-black font-semibold rounded-[20px] mt-3 placeholder:text-black-300 ;
   }
 
   .startup-form_error {

@@ -113,39 +113,77 @@ const ConstructionForm = ({ post }: { post?: Construction }) => {
       action={formAction}
       className={"startup-form"}
     >
-      <div>
-        <label htmlFor="title" className={"startup-form_label"}>
-          {"Tiêu Đề"}
-        </label>
-        <Input
-          id={"title"}
-          name={"title"}
-          className={"startup-form_input"}
-          placeholder={"Construction Title"}
-          required
-          value={formData?.title}
-          onChange={handleChangeForm}
-        />
-        {errors.title && (
-          <p className={"startup-form_error"}>{errors.title}</p>
-        )}
+      <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+        <div>
+          <label htmlFor="title" className={"startup-form_label"}>
+            {"Tiêu Đề"}
+          </label>
+          <Input
+            id={"title"}
+            name={"title"}
+            className={"startup-form_input"}
+            placeholder={"Construction Title"}
+            required
+            value={formData?.title}
+            onChange={handleChangeForm}
+          />
+          {errors.title && (
+            <p className={"startup-form_error"}>{errors.title}</p>
+          )}
+        </div>
+        <div>
+          <label htmlFor="subtitle" className={"startup-form_label"}>
+            {"Phụ Đề"}
+          </label>
+          <Input
+            id={"subtitle"}
+            name={"subtitle"}
+            className={"startup-form_input"}
+            placeholder={"Construction Subtitle"}
+            required
+            value={formData?.subtitle}
+            onChange={handleChangeForm}
+          />
+          {errors.subtitle && (
+            <p className={"startup-form_error"}>{errors.subtitle}</p>
+          )}
+        </div>
       </div>
-      <div>
-        <label htmlFor="subtitle" className={"startup-form_label"}>
-          {"Phụ Đề"}
-        </label>
-        <Input
-          id={"subtitle"}
-          name={"subtitle"}
-          className={"startup-form_input"}
-          placeholder={"Construction Subtitle"}
-          required
-          value={formData?.subtitle}
-          onChange={handleChangeForm}
-        />
-        {errors.subtitle && (
-          <p className={"startup-form_error"}>{errors.subtitle}</p>
-        )}
+      <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+        <div>
+          <label htmlFor="thumbnail" className={"startup-form_label"}>
+            {"Ảnh Đại Diện(tỉ lệ 3:4)"}
+          </label>
+          <Input
+            id={"thumbnail"}
+            name={"thumbnail"}
+            className={"startup-form_input"}
+            placeholder={"Construction Thumbnail URL"}
+            required
+            value={formData?.thumbnail}
+            onChange={handleChangeForm}
+          />
+          {errors.thumbnail && (
+            <p className={"startup-form_error"}>{errors.thumbnail}</p>
+          )}
+        </div>
+        <div>
+          <label htmlFor="image" className={"startup-form_label"}>
+            {"Hình Ảnh(tỉ lệ 16:9)"}
+          </label>
+          <Input
+            id={"image"}
+            name={"image"}
+            className={"startup-form_input"}
+            placeholder={"Construction Image URL"}
+            value={formData?.image}
+            required
+            onChange={handleChangeForm}
+          />
+          {errors.image && (
+            <p className={"startup-form_error"}>{errors.image}</p>
+          )}
+        </div>
       </div>
       <div>
         <label htmlFor="description" className={"startup-form_label"}>
@@ -164,43 +202,6 @@ const ConstructionForm = ({ post }: { post?: Construction }) => {
           <p className={"startup-form_error"}>{errors.description}</p>
         )}
       </div>
-
-      <div>
-        <label htmlFor="thumbnail" className={"startup-form_label"}>
-          {"Ảnh Đại Diện"}
-        </label>
-        <Input
-          id={"thumbnail"}
-          name={"thumbnail"}
-          className={"startup-form_input"}
-          placeholder={"Construction Thumbnail URL"}
-          required
-          value={formData?.thumbnail}
-          onChange={handleChangeForm}
-        />
-        {errors.thumbnail && (
-          <p className={"startup-form_error"}>{errors.thumbnail}</p>
-        )}
-      </div>
-
-      <div>
-        <label htmlFor="image" className={"startup-form_label"}>
-          {"Hình Ảnh"}
-        </label>
-        <Input
-          id={"image"}
-          name={"image"}
-          className={"startup-form_input"}
-          placeholder={"Construction Image URL"}
-          value={formData?.image}
-          required
-          onChange={handleChangeForm}
-        />
-        {errors.image && (
-          <p className={"startup-form_error"}>{errors.image}</p>
-        )}
-      </div>
-
       <div data-color-mode={"light"}>
         <label htmlFor="pitch" className={"startup-form_label"}>
           {"Bài viết"}

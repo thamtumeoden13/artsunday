@@ -1,7 +1,7 @@
 import React from 'react'
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
-import { DESIGN_BY_SLUG_QUERY } from '@/sanity/lib/queries';
+import { CONSTRUCTION_BY_SLUG_QUERY } from '@/sanity/lib/queries';
 import { clientNoCache } from '@/sanity/lib/client';
 import DesignForm from '@/components/DesignForm';
 
@@ -13,7 +13,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
   const slug = (await params).slug;
 
-  const post = await clientNoCache.fetch(DESIGN_BY_SLUG_QUERY, { slug });
+  const post = await clientNoCache.fetch(CONSTRUCTION_BY_SLUG_QUERY, { slug });
 
   console.log(post);
 
@@ -21,7 +21,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
   return (
     <>
-      <section className={"pink_container !min-h-[230px]"}>
+      <section className={"pink_container !min-h-[230px] !mt-0"}>
         <h1 className={"heading"}>CẬP NHẬT HẠNG MỤC THIẾT KẾ</h1>
       </section>
 

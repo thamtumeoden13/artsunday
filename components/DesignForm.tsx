@@ -167,7 +167,7 @@ const DesignForm = ({ post }: { post?: Design }) => {
 
       <div>
         <label htmlFor="thumbnail" className={"startup-form_label"}>
-          {"Ảnh Đại Diện"}
+          {"Ảnh Đại Diện(tỉ lệ 3:4)"}
         </label>
         <Input
           id={"thumbnail"}
@@ -185,7 +185,7 @@ const DesignForm = ({ post }: { post?: Design }) => {
 
       <div>
         <label htmlFor="image" className={"startup-form_label"}>
-          {"Hình Ảnh"}
+          {"Hình Ảnh(tỉ lệ 16:9)"}
         </label>
         <Input
           id={"image"}

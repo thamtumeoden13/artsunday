@@ -64,7 +64,7 @@ const ProjectForm = ({ post }: { post?: ProjectFormType }) => {
     } catch (error) {
       if (error instanceof z.ZodError) {
         const fieldErrors = error.flatten().fieldErrors;
-          console.log(fieldErrors)
+        console.log(fieldErrors)
         setErrors(fieldErrors as unknown as Record<string, string>);
 
         toast({
@@ -141,114 +141,119 @@ const ProjectForm = ({ post }: { post?: ProjectFormType }) => {
       action={formAction}
       className={"startup-form"}
     >
-      <div>
-        <label htmlFor="title" className={"startup-form_label"}>
-          {"Tiêu Đề"}
-        </label>
-        <Input
-          id={"title"}
-          name={"title"}
-          value={formData?.title}
-          onChange={handleChangeForm}
-          className={"startup-form_input"}
-          required
-          placeholder={"Project Title"}
-        />
-        {errors.title && (
-          <p className={"startup-form_error"}>{errors.title}</p>
-        )}
+      <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+        <div>
+          <label htmlFor="title" className={"startup-form_label"}>
+            {"Tiêu Đề"}
+          </label>
+          <Input
+            id={"title"}
+            name={"title"}
+            value={formData?.title}
+            onChange={handleChangeForm}
+            className={"startup-form_input"}
+            required
+            placeholder={"Project Title"}
+          />
+          {errors.title && (
+            <p className={"startup-form_error"}>{errors.title}</p>
+          )}
+        </div>
+        <div>
+          <label htmlFor="subtitle" className={"startup-form_label"}>
+            {"Phụ Đề"}
+          </label>
+          <Input
+            id={"subtitle"}
+            name={"subtitle"}
+            value={formData?.subtitle}
+            className={"startup-form_input"}
+            required
+            placeholder={"Project Subtitle"}
+            onChange={handleChangeForm}
+          />
+          {errors.subtitle && (
+            <p className={"startup-form_error"}>{errors.subtitle}</p>
+          )}
+        </div>
       </div>
-      <div>
-        <label htmlFor="subtitle" className={"startup-form_label"}>
-          {"Phụ Đề"}
-        </label>
-        <Input
-          id={"subtitle"}
-          name={"subtitle"}
-          value={formData?.subtitle}
-          className={"startup-form_input"}
-          required
-          placeholder={"Project Subtitle"}
-          onChange={handleChangeForm}
-        />
-        {errors.subtitle && (
-          <p className={"startup-form_error"}>{errors.subtitle}</p>
-        )}
-      </div>
-      <div>
-        <label htmlFor="description" className={"startup-form_label"}>
-          {"Mô Tả"}
-        </label>
-        <Textarea
-          id={"description"}
-          name={"description"}
-          value={formData?.description}
-          className={"startup-form_textarea"}
-          required
-          placeholder={"Project Description"}
-          onChange={handleChangeForm}
-        />
-        {errors.description && (
-          <p className={"startup-form_error"}>{errors.description}</p>
-        )}
-      </div>
+      <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+        <div>
+          <label htmlFor="thumbnail" className={"startup-form_label"}>
+            {"Ảnh Đại Diện(tỉ lệ 3:4)"}
+          </label>
+          <Input
+            id={"thumbnail"}
+            name={"thumbnail"}
+            value={formData?.thumbnail}
+            className={"startup-form_input"}
+            required
+            placeholder={"Project Thumbnail URL"}
+            onChange={handleChangeForm}
+          />
+          {errors.thumbnail && (
+            <p className={"startup-form_error"}>{errors.thumbnail}</p>
+          )}
+        </div>
 
-      <div>
-        <label htmlFor="thumbnail" className={"startup-form_label"}>
-          {"Ảnh Đại Diện"}
-        </label>
-        <Input
-          id={"thumbnail"}
-          name={"thumbnail"}
-          value={formData?.thumbnail}
-          className={"startup-form_input"}
-          required
-          placeholder={"Project Thumbnail URL"}
-          onChange={handleChangeForm}
-        />
-        {errors.thumbnail && (
-          <p className={"startup-form_error"}>{errors.thumbnail}</p>
-        )}
+        <div>
+          <label htmlFor="image" className={"startup-form_label"}>
+            {"Hình Ảnh(tỉ lệ 16:9)"}
+          </label>
+          <Input
+            id={"image"}
+            name={"image"}
+            value={formData?.image}
+            className={"startup-form_input"}
+            required
+            placeholder={"Project Image URL"}
+            onChange={handleChangeForm}
+          />
+          {errors.image && (
+            <p className={"startup-form_error"}>{errors.image}</p>
+          )}
+        </div>
       </div>
+      <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+        <div>
+          <label htmlFor="description" className={"startup-form_label"}>
+            {"Mô Tả"}
+          </label>
+          <Textarea
+            id={"description"}
+            name={"description"}
+            value={formData?.description}
+            className={"startup-form_textarea"}
+            required
+            placeholder={"Project Description"}
+            onChange={handleChangeForm}
+          />
+          {errors.description && (
+            <p className={"startup-form_error"}>{errors.description}</p>
+          )}
+        </div>
 
-      <div>
-        <label htmlFor="image" className={"startup-form_label"}>
-          {"Hình Ảnh"}
-        </label>
-        <Input
-          id={"image"}
-          name={"image"}
-          value={formData?.image}
-          className={"startup-form_input"}
-          required
-          placeholder={"Project Image URL"}
-          onChange={handleChangeForm}
-        />
-        {errors.image && (
-          <p className={"startup-form_error"}>{errors.image}</p>
-        )}
-      </div>
-
-      <div>
-        <label htmlFor="image" className={"startup-form_label"}>
-          {"Hạng mục"}
-        </label>
-        {/* <Combobox
+        <div>
+          <label htmlFor="image" className={"startup-form_label"}>
+            {"Hạng mục"}
+          </label>
+          {/* <Combobox
           data={constructions}
           initValue={initValue}
           className={"startup-form_input justify-between"}
           onChange={(value: MultiSelectOption) => { setSelected(value) }}
         /> */}
-        <MultiSelect
-          options={constructions}
-          selected={selected}
-          onChange={setSelected}
-          className={"startup-form_input justify-between"}
-          placeholder={"Add Team Members"}
-        />
-        {errors.image && (
-          <p className={"startup-form_error"}>{errors.image}</p>
-        )}
+          <MultiSelect
+            options={constructions}
+            selected={selected}
+            onChange={setSelected}
+            className={"startup-form_input justify-between"}
+            placeholder={"Add Team Members"}
+          />
+          {errors.image && (
+            <p className={"startup-form_error"}>{errors.image}</p>
+          )}
+        </div>
       </div>
 
       <div data-color-mode={"light"}>
