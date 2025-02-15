@@ -62,7 +62,8 @@ export const project = defineType({
     }),
     defineField({
       name: 'orderIndex',
-      type: 'number'
+      type: 'number',
+      initialValue: 0,
     }),
     defineField({
       name: 'pitch',

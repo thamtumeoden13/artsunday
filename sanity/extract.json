@@ -1386,6 +1386,13 @@
         },
         "optional": true
       },
+      "orderIndex": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
+        },
+        "optional": true
+      },
       "pitch": {
         "type": "objectAttribute",
         "value": {

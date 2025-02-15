@@ -247,6 +247,7 @@ export type Construction = {
   image?: string;
   description?: string;
   tags?: string;
+  orderIndex?: number;
   pitch?: string;
   isActived?: boolean;
   isDeleted?: boolean;

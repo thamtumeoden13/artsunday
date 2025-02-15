@@ -1,7 +1,7 @@
 import React from 'react'
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { PROJECTS_BY_CONSTRUCTION_ID_QUERY, PROJECTS_BY_DESIGN_ID_QUERY } from '@/sanity/lib/queries';
+import { PROJECTS_BY_CONSTRUCTION_ID_QUERY } from '@/sanity/lib/queries';
 import { sanityFetch } from '@/sanity/lib/live';
 import SimpleCard, { SimpleCardType } from './SimpleCard';
 
@@ -13,7 +13,7 @@ const ProjectList = async ({ post, parentPath = 'thi-cong', className, }: { post
   const params = { id }
 
   const { data: searchForProjects } = await sanityFetch({
-    query: parentPath === "thi-cong" ? PROJECTS_BY_CONSTRUCTION_ID_QUERY : PROJECTS_BY_DESIGN_ID_QUERY,
+    query: PROJECTS_BY_CONSTRUCTION_ID_QUERY,
     params
   });
 

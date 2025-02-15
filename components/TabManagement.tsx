@@ -16,6 +16,15 @@ export const TabManagement = async ({ user }: { user: Author }) => {
 
   const tabs = [
     {
+      title: "Hạng Mục",
+      value: "hang-muc",
+      content: (
+        <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
+          <ConstructionTable title='Hạng Mục' role={role} />
+        </div>
+      ),
+    },
+    {
       title: "Dự Án",
       value: "du-an",
       content: (
@@ -30,15 +39,6 @@ export const TabManagement = async ({ user }: { user: Author }) => {
       content: (
         <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
           <ProjectDetailTable title="Bài Viết" role={role} />
-        </div>
-      ),
-    },
-    {
-      title: "Hạng Mục",
-      value: "hang-muc",
-      content: (
-        <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
-          <ConstructionTable title='Hạng Mục' role={role} />
         </div>
       ),
     },
@@ -124,7 +124,7 @@ export const TabManagement = async ({ user }: { user: Author }) => {
   ];
 
   return (
-    <div className="h-[90vh] max-md:hidden [perspective:1000px] relative b flex flex-col max-w-7xl mx-auto w-full  items-start justify-start m-10">
+    <div className="h-[90vh] max-md:hidden [perspective:1000px] relative b flex flex-col max-w-[96rem] mx-auto w-full  items-start justify-start m-10">
       <Tabs
         tabs={tabs}
         activeTabClassName="bg-primary"

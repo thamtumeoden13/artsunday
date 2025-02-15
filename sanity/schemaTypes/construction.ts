@@ -54,6 +54,11 @@ export const construction = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'orderIndex',
+      type: 'number',
+      initialValue: 0,
+    }),
+    defineField({
       name: 'pitch',
       type: 'markdown',
       validation: (Rule) => Rule.required().min(20),

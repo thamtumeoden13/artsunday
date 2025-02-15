@@ -3,7 +3,6 @@
 import React, { useState, useActionState, useEffect } from 'react'
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import MDEditor from "@uiw/react-md-editor";
 import { Button } from "@/components/ui/button";
 import { Send } from "lucide-react";
 import { formConstructionSchema } from "@/lib/validation";
@@ -32,6 +31,7 @@ const ConstructionForm = ({ post }: { post?: Construction }) => {
         description: formDataSubmit.get("description") as string,
         thumbnail: formDataSubmit.get("thumbnail") as string,
         image: formDataSubmit.get("image") as string,
+        orderIndex: formDataSubmit.get("orderIndex") as string,
         pitch,
       }
 
@@ -99,9 +99,10 @@ const ConstructionForm = ({ post }: { post?: Construction }) => {
 
   useEffect(() => {
     if (post) {
-      const { _id, title, subtitle, description, thumbnail, image, } = post;
+      const { _id, title, subtitle, description, thumbnail, image, orderIndex } = post;
+      console.log(post)
 
-      setFormData({ ...formData!, _id, title, subtitle, description, thumbnail, image });
+      setFormData({ ...formData!, _id, title, subtitle, description, thumbnail, image, orderIndex });
 
       if (post.pitch) {
         setPitch(post.pitch)
@@ -219,22 +220,43 @@ const ConstructionForm = ({ post }: { post?: Construction }) => {
         </div>
 
       </div>
-      <div>
-        <label htmlFor="description" className={"startup-form_label"}>
-          {"Mô Tả"}
-        </label>
-        <Textarea
-          id={"description"}
-          name={"description"}
-          className={"startup-form_textarea"}
-          placeholder={"Construction Description"}
-          required
-          value={formData?.description}
-          onChange={handleChangeForm}
-        />
-        {errors.description && (
-          <p className={"startup-form_error"}>{errors.description}</p>
-        )}
+      <div className='grid grid-cols-1 lg:grid-cols-[1fr_200px] gap-4'>
+        <div>
+          <label htmlFor="description" className={"startup-form_label"}>
+            {"Mô Tả"}
+          </label>
+          <Textarea
+            id={"description"}
+            name={"description"}
+            className={"startup-form_textarea"}
+            placeholder={"Construction Description"}
+            required
+            value={formData?.description}
+            onChange={handleChangeForm}
+          />
+          {errors.description && (
+            <p className={"startup-form_error"}>{errors.description}</p>
+          )}
+        </div>
+        <div>
+          <label htmlFor="orderIndex" className={"startup-form_label "}>
+            {"Thứ Tự Hiển Thị"}
+          </label>
+          <Input
+            id={"orderIndex"}
+            name={"orderIndex"}
+            className={"startup-form_input"}
+            placeholder={"Order Index"}
+            required
+            type='number'
+            min={0}
+            value={formData?.orderIndex}
+            onChange={handleChangeForm}
+          />
+          {errors.orderIndex && (
+            <p className={"startup-form_error"}>{errors.orderIndex}</p>
+          )}
+        </div>
       </div>
       <div data-color-mode={"light"}>
         <label htmlFor="pitch" className={"startup-form_label"}>

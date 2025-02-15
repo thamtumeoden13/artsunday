@@ -15,7 +15,7 @@ import { Combobox, ComboboxDataType } from "./ComboBox";
 import { useEffect, useState } from "react";
 
 export const TableComponent = ({
-  headers = ['Tiêu đề', 'Đường dẫn', 'Ảnh tiêu đề', 'Mô tả'],
+  headers = ['Tiêu đề', 'Đường dẫn', 'Ảnh tiêu đề', 'Thứ tự', 'Mô tả'],
   customType = '',
   data, title, className, path,
   actions = [],
@@ -120,6 +120,7 @@ export const TableComponent = ({
                   />
 
                 </TableCell>
+                <TableCell className="font-normal" width={100}>{item.orderIndex}</TableCell>
                 <TableCell className="font-normal">{item.description}</TableCell>
               </>
             ) : (

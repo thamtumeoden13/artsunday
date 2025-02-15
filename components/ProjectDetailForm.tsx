@@ -3,7 +3,6 @@
 import React, { useState, useActionState, useEffect } from 'react'
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import MDEditor, { commands } from "@uiw/react-md-editor";
 import { Button } from "@/components/ui/button";
 import { Send } from "lucide-react";
 import { formProjectDetailSchema } from "@/lib/validation";
@@ -44,6 +43,7 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
         description: formData.get("description") as string,
         thumbnail: formData.get("thumbnail") as string,
         image: formData.get("image") as string,
+        orderIndex: formData.get("orderIndex") as string,
         projectId,
         pitch,
       }
@@ -130,9 +130,9 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
   useEffect(() => {
     if (post) {
 
-      const { title, subtitle, tags, description, thumbnail, image, project } = post;
+      const { title, subtitle, tags, description, thumbnail, image, project, orderIndex } = post;
 
-      setFormData({ ...formData!, title, subtitle, tags, description, thumbnail, image });
+      setFormData({ ...formData!, title, subtitle, tags, description, thumbnail, image, orderIndex });
 
       if (post.pitch) {
         setPitch(post.pitch)
@@ -286,23 +286,43 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
           )}
         </div>
       </div>
-
-      <div>
-        <label htmlFor="description" className={"startup-form_label"}>
-          {"Mô Tả"}
-        </label>
-        <Textarea
-          id={"description"}
-          name={"description"}
-          className={"startup-form_textarea"}
-          required
-          placeholder={"Project Description"}
-          value={formData?.description}
-          onChange={handleChangeForm}
-        />
-        {errors.description && (
-          <p className={"startup-form_error"}>{errors.description}</p>
-        )}
+      <div className='grid grid-cols-1 lg:grid-cols-[1fr_200px] gap-4'>
+        <div>
+          <label htmlFor="description" className={"startup-form_label"}>
+            {"Mô Tả"}
+          </label>
+          <Textarea
+            id={"description"}
+            name={"description"}
+            className={"startup-form_textarea"}
+            required
+            placeholder={"Project Description"}
+            value={formData?.description}
+            onChange={handleChangeForm}
+          />
+          {errors.description && (
+            <p className={"startup-form_error"}>{errors.description}</p>
+          )}
+        </div>
+        <div>
+          <label htmlFor="orderIndex" className={"startup-form_label "}>
+            {"Thứ Tự Hiển Thị"}
+          </label>
+          <Input
+            id={"orderIndex"}
+            name={"orderIndex"}
+            className={"startup-form_input"}
+            placeholder={"Order Index"}
+            required
+            type='number'
+            min={0}
+            value={formData?.orderIndex}
+            onChange={handleChangeForm}
+          />
+          {errors.orderIndex && (
+            <p className={"startup-form_error"}>{errors.orderIndex}</p>
+          )}
+        </div>
       </div>
       <div data-color-mode={"light"}>
         <label htmlFor="pitch" className={"startup-form_label"}>

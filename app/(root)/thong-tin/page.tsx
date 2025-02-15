@@ -42,7 +42,7 @@ export default async function InfoPage({ searchParams }: Readonly<{
           ))
         )}
       </>
-      <section className={"pink_container"}>
+      <section className={"pink_container !bg-white"}>
         <section className={"section_container mt-16  w-full md:w-[44rem]"}>
           <div className="mt-10">
             <Contact />

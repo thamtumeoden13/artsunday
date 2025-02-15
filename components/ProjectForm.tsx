@@ -3,7 +3,6 @@
 import React, { useState, useActionState, useEffect } from 'react'
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import MDEditor from "@uiw/react-md-editor";
 import { Button } from "@/components/ui/button";
 import { Send } from "lucide-react";
 import { formProjectSchema } from "@/lib/validation";
@@ -39,7 +38,8 @@ const ProjectForm = ({ post }: { post?: ProjectFormType }) => {
         description: formDataSubmit.get("description") as string,
         thumbnail: formDataSubmit.get("thumbnail") as string,
         image: formDataSubmit.get("image") as string,
-        selected,
+        orderIndex: formDataSubmit.get("orderIndex") as string,
+        constructionIds: selected,
         pitch,
       }
 
@@ -120,9 +120,9 @@ const ProjectForm = ({ post }: { post?: ProjectFormType }) => {
 
   useEffect(() => {
     if (post) {
-      const { _id, title, subtitle, description, thumbnail, image, pitch, construction } = post;
+      const { _id, title, subtitle, description, thumbnail, image, pitch, construction, orderIndex } = post;
 
-      setFormData({ ...formData!, _id, title, subtitle, description, thumbnail, image });
+      setFormData({ ...formData!, _id, title, subtitle, description, thumbnail, image, orderIndex });
 
       if (pitch) {
         setPitch(pitch)
@@ -247,7 +247,7 @@ const ProjectForm = ({ post }: { post?: ProjectFormType }) => {
         </div>
 
       </div>
-      <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+      <div className='grid grid-cols-1 lg:grid-cols-[1fr_400px_200px] gap-4'>
         <div>
           <label htmlFor="description" className={"startup-form_label"}>
             {"Mô Tả"}
@@ -285,6 +285,25 @@ const ProjectForm = ({ post }: { post?: ProjectFormType }) => {
           />
           {errors.image && (
             <p className={"startup-form_error"}>{errors.image}</p>
+          )}
+        </div>
+        <div>
+          <label htmlFor="orderIndex" className={"startup-form_label "}>
+            {"Thứ Tự Hiển Thị"}
+          </label>
+          <Input
+            id={"orderIndex"}
+            name={"orderIndex"}
+            className={"startup-form_input"}
+            placeholder={"Order Index"}
+            required
+            type='number'
+            min={0}
+            value={formData?.orderIndex}
+            onChange={handleChangeForm}
+          />
+          {errors.orderIndex && (
+            <p className={"startup-form_error"}>{errors.orderIndex}</p>
           )}
         </div>
       </div>

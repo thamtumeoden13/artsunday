@@ -1,43 +1,5 @@
 import { defineQuery } from "next-sanity";
 
-export const STARTUPS_QUERY =
-  defineQuery(`*[_type == "startup" && !defined($search) || title match $search || category match $search || author->name match $search] | order(_createdAt desc) {
-  _id, 
-  title, 
-  slug,
-  _createdAt,
-  author->{
-    _id, name, image, bio
-  }, 
-  views,
-  description,
-  category,
-  image,
-}`);
-
-export const STARTUP_BY_ID_QUERY =
-  defineQuery(`*[_type == "startup" && _id == $id][0]{
-  _id, 
-  title, 
-  slug,
-  _createdAt,
-  author->{
-    _id, name, username, image, bio
-  }, 
-  views,
-  description,
-  category,
-  image,
-  pitch,
-}`);
-
-export const STARTUP_VIEWS_QUERY = defineQuery(`
-*[_type == "startup" && _id == $id][0]{
-  _id,
-  views
-  }
-`);
-
 export const AUTHORS_BY_QUERY =
   defineQuery(`*[_type == "author" && !defined($search) || title match $search] | order(_createdAt desc) {
     _id,
@@ -117,7 +79,7 @@ export const PLAYLIST_BY_SLUG_QUERY =
 }`);
 
 export const CONSTRUCTIONS_BY_QUERY =
-  defineQuery(`*[_type == "construction" && !defined($search) || title match $search || author->name match $search] | order(_createdAt desc) {
+  defineQuery(`*[_type == "construction" && !defined($search) || title match $search || author->name match $search] | order(orderIndex asc, _createdAt desc) {
   _id, 
   title, 
   subtitle,
@@ -132,6 +94,7 @@ export const CONSTRUCTIONS_BY_QUERY =
   image,
   thumbnail,
   pitch,
+  orderIndex,
 }`);
 
 export const CONSTRUCTION_BY_ID_QUERY =
@@ -149,6 +112,7 @@ export const CONSTRUCTION_BY_ID_QUERY =
   image,
   thumbnail,
   pitch,
+  orderIndex,
 }`);
 
 export const CONSTRUCTION_BY_SLUG_QUERY =
@@ -166,6 +130,7 @@ export const CONSTRUCTION_BY_SLUG_QUERY =
   image,
   thumbnail,
   pitch,
+  orderIndex,
 }`);
 
 
@@ -185,6 +150,7 @@ export const DESIGNS_BY_QUERY =
   image,
   thumbnail,
   pitch,
+  orderIndex,
 }`);
 
 export const DESIGN_BY_ID_QUERY =
@@ -202,6 +168,7 @@ export const DESIGN_BY_ID_QUERY =
   image,
   thumbnail,
   pitch,
+  orderIndex,
 }`);
 
 export const DESIGN_BY_SLUG_QUERY =
@@ -219,10 +186,11 @@ export const DESIGN_BY_SLUG_QUERY =
   image,
   thumbnail,
   pitch,
+  orderIndex,
 }`);
 
 export const PROJECTS_BY_QUERY =
-  defineQuery(`*[_type == "project" && !defined($search) || title match $search ] | order(_createdAt desc) {
+  defineQuery(`*[_type == "project" && !defined($search) || title match $search ] | order(orderIndex asc, _createdAt desc) {
   _id, 
   title, 
   subtitle,
@@ -235,11 +203,11 @@ export const PROJECTS_BY_QUERY =
   construction[]->{
     _id, title, subtitle, description, image, thumbnail, slug
   },
-  views,
   description,
   image,
   thumbnail,
   pitch,
+  orderIndex,
 }`);
 
 export const PROJECT_BY_ID_QUERY =
@@ -260,6 +228,7 @@ export const PROJECT_BY_ID_QUERY =
   image,
   thumbnail,
   pitch,
+  orderIndex,
 }`);
 
 export const PROJECT_BY_SLUG_QUERY =
@@ -280,10 +249,33 @@ export const PROJECT_BY_SLUG_QUERY =
   image,
   thumbnail,
   pitch,
+  orderIndex,
 }`);
 
+export const PROJECT_BY_CONSTRUCTION_SLUGS_QUERY = defineQuery(`
+  *[_type == "project" && references(*[_type == "construction" && slug.current in $slugs]._id)] | order(orderIndex asc, _createdAt desc) {
+    _id, 
+    title,
+    subtitle,
+    slug,
+    _createdAt,
+    author->{
+      _id, name, username, image, bio
+    }, 
+    construction[]->{
+      _id, title, subtitle, description, image, thumbnail, slug
+    }, 
+    views,
+    description,
+    image,
+    thumbnail,
+    pitch,
+    orderIndex,
+  }
+`);
+
 export const PROJECTS_BY_CONSTRUCTION_ID_QUERY = defineQuery(`
-  *[_type == "project" && $id in construction[]._ref] | order(_createdAt desc) {
+  *[_type == "project" && $id in construction[]._ref] | order(orderIndex asc, _createdAt desc) {
     _id, 
     title, 
     subtitle,
@@ -300,11 +292,12 @@ export const PROJECTS_BY_CONSTRUCTION_ID_QUERY = defineQuery(`
     image,
     thumbnail,
     pitch,
+    orderIndex,
   }
 `);
 
 export const PROJECTS_BY_DESIGN_ID_QUERY =
-  defineQuery(`*[_type == "project" && design._ref == $id] | order(_createdAt desc) {
+  defineQuery(`*[_type == "project" && design._ref == $id] | order(orderIndex asc, _createdAt desc) {
   _id, 
   title, 
   subtitle,
@@ -321,10 +314,11 @@ export const PROJECTS_BY_DESIGN_ID_QUERY =
   image,
   thumbnail,
   pitch,
+  orderIndex,
 }`);
 
 export const PROJECT_DETAILS_BY_QUERY =
-  defineQuery(`*[_type == "projectDetail" && !defined($search) || (project != null && title match $search)] | order(_createdAt desc) {
+  defineQuery(`*[_type == "projectDetail" && !defined($search) || (project != null && title match $search)] | order(orderIndex asc, _createdAt desc) {
   _id, 
   title, 
   subtitle,
@@ -352,6 +346,7 @@ export const PROJECT_DETAILS_BY_QUERY =
   image,
   thumbnail,
   pitch,
+  orderIndex,
 }`);
 
 export const PROJECT_DETAIL_BY_ID_QUERY =
@@ -382,10 +377,11 @@ export const PROJECT_DETAIL_BY_ID_QUERY =
   image,
   thumbnail,
   pitch,
+  orderIndex,
 }`);
 
 export const PROJECT_DETAILS_BY_PROJECT_QUERY =
-  defineQuery(`*[_type == "projectDetail" && project._ref == $id]| order(_createdAt desc){
+  defineQuery(`*[_type == "projectDetail" && project._ref == $id]| order(orderIndex asc, _createdAt desc) {
   _id,
   title,
   subtitle,
@@ -412,6 +408,7 @@ export const PROJECT_DETAILS_BY_PROJECT_QUERY =
   image,
   thumbnail,
   pitch,
+  orderIndex,
 }`);
 
 export const PROJECT_DETAIL_BY_SLUG_QUERY =
@@ -443,10 +440,11 @@ export const PROJECT_DETAIL_BY_SLUG_QUERY =
   image,
   thumbnail,
   pitch,
+  orderIndex,
 }`);
 
 export const PROJECT_DETAILS_BY_TAG =
-  defineQuery(`*[_type == "projectDetail" && defined($tag) && _id != $id && ($tag match tags || tags match $tag)] | order(_createdAt desc) {
+  defineQuery(`*[_type == "projectDetail" && defined($tag) && _id != $id && ($tag match tags || tags match $tag)] | order(orderIndex asc, _createdAt desc) {
   _id,
   title,
   subtitle,
@@ -474,6 +472,7 @@ export const PROJECT_DETAILS_BY_TAG =
   image,
   thumbnail,
   pitch,
+  orderIndex,
 }`);
 
 
@@ -487,10 +486,10 @@ export const PROJECT_DETAIL_VIEWS_QUERY = defineQuery(`
 
 export const CATEGORY_BY_SLUG_QUERY =
   defineQuery(`*[_type == "category" && slug.current == $slug][0]{
-_id,
-title,
-slug,
-select[]->{
+  _id,
+  title,
+  slug,
+  select[]->{
     _id,
     _createdAt,
     title,
@@ -514,10 +513,10 @@ select[]->{
 
 export const CATEGORY_BY_ID_QUERY =
   defineQuery(`*[_type == "category" && _id == $id][0]{
-_id,
-title,
-slug,
-select[]->{
+  _id,
+  title,
+  slug,
+  select[]->{
     _id,
     _createdAt,
     _key,
@@ -542,10 +541,10 @@ select[]->{
 
 export const ROUTE_BY_SLUG_QUERY =
   defineQuery(`*[_type == "route" && slug.current == $slug][0]{
-_id,
-title,
-slug,
-select[]->{
+  _id,
+  title,
+  slug,
+  select[]->{
     _id,
     _createdAt,
     title,
@@ -569,10 +568,10 @@ select[]->{
 
 export const ROUTE_BY_ID_QUERY =
   defineQuery(`*[_type == "route" && _id == $id][0]{
-_id,
-title,
-slug,
-select[]->{
+  _id,
+  title,
+  slug,
+  select[]->{
     _id,
     _createdAt,
     _key,
