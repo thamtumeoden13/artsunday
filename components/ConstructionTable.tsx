@@ -68,6 +68,7 @@ const ConstructionTable = ({ title, role }: { title: string, role?: string }) =>
           data={constructions}
           title={title}
           path='hang-muc'
+          overridePath
           actions={role == 'admin' || role == 'editor' ? ['Edit', 'Delete'] : []}
           onDelete={handleDelete}
           onEdit={handleEdit}

@@ -88,13 +88,13 @@ const CategoryTable = ({ slug, title, role }: { slug: string, title: string, rol
         {(role == 'admin' || role == 'editor') && <div className='flex items-center justify-end flex-1 gap-10 py-10'>
           <Combobox
             data={projects}
-            className={"startup-form_input !mt-0 !w-[24rem] !h-[2.5rem] !border-white-100 !text-white-100 !text-[18px]"}
+            className={"startup-form_input !mt-0 !max-w-[48rem] !h-[2.5rem] !border-white-100 !text-white-100 !text-[18px]"}
             onChange={(value: ComboboxDataType) => { setSelected(value) }}
           />
           <PlusCircleIcon className={"size-12 text-white hover:cursor-pointer"} onClick={handleAddCategorySelect} />
         </div>}
       </div>
-      <div className='flex justify-end w-full h-full'  >
+      <div className='flex justify-end w-full h-full' >
         <TableComponent
           data={homeHeroPost}
           title={title}

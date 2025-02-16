@@ -1,30 +1,42 @@
 "use client"
 
 import React, { useEffect, useState } from 'react'
-import { PROJECT_DETAILS_BY_QUERY } from '@/sanity/lib/queries';
+import { PROJECT_DETAILS_BY_PROJECT_QUERY, PROJECT_DETAILS_BY_QUERY, PROJECTS_BY_QUERY } from '@/sanity/lib/queries';
 import { TableComponent } from './shared/Table';
 import { client, clientNoCache } from '@/sanity/lib/client';
 import { useRouter } from 'next/navigation';
-import { ProjectDetail } from '@/sanity/types';
+import { Project, ProjectDetail } from '@/sanity/types';
 import { toast } from '@/hooks/use-toast';
 import { deleteById } from '@/lib/actions';
 import { PlusCircleIcon } from 'lucide-react';
+import { Combobox, ComboboxDataType } from './shared/ComboBox';
+
+type ProjectDetailTableProps = Omit<ProjectDetail, 'project'> & { project: Project }
 
 const ProjectDetailTable = ({ title, role }: { title: string, role?: string }) => {
   const router = useRouter();
+  const [selected, setSelected] = useState<ComboboxDataType | null>(null);
 
-  const [projects, setProjects] = useState<ProjectDetail[] | []>([])
+  const [projects, setProjects] = useState<ComboboxDataType[] | []>([])
+  const [projectDetails, setProjectDetails] = useState<ProjectDetailTableProps[] | []>([])
 
-  const getProjectDetails = async () => {
+  const getProjects = async () => {
     const params = { search: null }
-    const searchForProjects = await clientNoCache.fetch(PROJECT_DETAILS_BY_QUERY, params);
+    const searchForProjects = await clientNoCache.fetch(PROJECTS_BY_QUERY, params);
 
-    const tempt = searchForProjects.map(({title, orderIndex}: ProjectDetail) => { return {title, orderIndex } })
-
-    console.log('ProjectTable -> getProjectDetailss', tempt)
-    
     setProjects(searchForProjects);
   }
+
+  const getProjectDetails = async () => {
+    const params = selected ? { id: selected._id } : { search: null }
+    const query = selected ? PROJECT_DETAILS_BY_PROJECT_QUERY : PROJECT_DETAILS_BY_QUERY
+    const searchForProjectDetails = await clientNoCache.fetch(query, params);
+
+    const _searchForProjectDetails = searchForProjectDetails.map((projectDetail: ProjectDetailTableProps) => { return { ...projectDetail, parent: projectDetail.project.title } })
+
+    setProjectDetails(_searchForProjectDetails);
+  }
+
 
   const handleDelete = async (post: ProjectDetail) => {
     console.log('ProjectTable -> handleDelete', post._id)
@@ -56,20 +68,33 @@ const ProjectDetailTable = ({ title, role }: { title: string, role?: string }) =
   }
 
   useEffect(() => {
+    getProjects();
     getProjectDetails();
   }, [])
 
-  if (!projects) return <div>Loading...</div>;
+  useEffect(() => {
+    getProjectDetails();
+  }, [selected])
+
+  if (!projectDetails) return <div>Loading...</div>;
 
   return (
     <section className={"section_container !justify-items-center !mt-0 overflow-auto h-full"}>
-      <div className='absolute top-0 flex items-center justify-end w-full h-24 gap-10 py-4 right-10 '>
-        <p>{title}</p>
-        {(role == 'admin' || role == 'editor') && <PlusCircleIcon className={"size-12 text-white hover:cursor-pointer"} onClick={handleAddProjectDetail} />}
-      </div>
-      <div className='flex justify-end w-full h-full'>
-        <TableComponent
+      <div className='absolute top-0 left-0 flex items-center justify-between w-full h-24 gap-10 px-16 py-4 '>
+        <Combobox
           data={projects}
+          className={"startup-form_input !mt-0 !max-w-[32rem] !h-[2.5rem] !border-white-100 !text-white-100 !text-[18px]"}
+          onChange={(value: ComboboxDataType | null) => { setSelected(value) }}
+        />
+        <div className='flex items-center justify-end gap-10 py-4'>
+          <p>{title}</p>
+          {(role == 'admin' || role == 'editor') && <PlusCircleIcon className={"size-12 text-white hover:cursor-pointer"} onClick={handleAddProjectDetail} />}
+        </div>
+      </div>
+      <div className='flex justify-end w-full h-full mt-10'>
+        <TableComponent
+          data={projectDetails}
+          headers={['Tiêu đề', 'Đường dẫn', 'Ảnh tiêu đề', 'Thứ tự', 'Dự Án']}
           title={title}
           path='bai-viet'
           actions={role == 'admin' || role == 'editor' ? ['Edit', 'Delete'] : []}

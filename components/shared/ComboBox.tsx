@@ -31,14 +31,18 @@ export function Combobox({
   initValue?: string;
   data: ComboboxDataType[];
   className?: string;
-  onChange?: (value: ComboboxDataType) => void;
+  onChange?: (value: ComboboxDataType | null) => void;
 }>) {
 
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState(initValue ?? "")
 
   React.useEffect(() => {
-    if (value && onChange) {
+    if (onChange) {
+      if (!value) {
+        onChange(null)
+        return;
+      }
       const selected = data.find((item) => item._id === value)
       onChange(selected!)
     }

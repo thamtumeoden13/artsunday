@@ -13,11 +13,12 @@ import { EditIcon, TrashIcon } from "lucide-react";
 import Image from "next/image";
 import { Combobox, ComboboxDataType } from "./ComboBox";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export const TableComponent = ({
   headers = ['Tiêu đề', 'Đường dẫn', 'Ảnh tiêu đề', 'Thứ tự', 'Mô tả'],
   customType = '',
-  data, title, className, path,
+  data, title, className, path, overridePath = false,
   actions = [],
   onDelete, onEdit,
 }: {
@@ -27,6 +28,7 @@ export const TableComponent = ({
   title: string;
   className?: string;
   path?: string;
+  overridePath?: boolean
   actions?: string[];
   onDelete?: (post: any) => void;
   onEdit?: (post: any) => void;
@@ -79,7 +81,7 @@ export const TableComponent = ({
               ]}
               initValue={item.role}
               className={"!mt-0 !w-[24rem] !h-[2.5rem] !border-white-100 !text-white-100 !text-[18px]"}
-              onChange={(value: ComboboxDataType) => handleEditRow({ ...item, role: value._id })}
+              onChange={(value: ComboboxDataType | null) => handleEditRow({ ...item, role: value!._id })}
             />
           </TableCell>
         </>
@@ -90,17 +92,18 @@ export const TableComponent = ({
   }
 
   useEffect(() => {
+    console.log('TableComponent -> data', data)
     setDataList(data)
   }, [data])
 
   return (
     <Table className={cn('w-full', className)}>
       <TableHeader>
-        <TableRow>
+        <TableRow className="min-w-20 w-full">
           {headers.map((header, index) => (
             <TableHead key={header} className="text-20-medium !text-white">{header}</TableHead>
           ))}
-          {!!actions.length && <TableHead className="text-20-medium !text-white">{"Thao tác"}</TableHead>}
+          {!!actions.length && <TableHead className="text-20-medium !text-white w-20">{"Thao tác"}</TableHead>}
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -109,7 +112,11 @@ export const TableComponent = ({
             {!customType ? (
               <>
                 <TableCell width={200} className="font-medium">{item.title}</TableCell>
-                <TableCell width={200}>{item.slug?.current}</TableCell>
+                <TableCell width={200}>
+                  <Link href={overridePath ? `/${item.slug?.current}` : `/${path}/${item.slug?.current}`} className="text-primary hover:underline" target="_blank">
+                    {item.slug?.current}
+                  </Link>
+                </TableCell>
                 <TableCell width={200} height={100}>
                   <Image
                     src={item.thumbnail}
@@ -121,14 +128,14 @@ export const TableComponent = ({
 
                 </TableCell>
                 <TableCell className="font-normal" width={100}>{item.orderIndex}</TableCell>
-                <TableCell className="font-normal">{item.description}</TableCell>
+                <TableCell className="font-normal" width={200}>{item.parent || item.description}</TableCell>
               </>
             ) : (
               renderCustomColumns(item)
             )
             }
             {[...actions]?.map((act) => (
-              <TableCell key={act} className="w-[40px] items-center justify-center ">
+              <TableCell key={act} className="justify-center" width={50}>
                 {act === 'Edit' && <EditIcon className={"size-6 text-white hover:cursor-pointer"} onClick={() => handleActionRow(item, act)} />}
                 {act === 'Delete' && <TrashIcon className={"size-6 text-red-500 hover:cursor-pointer"} onClick={() => handleActionRow(item, act)} />}
               </TableCell>
