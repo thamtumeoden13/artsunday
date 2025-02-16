@@ -55,8 +55,8 @@ export const construction = defineType({
     }),
     defineField({
       name: 'orderIndex',
-      type: 'number',
-      initialValue: 0,
+      type: 'string',
+      initialValue: '0',
     }),
     defineField({
       name: 'pitch',

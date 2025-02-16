@@ -161,7 +161,7 @@ export type ProjectDetail = {
     estimatedTime?: string;
   };
   tags?: string;
-  orderIndex?: number;
+  orderIndex?: string;
   pitch?: string;
   onlyShowRouter?: boolean;
   isActived?: boolean;
@@ -195,7 +195,7 @@ export type Project = {
   thumbnail?: string;
   image?: string;
   tags?: string;
-  orderIndex?: number;
+  orderIndex?: string;
   pitch?: string;
   onlyShowRouter?: boolean;
   isActived?: boolean;
@@ -247,7 +247,7 @@ export type Construction = {
   image?: string;
   description?: string;
   tags?: string;
-  orderIndex?: number;
+  orderIndex?: string;
   pitch?: string;
   isActived?: boolean;
   isDeleted?: boolean;

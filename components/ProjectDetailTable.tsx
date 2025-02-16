@@ -18,6 +18,11 @@ const ProjectDetailTable = ({ title, role }: { title: string, role?: string }) =
   const getProjectDetails = async () => {
     const params = { search: null }
     const searchForProjects = await clientNoCache.fetch(PROJECT_DETAILS_BY_QUERY, params);
+
+    const tempt = searchForProjects.map(({title, orderIndex}: ProjectDetail) => { return {title, orderIndex } })
+
+    console.log('ProjectTable -> getProjectDetailss', tempt)
+    
     setProjects(searchForProjects);
   }
 
