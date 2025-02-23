@@ -29,7 +29,7 @@ export default async function Constructions({ params }: { readonly params: Promi
         <p className={"tag"}>{formatDate(data?._createdAt)}</p>
 
         <h1 className={"heading"}>{data.title}</h1>
-        <p className={"sub-heading !max-w-5xl"}>{data.description}</p>
+        <p className={"sub-heading !max-w-5xl !text-[18px]"}>{data.description}</p>
       </section>
 
       <section className={"section_container !px-0 !py-2"}>
@@ -38,12 +38,12 @@ export default async function Constructions({ params }: { readonly params: Promi
           alt={data.subtitle || "Art Sunday"}
           width={760}
           height={540}
-          className="object-cover w-full md:mb-10 rounded-lg"
+          className="object-cover w-full rounded-lg md:mb-10"
         />
 
         <ProjectDetailList key={data?._id} post={data} className="!p-0" />
 
-        <div className={"space-y-5 mt-10 max-w-7xl mx-auto"}>
+        <div className={"space-y-5 mt-10 max-w-7xl mx-auto !px-2"}>
           <h3 className={"text-30-bold"}>Bài Viết Chi Tiết</h3>
           {parsedContent ? (
             <article

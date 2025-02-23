@@ -43,7 +43,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
         <p className={"tag"}>{formatDate(post?._createdAt)}</p>
 
         <h1 className={"heading"}>{post.title}</h1>
-        <p className={"sub-heading !max-w-5xl !text-[14px]"}>{post.description}</p>
+        <p className={"sub-heading !max-w-5xl !text-[18px]"}>{post.description}</p>
       </section>
 
       {/* <section className={"section_container !py-0 !px-2 !min-h-[230px] !max-w-screen-xl"}>
@@ -67,8 +67,8 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
               if (!post.overview[key]) return null;
               return (
                 <li key={key} className="flex items-center gap-2">
-                  <span>{overvewTranslate[key]}:</span>
-                  <span className="text-20-medium">{post.overview[key]}</span>
+                  <span className='text-[18px]'>{overvewTranslate[key]}:</span>
+                  <span className="text-20-medium !text-[18px]">{post.overview[key]}</span>
                 </li>
               )
             })}

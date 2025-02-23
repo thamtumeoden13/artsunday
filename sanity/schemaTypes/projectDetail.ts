@@ -40,7 +40,8 @@ export const projectDetail = defineType({
     defineField({
       name: 'project',
       type: 'reference',
-      to: { type: 'project' }
+      to: { type: 'project' },
+      weak: true, // Cho phép xóa project mà không bị lỗi
     }),
     defineField({
       name: 'thumbnail',

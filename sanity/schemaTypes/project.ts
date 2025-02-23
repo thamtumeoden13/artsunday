@@ -37,7 +37,7 @@ export const project = defineType({
       name: "construction",
       type: "array",
       of: [
-        { type: "reference", to: [{ type: "construction" }] },
+        { type: "reference", to: [{ type: "construction", }] },
       ],
     }),
     defineField({
