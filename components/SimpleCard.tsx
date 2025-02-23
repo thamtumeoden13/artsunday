@@ -26,7 +26,7 @@ const SimpleCard = ({ post, path, className }: { post: SimpleCardType, path: str
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger>
-                  <h3 className={"text-16-medium !font-semibold md:line-clamp-2 !text-left px-2 pt-1"}>{title}</h3>
+                  <h3 className={"text-16-medium !font-semibold line-clamp-2 text-left px-2 pt-1 sm:min-h-14"}>{title}</h3>
                 </TooltipTrigger>
                 <TooltipContent side="bottom" align="start" >
                   <p className='text-left text-white-100'> {title}</p>

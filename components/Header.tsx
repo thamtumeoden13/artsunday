@@ -189,7 +189,7 @@ const Header = () => {
                     </Link>
                   </li>
 
-                  <li className={"nav-li"}>
+                  <li className={"nav-li max-lg:mb-4 gap-4"}>
                     <MenuItem setActive={setActive} active={active}
                       item="construction" name={"Thi Công"} route={"/thi-cong"}
                       setIsOpen={handleIsOpen}
@@ -199,7 +199,7 @@ const Header = () => {
                           <ProductItem
                             key={_id}
                             title={title!}
-                            href={`/thiet-ke/${slug?.current}`}
+                            href={`/thi-cong/${slug?.current}`}
                             src={thumbnail!}
                             description={subtitle!}
                             setIsOpen={handleIsOpen}

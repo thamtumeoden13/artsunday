@@ -208,6 +208,17 @@ export const PROJECTS_BY_QUERY =
   thumbnail,
   pitch,
   orderIndex,
+  overview {
+    investor,
+    address,
+    scale,
+    function,
+    expense,
+    designTeam,
+    designYear,
+    estimatedTime
+  },
+  views,
 }`);
 
 export const PROJECT_BY_ID_QUERY =

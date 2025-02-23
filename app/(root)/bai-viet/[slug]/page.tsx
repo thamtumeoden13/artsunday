@@ -29,6 +29,8 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
   const releatedPosts = post && await client.fetch(PROJECT_DETAILS_BY_TAG, { tag: post?.tags, id: post._id },) || []
 
+  console.log(releatedPosts)
+
   if (!post) return notFound();
 
   const parsedContent = md.render(post?.pitch || '');
@@ -41,7 +43,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
         <p className={"tag"}>{formatDate(post?._createdAt)}</p>
 
         <h1 className={"heading"}>{post.title}</h1>
-        <p className={"sub-heading !max-w-5xl"}>{post.description}</p>
+        <p className={"sub-heading !max-w-5xl !text-[14px]"}>{post.description}</p>
       </section>
 
       {/* <section className={"section_container !py-0 !px-2 !min-h-[230px] !max-w-screen-xl"}>
@@ -50,7 +52,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
         </div>
       </section> */}
 
-      <section className="section_container">
+      <section className="section_container !px-2">
         {/* <ProjectGeneral post={post} /> */}
         <CloudinaryImage
           src={post.thumbnail}
@@ -61,18 +63,21 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
         />
         <div className='flex flex-col gap-4 pb-4 border-b border-black-100'>
           <ul className="grid items-center justify-center grid-cols-1 gap-4 lg:grid-cols-3 md:grid-cols-2">
-            {post.overview && (Object.keys(post.overview) as Array<keyof typeof overvewTranslate>).map((key) => (
-              <li key={key} className="flex items-center gap-2">
-                <span>{overvewTranslate[key]}:</span>
-                <span className="text-20-medium">{post.overview[key]}</span>
-              </li>
-            ))}
+            {post.overview && (Object.keys(post.overview) as Array<keyof typeof overvewTranslate>).map((key) => {
+              if (!post.overview[key]) return null;
+              return (
+                <li key={key} className="flex items-center gap-2">
+                  <span>{overvewTranslate[key]}:</span>
+                  <span className="text-20-medium">{post.overview[key]}</span>
+                </li>
+              )
+            })}
           </ul>
         </div>
 
         <div className="flex items-start justify-between gap-1">
 
-          <div className={"space-y-5 mt-10 pr-10 max-w-7xl mx-auto"}>
+          <div className={"space-y-5 mt-10 pr-0 md:pr-10 max-w-7xl mx-auto"}>
             <h3 className={"text-30-bold"}>Bài Viết Chi Tiết</h3>
             {parsedContent ? (
               <article

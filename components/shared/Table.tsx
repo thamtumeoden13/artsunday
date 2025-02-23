@@ -127,7 +127,7 @@ export const TableComponent = ({
                   />
 
                 </TableCell>
-                <TableCell className="font-normal" width={100}>{item.orderIndex}</TableCell>
+                <TableCell className="font-normal" width={100}>{item.orderIndex || index}</TableCell>
                 <TableCell className="font-normal" width={200}>{item.parent || item.description}</TableCell>
               </>
             ) : (

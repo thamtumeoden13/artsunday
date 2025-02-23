@@ -28,7 +28,7 @@ export default async function Construction({ searchParams }: Readonly<{
 
       <section className={"pink_container md:!min-h-[28rem] !flex !mt-0 !md:my-0 !pb-4 !pt-16 "}>
         <h1 className={"heading"}>
-          Kết Nối Với Chúng Tôi
+          Hạng Mục Thiết Kế
         </h1>
 
         <p className={"sub-heading !max-w-3xl"}>
@@ -41,7 +41,7 @@ export default async function Construction({ searchParams }: Readonly<{
       <>
         {searchForProjects?.length > 0 && (
           searchForProjects.map((post: SimpleCardType) => (
-            <ProjectDetailList key={post?._id} post={post} className="!px-0" />
+            <ProjectDetailList key={post?._id} post={post} className="!p-0" />
           ))
         )}
       </>

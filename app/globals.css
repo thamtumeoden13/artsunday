@@ -182,7 +182,7 @@
   }
 
   .heading {
-    @apply uppercase bg-black px-6 py-3 font-ibm-plex font-extrabold text-white sm:text-[54px] sm:leading-[64px] text-[36px] leading-[46px] max-w-5xl text-center my-5;
+    @apply uppercase bg-black px-6 py-3 font-ibm-plex font-extrabold text-white lg:text-[54px] lg:leading-[64px] sm:text-[27px] sm:leading-[32px] text-[18px] leading-[23px] max-w-5xl text-center my-5;
   }
 
   .heading-half {
@@ -703,4 +703,16 @@
 
 .no-visible-scrollbar::-webkit-scrollbar {
   display: none;
+}
+.w-md-editor-toolbar li > button {
+  width: 40px !important;  /* Tăng kích thước nút */
+  height: 40px !important; /* Tăng chiều cao nút */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.w-md-editor-toolbar svg {
+  width: 32px !important; /* Tăng kích thước icon */
+  height: 32px !important;
 }

@@ -89,7 +89,7 @@ const CategoryTable = ({ slug, title, role }: { slug: string, title: string, rol
           <Combobox
             data={projects}
             className={"startup-form_input !mt-0 !max-w-[48rem] !h-[2.5rem] !border-white-100 !text-white-100 !text-[18px]"}
-            onChange={(value: ComboboxDataType) => { setSelected(value) }}
+            onChange={(value: ComboboxDataType | null) => { setSelected(value) }}
           />
           <PlusCircleIcon className={"size-12 text-white hover:cursor-pointer"} onClick={handleAddCategorySelect} />
         </div>}

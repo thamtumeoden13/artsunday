@@ -70,7 +70,7 @@ export const MenuItem = ({
     setActive(item)
     if (isMobile && item !== active) {
       console.log("Action triggered for setIsOpen", isMobile);
-      setIsOpen && setIsOpen(false);
+      // setIsOpen && setIsOpen(false);
     }
   };
 

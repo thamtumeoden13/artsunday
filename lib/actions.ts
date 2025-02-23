@@ -383,10 +383,9 @@ export const updateProject = async (state: any, form: FormData, pitch: string, c
     status: "ERROR"
   });
 
-  const { title, subtitle, description, thumbnail, image, orderIndex } = Object.fromEntries(
+  const { title, subtitle, description, thumbnail, image, orderIndex, investor, address, scale, _function, expense, designTeam, designYear, estimatedTime, } = Object.fromEntries(
     Array.from(form).filter(([key]) => key !== 'pitch'),
   );
-
 
   const baseSlug = slugify(title as string, { lower: true, strict: true });
   let uniqueSlug = baseSlug;
@@ -411,6 +410,16 @@ export const updateProject = async (state: any, form: FormData, pitch: string, c
       thumbnail,
       image,
       orderIndex,
+      overview: {
+        investor,
+        address,
+        scale,
+        function: _function,
+        expense,
+        designTeam,
+        designYear,
+        estimatedTime,
+      },
       slug: {
         _type: uniqueSlug,
         current: uniqueSlug,
@@ -454,9 +463,11 @@ export const createProjectDetail = async (state: any, form: FormData, pitch: str
     status: "ERROR"
   });
 
-  const { title, subtitle, tags, description, thumbnail, image, orderIndex } = Object.fromEntries(
+  const { title, subtitle, tags, description, thumbnail, image, orderIndex, overview } = Object.fromEntries(
     Array.from(form).filter(([key]) => key !== 'pitch'),
   );
+
+  console.log('createProjectDetail -> overview', overview)
 
   const baseSlug = slugify(title as string, { lower: true, strict: true });
   let uniqueSlug = baseSlug;
@@ -478,6 +489,7 @@ export const createProjectDetail = async (state: any, form: FormData, pitch: str
       image,
       tags,
       orderIndex,
+      overview,
       slug: {
         _type: uniqueSlug,
         current: uniqueSlug,
@@ -519,7 +531,7 @@ export const updateProjectDetail = async (state: any, form: FormData, pitch: str
     status: "ERROR"
   });
 
-  const { title, subtitle, tags, description, thumbnail, image, orderIndex } = Object.fromEntries(
+  const { title, subtitle, tags, description, thumbnail, image, orderIndex, investor, address, scale, _function, expense, designTeam, designYear, estimatedTime, } = Object.fromEntries(
     Array.from(form).filter(([key]) => key !== 'pitch'),
   );
 
@@ -534,6 +546,7 @@ export const updateProjectDetail = async (state: any, form: FormData, pitch: str
     uniqueSlug = `${baseSlug}-${resultQuery.data.length}`;
   }
 
+
   try {
     const projectDetailData = {
       title,
@@ -543,6 +556,16 @@ export const updateProjectDetail = async (state: any, form: FormData, pitch: str
       thumbnail,
       image,
       orderIndex,
+      overview: {
+        investor,
+        address,
+        scale,
+        function: _function,
+        expense,
+        designTeam,
+        designYear,
+        estimatedTime,
+      },
       slug: {
         _type: uniqueSlug,
         current: uniqueSlug,

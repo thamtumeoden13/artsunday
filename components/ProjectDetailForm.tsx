@@ -17,7 +17,7 @@ import { Author, Project, ProjectDetail } from '@/sanity/types';
 import MDEditorComponent from './shared/MDEditor';
 import { CloudinaryImage } from './shared/CloudinaryImage';
 
-type FormDataType = Omit<ProjectDetail, "author" | "project">;
+type FormDataType = Omit<ProjectDetail, "author" | "project"> & { investor?: string, address?: string, scale?: string, _function?: string, expense?: string, designTeam?: string, designYear?: string, estimatedTime?: string }
 type ProjectDetailFormType = Omit<ProjectDetail, "author" | "project"> & { author?: Author } & { project?: Project };
 
 const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
@@ -48,7 +48,7 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
         pitch,
       }
 
-      console.log(formValues);
+      console.log({ formValues });
       await formProjectDetailSchema.parseAsync(formValues);
 
       console.log('post', post?._id);
@@ -109,8 +109,12 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
 
   const handleChangeForm = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 
+    if (!formData) {
+      return;
+    }
+
     setFormData({
-      ...formData!,
+      ...formData,
       [e.target.name]: e.target.value
     })
   }
@@ -130,9 +134,30 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
   useEffect(() => {
     if (post) {
 
-      const { title, subtitle, tags, description, thumbnail, image, project, orderIndex } = post;
+      const { title, subtitle, tags, description, thumbnail, image, project, orderIndex, overview } = post;
 
-      setFormData({ ...formData!, title, subtitle, tags, description, thumbnail, image, orderIndex });
+      const _formData = {
+        ...formData!,
+        title,
+        subtitle,
+        tags,
+        description,
+        thumbnail,
+        image,
+        orderIndex,
+        investor: overview?.investor,
+        address: overview?.address,
+        scale: overview?.scale,
+        _function: overview?.function,
+        expense: overview?.expense,
+        designTeam: overview?.designTeam,
+        designYear: overview?.designYear,
+        estimatedTime: overview?.estimatedTime,
+      }
+
+      console.log('post -> _formData', _formData)
+
+      setFormData({ ..._formData });
 
       if (post.pitch) {
         setPitch(post.pitch)
@@ -148,7 +173,7 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
       action={formAction}
       className={"startup-form"}
     >
-      <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+      <div className='grid grid-cols-1 gap-4 lg:grid-cols-2'>
         <div>
           <label htmlFor="title" className={"startup-form_label"}>
             {"Tiêu Đề"}
@@ -158,7 +183,7 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
             name={"title"}
             className={"startup-form_input"}
             required
-            placeholder={"Project Title"}
+            placeholder={"Vui lòng nhập tiêu đề"}
             value={formData?.title}
             onChange={handleChangeForm}
           />
@@ -175,7 +200,7 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
             name={"subtitle"}
             className={"startup-form_input"}
             required
-            placeholder={"Project Subtitle"}
+            placeholder={"Vui lòng nhập phụ đề"}
             value={formData?.subtitle}
             onChange={handleChangeForm}
           />
@@ -184,7 +209,7 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
           )}
         </div>
       </div>
-      <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+      <div className='grid grid-cols-1 gap-4 lg:grid-cols-2'>
         <div>
           <label htmlFor="thumbnail" className={"startup-form_label"}>
             {"Ảnh Đại Diện(tỉ lệ 3:4)"}
@@ -196,7 +221,7 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
               name={"thumbnail"}
               className={"startup-form_input"}
               required
-              placeholder={"Project Thumbnail URL"}
+              placeholder={"Vui lòng nhập đường dẫn ảnh đại diện"}
               value={formData?.thumbnail}
               onChange={handleChangeForm}
             />
@@ -204,7 +229,7 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
               <div className='w-[280px] h-[200px] overflow-hidden mt-2 p-2 border border-black-100'>
                 <CloudinaryImage
                   src={formData.thumbnail}
-                  alt={"Project Thumbnail URL"}
+                  alt={""}
                   width={280}
                   height={200}
                   className="object-cover w-full rounded-lg"
@@ -228,7 +253,7 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
               name={"image"}
               className={"startup-form_input"}
               required
-              placeholder={"Project Image URL"}
+              placeholder={"Vui lòng nhập đường dẫn hình ảnh"}
               value={formData?.image}
               onChange={handleChangeForm}
             />
@@ -237,7 +262,7 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
               <div className='w-[116px] h-[200px] overflow-hidden mt-2 p-2 border border-black-100'>
                 <CloudinaryImage
                   src={formData.image}
-                  alt={"Project Image URL"}
+                  alt={""}
                   width={200}
                   height={200}
                   className="object-cover w-full rounded-lg"
@@ -253,7 +278,7 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
 
       </div>
 
-      <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+      <div className='grid grid-cols-1 gap-4 lg:grid-cols-2'>
         <div>
           <label htmlFor="tags" className={"startup-form_label"}>
             {"Dán Nhãn"}
@@ -263,12 +288,12 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
             name={"tags"}
             className={"startup-form_input"}
             required
-            placeholder={"Project Tags"}
+            placeholder={"vui lòng nhập dán nhãn"}
             value={formData?.tags}
             onChange={handleChangeForm}
           />
-          {errors.subtitle && (
-            <p className={"startup-form_error"}>{errors.subtitle}</p>
+          {errors.tags && (
+            <p className={"startup-form_error"}>{errors.tags}</p>
           )}
         </div>
         <div>
@@ -279,10 +304,10 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
             data={projects}
             initValue={initValue}
             className={"startup-form_input justify-between"}
-            onChange={(value: ComboboxDataType) => { setSelected(value) }}
+            onChange={(value: ComboboxDataType | null) => { setSelected(value) }}
           />
-          {errors.image && (
-            <p className={"startup-form_error"}>{errors.image}</p>
+          {errors.projectId && (
+            <p className={"startup-form_error"}>{errors.projectId}</p>
           )}
         </div>
       </div>
@@ -296,7 +321,7 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
             name={"description"}
             className={"startup-form_textarea"}
             required
-            placeholder={"Project Description"}
+            placeholder={"Vui lòng nhập mô tả"}
             value={formData?.description}
             onChange={handleChangeForm}
           />
@@ -312,7 +337,7 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
             id={"orderIndex"}
             name={"orderIndex"}
             className={"startup-form_input"}
-            placeholder={"Order Index"}
+            placeholder={"Thứ tự"}
             required
             type='number'
             min={0}
@@ -321,6 +346,146 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
           />
           {errors.orderIndex && (
             <p className={"startup-form_error"}>{errors.orderIndex}</p>
+          )}
+        </div>
+      </div>
+
+      <div className='grid grid-cols-1 gap-4 lg:grid-cols-2'>
+        <div>
+          <label htmlFor="investor" className={"startup-form_label"}>
+            {"Chủ Đầu Tư"}
+          </label>
+          <Input
+            id={"investor"}
+            name={"investor"}
+            className={"startup-form_input"}
+            placeholder={"vui lòng nhập chủ đầu tư"}
+            value={formData?.investor}
+            onChange={handleChangeForm}
+          />
+          {errors.investor && (
+            <p className={"startup-form_error"}>{errors.investor}</p>
+          )}
+        </div>
+        <div>
+          <label htmlFor="address" className={"startup-form_label"}>
+            {"Địa Điểm"}
+          </label>
+          <Input
+            id={"address"}
+            name={"address"}
+            className={"startup-form_input"}
+            placeholder={"vui lòng nhập địa điểm"}
+            value={formData?.address}
+            onChange={handleChangeForm}
+          />
+          {errors.address && (
+            <p className={"startup-form_error"}>{errors.address}</p>
+          )}
+        </div>
+      </div>
+
+      <div className='grid grid-cols-1 gap-4 lg:grid-cols-2'>
+        <div>
+          <label htmlFor="scale" className={"startup-form_label"}>
+            {"Diện Tích"}
+          </label>
+          <Input
+            id={"scale"}
+            name={"scale"}
+            className={"startup-form_input"}
+            placeholder={"Vui lòng nhập diện tích"}
+            value={formData?.scale}
+            onChange={handleChangeForm}
+          />
+          {errors.scale && (
+            <p className={"startup-form_error"}>{errors.scale}</p>
+          )}
+        </div>
+        <div>
+          <label htmlFor="_function" className={"startup-form_label"}>
+            {"Quy Mô Dự Án"}
+          </label>
+          <Input
+            id={"_function"}
+            name={"_function"}
+            className={"startup-form_input"}
+            placeholder={"Vui lòng nhập quy mô dự án"}
+            value={formData?._function}
+            onChange={handleChangeForm}
+          />
+          {errors.function && (
+            <p className={"startup-form_error"}>{errors.function}</p>
+          )}
+        </div>
+      </div>
+
+      <div className='grid grid-cols-1 gap-4 lg:grid-cols-2'>
+        <div>
+          <label htmlFor="expense" className={"startup-form_label"}>
+            {"Kinh Phí"}
+          </label>
+          <Input
+            id={"expense"}
+            name={"expense"}
+            className={"startup-form_input"}
+            placeholder={"vui lòng nhập kinh phí"}
+            value={formData?.expense}
+            onChange={handleChangeForm}
+          />
+          {errors.expense && (
+            <p className={"startup-form_error"}>{errors.expense}</p>
+          )}
+        </div>
+        <div>
+          <label htmlFor="designTeam" className={"startup-form_label"}>
+            {"Nhóm Thiết Kế"}
+          </label>
+          <Input
+            id={"designTeam"}
+            name={"designTeam"}
+            className={"startup-form_input"}
+            placeholder={"vui lòng nhập nhóm thiết kế"}
+            value={formData?.designTeam}
+            onChange={handleChangeForm}
+          />
+          {errors.designTeam && (
+            <p className={"startup-form_error"}>{errors.designTeam}</p>
+          )}
+        </div>
+      </div>
+
+      <div className='grid grid-cols-1 gap-4 lg:grid-cols-2'>
+        <div>
+          <label htmlFor="designYear" className={"startup-form_label"}>
+            {"Năm Thiết Kế"}
+          </label>
+          <Input
+            id={"designYear"}
+            name={"designYear"}
+            className={"startup-form_input"}
+            placeholder={"vui lòng nhập năm thiết kế"}
+            value={formData?.designYear}
+            onChange={handleChangeForm}
+          />
+          {errors.designYear && (
+            <p className={"startup-form_error"}>{errors.designYear}</p>
+          )}
+        </div>
+        <div>
+          <label htmlFor="estimatedTime" className={"startup-form_label"}>
+            {"Thời Gian Hoàn Thiện"}
+          </label>
+          <Input
+            id={"estimatedTime"}
+            name={"estimatedTime"}
+            className={"startup-form_input"}
+            placeholder={"Vui lòng nhập thời gian hoàn thiện"}
+            value={formData?.estimatedTime}
+            onChange={handleChangeForm}
+          />
+          {errors.estimatedTime && (
+            <p className={"startup-form_error"}>{errors.estimatedTime}</p>
           )}
         </div>
       </div>
