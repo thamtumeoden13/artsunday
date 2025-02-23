@@ -32,7 +32,9 @@ const ProjectDetailTable = ({ title, role }: { title: string, role?: string }) =
     const query = selected ? PROJECT_DETAILS_BY_PROJECT_QUERY : PROJECT_DETAILS_BY_QUERY
     const searchForProjectDetails = await clientNoCache.fetch(query, params);
 
-    const _searchForProjectDetails = searchForProjectDetails.map((projectDetail: ProjectDetailTableProps) => { return { ...projectDetail, parent: projectDetail.project.title } })
+    const _searchForProjectDetails = searchForProjectDetails
+      .filter((projectDetail: ProjectDetailTableProps) => !!projectDetail.project)
+      .map((projectDetail: ProjectDetailTableProps) => { return { ...projectDetail, parent: projectDetail.project.title } })
 
     setProjectDetails(_searchForProjectDetails);
   }
