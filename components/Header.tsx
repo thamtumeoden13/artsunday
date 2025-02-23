@@ -158,6 +158,7 @@ const Header = () => {
                       setActive={setActive} active={active}
                       item="deisgner" name={"Thiết Kế"} route={"/thiet-ke"}
                       setIsOpen={handleIsOpen}
+                      className="-translate-x-1/4"
                     >
                       <div className="grid grid-cols-2 gap-10 p-4 max-lg:grid-cols-1 text-md ">
                         {navDesignRouter.map(({ _id, title, slug, description, image, thumbnail, subtitle }) => (
@@ -193,6 +194,7 @@ const Header = () => {
                     <MenuItem setActive={setActive} active={active}
                       item="construction" name={"Thi Công"} route={"/thi-cong"}
                       setIsOpen={handleIsOpen}
+                      className="-translate-x-3/4 "
                     >
                       <div className="grid grid-cols-2 gap-10 p-4 max-lg:grid-cols-1 text-md ">
                         {navConstructionRouter.map(({ _id, title, slug, image, thumbnail, subtitle }) => (
@@ -211,6 +213,7 @@ const Header = () => {
                     <MenuItem setActive={setActive} active={active}
                       item="info" name={"Thông Tin"} route={"/thong-tin"}
                       setIsOpen={handleIsOpen}
+                      className="-translate-x-19/20"
                     >
                       <div className="grid grid-cols-2 gap-10 p-4 max-lg:grid-cols-1 text-md ">
                         {navInfoRouter.map(({ _id, title, slug, image, thumbnail, subtitle }) => (

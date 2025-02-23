@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { Link as LinkScroll } from "react-scroll";
+import { cn } from "@/lib/utils";
 
 const transition = {
   type: "spring",
@@ -53,6 +54,7 @@ export const MenuItem = ({
   route,
   children,
   setIsOpen,
+  className,
 }: {
   setActive: (item: string | null) => void;
   active: string | null;
@@ -61,6 +63,7 @@ export const MenuItem = ({
   route?: string;
   setIsOpen?: (isOpen: boolean) => void,
   children?: React.ReactNode;
+  className?: string;
 }) => {
 
   const [isMobile, setIsMobile] = useState(false);
@@ -107,7 +110,7 @@ export const MenuItem = ({
           transition={transition}
         >
           {active === item && (
-            <div className="absolute top-[calc(100%_+_1.2rem)] left-1/2 transform -translate-x-1/2 pt-4 max-lg:relative">
+            <div className={cn("absolute top-[calc(100%_+_1.2rem)] left-1/2 transform -translate-x-1/2 pt-4 max-lg:relative", className)}>
               <motion.div
                 transition={transition}
                 layoutId="active" // layoutId ensures smooth animation
@@ -178,7 +181,7 @@ export const ProductItem = ({
         </div>
       </Link>
       <Link href={href} className="flex space-x-2 lg:hidden" onClick={() => setIsOpen(false)}>
-        <h4 className="mb-1 text-xl font-bold text-white hover:text-primary max-w-sm md:max-w-md">
+        <h4 className="max-w-sm mb-1 text-xl font-bold text-white hover:text-primary md:max-w-md">
           {title}
         </h4>
       </Link>
