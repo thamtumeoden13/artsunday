@@ -190,7 +190,7 @@
   }
 
   .sub-heading {
-    @apply font-medium text-[20px] text-white max-w-2xl text-justify break-words;
+    @apply font-medium sm:text-[24px] text-[18px] text-white max-w-2xl text-justify break-words;
   }
 
   .section_container {
@@ -321,7 +321,7 @@
 
   /* startupform */
   .startup-form {
-    @apply max-w-7xl px-6 mx-auto my-10 space-y-8 bg-white;
+    @apply px-6 mx-auto my-10 space-y-8 bg-white max-w-7xl;
   }
 
   .startup-form_label {
