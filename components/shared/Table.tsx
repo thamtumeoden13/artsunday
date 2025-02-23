@@ -14,12 +14,19 @@ import Image from "next/image";
 import { Combobox, ComboboxDataType } from "./ComboBox";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { Author } from "@/sanity/types";
+
+type Session = {
+  id: string;
+  [key: string]: any;
+}
 
 export const TableComponent = ({
   headers = ['Tiêu đề', 'Đường dẫn', 'Ảnh tiêu đề', 'Thứ tự', 'Mô tả'],
   customType = '',
   data, title, className, path, overridePath = false,
   actions = [],
+  author,
   onDelete, onEdit,
 }: {
   headers?: string[];
@@ -30,6 +37,7 @@ export const TableComponent = ({
   path?: string;
   overridePath?: boolean
   actions?: string[];
+  author: Author;
   onDelete?: (post: any) => void;
   onEdit?: (post: any) => void;
 }
@@ -136,7 +144,7 @@ export const TableComponent = ({
             }
             {[...actions]?.map((act) => (
               <TableCell key={act} className="justify-center" width={50}>
-                {act === 'Edit' && <EditIcon className={"size-6 text-white hover:cursor-pointer"} onClick={() => handleActionRow(item, act)} />}
+                {act === 'Edit' && author && (author.role === 'admin' || (author.role === 'editor' && item.author?._id === author?._id)) && <EditIcon className={"size-6 text-white hover:cursor-pointer"} onClick={() => handleActionRow(item, act)} />}
                 {act === 'Delete' && <TrashIcon className={"size-6 text-red-500 hover:cursor-pointer"} onClick={() => handleActionRow(item, act)} />}
               </TableCell>
             ))}

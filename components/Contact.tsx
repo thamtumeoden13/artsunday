@@ -47,7 +47,7 @@ const Contact = ({ className }: { className?: string }) => {
           from_name: formValues.name,
           to_name: 'Art Sunday',
           from_email: formValues.email,
-          to_email: 'ltv.mrvu@gmail.com',
+          to_email: 'artsunday.vn@gmail.com',
           message: `Số điện thoại: ${formValues.phone} \n Nội dung: ${formValues.message}`
         },
         'ugaUp8luB88w0ka3B'

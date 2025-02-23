@@ -10,7 +10,7 @@ import RouteTable from "./RouteTable";
 
 export const TabManagement = async ({ user }: { user: Author }) => {
 
-  const role = user?.role;
+  const role = user?.role ?? 'viewer';
 
   console.log('TabManagement -> user', user)
 
@@ -20,7 +20,7 @@ export const TabManagement = async ({ user }: { user: Author }) => {
       value: "hang-muc",
       content: (
         <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
-          <ConstructionTable title='Hạng Mục' role={role} />
+          <ConstructionTable title='Hạng Mục'  author={user} />
         </div>
       ),
     },
@@ -29,7 +29,7 @@ export const TabManagement = async ({ user }: { user: Author }) => {
       value: "du-an",
       content: (
         <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
-          <ProjectTable title="Dự Án" role={role} />
+          <ProjectTable title="Dự Án" author={user} />
         </div>
       ),
     },
@@ -38,7 +38,7 @@ export const TabManagement = async ({ user }: { user: Author }) => {
       value: "chi-tiet-bai-viet",
       content: (
         <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
-          <ProjectDetailTable title="Bài Viết" role={role} />
+          <ProjectDetailTable title="Bài Viết" author={user} />
         </div>
       ),
     },
@@ -50,7 +50,7 @@ export const TabManagement = async ({ user }: { user: Author }) => {
           <CategoryTable
             slug="danh-muc-trang-chu"
             title="Danh Mục Trang Chủ"
-            role={role}
+            author={user}
           />
         </div>
       ),
@@ -64,7 +64,7 @@ export const TabManagement = async ({ user }: { user: Author }) => {
             slug="thiet-ke"
             route_slug="danh-muc-thiet-ke"
             title="Danh Mục Thiết Kế"
-            role={role}
+            author={user}
           />
         </div>
       ),
@@ -78,7 +78,7 @@ export const TabManagement = async ({ user }: { user: Author }) => {
             slug="thi-cong"
             route_slug="danh-muc-thi-cong"
             title="Danh Mục Thi Công"
-            role={role}
+            author={user}
           />
         </div>
       ),
@@ -91,7 +91,7 @@ export const TabManagement = async ({ user }: { user: Author }) => {
           <RouteTable
             route_slug="danh-muc-cuoi-trang"
             title="Danh Mục Cuối Trang"
-            role={role}
+            author={user}
           />
         </div>
       ),
@@ -104,7 +104,7 @@ export const TabManagement = async ({ user }: { user: Author }) => {
           <RouteTable
             route_slug="danh-muc-thong-tin"
             title="Danh Mục Thông Tin"
-            role={role}
+            author={user}
           />
         </div>
       ),
@@ -115,7 +115,7 @@ export const TabManagement = async ({ user }: { user: Author }) => {
       content: (
         <div className="relative w-full h-full p-10 text-xl font-bold text-white rounded-2xl md:text-4xl bg-gradient-to-br from-blue-700 to-green-900">
           {role === 'admin' ?
-            <PermissionTable title="Quyền Truy Cập" role={role} />
+            <PermissionTable title="Quyền Truy Cập"  author={user}/>
             : 'Bạn không có quyền truy cập'
           }
         </div>

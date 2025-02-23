@@ -3,14 +3,14 @@
 import React, { useEffect, useState } from 'react'
 import { CONSTRUCTIONS_BY_QUERY } from '@/sanity/lib/queries';
 import { client, clientNoCache } from '@/sanity/lib/client';
-import { Construction } from '@/sanity/types';
+import { Author, Construction } from '@/sanity/types';
 import { useRouter } from 'next/navigation';
 import { deleteById } from '@/lib/actions';
 import { toast } from '@/hooks/use-toast';
 import { PlusCircleIcon } from 'lucide-react';
 import { TableComponent } from './shared/Table';
 
-const ConstructionTable = ({ title, role }: { title: string, role?: string }) => {
+const ConstructionTable = ({ title, author }: { title: string, author: Author }) => {
   const router = useRouter();
 
   const [constructions, setConstructions] = useState<Construction[] | []>([])
@@ -56,12 +56,12 @@ const ConstructionTable = ({ title, role }: { title: string, role?: string }) =>
 
   if (!constructions) return <div>Loading...</div>;
 
-  console.log('ConstructionTable -> role', role)
+  console.log('ConstructionTable -> role', author)
   return (
     <section className={"section_container !justify-items-center !mt-0 overflow-auto h-full"}>
       <div className='absolute top-0 flex items-center justify-end w-full h-24 gap-10 py-4 right-10 '>
         <p>{title}</p>
-        {(role == 'admin' || role == 'editor') && <PlusCircleIcon className={"size-12 text-white hover:cursor-pointer"} onClick={handleAddConstruction} />}
+        {(author.role == 'admin' || author.role == 'editor') && <PlusCircleIcon className={"size-12 text-white hover:cursor-pointer"} onClick={handleAddConstruction} />}
       </div>
       <div className='flex justify-end w-full h-full'  >
         <TableComponent
@@ -69,7 +69,8 @@ const ConstructionTable = ({ title, role }: { title: string, role?: string }) =>
           title={title}
           path='hang-muc'
           overridePath
-          actions={role == 'admin' || role == 'editor' ? ['Edit', 'Delete'] : []}
+          actions={author.role == 'admin' ? ['Edit', 'Delete'] : []}
+          author={author}
           onDelete={handleDelete}
           onEdit={handleEdit}
         />

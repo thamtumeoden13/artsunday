@@ -8,7 +8,7 @@ import { toast } from '@/hooks/use-toast';
 import { deleteById, updateRoleByAdmin } from '@/lib/actions';
 import { TableComponent } from './shared/Table';
 
-const PermissionTable = ({ title, role, }: { title: string, role?: string }) => {
+const PermissionTable = ({ title, author }: { title: string, author: Author }) => {
 
   const [users, setUsers] = useState<Author[] | []>([])
 
@@ -80,6 +80,7 @@ const PermissionTable = ({ title, role, }: { title: string, role?: string }) => 
           customType={'author'}
           title={title}
           actions={['Delete', 'Edit']}
+          author={author}
           onDelete={handleDelete}
           onEdit={handleEdit}
         />

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { CONSTRUCTIONS_BY_QUERY, PROJECTS_BY_CONSTRUCTION_ID_QUERY, PROJECTS_BY_QUERY } from '@/sanity/lib/queries';
 import { client, clientNoCache } from '@/sanity/lib/client';
 import { useRouter } from 'next/navigation';
-import { Construction, Project, ProjectDetail } from '@/sanity/types';
+import { Author, Construction, Project, ProjectDetail } from '@/sanity/types';
 import { deleteById } from '@/lib/actions';
 import { toast } from '@/hooks/use-toast';
 import { PlusCircleIcon } from 'lucide-react';
@@ -13,12 +13,13 @@ import { Combobox, ComboboxDataType } from './shared/ComboBox';
 
 type ProjectTableProps = Omit<Project, 'construction'> & { construction: Construction[] }
 
-const ProjectTable = ({ title, role }: { title: string, role?: string }) => {
+const ProjectTable = ({ title, author }: { title: string,  author: Author }) => {
   const router = useRouter();
   const [selected, setSelected] = useState<ComboboxDataType | null>(null);
 
   const [constructions, setConstructions] = useState<Project[] | []>([])
   const [projects, setProjects] = useState<ProjectTableProps[] | []>([])
+  const [actions, setActions] = useState<string[]>([]);
 
   const getConstructions = async () => {
     const params = { search: null }
@@ -78,6 +79,16 @@ const ProjectTable = ({ title, role }: { title: string, role?: string }) => {
     getProjects();
   }, [selected])
 
+  useEffect(() => {
+    let actions: string[] = [];
+    if (author.role == 'admin') {
+      actions = ['Edit', 'Delete'];
+    } else if (author.role == 'editor') {
+      actions = ['Edit'];
+    }
+    setActions(actions)
+  }, [author])
+
   if (!projects) return <div>Loading...</div>;
 
   return (
@@ -90,7 +101,7 @@ const ProjectTable = ({ title, role }: { title: string, role?: string }) => {
         />
         <div className='flex items-center justify-end gap-10 py-4'>
           <p>{title}</p>
-          {(role == 'admin' || role == 'editor') && <PlusCircleIcon className={"size-12 text-white hover:cursor-pointer"} onClick={handleAddProject} />}
+          {(author.role == 'admin' || author.role == 'editor') && <PlusCircleIcon className={"size-12 text-white hover:cursor-pointer"} onClick={handleAddProject} />}
         </div>
       </div>
       <div className='flex justify-end w-full h-full mt-10'>
@@ -99,7 +110,8 @@ const ProjectTable = ({ title, role }: { title: string, role?: string }) => {
           headers={['Tiêu đề', 'Đường dẫn', 'Ảnh tiêu đề', 'Thứ tự', 'Hạng mục']}
           title={title}
           path='du-an'
-          actions={role == 'admin' || role == 'editor' ? ['Edit', 'Delete'] : []}
+          actions={actions}
+          author={author}
           onDelete={handleDelete}
           onEdit={handleEdit}
         />
