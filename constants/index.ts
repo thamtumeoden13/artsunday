@@ -451,3 +451,57 @@ export const overvewTranslate = {
   designYear: 'Năm Thiết Kế',
   estimatedTime: 'Thời Gian Hoàn Thiện',
 }
+
+  export const adminSideBarLinks = [
+    {
+      img: "/icons/admin/home.svg",
+      route: "/admin",
+      text: "Tổng Quan",
+    },
+    {
+      img: "/icons/admin/book.svg",
+      route: "/admin/hang-muc",
+      text: "Hạng Mục",
+    },
+    {
+      img: "/icons/admin/bookmark.svg",
+      route: "/admin/du-an",
+      text: "Dự Án",
+    },
+    {
+      img: "/icons/admin/receipt.svg",
+      route: "/admin/bai-viet",
+      text: "Bài Viết",
+    },
+    {
+      img: "/icons/admin/calendar.svg",
+      route: "/admin/danh-muc-trang-chu",
+      text: "Danh Mục Trang Chủ",
+    },
+    {
+      img: "/icons/admin/calendar.svg",
+      route: "/admin/danh-muc-thiet-ke",
+      text: "Danh Mục Thiết Kế",
+    },
+    {
+      img: "/icons/admin/calendar.svg",
+      route: "/admin/danh-muc-thi-cong",
+      text: "Danh Mục Thi Công",
+    },
+    {
+      img: "/icons/admin/calendar.svg",
+      route: "/admin/danh-muc-cuoi-trang",
+      text: "Danh Mục Cuối Trang",
+    },
+    {
+      img: "/icons/admin/calendar.svg",
+      route: "/admin/danh-muc-thong-tin",
+      text: "Danh Mục Thông Tin",
+    },
+    {
+      img: "/icons/admin/user.svg",
+      route: "/admin/quyen-truy-cap",
+      text: "Quyền Truy Cập",
+    },
+  ];
+  

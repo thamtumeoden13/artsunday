@@ -60,6 +60,20 @@ export const projectDetail = defineType({
       }),
     }),
     defineField({
+      name:'published',
+      title: 'Published',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Pending', value: 'pending' },
+          { title: 'Approved', value: 'approved' },
+          { title: 'Rejected', value: 'rejected' }, 
+        ],
+      },
+      initialValue: 'pending', // Giá trị mặc định
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'overview',
       type: 'object',
       fields: [

@@ -10,7 +10,7 @@ import { Send } from "lucide-react";
 // import { EarthCanvas } from './canvas'
 // import { SectionWrapper } from '../hoc'
 import styles from "@/styles"
-import { cn, slideIn, staggerContainer } from "@/lib/utils"
+import { cn, staggerContainer } from "@/lib/utils"
 import { TypewriterEffectSmooth } from "./ui/typewriter-effect"
 import { formContactSchema } from "@/lib/validation";
 import z from "zod";

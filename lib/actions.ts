@@ -5,7 +5,7 @@ import { parseServerActionResponse } from "@/lib/utils";
 import slugify from "slugify";
 import { writeClient } from "@/sanity/lib/write-client";
 import { client, clientNoCache } from "@/sanity/lib/client";
-import { CATEGORY_BY_ID_QUERY, CONSTRUCTION_BY_SLUG_QUERY, DESIGN_BY_SLUG_QUERY, PROJECT_BY_SLUG_QUERY, PROJECT_DETAIL_BY_SLUG_QUERY, ROUTE_BY_ID_QUERY } from "@/sanity/lib/queries";
+import { CATEGORY_BY_ID_QUERY, CONSTRUCTION_BY_SLUG_QUERY, DESIGN_BY_SLUG_QUERY, PROJECT_BY_SLUG_QUERY, PROJECT_DETAIL_BY_ID_QUERY, PROJECT_DETAIL_BY_SLUG_QUERY, ROUTE_BY_ID_QUERY } from "@/sanity/lib/queries";
 import { v4 as uuidv4 } from 'uuid';
 import { Author } from "@/sanity/types";
 
@@ -782,3 +782,42 @@ export const updateRoleByAdmin = async (post: Author) => {
     });
   }
 }
+
+export const publishedProjectDetail = async (
+  postId: string,
+  published: string
+): Promise<ReturnType<typeof parseServerActionResponse>> => {
+  const session = await auth();
+
+  if (!session)
+    return parseServerActionResponse({
+      error: "Not signed in",
+      status: "ERROR",
+    });
+
+  const resultQuery = await clientNoCache.fetch(PROJECT_DETAIL_BY_ID_QUERY, {
+    id: postId,
+  });
+
+  try {
+    const projectDetailData = {
+      ...resultQuery,
+      published,
+    };
+    const result = await writeClient
+      .patch(postId)
+      .set({ ...projectDetailData })
+      .commit();
+
+    return parseServerActionResponse({
+      result,
+      error: "",
+      status: "SUCCESS",
+    });
+  } catch (error) {
+    return parseServerActionResponse({
+      error: JSON.stringify(error),
+      status: "ERROR",
+    });
+  }
+};

@@ -150,6 +150,7 @@ export type ProjectDetail = {
   };
   thumbnail?: string;
   image?: string;
+  published?: "pending" | "approved" | "rejected";
   overview?: {
     investor?: string;
     address?: string;

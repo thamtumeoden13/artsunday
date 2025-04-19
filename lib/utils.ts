@@ -244,3 +244,10 @@ export const mdParser = new MarkdownIt({
     return defaultRender(tokens, idx, options, env, self);
   };
 });
+
+export const getInitials = (name: string) => {
+  const [firstName, lastName] = name.split(" ");
+  return `${firstName.charAt(0)}${lastName.charAt(0)}`
+    .toUpperCase()
+    .slice(0, 2);
+};

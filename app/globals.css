@@ -592,6 +592,20 @@
     @apply flex items-center justify-center transition-all duration-500 border-2 rounded-full size-10 border-s4/25 bg-s1/5 hover:border-s4;
   }
 
+  /* Auth */
+  .auth-container {
+    @apply relative flex flex-col-reverse text-light-100 sm:flex-row;
+  }
+
+  .auth-form {
+    @apply flex items-center flex-1 h-full min-h-screen px-5 py-10 my-auto bg-top bg-cover bg-dark-200;
+  }
+
+  .auth-box {
+    @apply flex flex-col max-w-xl gap-6 p-10 mx-auto rounded-lg;
+  }
+
+
   .footer-gradient {
     position: absolute;
     width: 500px;

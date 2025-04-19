@@ -29,14 +29,14 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     <>
       <MarkupSchema path={`du-an/${slug}`} post={data} />
 
-      <section className={"pink_container !min-h-[360px] !mt-4 "}>
+      <section className={"pink_container !min-h-[360px] !mt-10 "}>
         <p className={"tag"}>{formatDate(data?._createdAt)}</p>
 
         <h1 className={"heading"}>{data.title}</h1>
         <p className={"sub-heading !max-w-5xl"}>{data.description}</p>
       </section>
 
-      <section className={"section_container"}>
+      <section className={"section_container max-sm:mt-8"}>
         <CloudinaryImage
           src={data.thumbnail}
           alt={data.subtitle || "Art Sunday"}

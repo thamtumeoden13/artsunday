@@ -358,6 +358,7 @@ export const PROJECT_DETAILS_BY_QUERY =
   thumbnail,
   pitch,
   orderIndex,
+  published,
 }`);
 
 export const PROJECT_DETAIL_BY_ID_QUERY =
@@ -389,6 +390,7 @@ export const PROJECT_DETAIL_BY_ID_QUERY =
   thumbnail,
   pitch,
   orderIndex,
+  published,
 }`);
 
 export const PROJECT_DETAILS_BY_PROJECT_QUERY =
@@ -420,6 +422,7 @@ export const PROJECT_DETAILS_BY_PROJECT_QUERY =
   thumbnail,
   pitch,
   orderIndex,
+  published,
 }`);
 
 export const PROJECT_DETAIL_BY_SLUG_QUERY =
@@ -452,6 +455,7 @@ export const PROJECT_DETAIL_BY_SLUG_QUERY =
   thumbnail,
   pitch,
   orderIndex,
+  published,
 }`);
 
 export const PROJECT_DETAILS_BY_TAG =
@@ -484,6 +488,7 @@ export const PROJECT_DETAILS_BY_TAG =
   thumbnail,
   pitch,
   orderIndex,
+  published,
 }`);
 
 
