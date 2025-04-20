@@ -328,6 +328,39 @@ export const PROJECTS_BY_DESIGN_ID_QUERY =
   orderIndex,
 }`);
 
+export const ALL_ARTICLES_BY_QUERY =
+  defineQuery(`*[_type == "projectDetail" && !defined($search) || ( title match $search)] | order(orderIndex asc, _createdAt desc) {
+  _id, 
+  title, 
+  subtitle,
+  slug,
+  _createdAt,
+  _updatedAt,
+  author->{
+    _id, name, image, bio
+  }, 
+  project->{
+    _id, title, subtitle, description, image, thumbnail, slug
+  }, 
+  overview {
+    investor,
+    address,
+    scale,
+    function,
+    expense,
+    designTeam,
+    designYear,
+    estimatedTime
+  },
+  views,
+  description,
+  image,
+  thumbnail,
+  pitch,
+  orderIndex,
+  published,
+}`);
+
 export const PROJECT_DETAILS_BY_QUERY =
   defineQuery(`*[_type == "projectDetail" && !defined($search) || (project != null && title match $search)] | order(orderIndex asc, _createdAt desc) {
   _id, 

@@ -35,7 +35,8 @@ export const projectDetail = defineType({
     defineField({
       name: 'author',
       type: 'reference',
-      to: { type: 'author' }
+      to: { type: 'author' },
+      weak: true, // Cho phép xóa author mà không bị lỗi
     }),
     defineField({
       name: 'project',

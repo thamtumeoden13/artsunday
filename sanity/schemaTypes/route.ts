@@ -1,4 +1,4 @@
-import { GalleryThumbnailsIcon, RouteIcon } from "lucide-react";
+import { RouteIcon } from "lucide-react";
 import { defineField, defineType } from "sanity";
 
 export const route = defineType({
@@ -21,9 +21,7 @@ export const route = defineType({
     defineField({
       name: "select",
       type: "array",
-      of: [
-        { type: "reference", to: [{ type: "project" }] }
-      ],
+      of: [{ type: "reference", to: [{ type: "project" }], weak: true }],
     }),
   ],
 });

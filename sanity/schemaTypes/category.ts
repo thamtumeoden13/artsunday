@@ -1,4 +1,4 @@
-import { GalleryThumbnailsIcon, ListIcon } from "lucide-react";
+import { GalleryThumbnailsIcon } from "lucide-react";
 import { defineField, defineType } from "sanity";
 
 export const category = defineType({
@@ -22,7 +22,7 @@ export const category = defineType({
       name: "select",
       type: "array",
       of: [
-        { type: "reference", to: [{ type: "projectDetail" }] },
+        { type: "reference", to: [{ type: "projectDetail" }], weak: true },
         // { type: "reference", to: [{ type: "project" }] }
       ],
     }),
