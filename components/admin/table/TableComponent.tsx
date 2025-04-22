@@ -43,16 +43,16 @@ import { ArticleProps } from "../articles/column";
 import { ProjectProps } from "../projects/column";
 import { ConstructionProps } from "../constructions/column";
 
-type DataProps = ArticleProps | ProjectProps | ConstructionProps;
-type TableProps = {
+export type DataProps = ArticleProps | ProjectProps | ConstructionProps;
+export type TableProps = {
   data: DataProps[];
   columns: ColumnDef<DataProps>[];
   title?: string;
   description?: string;
-  openApproveDialog: (request: ArticleProps) => void;
-  openDenyDialog: (request: ArticleProps) => void;
-  openDeleteDialog: (request: ArticleProps) => void;
-  onEdit: (request: ArticleProps) => void;
+  openApproveDialog: (request: DataProps) => void;
+  openDenyDialog: (request: DataProps) => void;
+  openDeleteDialog: (request: DataProps) => void;
+  onEdit: (request: DataProps) => void;
 };
 
 export default function UsersTable({
