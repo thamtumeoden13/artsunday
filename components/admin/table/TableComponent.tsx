@@ -48,18 +48,18 @@ export type TableProps = {
   data: DataProps[];
   columns: ColumnDef<DataProps>[];
   title?: string;
-  description?: string;
-  openApproveDialog: (request: DataProps) => void;
-  openDenyDialog: (request: DataProps) => void;
-  openDeleteDialog: (request: DataProps) => void;
-  onEdit: (request: DataProps) => void;
+  addButton?: string;
+  openApproveDialog?: (request: DataProps) => void;
+  openDenyDialog?: (request: DataProps) => void;
+  openDeleteDialog?: (request: DataProps) => void;
+  onEdit?: (request: DataProps) => void;
 };
 
 export default function UsersTable({
   data,
   columns,
   title = "Articles",
-  description = "Create a new Article",
+  addButton = "",
 }: TableProps) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -111,16 +111,19 @@ export default function UsersTable({
               <ArrowUpDown className="w-4 h-4" />
             </Button>
           </div>
-          <Button
-            className="bg-indigo-600 hover:bg-indigo-700 text-white"
-            asChild
-          >
-            <Link href="/admin/articles/new">
-              <span className="flex items-center">
-                <span className="mr-1">+</span> {description}
-              </span>
-            </Link>
-          </Button>
+          {/* Add button to create a new article */}
+          {addButton && (
+            <Button
+              className="bg-indigo-600 hover:bg-indigo-700 text-white"
+              asChild
+            >
+              <Link href="/admin/articles/new">
+                <span className="flex items-center">
+                  <span className="mr-1">+</span> {addButton}
+                </span>
+              </Link>
+            </Button>
+          )}
         </div>
       </div>
 

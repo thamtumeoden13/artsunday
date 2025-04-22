@@ -66,7 +66,7 @@ export const columns: ColumnDef<ConstructionProps>[] = [
       const request = row.original;
       return (
         <Button variant="link" className="px-2 h-auto p-0 text-blue-500">
-          <Link target="_blank" href={`/bai-viet/${request?.slug?.current}`}>
+          <Link target="_blank" href={`/hang-muc/${request?.slug?.current}`}>
             View Constructions
           </Link>
           <ExternalLink className="w-4 h-4 ml-1" />

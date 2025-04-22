@@ -11,8 +11,10 @@ import { ALL_ARTICLES_BY_QUERY } from "@/sanity/lib/queries";
 import { deleteById, publishedProjectDetail } from "@/lib/actions";
 import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
-import TableComponent, { DataProps } from "@/components/admin/table/TableComponent";
-import { ArticleProps, columns } from "@/components/admin/articles/column";
+import TableComponent, {
+  DataProps,
+} from "@/components/admin/table/TableComponent";
+import { columns } from "@/components/admin/articles/column";
 
 import { type ColumnDef } from "@tanstack/react-table";
 import {
@@ -41,17 +43,17 @@ export default function UsersTable() {
     null
   );
 
-  const openDeleteDialog = (request: ArticleProps) => {
+  const openDeleteDialog = (request: DataProps) => {
     setSelectedRequestId(request._id);
     setDeleteDialogOpen(true);
   };
 
-  const openApproveDialog = (request: ArticleProps) => {
+  const openApproveDialog = (request: DataProps) => {
     setSelectedRequestId(request._id);
     setApproveDialogOpen(true);
   };
 
-  const openDenyDialog = (request: ArticleProps) => {
+  const openDenyDialog = (request: DataProps) => {
     setSelectedRequestId(request._id);
     setDenyDialogOpen(true);
   };
@@ -136,7 +138,7 @@ export default function UsersTable() {
     }
   };
 
-  const handleEdit = async (request: Article) => {
+  const handleEdit = async (request: DataProps) => {
     console.log("TableComponent -> path", request);
     router.push(`/admin/bai-viet/${request.slug?.current}`);
   };
@@ -272,7 +274,7 @@ export default function UsersTable() {
           data={requests}
           columns={_columns as ColumnDef<DataProps>[]}
           title="Tất cả bài viết"
-          description="Tạo bài viết mới"
+          addButton="Tạo bài viết mới"
           openApproveDialog={openApproveDialog}
           openDenyDialog={openDenyDialog}
           openDeleteDialog={openDeleteDialog}

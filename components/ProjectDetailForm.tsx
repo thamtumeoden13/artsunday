@@ -11,7 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { createProjectDetail, updateProjectDetail } from "@/lib/actions";
 import { Combobox, ComboboxDataType } from "./shared/ComboBox";
-import { client, clientNoCache } from "@/sanity/lib/client";
+import {  clientNoCache } from "@/sanity/lib/client";
 import { PROJECTS_BY_QUERY } from "@/sanity/lib/queries";
 import { Author, Project, ProjectDetail } from '@/sanity/types';
 import MDEditorComponent from './shared/MDEditor';
@@ -31,7 +31,7 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
   const { toast } = useToast()
   const router = useRouter();
 
-  const handleFormSubmit = async (prevState: any, formData: FormData) => {
+  const handleFormSubmit = async (prevState: { error: string; status: string }, formData: FormData) => {
     try {
 
       const projectId = selected?._id ?? initValue;

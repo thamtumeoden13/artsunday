@@ -1,16 +1,14 @@
-import React, { Suspense } from 'react'
-import {
-  PROJECT_BY_SLUG_QUERY,
-} from "@/sanity/lib/queries";
+import React from "react";
+import { PROJECT_BY_SLUG_QUERY } from "@/sanity/lib/queries";
 import { client } from "@/sanity/lib/client";
 import { notFound } from "next/navigation";
 import { formatDate } from "@/lib/utils";
 
 import markdownit from "markdown-it";
-import ProjectDetailList from '@/components/ProjectDetailList';
-import { sanityFetch } from '@/sanity/lib/live';
-import MarkupSchema from '@/components/shared/MarkupSchema';
-import { CloudinaryImage } from '@/components/shared/CloudinaryImage';
+import ProjectDetailList from "@/components/ProjectDetailList";
+import { sanityFetch } from "@/sanity/lib/live";
+import MarkupSchema from "@/components/shared/MarkupSchema";
+import { CloudinaryImage } from "@/components/shared/CloudinaryImage";
 
 const md = markdownit();
 
@@ -19,11 +17,14 @@ export const experimental_ppr = true;
 const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const slug = (await params).slug;
 
-  const { data } = await sanityFetch({ query: PROJECT_BY_SLUG_QUERY, params: { slug } })
+  const { data } = await sanityFetch({
+    query: PROJECT_BY_SLUG_QUERY,
+    params: { slug },
+  });
 
   if (!data) return notFound();
 
-  const parsedContent = md.render(data?.pitch || '');
+  const parsedContent = md.render(data?.pitch || "");
 
   return (
     <>
@@ -45,7 +46,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
           className="object-cover w-full mb-10 rounded-lg"
         />
 
-        <ProjectDetailList key={data?._id} post={data} className="!px-0 "/>
+        <ProjectDetailList key={data?._id} post={data} className="!px-0 " />
 
         <div className={"space-y-5 mt-10 max-w-7xl mx-auto"}>
           <h3 className={"text-30-bold"}>Bài Viết Chi Tiết</h3>
@@ -60,21 +61,24 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
         </div>
 
         <hr className={"divider"} />
-
       </section>
     </>
-  )
-}
-export default Page
+  );
+};
+export default Page;
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const slug = (await params).slug;
 
   // Fetch dữ liệu sản phẩm từ API hoặc database
-  const data = await client.fetch(PROJECT_BY_SLUG_QUERY, { slug })
+  const data = await client.fetch(PROJECT_BY_SLUG_QUERY, { slug });
 
   if (!data) return null;
-  
+
   return {
     title: `${data.title} - Art Sunday`,
     description: `${data.description}`,
@@ -92,7 +96,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       ],
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title: `${data.name} - Art Sunday`,
       description: `${data.description}`,
       images: [data.image],

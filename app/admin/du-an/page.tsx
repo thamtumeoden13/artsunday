@@ -32,7 +32,7 @@ export default function UsersTable() {
   const [selectedRequestId, setSelectedRequestId] = useState<string | null>(
     null
   );
-  const openDeleteDialog = (request: ProjectProps) => {
+  const openDeleteDialog = (request: DataProps) => {
     setSelectedRequestId(request._id);
     setDeleteDialogOpen(true);
   };
@@ -61,7 +61,7 @@ export default function UsersTable() {
     }
   };
 
-  const handleEdit = async (request: ProjectProps) => {
+  const handleEdit = async (request: DataProps) => {
     console.log("TableComponent -> path", request);
     router.push(`/admin/du-an/${request.slug?.current}`);
   };
@@ -118,7 +118,7 @@ export default function UsersTable() {
           data={requests}
           columns={_columns as ColumnDef<DataProps>[]}
           title="Tất cả bài viết"
-          description="Tạo bài viết mới"
+          addButton="Tạo bài viết mới"
           // openApproveDialog={openApproveDialog}
           // openDenyDialog={openDenyDialog}
           openDeleteDialog={openDeleteDialog}
