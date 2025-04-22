@@ -1,17 +1,17 @@
 "use client";
 
-import { Author, Project, ProjectDetail } from "@/sanity/types";
+import { Author, Construction, Project } from "@/sanity/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-export type ArticleProps = Omit<ProjectDetail, "author" | "project"> & {
+export type ProjectProps = Omit<Project, "author" | "construction"> & {
   author?: Author;
-} & { project?: Project } & { published?: "pending" | "approved" | "rejected" };
+} & { construction?: Construction };
 
-export const columns: ColumnDef<ArticleProps>[] = [
+export const columns: ColumnDef<ProjectProps>[] = [
   {
     accessorKey: "title",
     header: "Tiêu đề",
@@ -60,18 +60,6 @@ export const columns: ColumnDef<ArticleProps>[] = [
     },
   },
   {
-    accessorKey: "views",
-    header: "Lượt xem",
-    cell: ({ row }) => {
-      const request = row.original;
-      return (
-        <div className="flex items-center justify-center gap-3">
-          <span className="font-medium">{request.views}</span>
-        </div>
-      );
-    },
-  },
-  {
     accessorKey: "view detail",
     header: "Xem chi tiết",
     cell: ({ row }) => {
@@ -79,7 +67,7 @@ export const columns: ColumnDef<ArticleProps>[] = [
       return (
         <Button variant="link" className="px-2 h-auto p-0 text-blue-500">
           <Link target="_blank" href={`/bai-viet/${request?.slug?.current}`}>
-            View Article
+            View Project
           </Link>
           <ExternalLink className="w-4 h-4 ml-1" />
         </Button>

@@ -38,28 +38,29 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Author, Project, ProjectDetail } from "@/sanity/types";
 import Link from "next/link";
+import { ArticleProps } from "../articles/column";
+import { ProjectProps } from "../projects/column";
+import { ConstructionProps } from "../constructions/column";
 
-type Article = Omit<ProjectDetail, "author" | "project"> & {
-  author?: Author;
-} & { project?: Project } & { published?: "pending" | "approved" | "rejected" };
+type DataProps = ArticleProps | ProjectProps | ConstructionProps;
+type TableProps = {
+  data: DataProps[];
+  columns: ColumnDef<DataProps>[];
+  title?: string;
+  description?: string;
+  openApproveDialog: (request: ArticleProps) => void;
+  openDenyDialog: (request: ArticleProps) => void;
+  openDeleteDialog: (request: ArticleProps) => void;
+  onEdit: (request: ArticleProps) => void;
+};
 
 export default function UsersTable({
   data,
   columns,
   title = "Articles",
   description = "Create a new Article",
-}: {
-  data: Article[];
-  columns: ColumnDef<Article>[];
-  title?: string;
-  description?: string;
-  openApproveDialog: (request: Article) => void;
-  openDenyDialog: (request: Article) => void;
-  openDeleteDialog: (request: Article) => void;
-  onEdit: (request: Article) => void;
-}) {
+}: TableProps) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
