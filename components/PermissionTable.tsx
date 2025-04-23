@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { AUTHORS_BY_QUERY } from '@/sanity/lib/queries';
-import { client, clientNoCache } from '@/sanity/lib/client';
+import { clientNoCache } from '@/sanity/lib/client';
 import { Author, ProjectDetail } from '@/sanity/types';
 import { toast } from '@/hooks/use-toast';
 import { deleteById, updateRoleByAdmin } from '@/lib/actions';

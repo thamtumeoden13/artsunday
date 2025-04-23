@@ -24,7 +24,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Check, EditIcon, Trash2 } from "lucide-react";
+import { ArrowUpDown, Check, EditIcon, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 type Article = Omit<ProjectDetail, "author" | "project"> & {
@@ -172,7 +172,22 @@ export default function UsersTable() {
     ...columns,
     {
       accessorKey: "published",
-      header: "Xuất bản",
+      header: ({ column }) => {
+        return (
+          <div className="flex items-center justify-center space-x-2">
+            <Button
+              variant="ghost"
+              onClick={() =>
+                column.toggleSorting(column.getIsSorted() === "asc")
+              }
+              className="p-0 hover:bg-transparent"
+            >
+              <span>Xuất bản</span>
+              <ArrowUpDown className="ml-2 h-4 w-4" />
+            </Button>
+          </div>
+        );
+      },
       cell: ({ row }) => {
         const request = row.original;
         const roleColor =
@@ -273,8 +288,9 @@ export default function UsersTable() {
         <TableComponent
           data={requests}
           columns={_columns as ColumnDef<DataProps>[]}
-          title="Tất cả bài viết"
+          title="Danh sách bài viết"
           addButton="Tạo bài viết mới"
+          addButtonLink="/admin/bai-viet/new"
           openApproveDialog={openApproveDialog}
           openDenyDialog={openDenyDialog}
           openDeleteDialog={openDeleteDialog}

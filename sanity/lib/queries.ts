@@ -554,6 +554,7 @@ export const CATEGORY_BY_SLUG_QUERY =
       image,
       bio
     },
+    views,
     project->{
       _id, title, subtitle, description, image, thumbnail, slug
     }, 

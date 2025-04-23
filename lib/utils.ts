@@ -1,4 +1,4 @@
-import { client, clientNoCache } from "@/sanity/lib/client";
+import { clientNoCache } from "@/sanity/lib/client";
 import { clsx, type ClassValue } from "clsx";
 import MarkdownIt from "markdown-it";
 import { twMerge } from "tailwind-merge";
@@ -199,7 +199,6 @@ export const footerVariants = {
 };
 
 const MAX_SLUG_LENGTH = 100;
-type SearchFn = (subString: string) => Promise<boolean>;
 
 const slugify = ({ title }: { title: string }) => {
   return title
@@ -211,7 +210,7 @@ const slugify = ({ title }: { title: string }) => {
 };
 
 export const generateUniqueSlug = async ({ title, query }: { title: string, query: string }) => {
-  let baseSlug = slugify({ title });
+  const baseSlug = slugify({ title });
   let uniqueSlug = baseSlug;
 
   const { data } = await clientNoCache.fetch(query, { slug: baseSlug });
@@ -251,3 +250,9 @@ export const getInitials = (name: string) => {
     .toUpperCase()
     .slice(0, 2);
 };
+
+
+// Get unique values for filter options
+export const getUniqueValues = <T>(data: T[], key: keyof T) => {
+  return Array.from(new Set(data.map((item) => item[key])))
+}

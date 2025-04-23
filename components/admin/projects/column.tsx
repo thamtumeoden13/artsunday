@@ -3,7 +3,7 @@
 import { Author, Construction, Project } from "@/sanity/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
-import { ExternalLink } from "lucide-react";
+import { ArrowUpDown, ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -14,7 +14,20 @@ export type ProjectProps = Omit<Project, "author" | "construction"> & {
 export const columns: ColumnDef<ProjectProps>[] = [
   {
     accessorKey: "title",
-    header: "Tiêu đề",
+    header: ({ column }) => {
+      return (
+        <div className="flex items-center justify-center space-x-2">
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+            className="p-0 hover:bg-transparent"
+          >
+            <span>Tiêu đề</span>
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        </div>
+      );
+    },
     cell: ({ row }) => {
       const request = row.original;
       return (
@@ -35,7 +48,7 @@ export const columns: ColumnDef<ProjectProps>[] = [
     cell: ({ row }) => {
       const request = row.original;
       return (
-        <div className="flex items-center gap-3">
+        <div className="flex items-center justify-center gap-3">
           <Image
             src={request.thumbnail || "/gsap.svg"}
             alt={request.title!}
@@ -60,17 +73,19 @@ export const columns: ColumnDef<ProjectProps>[] = [
     },
   },
   {
-    accessorKey: "view detail",
-    header: "Xem chi tiết",
+    accessorKey: "viewDetail",
+    header: "Đường dẫn",
     cell: ({ row }) => {
       const request = row.original;
       return (
-        <Button variant="link" className="px-2 h-auto p-0 text-blue-500">
-          <Link target="_blank" href={`/du-an/${request?.slug?.current}`}>
-            View Project
-          </Link>
-          <ExternalLink className="w-4 h-4 ml-1" />
-        </Button>
+        <div className="flex items-center justify-center gap-3">
+          <Button variant="link" className="px-2 h-auto p-0 text-blue-500">
+            <Link target="_blank" href={`/du-an/${request?.slug?.current}`}>
+              <span className="text-sm">Xem chi tiết</span>
+            </Link>
+            <ExternalLink className="w-4 h-4 ml-1" />
+          </Button>
+        </div>
       );
     },
   },

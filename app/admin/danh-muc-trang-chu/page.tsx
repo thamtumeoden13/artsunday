@@ -160,7 +160,7 @@ export default function UsersTable() {
         <TableComponent
           data={data}
           columns={_columns as ColumnDef<DataProps>[]}
-          title="Danh mục trang chủ"
+          title="Danh sách danh mục trang chủ"
           // addButton="Tạo bài viết mới"
           // openApproveDialog={openApproveDialog}
           // openDenyDialog={openDenyDialog}

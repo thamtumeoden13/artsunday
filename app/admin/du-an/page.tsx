@@ -117,8 +117,9 @@ export default function UsersTable() {
         <TableComponent
           data={requests}
           columns={_columns as ColumnDef<DataProps>[]}
-          title="Tất cả bài viết"
-          addButton="Tạo bài viết mới"
+          title="Danh sách dự án"
+          addButton="Tạo dự án mới"
+          addButtonLink="/admin/du-an/new"
           // openApproveDialog={openApproveDialog}
           // openDenyDialog={openDenyDialog}
           openDeleteDialog={openDeleteDialog}

@@ -16,7 +16,7 @@ import { updateRoute } from "@/lib/actions";
 import { toast } from "@/hooks/use-toast";
 import { Combobox, ComboboxDataType } from "@/components/shared/ComboBox";
 import TableComponent, { DataProps } from "@/components/admin/table/TableComponent";
-import { ArticleProps, columns } from "@/components/admin/articles/column";
+import { ProjectProps, columns } from "@/components/admin/projects/column";
 
 export default function UsersTable() {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -120,7 +120,7 @@ export default function UsersTable() {
     getRouteSelect();
   }, []);
 
-  const _columns: ColumnDef<ArticleProps>[] = [
+  const _columns: ColumnDef<ProjectProps>[] = [
     ...columns,
     {
       id: "actions",
@@ -165,7 +165,7 @@ export default function UsersTable() {
         <TableComponent
           data={data}
           columns={_columns as ColumnDef<DataProps>[]}
-          title="Danh mục trang chủ"
+          title="Danh sách danh mục thiết kế"
           // addButton="Tạo bài viết mới"
           // openApproveDialog={openApproveDialog}
           // openDenyDialog={openDenyDialog}

@@ -15,7 +15,6 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import {
-  ArrowUpDown,
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
@@ -42,13 +41,16 @@ import Link from "next/link";
 import { ArticleProps } from "../articles/column";
 import { ProjectProps } from "../projects/column";
 import { ConstructionProps } from "../constructions/column";
+import { AuthorProps } from "../users/column";
+import { Input } from "@/components/ui/input";
 
-export type DataProps = ArticleProps | ProjectProps | ConstructionProps;
+export type DataProps = ArticleProps | ProjectProps | ConstructionProps | AuthorProps;
 export type TableProps = {
   data: DataProps[];
   columns: ColumnDef<DataProps>[];
   title?: string;
   addButton?: string;
+  addButtonLink?: string;
   openApproveDialog?: (request: DataProps) => void;
   openDenyDialog?: (request: DataProps) => void;
   openDeleteDialog?: (request: DataProps) => void;
@@ -60,6 +62,7 @@ export default function UsersTable({
   columns,
   title = "Articles",
   addButton = "",
+  addButtonLink = "",
 }: TableProps) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -69,6 +72,8 @@ export default function UsersTable({
     pageIndex: 0,
     pageSize: 10,
   });
+
+  const [titleFilter, setTitleFilter] = useState("")
 
   const table = useReactTable({
     data,
@@ -91,6 +96,18 @@ export default function UsersTable({
     },
   });
 
+  // Apply title filter
+  const handleTitleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
+    setTitleFilter(value)
+    table.getColumn("title")?.setFilterValue(value)
+
+    // Reset to first page when filtering
+    if (table.getState().pagination.pageIndex !== 0) {
+      table.setPageIndex(0)
+    }
+  }
+
   // Calculate pagination details
   const { pageSize, pageIndex } = table.getState().pagination;
   const totalRows = table.getFilteredRowModel().rows.length;
@@ -103,21 +120,13 @@ export default function UsersTable({
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-xl font-semibold">{title}</h1>
         <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm">
-              A-Z
-            </Button>
-            <Button variant="ghost" size="icon" className="w-8 h-8">
-              <ArrowUpDown className="w-4 h-4" />
-            </Button>
-          </div>
-          {/* Add button to create a new article */}
-          {addButton && (
+          {/* Add button to create a new item */}
+          {addButton && addButtonLink && (
             <Button
               className="bg-indigo-600 hover:bg-indigo-700 text-white"
               asChild
             >
-              <Link href="/admin/articles/new">
+              <Link href={addButtonLink}>
                 <span className="flex items-center">
                   <span className="mr-1">+</span> {addButton}
                 </span>
@@ -125,6 +134,16 @@ export default function UsersTable({
             </Button>
           )}
         </div>
+      </div>
+
+      {/* Filter */}
+      <div className="flex items-center py-4">
+        <Input
+          placeholder="Filter by title..."
+          value={titleFilter}
+          onChange={handleTitleFilterChange}
+          className="max-w-sm"
+        />
       </div>
 
       <div className="border rounded-md">
@@ -168,7 +187,7 @@ export default function UsersTable({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  Không có dữ liệu
                 </TableCell>
               </TableRow>
             )}
