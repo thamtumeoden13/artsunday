@@ -1,12 +1,12 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Author} from "@/sanity/types";
+import { Author } from "@/sanity/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import Image from "next/image";
 
-export type AuthorProps = Author;
+export type AuthorProps = Author & { slug?: { current?: string } };
 
 export const columns: ColumnDef<AuthorProps>[] = [
   {
@@ -14,15 +14,15 @@ export const columns: ColumnDef<AuthorProps>[] = [
     header: ({ column }) => {
       return (
         <div className="flex items-center justify-center space-x-2">
-            <Button
-              variant="ghost"
-              onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-              className="p-0 hover:bg-transparent"
-            >
-              <span>Tiêu đề</span>
-              <ArrowUpDown className="ml-2 h-4 w-4" />
-            </Button>
-          </div>
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+            className="p-0 hover:bg-transparent"
+          >
+            <span>Tiêu đề</span>
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        </div>
       );
     },
     cell: ({ row }) => {
@@ -31,9 +31,9 @@ export const columns: ColumnDef<AuthorProps>[] = [
         <div className="flex items-center gap-3 max-w-80">
           <div className="flex flex-col">
             <span className="font-medium line-clamp-1">{request.name}</span>
-              <span className="text-sm text-muted-foreground line-clamp-1">
-                {request.email}
-              </span>
+            <span className="text-sm text-muted-foreground line-clamp-1">
+              {request.email}
+            </span>
           </div>
         </div>
       );
