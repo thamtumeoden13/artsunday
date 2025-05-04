@@ -133,7 +133,6 @@ export const CONSTRUCTION_BY_SLUG_QUERY =
   orderIndex,
 }`);
 
-
 export const DESIGNS_BY_QUERY =
   defineQuery(`*[_type == "design" && !defined($search) || title match $search || author->name match $search] | order(_createdAt desc) {
   _id, 
@@ -329,7 +328,7 @@ export const PROJECTS_BY_DESIGN_ID_QUERY =
 }`);
 
 export const ALL_ARTICLES_BY_QUERY =
-  defineQuery(`*[_type == "projectDetail" && !defined($search) || ( title match $search)] | order(orderIndex asc, _createdAt desc) {
+  defineQuery(`*[_type == "projectDetail"] | order(orderIndex asc, _createdAt desc) {
   _id, 
   title, 
   subtitle,
@@ -362,7 +361,7 @@ export const ALL_ARTICLES_BY_QUERY =
 }`);
 
 export const PROJECT_DETAILS_BY_QUERY =
-  defineQuery(`*[_type == "projectDetail" && !defined($search) || (project != null && title match $search)] | order(orderIndex asc, _createdAt desc) {
+  defineQuery(`*[_type == "projectDetail" && !defined($search) || (project != null && title match $search && published=='approved' )] | order(orderIndex asc, _createdAt desc) {
   _id, 
   title, 
   subtitle,
@@ -532,7 +531,6 @@ export const PROJECT_DETAIL_VIEWS_QUERY = defineQuery(`
     }
   `);
 
-
 export const CATEGORY_BY_SLUG_QUERY =
   defineQuery(`*[_type == "category" && slug.current == $slug][0]{
   _id,
@@ -643,3 +641,4 @@ export const ROUTE_BY_ID_QUERY =
     }, 
   }
 }`);
+

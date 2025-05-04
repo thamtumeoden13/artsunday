@@ -18,6 +18,7 @@ import TableComponent, {
   DataProps,
 } from "@/components/admin/table/TableComponent";
 import { columns } from "@/components/admin/projects/column";
+import Link from "next/link";
 
 type ProjectProps = Omit<Project, "author" | "construction"> & {
   author?: Author;
@@ -114,12 +115,22 @@ export default function UsersTable() {
   return (
     <>
       <section className="w-full bg-white rounded-2xl p-7">
+        <div className="flex items-center justify-end px-6">
+            <Button
+              className="bg-indigo-600 hover:bg-indigo-700 text-white"
+              asChild
+            >
+              <Link href="/admin/du-an/new">
+                <span className="flex items-center">
+                  <span className="mr-1">+</span> Tạo dự án mới
+                </span>
+              </Link>
+            </Button>
+        </div>
         <TableComponent
           data={requests}
           columns={_columns as ColumnDef<DataProps>[]}
           title="Danh sách dự án"
-          addButton="Tạo dự án mới"
-          addButtonLink="/admin/du-an/new"
           // openApproveDialog={openApproveDialog}
           // openDenyDialog={openDenyDialog}
           openDeleteDialog={openDeleteDialog}

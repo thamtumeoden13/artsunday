@@ -37,14 +37,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import Link from "next/link";
 import { ArticleProps } from "../articles/column";
 import { ProjectProps } from "../projects/column";
 import { ConstructionProps } from "../constructions/column";
 import { AuthorProps } from "../users/column";
 import { Input } from "@/components/ui/input";
 
-export type DataProps = ArticleProps | ProjectProps | ConstructionProps | AuthorProps;
+export type DataProps =
+  | ArticleProps
+  | ProjectProps
+  | ConstructionProps
+  | AuthorProps;
 export type TableProps = {
   data: DataProps[];
   columns: ColumnDef<DataProps>[];
@@ -61,8 +64,6 @@ export default function UsersTable({
   data,
   columns,
   title = "Articles",
-  addButton = "",
-  addButtonLink = "",
 }: TableProps) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -73,7 +74,7 @@ export default function UsersTable({
     pageSize: 10,
   });
 
-  const [titleFilter, setTitleFilter] = useState("")
+  const [titleFilter, setTitleFilter] = useState("");
 
   const table = useReactTable({
     data,
@@ -98,15 +99,15 @@ export default function UsersTable({
 
   // Apply title filter
   const handleTitleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value
-    setTitleFilter(value)
-    table.getColumn("title")?.setFilterValue(value)
+    const value = e.target.value;
+    setTitleFilter(value);
+    table.getColumn("title")?.setFilterValue(value);
 
     // Reset to first page when filtering
     if (table.getState().pagination.pageIndex !== 0) {
-      table.setPageIndex(0)
+      table.setPageIndex(0);
     }
-  }
+  };
 
   // Calculate pagination details
   const { pageSize, pageIndex } = table.getState().pagination;
@@ -117,23 +118,8 @@ export default function UsersTable({
 
   return (
     <div className="w-full p-6 bg-white rounded-lg">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between">
         <h1 className="text-xl font-semibold">{title}</h1>
-        <div className="flex items-center justify-between mb-6">
-          {/* Add button to create a new item */}
-          {addButton && addButtonLink && (
-            <Button
-              className="bg-indigo-600 hover:bg-indigo-700 text-white"
-              asChild
-            >
-              <Link href={addButtonLink}>
-                <span className="flex items-center">
-                  <span className="mr-1">+</span> {addButton}
-                </span>
-              </Link>
-            </Button>
-          )}
-        </div>
       </div>
 
       {/* Filter */}

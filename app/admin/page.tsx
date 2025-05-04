@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
+  ALL_ARTICLES_BY_QUERY,
   CONSTRUCTION_BY_SLUG_QUERY,
-  PROJECT_DETAILS_BY_QUERY,
   PROJECTS_BY_CONSTRUCTION_ID_QUERY,
 } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/live";
@@ -35,11 +35,11 @@ export default async function Dashboard() {
       }),
       sanityFetch({
         query: PROJECTS_BY_CONSTRUCTION_ID_QUERY,
-        params: { id: designId } ,
+        params: { id: designId },
       }),
       sanityFetch({
-        query: PROJECT_DETAILS_BY_QUERY,
-        params: { search: null },
+        query: ALL_ARTICLES_BY_QUERY,
+        params: { published: null },
       }),
     ]);
 
@@ -47,7 +47,7 @@ export default async function Dashboard() {
   const { data: dataDesigns } = searchForDesign;
   const { data: dataArticles } = searchForProjectDetails;
 
-  console.log("dataArticles", typeof dataArticles);
+  console.log("dataArticles", dataArticles[0]);
 
   return (
     <div className="w-full min-h-screen bg-slate-50">

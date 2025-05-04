@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ArrowUpDown, Check, EditIcon, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 type Article = Omit<ProjectDetail, "author" | "project"> & {
   author?: Author;
@@ -285,6 +286,18 @@ export default function UsersTable() {
   return (
     <>
       <section className="w-full bg-white rounded-2xl p-7">
+        <div className="flex items-center justify-end px-6">
+            <Button
+              className="bg-indigo-600 hover:bg-indigo-700 text-white"
+              asChild
+            >
+              <Link href="/admin/bai-viet/new">
+                <span className="flex items-center">
+                  <span className="mr-1">+</span> Tạo bài viết mới
+                </span>
+              </Link>
+            </Button>
+        </div>
         <TableComponent
           data={requests}
           columns={_columns as ColumnDef<DataProps>[]}
