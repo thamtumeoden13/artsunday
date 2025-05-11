@@ -94,7 +94,7 @@ export function ImageGalleryDialog({ isOpen, onClose, images, currentImageSrc }:
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-7xl p-0 bg-black/95 border-none" onKeyDown={handleKeyDown}>
+      <DialogContent className="max-w-[96rem] p-0 bg-black/95 border-none" onKeyDown={handleKeyDown}>
         <div className="relative flex flex-col items-center justify-center min-h-[80vh]">
           <div className="absolute top-2 right-2 flex space-x-2 z-10">
             <Button
@@ -146,7 +146,7 @@ export function ImageGalleryDialog({ isOpen, onClose, images, currentImageSrc }:
             </Button>
 
             <div className="flex flex-col items-center">
-              <div className="overflow-auto max-h-[65vh] max-w-full">
+              <div className="overflow-auto max-h-[90vh] max-w-full">
                 <img
                   src={currentImage.src || "/placeholder.svg"}
                   alt={currentImage.alt}

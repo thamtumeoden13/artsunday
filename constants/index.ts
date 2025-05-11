@@ -27,20 +27,24 @@
 
 export const socials = [
   {
-    name: "twitter",
-    url: "/twitter.svg",
-  },
-  {
-    name: "linkedin",
-    url: "/linkedin.svg",
-  },
-  {
-    name: "instagram",
-    url: "/instagram.svg",
-  },
-  {
     name: "facebook",
     url: "/facebook.svg",
+    href: "https://www.facebook.com/artsunday.vn/",
+  },
+  {
+    name: "youtube",
+    url: "/youtube.svg",
+    href: "https://www.youtube.com/@vinhsunday",
+  },
+  {
+    name: "tiktok",
+    url: "/tiktok.svg",
+    href: "https://www.tiktok.com/@artsunday.vn",
+  },
+  {
+    name: "pinterest",
+    url: "/pinterest.svg",
+    href: "https://www.pinterest.com/artsundayvn/?actingBusinessId=893401782238073606",
   },
 ];
 
