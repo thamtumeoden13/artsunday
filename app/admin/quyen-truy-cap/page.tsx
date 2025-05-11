@@ -130,10 +130,11 @@ export default function UsersTable() {
               ? "text-pink-500"
               : "text-gray-500";
 
+        const disabled = request?.role !== "admin" ? true : false;
         return (
           <div className="flex items-center justify-center gap-2">
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
+              <DropdownMenuTrigger asChild disabled={disabled}>
                 <Button
                   variant="outline"
                   className={`px-4 py-1 h-auto font-medium ${roleColor}`}
@@ -190,6 +191,7 @@ export default function UsersTable() {
       header: "Action",
       cell: ({ row }) => {
         const request = row.original;
+        const disabled = request?.role !== "admin" ? true : false;
 
         return (
           <div className="flex items-center justify-center gap-2">
@@ -197,6 +199,7 @@ export default function UsersTable() {
               variant="ghost"
               size="icon"
               className="w-8 h-8 text-red-500 border border-red-100 rounded-full"
+              disabled={disabled}
               onClick={() => openDeleteDialog(request)}
             >
               <Trash2 className="w-4 h-4" />
@@ -216,7 +219,7 @@ export default function UsersTable() {
           addButton="Tạo hạng mục mới"
           // openApproveDialog={openApproveDialog}
           // openDenyDialog={openDenyDialog}
-          openDeleteDialog={openDeleteDialog}
+          // openDeleteDialog={openDeleteDialog}
         />
       </section>
 
@@ -226,15 +229,18 @@ export default function UsersTable() {
         open={approveDialogOpen}
         onOpenChange={setApproveDialogOpen}
         onConfirm={handleApproveAccount}
+        title="Cấp quyền truy cập"
+        description="Cấp quyền truy cập cho người dùng này. Một email xác nhận sẽ được gửi đi sau khi cấp quyền."
+        buttonTitle="Cấp quyền truy cập"
       />
 
       <DenyAccountDialog
         open={deleteDialogOpen}
         onOpenChange={setDeleteDialogOpen}
         onConfirm={handleDeleteRequest}
-        title="Delete Request"
-        description="Are you sure you want to delete this request? This action cannot be undone."
-        buttonTitle="Delete Request"
+        title="Xóa người dùng"
+        description="Bạn có chắc chắn muốn xóa người dùng này không? Hành động này sẽ không thể hoàn tác."
+        buttonTitle="Xóa người dùng"
       />
     </>
   );

@@ -9,7 +9,8 @@ export const AUTHORS_BY_QUERY =
     email,
     image,
     bio,
-    role
+    role,
+    type,
 }`);
 
 export const AUTHOR_BY_GITHUB_ID_QUERY = defineQuery(`
@@ -21,7 +22,8 @@ export const AUTHOR_BY_GITHUB_ID_QUERY = defineQuery(`
     email,
     image,
     bio,
-    role
+    role,
+    type,
   }
 `);
 
@@ -34,7 +36,8 @@ export const AUTHOR_BY_ID_QUERY = defineQuery(`
     email,
     image,
     bio,
-    role
+    role,
+    type,
 }
 `);
 
@@ -79,7 +82,7 @@ export const PLAYLIST_BY_SLUG_QUERY =
 }`);
 
 export const CONSTRUCTIONS_BY_QUERY =
-  defineQuery(`*[_type == "construction" && !defined($search) || title match $search || author->name match $search] | order(orderIndex asc, _createdAt desc) {
+  defineQuery(`*[_type == "construction" && !defined($search) && isDeleted == false || title match $search] | order(orderIndex asc, _createdAt desc) {
   _id, 
   title, 
   subtitle,
@@ -94,6 +97,8 @@ export const CONSTRUCTIONS_BY_QUERY =
   image,
   thumbnail,
   pitch,
+  isDeleted,
+  
   orderIndex,
 }`);
 
@@ -134,7 +139,7 @@ export const CONSTRUCTION_BY_SLUG_QUERY =
 }`);
 
 export const DESIGNS_BY_QUERY =
-  defineQuery(`*[_type == "design" && !defined($search) || title match $search || author->name match $search] | order(_createdAt desc) {
+  defineQuery(`*[_type == "design" && isDeleted == false && !defined($search) || title match $search] | order(orderIndex asc, _createdAt desc) {
   _id, 
   title, 
   subtitle,
@@ -189,7 +194,7 @@ export const DESIGN_BY_SLUG_QUERY =
 }`);
 
 export const PROJECTS_BY_QUERY =
-  defineQuery(`*[_type == "project" && !defined($search) || title match $search ] | order(orderIndex asc, _createdAt desc) {
+  defineQuery(`*[_type == "project" && !defined($search) && isDeleted == false || title match $search] | order(orderIndex asc, _createdAt desc) {
   _id, 
   title, 
   subtitle,
@@ -207,16 +212,6 @@ export const PROJECTS_BY_QUERY =
   thumbnail,
   pitch,
   orderIndex,
-  overview {
-    investor,
-    address,
-    scale,
-    function,
-    expense,
-    designTeam,
-    designYear,
-    estimatedTime
-  },
   views,
 }`);
 
@@ -263,7 +258,8 @@ export const PROJECT_BY_SLUG_QUERY =
 }`);
 
 export const PROJECT_BY_CONSTRUCTION_SLUGS_QUERY = defineQuery(`
-  *[_type == "project" && references(*[_type == "construction" && slug.current in $slugs]._id)] | order(orderIndex asc, _createdAt desc) {
+  *[_type == "project" && isDeleted == false 
+    && references(*[_type == "construction" && slug.current in $slugs]._id)] | order(orderIndex asc, _createdAt desc) {
     _id, 
     title,
     subtitle,
@@ -281,11 +277,12 @@ export const PROJECT_BY_CONSTRUCTION_SLUGS_QUERY = defineQuery(`
     thumbnail,
     pitch,
     orderIndex,
+    isActived,
   }
 `);
 
 export const PROJECTS_BY_CONSTRUCTION_ID_QUERY = defineQuery(`
-  *[_type == "project" && $id in construction[]._ref] | order(orderIndex asc, _createdAt desc) {
+  *[_type == "project" && isDeleted == false && $id in construction[]._ref] | order(orderIndex asc, _createdAt desc) {
     _id, 
     title, 
     subtitle,
@@ -306,62 +303,10 @@ export const PROJECTS_BY_CONSTRUCTION_ID_QUERY = defineQuery(`
   }
 `);
 
-export const PROJECTS_BY_DESIGN_ID_QUERY =
-  defineQuery(`*[_type == "project" && design._ref == $id] | order(orderIndex asc, _createdAt desc) {
-  _id, 
-  title, 
-  subtitle,
-  slug,
-  _createdAt,
-  author->{
-    _id, name, image, bio
-  }, 
-  design->{
-    _id, title, subtitle, description, image, thumbnail, slug
-  }, 
-  views,
-  description,
-  image,
-  thumbnail,
-  pitch,
-  orderIndex,
-}`);
-
-export const ALL_ARTICLES_BY_QUERY =
-  defineQuery(`*[_type == "projectDetail"] | order(orderIndex asc, _createdAt desc) {
-  _id, 
-  title, 
-  subtitle,
-  slug,
-  _createdAt,
-  _updatedAt,
-  author->{
-    _id, name, image, bio
-  }, 
-  project->{
-    _id, title, subtitle, description, image, thumbnail, slug
-  }, 
-  overview {
-    investor,
-    address,
-    scale,
-    function,
-    expense,
-    designTeam,
-    designYear,
-    estimatedTime
-  },
-  views,
-  description,
-  image,
-  thumbnail,
-  pitch,
-  orderIndex,
-  published,
-}`);
-
 export const PROJECT_DETAILS_BY_QUERY =
-  defineQuery(`*[_type == "projectDetail" && !defined($search) || (project != null && title match $search && published=='approved' )] | order(orderIndex asc, _createdAt desc) {
+  defineQuery(`*[_type == "projectDetail" && !defined($search) 
+        && published == 'approved' && isDeleted == false
+        || (project != null && title match $search)] | order(orderIndex asc, _createdAt desc) {
   _id, 
   title, 
   subtitle,
@@ -391,6 +336,7 @@ export const PROJECT_DETAILS_BY_QUERY =
   pitch,
   orderIndex,
   published,
+  isDeleted,
 }`);
 
 export const PROJECT_DETAIL_BY_ID_QUERY =
@@ -423,10 +369,14 @@ export const PROJECT_DETAIL_BY_ID_QUERY =
   pitch,
   orderIndex,
   published,
+  isDeleted,
+  
 }`);
 
 export const PROJECT_DETAILS_BY_PROJECT_QUERY =
-  defineQuery(`*[_type == "projectDetail" && project._ref == $id]| order(orderIndex asc, _createdAt desc) {
+  defineQuery(`*[_type == "projectDetail" 
+    && isDeleted == false && published == 'approved'
+    && project._ref == $id]| order(orderIndex asc, _createdAt desc) {
   _id,
   title,
   subtitle,
@@ -455,6 +405,8 @@ export const PROJECT_DETAILS_BY_PROJECT_QUERY =
   pitch,
   orderIndex,
   published,
+  isDeleted,
+  
 }`);
 
 export const PROJECT_DETAIL_BY_SLUG_QUERY =
@@ -488,10 +440,13 @@ export const PROJECT_DETAIL_BY_SLUG_QUERY =
   pitch,
   orderIndex,
   published,
+  isDeleted,
 }`);
 
 export const PROJECT_DETAILS_BY_TAG =
-  defineQuery(`*[_type == "projectDetail" && defined($tag) && _id != $id && ($tag match tags || tags match $tag)] | order(orderIndex asc, _createdAt desc) {
+  defineQuery(`*[_type == "projectDetail" && defined($tag) 
+    && isDeleted == false && published == 'approved'
+    && _id != $id && ($tag match tags || tags match $tag)] | order(orderIndex asc, _createdAt desc) {
   _id,
   title,
   subtitle,
@@ -521,8 +476,8 @@ export const PROJECT_DETAILS_BY_TAG =
   pitch,
   orderIndex,
   published,
+  isDeleted,
 }`);
-
 
 export const PROJECT_DETAIL_VIEWS_QUERY = defineQuery(`
   *[_type == "projectDetail" && _id == $id][0]{
@@ -642,3 +597,80 @@ export const ROUTE_BY_ID_QUERY =
   }
 }`);
 
+// Admin QUERIES
+
+export const ALL_CONSTRUCTIONS_BY_QUERY =
+  defineQuery(`*[_type == "construction"] | order(orderIndex asc, _createdAt desc) {
+  _id, 
+  title, 
+  subtitle,
+  slug,
+  _createdAt,
+  _updatedAt,
+  author->{
+    _id, name, image, bio, role
+  }, 
+  views,
+  description,
+  image,
+  thumbnail,
+  pitch,
+  orderIndex,
+  isDeleted,
+}`);
+
+export const ALL_PROJECTS_BY_QUERY =
+  defineQuery(`*[_type == "project"] | order(orderIndex asc, _createdAt desc) {
+  _id, 
+  title, 
+  subtitle,
+  slug,
+  _createdAt,
+  _updatedAt,
+  author->{
+    _id, name, image, bio, role
+  },
+  construction[]->{
+    _id, title, subtitle, description, image, thumbnail, slug
+  },
+  description,
+  image,
+  thumbnail,
+  pitch,
+  orderIndex,
+  isDeleted,
+}`);
+
+export const ALL_ARTICLES_BY_QUERY =
+  defineQuery(`*[_type == "projectDetail"] | order(orderIndex asc, _createdAt desc) {
+  _id, 
+  title, 
+  subtitle,
+  slug,
+  _createdAt,
+  _updatedAt,
+  author->{
+    _id, name, image, bio, role
+  }, 
+  project->{
+    _id, title, subtitle, description, image, thumbnail, slug
+  }, 
+  overview {
+    investor,
+    address,
+    scale,
+    function,
+    expense,
+    designTeam,
+    designYear,
+    estimatedTime
+  },
+  views,
+  description,
+  image,
+  thumbnail,
+  pitch,
+  orderIndex,
+  published,
+  isDeleted,
+}`);

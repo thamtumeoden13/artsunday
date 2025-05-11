@@ -117,7 +117,7 @@ export default function UsersTable({
   const endRow = Math.min((pageIndex + 1) * pageSize, totalRows);
 
   return (
-    <div className="w-full p-6 bg-white rounded-lg">
+    <div className="w-full p-2 bg-white rounded-lg">
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-semibold">{title}</h1>
       </div>
@@ -125,7 +125,7 @@ export default function UsersTable({
       {/* Filter */}
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter by title..."
+          placeholder="Tìm kiếm theo tiêu đề..."
           value={titleFilter}
           onChange={handleTitleFilterChange}
           className="max-w-sm"

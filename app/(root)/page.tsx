@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import SearchForm from "@/components/SearchForm";
 import { client } from "@/sanity/lib/client";
-import { CATEGORY_BY_SLUG_QUERY, PROJECT_BY_CONSTRUCTION_SLUGS_QUERY, PROJECTS_BY_QUERY, } from "@/sanity/lib/queries";
+import { CATEGORY_BY_SLUG_QUERY, PROJECT_BY_CONSTRUCTION_SLUGS_QUERY, } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import MarkupSchema from "@/components/shared/MarkupSchema";
 import { AppleCardsCarousel } from "@/components/AppleCardsCarousel";
@@ -18,7 +18,7 @@ export default async function Home({ searchParams }: {
 
   const { data: searchForProjects } = await sanityFetch({ query: PROJECT_BY_CONSTRUCTION_SLUGS_QUERY, params });
 
-  console.log(searchForProjects);
+  console.log("searchForProjects", searchForProjects);
 
   const { select: homeHeroPost } = await client.fetch(CATEGORY_BY_SLUG_QUERY, { slug: "danh-muc-trang-chu" });
 

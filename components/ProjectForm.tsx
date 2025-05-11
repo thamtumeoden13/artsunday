@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import React, { useState, useActionState, useEffect } from 'react'
+import React, { useState, useActionState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -10,28 +10,29 @@ import z from "zod";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { createProject, updateProject } from "@/lib/actions";
-import { client, clientNoCache } from "@/sanity/lib/client";
+import { clientNoCache } from "@/sanity/lib/client";
 import { CONSTRUCTIONS_BY_QUERY } from "@/sanity/lib/queries";
-import { Author, Construction, Project } from '@/sanity/types';
-import { MultiSelect, MultiSelectOption } from './shared/MultiSelect';
-import MDEditorComponent from './shared/MDEditor';
-import { CloudinaryImage } from './shared/CloudinaryImage';
+import { Author, Construction, Project } from "@/sanity/types";
+import { MultiSelect, MultiSelectOption } from "./shared/MultiSelect";
+import MDEditorComponent from "./shared/MDEditor";
+import { CloudinaryImage } from "./shared/CloudinaryImage";
 
 type FormDataType = Omit<Project, "author" | "construction">;
-type ProjectFormType = Omit<Project, "author" | "construction"> & { author?: Author } & { construction?: Construction[] };
+type ProjectFormType = Omit<Project, "author" | "construction"> & {
+  author?: Author;
+} & { construction?: Construction[] };
 
 const ProjectForm = ({ post }: { post?: ProjectFormType }) => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [pitch, setPitch] = useState<string>("");
   const [formData, setFormData] = useState<FormDataType | null>(null);
   const [selected, setSelected] = useState<string[]>([]);
-  const [constructions, setConstructions] = useState<MultiSelectOption[]>([])
-  const { toast } = useToast()
+  const [constructions, setConstructions] = useState<MultiSelectOption[]>([]);
+  const { toast } = useToast();
   const router = useRouter();
 
   const handleFormSubmit = async (prevState: any, formDataSubmit: FormData) => {
     try {
-
       const formValues = {
         title: formDataSubmit.get("title") as string,
         subtitle: formDataSubmit.get("subtitle") as string,
@@ -41,38 +42,44 @@ const ProjectForm = ({ post }: { post?: ProjectFormType }) => {
         orderIndex: formDataSubmit.get("orderIndex") as string,
         constructionIds: selected,
         pitch,
-      }
+      };
 
       await formProjectSchema.parseAsync(formValues);
 
-      console.log('handleFormSubmit', formValues);
+      console.log("handleFormSubmit", formValues);
 
       const response = post
-        ? await updateProject(prevState, formDataSubmit, pitch, selected, formData?._id!)
+        ? await updateProject(
+            prevState,
+            formDataSubmit,
+            pitch,
+            selected,
+            formData!._id!
+          )
         : await createProject(prevState, formDataSubmit, pitch, selected);
 
       if (response.status === "SUCCESS") {
         toast({
           title: "Success",
           description: "Your project pitch has been created successfully",
-        })
+        });
       }
 
       // router.push(`/du-an/${selected?.slug?.current}`)
-      router.push(`/auth`)
+      router.push(`/auth`);
 
       return response;
     } catch (error) {
       if (error instanceof z.ZodError) {
         const fieldErrors = error.flatten().fieldErrors;
-        console.log(fieldErrors)
+        console.log(fieldErrors);
         setErrors(fieldErrors as unknown as Record<string, string>);
 
         toast({
           title: "Error",
           description: "Please check your inputs and try again",
           variant: "destructive",
-        })
+        });
 
         return { ...prevState, error: "Validation failed", status: "ERROR" };
       }
@@ -81,68 +88,82 @@ const ProjectForm = ({ post }: { post?: ProjectFormType }) => {
         title: "Error",
         description: "An unexpected error has occurred",
         variant: "destructive",
-      })
+      });
 
       return {
         ...prevState,
         error: "An unexpected error has occurred",
         status: "ERROR",
-      }
+      };
     }
-  }
+  };
 
-  const [state, formAction, isPending] = useActionState(
-    handleFormSubmit,
-    {
-      error: "",
-      status: "INITIAL",
-    }
-  );
+  const [state, formAction, isPending] = useActionState(handleFormSubmit, {
+    error: "",
+    status: "INITIAL",
+  });
 
-  const handleChangeForm = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-
+  const handleChangeForm = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({
       ...formData!,
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
   useEffect(() => {
     const getConstructions = async () => {
-      const result = await clientNoCache.fetch(CONSTRUCTIONS_BY_QUERY, { search: null });
+      const result = await clientNoCache.fetch(CONSTRUCTIONS_BY_QUERY, {
+        search: null,
+      });
 
-      setConstructions(result || [])
-    }
+      setConstructions(result || []);
+    };
 
     getConstructions();
-
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (post) {
-      const { _id, title, subtitle, description, thumbnail, image, pitch, construction, orderIndex } = post;
+      const {
+        _id,
+        title,
+        subtitle,
+        description,
+        thumbnail,
+        image,
+        pitch,
+        construction,
+        orderIndex,
+      } = post;
 
-      setFormData({ ...formData!, _id, title, subtitle, description, thumbnail, image, orderIndex });
+      setFormData({
+        ...formData!,
+        _id,
+        title,
+        subtitle,
+        description,
+        thumbnail,
+        image,
+        orderIndex,
+      });
 
       if (pitch) {
-        setPitch(pitch)
+        setPitch(pitch);
       }
 
       if (construction) {
-        const initValue = construction?.map(item => item._id) || [];
-        console.log('initValue', initValue)
-        setSelected(initValue)
+        const initValue = construction?.map((item) => item._id) || [];
+        console.log("initValue", initValue);
+        setSelected(initValue);
       }
-
     }
-  }, [post])
+  }, [post]);
 
   return (
-    <form
-      action={formAction}
-      className={"startup-form"}
-    >
-      <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+    <form action={formAction} className={"startup-form"}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
           <label htmlFor="title" className={"startup-form_label"}>
             {"Tiêu Đề"}
@@ -179,13 +200,12 @@ const ProjectForm = ({ post }: { post?: ProjectFormType }) => {
         </div>
       </div>
 
-      <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
           <label htmlFor="thumbnail" className={"startup-form_label"}>
             {"Ảnh Đại Diện(tỉ lệ 3:4)"}
           </label>
           <div>
-
             <Input
               id={"thumbnail"}
               name={"thumbnail"}
@@ -196,7 +216,7 @@ const ProjectForm = ({ post }: { post?: ProjectFormType }) => {
               onChange={handleChangeForm}
             />
             {formData?.thumbnail && (
-              <div className='w-[280px] h-[200px] overflow-hidden mt-2 p-2 border border-black-100'>
+              <div className="w-[280px] h-[200px] overflow-hidden mt-2 p-2 border border-black-100">
                 <CloudinaryImage
                   src={formData.thumbnail}
                   alt={"Project Thumbnail URL"}
@@ -217,7 +237,6 @@ const ProjectForm = ({ post }: { post?: ProjectFormType }) => {
             {"Hình Ảnh(tỉ lệ 6:9)"}
           </label>
           <div>
-
             <Input
               id={"image"}
               name={"image"}
@@ -229,7 +248,7 @@ const ProjectForm = ({ post }: { post?: ProjectFormType }) => {
             />
 
             {formData?.image && (
-              <div className='w-[116px] h-[200px] overflow-hidden mt-2 p-2 border border-black-100'>
+              <div className="w-[116px] h-[200px] overflow-hidden mt-2 p-2 border border-black-100">
                 <CloudinaryImage
                   src={formData.image}
                   alt={"Project Image URL"}
@@ -239,15 +258,13 @@ const ProjectForm = ({ post }: { post?: ProjectFormType }) => {
                 />
               </div>
             )}
-
           </div>
           {errors.image && (
             <p className={"startup-form_error"}>{errors.image}</p>
           )}
         </div>
-
       </div>
-      <div className='grid grid-cols-1 lg:grid-cols-[1fr_400px_200px] gap-4'>
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px_200px] gap-4">
         <div>
           <label htmlFor="description" className={"startup-form_label"}>
             {"Mô Tả"}
@@ -297,7 +314,7 @@ const ProjectForm = ({ post }: { post?: ProjectFormType }) => {
             className={"startup-form_input"}
             placeholder={"Order Index"}
             required
-            type='number'
+            type="number"
             min={0}
             value={formData?.orderIndex}
             onChange={handleChangeForm}
@@ -326,6 +343,6 @@ const ProjectForm = ({ post }: { post?: ProjectFormType }) => {
         <Send className={"size-6 ml-2"} />
       </Button>
     </form>
-  )
-}
-export default ProjectForm
+  );
+};
+export default ProjectForm;

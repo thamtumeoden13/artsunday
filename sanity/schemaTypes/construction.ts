@@ -66,15 +66,18 @@ export const construction = defineType({
     }),
     defineField({
       name: 'isActived',
-      type: 'boolean'
+      type: 'boolean',
+      initialValue: true,
     }),
     defineField({
       name: 'isDeleted',
-      type: 'boolean'
+      type: 'boolean',
+      initialValue: false,
     }),
     defineField({
       name: 'createdAt',
       type: 'date',
+      initialValue: new Date().toISOString(),
     }),
   ],
 })

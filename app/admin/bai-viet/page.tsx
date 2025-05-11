@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/confirmation-dialogs";
 import { clientNoCache } from "@/sanity/lib/client";
 import { ALL_ARTICLES_BY_QUERY } from "@/sanity/lib/queries";
-import { deleteById, publishedProjectDetail } from "@/lib/actions";
+import { publishedProjectDetail, updateIsDeleted } from "@/lib/actions";
 import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import TableComponent, {
@@ -24,7 +24,13 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ArrowUpDown, Check, EditIcon, Trash2 } from "lucide-react";
+import {
+  ArrowUpDown,
+  Check,
+  EditIcon,
+  Trash2,
+  LucideRecycle,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -32,7 +38,7 @@ type Article = Omit<ProjectDetail, "author" | "project"> & {
   author?: Author;
 } & { project?: Project } & { published?: "pending" | "approved" | "rejected" };
 
-export default function UsersTable() {
+const ArticlesTable = () => {
   const router = useRouter();
 
   const [requests, setRequests] = useState<Article[]>([]);
@@ -40,11 +46,13 @@ export default function UsersTable() {
   const [denyDialogOpen, setDenyDialogOpen] = useState(false);
   const [approveDialogOpen, setApproveDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [isDeleted, setIsDeleted] = useState<boolean>(false);
   const [selectedRequestId, setSelectedRequestId] = useState<string | null>(
     null
   );
 
-  const openDeleteDialog = (request: DataProps) => {
+  const openDeleteDialog = (request: DataProps, isDeleted: boolean) => {
+    setIsDeleted(isDeleted);
     setSelectedRequestId(request._id);
     setDeleteDialogOpen(true);
   };
@@ -119,7 +127,10 @@ export default function UsersTable() {
     setDeleteDialogOpen(false);
     setSelectedRequestId(null);
     if (selectedRequestId) {
-      const { error, status } = await deleteById(selectedRequestId);
+      const { error, status } = await updateIsDeleted(
+        selectedRequestId,
+        isDeleted
+      );
       if (status === "ERROR") {
         console.error("ProjectTable -> handleDelete", error);
         toast({
@@ -191,20 +202,24 @@ export default function UsersTable() {
       },
       cell: ({ row }) => {
         const request = row.original;
-        const roleColor =
+        const color =
           request.published === "approved"
             ? "text-green-500"
             : request.published === "rejected"
               ? "text-pink-500"
               : "text-gray-500";
 
+        console.log("request", request);
+
+        const disabled = request.author?.role !== "admin" ? true : false;
+
         return (
           <div className="w-20">
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
+              <DropdownMenuTrigger asChild disabled={disabled}>
                 <Button
                   variant="outline"
-                  className={`px-4 py-1 h-auto font-medium ${roleColor}`}
+                  className={`px-4 py-1 h-auto font-medium ${color}`}
                 >
                   {request.published}
                 </Button>
@@ -259,20 +274,36 @@ export default function UsersTable() {
       cell: ({ row }) => {
         const request = row.original;
 
+        const disabled = request.author?.role !== "admin" ? true : false;
+        const allowEdit = ["admin", "editor"].includes(request.author!.role!) || false;
         return (
           <div className="flex items-center justify-center gap-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="w-8 h-8 text-red-500 border border-red-100 rounded-full"
-              onClick={() => openDeleteDialog(request)}
-            >
-              <Trash2 className="w-4 h-4" />
-            </Button>
+            {request.isDeleted ? (
+              <Button
+                variant="ghost"
+                size="icon"
+                className="w-8 h-8 text-gray-500 border border-gray-100 rounded-full"
+                disabled={disabled}
+                onClick={() => openDeleteDialog(request, false)}
+              >
+                <LucideRecycle className="w-4 h-4" />
+              </Button>
+            ) : (
+              <Button
+                variant="ghost"
+                size="icon"
+                className="w-8 h-8 text-red-500 border border-red-100 rounded-full"
+                disabled={disabled}
+                onClick={() => openDeleteDialog(request, true)}
+              >
+                <Trash2 className="w-4 h-4" />
+              </Button>
+            )}
             <Button
               variant="ghost"
               size="icon"
               className="w-8 h-8 text-blue-500 border border-blue-100 rounded-full"
+              disabled={!allowEdit}
               onClick={() => handleEdit(request)}
             >
               <EditIcon className="w-4 h-4" />
@@ -285,28 +316,27 @@ export default function UsersTable() {
 
   return (
     <>
-      <section className="w-full bg-white rounded-2xl p-7">
-        <div className="flex items-center justify-end px-6">
-            <Button
-              className="bg-indigo-600 hover:bg-indigo-700 text-white"
-              asChild
-            >
-              <Link href="/admin/bai-viet/new">
-                <span className="flex items-center">
-                  <span className="mr-1">+</span> Tạo bài viết mới
-                </span>
-              </Link>
-            </Button>
+      <section className="w-full bg-white rounded-2xl p-4 relative">
+        <div className="flex items-center justify-end px-6 absolute right-0 top-4">
+          <Button
+            className="bg-indigo-600 hover:bg-indigo-700 text-white"
+            asChild
+          >
+            <Link href="/admin/bai-viet/new">
+              <span className="flex items-center">
+                <span className="mr-1">+</span> Tạo bài viết mới
+              </span>
+            </Link>
+          </Button>
         </div>
         <TableComponent
           data={requests}
           columns={_columns as ColumnDef<DataProps>[]}
           title="Danh sách bài viết"
-          addButton="Tạo bài viết mới"
-          addButtonLink="/admin/bai-viet/new"
-          openApproveDialog={openApproveDialog}
-          openDenyDialog={openDenyDialog}
-          openDeleteDialog={openDeleteDialog}
+          // addButton="Tạo bài viết mới"
+          // addButtonLink="/admin/bai-viet/new"
+          // openApproveDialog={openApproveDialog}
+          // openDenyDialog={openDenyDialog}
           onEdit={handleEdit}
         />
       </section>
@@ -316,22 +346,34 @@ export default function UsersTable() {
         open={denyDialogOpen}
         onOpenChange={setDenyDialogOpen}
         onConfirm={handleRejectAccount}
+        title="Từ chối bài viết"
+        description="Bạn có chắc chắn muốn từ chối bài viết này không?"
+        buttonTitle="Từ chối bài viết"
       />
 
       <ApproveAccountDialog
         open={approveDialogOpen}
         onOpenChange={setApproveDialogOpen}
         onConfirm={handleApproveAccount}
+        title="Phê duyệt bài viết"
+        description="Bạn có chắc chắn muốn phê duyệt bài viết này không?"
+        buttonTitle="Phê duyệt bài viết"
       />
 
       <DenyAccountDialog
         open={deleteDialogOpen}
         onOpenChange={setDeleteDialogOpen}
         onConfirm={handleDeleteRequest}
-        title="Delete Request"
-        description="Are you sure you want to delete this request? This action cannot be undone."
-        buttonTitle="Delete Request"
+        title={!isDeleted ? "Khôi phục bài viết" : "Xóa bài viết"}
+        description={
+          !isDeleted
+            ? "Banh có chắc chắn muốn khôi phục bài viết này không?"
+            : "Bạn có chắc chắn muốn xóa bài viết này không?"
+        }
+        buttonTitle={!isDeleted ? "Khôi phục bài viết" : "Xóa bài viết"}
       />
     </>
   );
-}
+};
+
+export default ArticlesTable;

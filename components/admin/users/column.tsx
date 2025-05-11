@@ -13,7 +13,7 @@ export const columns: ColumnDef<AuthorProps>[] = [
     accessorKey: "title",
     header: ({ column }) => {
       return (
-        <div className="flex items-center justify-center space-x-2">
+        <div className="flex items-center space-x-2">
           <Button
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
@@ -28,13 +28,25 @@ export const columns: ColumnDef<AuthorProps>[] = [
     cell: ({ row }) => {
       const request = row.original;
       return (
-        <div className="flex items-center gap-3 max-w-80">
+        <div className="flex items-center gap-3 ">
           <div className="flex flex-col">
             <span className="font-medium line-clamp-1">{request.name}</span>
             <span className="text-sm text-muted-foreground line-clamp-1">
               {request.email}
             </span>
           </div>
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: "type",
+    header: "Loại tài khoản",
+    cell: ({ row }) => {
+      const request = row.original;
+      return (
+        <div className="flex items-center justify-center">
+          <span className="line-clamp-2">{request.type}</span>
         </div>
       );
     },

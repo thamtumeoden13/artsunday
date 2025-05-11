@@ -4,7 +4,7 @@ import { User } from "@auth/core/types";
 
 const Header = ({
   user,
-  subtitle = "Monitor all of your projects and tasks here",
+  subtitle = "",
   onSearch,
 }: {
   user: User;
@@ -15,7 +15,7 @@ const Header = ({
     <header className="admin-header">
       <div>
         <h1 className="text-2xl font-semibold text-gray-900">
-          Welcome, {user?.name}
+          Xin Chào, {user?.name}
         </h1>
         {subtitle && <p className="text-gray-500">{subtitle}</p>}
       </div>

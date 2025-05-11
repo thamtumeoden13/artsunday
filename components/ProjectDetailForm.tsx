@@ -65,7 +65,7 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
       }
 
       // router.push(`/bai-viet/${selected?.slug?.current}`)
-      router.push(`/auth`)
+      router.push(`/admin/bai-viet`)
       return response;
     } catch (error) {
 

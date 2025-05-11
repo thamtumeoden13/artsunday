@@ -141,8 +141,8 @@ export default function UsersTable() {
 
   return (
     <>
-      <section className="w-full bg-white rounded-2xl p-7">
-        <div className="flex items-center justify-end mb-6 gap-3">
+      <section className="w-full bg-white rounded-2xl p-4 relative">
+        <div className="flex items-center justify-end mb-6 gap-3 absolute top-4 right-4">
           <Combobox
             data={(projects as ComboboxDataType[]) || []}
             className={

@@ -104,19 +104,24 @@ export const projectDetail = defineType({
     }),
     defineField({
       name: 'onlyShowRouter',
-      type: 'boolean'
+      type: 'boolean',
+      initialValue: false,
     }),
     defineField({
       name: 'isActived',
-      type: 'boolean'
+      type: 'boolean',
+      initialValue: true,
     }),
     defineField({
       name: 'isDeleted',
-      type: 'boolean'
+      type: 'boolean',
+      initialValue: false,
     }),
     defineField({
       name: 'createdAt',
       type: 'date',
+      initialValue: new Date().toISOString(),
     }),
   ],
+
 })
