@@ -68,6 +68,8 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
           width={760}
           height={540}
           quality={100}
+          q_auto={false}
+          f_auto={false}
           className="object-cover w-full mb-10 rounded-lg"
         />
         <div className="flex flex-col gap-4 pb-4 border-b border-black-100">
