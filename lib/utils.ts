@@ -1,7 +1,9 @@
-import { clientNoCache } from "@/sanity/lib/client";
+// import { clientNoCache } from "@/sanity/lib/client";
 import { clsx, type ClassValue } from "clsx";
 import MarkdownIt from "markdown-it";
 import { twMerge } from "tailwind-merge";
+import slugify from "slugify";
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -198,31 +200,31 @@ export const footerVariants = {
   },
 };
 
-const MAX_SLUG_LENGTH = 100;
+// const MAX_SLUG_LENGTH = 100;
 
-const slugify = ({ title }: { title: string }) => {
-  return title
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
-    .replace(/\s+/g, '-') // Replace spaces with dashes
-    .replace(/-+/g, '-'); // Remove multiple dashes
-};
+// const slugify = ({ title }: { title: string }) => {
+//   return title
+//     .toLowerCase()
+//     .trim()
+//     .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
+//     .replace(/\s+/g, '-') // Replace spaces with dashes
+//     .replace(/-+/g, '-'); // Remove multiple dashes
+// };
 
-export const generateUniqueSlug = async ({ title, query }: { title: string, query: string }) => {
-  const baseSlug = slugify({ title });
-  let uniqueSlug = baseSlug;
+// export const generateUniqueSlug = async ({ title, query }: { title: string, query: string }) => {
+//   const baseSlug = slugify({ title });
+//   let uniqueSlug = baseSlug;
 
-  const { data } = await clientNoCache.fetch(query, { slug: baseSlug });
+//   const { data } = await clientNoCache.fetch(query, { slug: baseSlug });
 
-  if (data) {
-    uniqueSlug = `${baseSlug}-${data.length}`;
-  }
+//   if (data) {
+//     uniqueSlug = `${baseSlug}-${data.length}`;
+//   }
 
-  uniqueSlug = uniqueSlug.slice(0, MAX_SLUG_LENGTH);
+//   uniqueSlug = uniqueSlug.slice(0, MAX_SLUG_LENGTH);
 
-  return uniqueSlug;
-};
+//   return uniqueSlug;
+// };
 
 export const mdParser = new MarkdownIt({
   html: true,
@@ -255,4 +257,17 @@ export const getInitials = (name: string) => {
 // Get unique values for filter options
 export const getUniqueValues = <T>(data: T[], key: keyof T) => {
   return Array.from(new Set(data.map((item) => item[key])))
+}
+
+export function slugifyVi(input: string) {
+  // Manually replace Đ/đ before slugifying
+  const replaced = input.replace(/Đ/g, "D").replace(/đ/g, "d");
+  return slugify(replaced, {
+    lower: true,
+    strict: true,
+    locale: "vi",
+    remove: undefined,
+    trim: true,
+    replacement: "-",
+  });
 }

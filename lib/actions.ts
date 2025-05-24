@@ -1,8 +1,7 @@
 "use server";
 
 import { auth } from "@/auth";
-import { parseServerActionResponse } from "@/lib/utils";
-import slugify from "slugify";
+import { parseServerActionResponse, slugifyVi } from "@/lib/utils";
 import { writeClient } from "@/sanity/lib/write-client";
 import { clientNoCache } from "@/sanity/lib/client";
 import {
@@ -33,7 +32,7 @@ export const createPitch = async (
     Array.from(form).filter(([key]) => key !== "pitch")
   );
 
-  const slug = slugify(title as string, { lower: true, strict: true });
+  const slug = slugifyVi(title as string);
 
   try {
     const startup = {
@@ -87,7 +86,7 @@ export const createConstruction = async (
   const { _id, title, subtitle, description, thumbnail, image, orderIndex } =
     Object.fromEntries(Array.from(form).filter(([key]) => key !== "pitch"));
 
-  const baseSlug = slugify(title as string, { lower: true, strict: true });
+  const baseSlug = slugifyVi(title as string);
   let uniqueSlug = baseSlug;
 
   const resultQuery = await clientNoCache.fetch(CONSTRUCTION_BY_SLUG_QUERY, {
@@ -158,7 +157,7 @@ export const updateConstruction = async (
   const { title, subtitle, description, thumbnail, image, orderIndex } =
     Object.fromEntries(Array.from(form).filter(([key]) => key !== "pitch"));
 
-  const baseSlug = slugify(title as string, { lower: true, strict: true });
+  const baseSlug = slugifyVi(title as string);
   let uniqueSlug = baseSlug;
 
   const resultQuery = await clientNoCache.fetch(CONSTRUCTION_BY_SLUG_QUERY, {
@@ -228,7 +227,7 @@ export const createDesign = async (
   const { _id, title, subtitle, description, thumbnail, image } =
     Object.fromEntries(Array.from(form).filter(([key]) => key !== "pitch"));
 
-  const baseSlug = slugify(title as string, { lower: true, strict: true });
+  const baseSlug = slugifyVi(title as string);
   let uniqueSlug = baseSlug;
 
   const resultQuery = await clientNoCache.fetch(DESIGN_BY_SLUG_QUERY, {
@@ -296,7 +295,7 @@ export const updateDesign = async (
     Array.from(form).filter(([key]) => key !== "pitch")
   );
 
-  const baseSlug = slugify(title as string, { lower: true, strict: true });
+  const baseSlug = slugifyVi(title as string);
   let uniqueSlug = baseSlug;
 
   const resultQuery = await clientNoCache.fetch(DESIGN_BY_SLUG_QUERY, {
@@ -364,7 +363,7 @@ export const createProject = async (
   const { title, subtitle, description, thumbnail, image, orderIndex } =
     Object.fromEntries(Array.from(form).filter(([key]) => key !== "pitch"));
 
-  const baseSlug = slugify(title as string, { lower: true, strict: true });
+  const baseSlug = slugifyVi(title as string);
   let uniqueSlug = baseSlug;
 
   const resultQuery = await clientNoCache.fetch(PROJECT_BY_SLUG_QUERY, {
@@ -458,7 +457,7 @@ export const updateProject = async (
     estimatedTime,
   } = Object.fromEntries(Array.from(form).filter(([key]) => key !== "pitch"));
 
-  const baseSlug = slugify(title as string, { lower: true, strict: true });
+  const baseSlug = slugifyVi(title as string);
   let uniqueSlug = baseSlug;
 
   const resultQuery = await clientNoCache.fetch(PROJECT_BY_SLUG_QUERY, {
@@ -558,7 +557,7 @@ export const createProjectDetail = async (
 
   console.log("createProjectDetail -> overview", overview);
 
-  const baseSlug = slugify(title as string, { lower: true, strict: true });
+  const baseSlug = slugifyVi(title as string);
   let uniqueSlug = baseSlug;
 
   const resultQuery = await clientNoCache.fetch(PROJECT_DETAIL_BY_SLUG_QUERY, {
@@ -649,7 +648,7 @@ export const updateProjectDetail = async (
     estimatedTime,
   } = Object.fromEntries(Array.from(form).filter(([key]) => key !== "pitch"));
 
-  const baseSlug = slugify(title as string, { lower: true, strict: true });
+  const baseSlug = slugifyVi(title as string);
   let uniqueSlug = baseSlug;
 
   const resultQuery = await clientNoCache.fetch(PROJECT_DETAIL_BY_SLUG_QUERY, {
