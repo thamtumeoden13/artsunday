@@ -14,7 +14,6 @@ import {
   Maximize,
   Minimize,
 } from "lucide-react";
-import Image from "next/image";
 
 interface Image {
   src: string;
@@ -54,12 +53,6 @@ export function ImageGalleryDialog({
   const minSwipeDistance = 50;
 
   useEffect(() => {
-    if (isOpen) {
-      toggleFullscreen();
-    }
-  }, [isOpen]);
-
-  useEffect(() => {
     if (currentImageSrc) {
       const index = images.findIndex((img) => img.src === currentImageSrc);
       if (index !== -1) {
@@ -95,7 +88,7 @@ export function ImageGalleryDialog({
     } else if (e.key === "ArrowLeft") {
       goToPrevious();
     } else if (e.key === "Escape") {
-      handleClose();
+      onClose();
     } else if (e.key === "+") {
       zoomIn();
     } else if (e.key === "-") {
@@ -105,59 +98,73 @@ export function ImageGalleryDialog({
     }
   };
 
-  // Touch event handlers
+  // Touch event handlers - improved for mobile devices
   const onTouchStart = (e: React.TouchEvent) => {
-    // Only handle swipes when not zoomed in
-    if (zoomLevel > 1) return;
+    // Only handle swipes when not zoomed in and gallery is already open
+    if (zoomLevel > 1 || !isOpen) return;
 
+    // Prevent conflicts with other touch interactions
+    const touch = e.touches[0];
     setTouchEnd(null);
     setTouchStart({
-      x: e.targetTouches[0].clientX,
-      y: e.targetTouches[0].clientY,
+      x: touch.clientX,
+      y: touch.clientY,
     });
-    setIsDragging(true);
+    setIsDragging(false); // Don't set dragging immediately
   };
 
   const onTouchMove = (e: React.TouchEvent) => {
-    if (!touchStart || zoomLevel > 1) return;
+    if (!touchStart || zoomLevel > 1 || !isOpen) return;
 
+    const touch = e.touches[0];
     const currentTouch = {
-      x: e.targetTouches[0].clientX,
-      y: e.targetTouches[0].clientY,
+      x: touch.clientX,
+      y: touch.clientY,
     };
 
     const deltaX = currentTouch.x - touchStart.x;
     const deltaY = Math.abs(currentTouch.y - touchStart.y);
 
-    // Only handle horizontal swipes (ignore vertical scrolling)
-    if (deltaY < 100) {
+    // Only start dragging if horizontal movement is significant
+    if (Math.abs(deltaX) > 10 && deltaY < 50) {
+      if (!isDragging) {
+        setIsDragging(true);
+      }
+      // Prevent scrolling only when we're actually swiping
       e.preventDefault();
       setDragOffset(deltaX);
       setTouchEnd(currentTouch);
     }
   };
 
-  const onTouchEnd = () => {
-    if (!touchStart || !touchEnd || zoomLevel > 1) {
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (!touchStart || zoomLevel > 1 || !isOpen) {
       setIsDragging(false);
       setDragOffset(0);
+      setTouchStart(null);
+      setTouchEnd(null);
       return;
     }
 
-    const distance = touchStart.x - touchEnd.x;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
+    // If we were dragging, handle the swipe
+    if (isDragging && touchEnd) {
+      const distance = touchStart.x - touchEnd.x;
+      const isLeftSwipe = distance > minSwipeDistance;
+      const isRightSwipe = distance < -minSwipeDistance;
 
-    if (isLeftSwipe) {
-      goToNext();
-    } else if (isRightSwipe) {
-      goToPrevious();
-    } else {
-      // Snap back to original position
-      setDragOffset(0);
+      if (isLeftSwipe) {
+        goToNext();
+      } else if (isRightSwipe) {
+        goToPrevious();
+      } else {
+        // Snap back to original position
+        setDragOffset(0);
+      }
     }
 
+    // Reset all touch state
     setIsDragging(false);
+    setDragOffset(0);
     setTouchStart(null);
     setTouchEnd(null);
   };
@@ -193,24 +200,14 @@ export function ImageGalleryDialog({
     setTimeout(() => setIsTransitioning(false), 300);
   };
 
-  const handleClose = () => {
-    setZoomLevel(1); // Reset zoom when closing
-    // Exit fullscreen if in fullscreen mode
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-      setIsFullscreen(false);
-    }
-    onClose();
-  };
-
   if (images.length === 0) return null;
 
   const currentImage = images[currentIndex];
 
   return (
-    <Dialog open={isOpen} onOpenChange={handleClose}>
+    <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent
-        className="max-w-screen w-screen h-screen p-0 bg-black/95 border-none"
+        className="max-w-7xl p-0 bg-black/95 border-none"
         onKeyDown={handleKeyDown}
       >
         <div className="relative flex flex-col items-center justify-center min-h-[80vh]">
@@ -233,7 +230,7 @@ export function ImageGalleryDialog({
             >
               <ZoomOut className="h-5 w-5" />
             </Button>
-            {/* <Button
+            <Button
               variant="ghost"
               size="icon"
               className="text-white hover:bg-white/20"
@@ -245,12 +242,12 @@ export function ImageGalleryDialog({
               ) : (
                 <Maximize className="h-5 w-5" />
               )}
-            </Button> */}
+            </Button>
             <Button
               variant="ghost"
               size="icon"
               className="text-white hover:bg-white/20"
-              onClick={handleClose}
+              onClick={onClose}
               title="Close"
             >
               <X className="h-5 w-5" />
@@ -270,10 +267,11 @@ export function ImageGalleryDialog({
             <div className="flex flex-col items-center">
               <div
                 ref={imageContainerRef}
-                className="overflow-auto max-h-[90vh] max-w-full"
+                className="overflow-auto max-h-[90vh] max-w-full touch-pan-y"
                 onTouchStart={onTouchStart}
                 onTouchMove={onTouchMove}
                 onTouchEnd={onTouchEnd}
+                style={{ touchAction: "pan-y pinch-zoom" }}
               >
                 <div
                   className={`transition-transform duration-300 ease-out ${isDragging ? "duration-0" : ""}`}
@@ -284,7 +282,7 @@ export function ImageGalleryDialog({
                   <img
                     src={currentImage.src || "/placeholder.svg"}
                     alt={currentImage.alt}
-                    className="object-contain transition-transform duration-200 select-none  max-h-[90vh]"
+                    className="object-contain transition-transform duration-200 select-none"
                     style={{
                       transform: `scale(${zoomLevel})`,
                       transformOrigin: "center center",
@@ -350,11 +348,11 @@ export function ImageGalleryDialog({
           </div>
 
           {/* Swipe instruction for first-time users */}
-          {/* {!isDragging && zoomLevel === 1 && (
+          {!isDragging && zoomLevel === 1 && (
             <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 text-white/50 text-sm animate-pulse">
               Swipe left/right to navigate
             </div>
-          )} */}
+          )}
         </div>
       </DialogContent>
     </Dialog>
