@@ -284,7 +284,7 @@ export function ImageGalleryDialog({
                   <img
                     src={currentImage.src || "/placeholder.svg"}
                     alt={currentImage.alt}
-                    className="object-contain transition-transform duration-200 select-none"
+                    className="object-contain transition-transform duration-200 select-none  max-h-[90vh]"
                     style={{
                       transform: `scale(${zoomLevel})`,
                       transformOrigin: "center center",
