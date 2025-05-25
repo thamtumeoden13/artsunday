@@ -107,7 +107,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
               <p className={"no-result"}>Không tìm thấy thông tin phù hợp</p>
             )} */}
             <ImageGalleryProvider>
-              <MarkdownRenderer markdown={post?.pitch} />
+              <MarkdownRenderer markdown={post?.pitch} thumbnail={post.thumbnail} />
             </ImageGalleryProvider>
           </div>
 

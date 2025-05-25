@@ -6,6 +6,7 @@ import { useState, useEffect } from "react"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, X, ZoomIn, ZoomOut, Maximize, Minimize } from "lucide-react"
+import Image from "next/image"
 
 interface Image {
   src: string
@@ -94,7 +95,7 @@ export function ImageGalleryDialog({ isOpen, onClose, images, currentImageSrc }:
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-[96rem] p-0 bg-black/95 border-none" onKeyDown={handleKeyDown}>
+      <DialogContent className="max-w-screen w-screen h-screen p-0 bg-black/95 border-none" onKeyDown={handleKeyDown}>
         <div className="relative flex flex-col items-center justify-center min-h-[80vh]">
           <div className="absolute top-2 right-2 flex space-x-2 z-10">
             <Button
@@ -147,10 +148,11 @@ export function ImageGalleryDialog({ isOpen, onClose, images, currentImageSrc }:
 
             <div className="flex flex-col items-center">
               <div className="overflow-auto max-h-[90vh] max-w-full">
-                <img
+                <Image
                   src={currentImage.src || "/placeholder.svg"}
                   alt={currentImage.alt}
                   className="object-contain transition-transform duration-200"
+                  fill
                   style={{
                     transform: `scale(${zoomLevel})`,
                     transformOrigin: "center center",
