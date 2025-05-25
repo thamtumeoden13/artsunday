@@ -41,7 +41,7 @@ const ProjectGeneral = ({ post }: { post: StartupCardType }) => {
         <div className={"space-y-5 px-4 max-w-5xl mx-auto"}>
           <ImageModal item={post} />
 
-          <h3 className={"text-30-bold"}>Bài Viết Chi Tiết</h3>
+          {/* <h3 className={"text-30-bold"}>Bài Viết Chi Tiết</h3> */}
           {parsedContent ? (
             <article
               className={"prose max-w-7xl font-ibm-plex text-justify"}

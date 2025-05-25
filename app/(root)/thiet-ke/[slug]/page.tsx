@@ -47,7 +47,7 @@ export default async function Designs({ params }: { readonly params: Promise<{ r
         <ProjectDetailList key={data?._id} post={data} className="!p-0" />
 
         <div className={"space-y-5 mt-10 max-w-7xl mx-auto !px-2"}>
-          <h3 className={"text-30-bold"}>Bài Viết Chi Tiết</h3>
+          {/* <h3 className={"text-30-bold"}>Bài Viết Chi Tiết</h3> */}
           {parsedContent ? (
             <article
               className={"prose max-w-7xl font-ibm-plex text-justify"}

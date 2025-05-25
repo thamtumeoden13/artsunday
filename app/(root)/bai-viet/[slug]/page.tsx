@@ -97,7 +97,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
         <div className="flex items-start justify-between gap-1">
           <div className={"space-y-5 mt-10 pr-0 md:pr-10 max-w-7xl mx-auto"}>
-            <h3 className={"text-30-bold"}>Bài Viết Chi Tiết</h3>
+            {/* <h3 className={"text-30-bold"}>Bài Viết Chi Tiết</h3> */}
             {/* {parsedContent ? (
               <article
                 className={"prose max-w-7xl font-ibm-plex text-justify"}
