@@ -2,7 +2,7 @@
 
 import type React from "react";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import {
@@ -28,6 +28,11 @@ interface ImageGalleryDialogProps {
   currentImageSrc: string | null;
 }
 
+interface TouchPosition {
+  x: number;
+  y: number;
+}
+
 export function ImageGalleryDialog({
   isOpen,
   onClose,
@@ -37,6 +42,16 @@ export function ImageGalleryDialog({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [zoomLevel, setZoomLevel] = useState(1);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  // Touch/swipe state
+  const [touchStart, setTouchStart] = useState<TouchPosition | null>(null);
+  const [touchEnd, setTouchEnd] = useState<TouchPosition | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragOffset, setDragOffset] = useState(0);
+
+  const imageContainerRef = useRef<HTMLDivElement>(null);
+  const minSwipeDistance = 50;
 
   useEffect(() => {
     if (isOpen) {
@@ -53,16 +68,25 @@ export function ImageGalleryDialog({
     }
     // Reset zoom when changing images
     setZoomLevel(1);
+    setDragOffset(0);
   }, [currentImageSrc, images]);
 
   const goToNext = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
     setCurrentIndex((prev) => (prev + 1) % images.length);
     setZoomLevel(1); // Reset zoom
+    setDragOffset(0);
+    setTimeout(() => setIsTransitioning(false), 300);
   };
 
   const goToPrevious = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
     setZoomLevel(1); // Reset zoom
+    setDragOffset(0);
+    setTimeout(() => setIsTransitioning(false), 300);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -71,7 +95,7 @@ export function ImageGalleryDialog({
     } else if (e.key === "ArrowLeft") {
       goToPrevious();
     } else if (e.key === "Escape") {
-      onClose();
+      handleClose();
     } else if (e.key === "+") {
       zoomIn();
     } else if (e.key === "-") {
@@ -79,6 +103,63 @@ export function ImageGalleryDialog({
     } else if (e.key === "f") {
       toggleFullscreen();
     }
+  };
+
+  // Touch event handlers
+  const onTouchStart = (e: React.TouchEvent) => {
+    // Only handle swipes when not zoomed in
+    if (zoomLevel > 1) return;
+
+    setTouchEnd(null);
+    setTouchStart({
+      x: e.targetTouches[0].clientX,
+      y: e.targetTouches[0].clientY,
+    });
+    setIsDragging(true);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    if (!touchStart || zoomLevel > 1) return;
+
+    const currentTouch = {
+      x: e.targetTouches[0].clientX,
+      y: e.targetTouches[0].clientY,
+    };
+
+    const deltaX = currentTouch.x - touchStart.x;
+    const deltaY = Math.abs(currentTouch.y - touchStart.y);
+
+    // Only handle horizontal swipes (ignore vertical scrolling)
+    if (deltaY < 100) {
+      e.preventDefault();
+      setDragOffset(deltaX);
+      setTouchEnd(currentTouch);
+    }
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd || zoomLevel > 1) {
+      setIsDragging(false);
+      setDragOffset(0);
+      return;
+    }
+
+    const distance = touchStart.x - touchEnd.x;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      goToNext();
+    } else if (isRightSwipe) {
+      goToPrevious();
+    } else {
+      // Snap back to original position
+      setDragOffset(0);
+    }
+
+    setIsDragging(false);
+    setTouchStart(null);
+    setTouchEnd(null);
   };
 
   const zoomIn = () => {
@@ -104,13 +185,21 @@ export function ImageGalleryDialog({
   };
 
   const selectImage = (index: number) => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
     setCurrentIndex(index);
     setZoomLevel(1); // Reset zoom
+    setDragOffset(0);
+    setTimeout(() => setIsTransitioning(false), 300);
   };
 
   const handleClose = () => {
     setZoomLevel(1); // Reset zoom when closing
-    toggleFullscreen(); // Exit fullscreen if in fullscreen mode
+    // Exit fullscreen if in fullscreen mode
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+      setIsFullscreen(false);
+    }
     onClose();
   };
 
@@ -179,26 +268,52 @@ export function ImageGalleryDialog({
             </Button>
 
             <div className="flex flex-col items-center">
-              <div className="overflow-auto max-h-[90vh] max-w-full">
-                <Image
-                  src={currentImage.src || "/placeholder.svg"}
-                  alt={currentImage.alt}
-                  className="object-contain transition-transform duration-200"
-                  fill
+              <div
+                ref={imageContainerRef}
+                className="overflow-auto max-h-[90vh] max-w-full"
+                onTouchStart={onTouchStart}
+                onTouchMove={onTouchMove}
+                onTouchEnd={onTouchEnd}
+              >
+                <div
+                  className={`transition-transform duration-300 ease-out ${isDragging ? "duration-0" : ""}`}
                   style={{
-                    transform: `scale(${zoomLevel})`,
-                    transformOrigin: "center center",
+                    transform: `translateX(${dragOffset}px)`,
                   }}
-                />
+                >
+                  <img
+                    src={currentImage.src || "/placeholder.svg"}
+                    alt={currentImage.alt}
+                    className="object-contain transition-transform duration-200 select-none"
+                    style={{
+                      transform: `scale(${zoomLevel})`,
+                      transformOrigin: "center center",
+                    }}
+                    draggable={false}
+                  />
+                </div>
               </div>
               {currentImage.alt && (
                 <p className="text-white mt-4 text-center">
                   {currentImage.alt}
                 </p>
               )}
-              <p className="text-white/70 text-sm mt-2">
-                {currentIndex + 1} / {images.length}
-              </p>
+              <div className="flex items-center space-x-4 mt-2">
+                <p className="text-white/70 text-sm">
+                  {currentIndex + 1} / {images.length}
+                </p>
+                {zoomLevel > 1 && (
+                  <p className="text-white/70 text-sm">
+                    Zoom: {Math.round(zoomLevel * 100)}%
+                  </p>
+                )}
+              </div>
+              {/* Swipe indicator */}
+              {isDragging && Math.abs(dragOffset) > 20 && (
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/50 text-white px-4 py-2 rounded-lg">
+                  {dragOffset > 0 ? "← Previous" : "Next →"}
+                </div>
+              )}
             </div>
 
             <Button
@@ -233,6 +348,13 @@ export function ImageGalleryDialog({
               ))}
             </div>
           </div>
+
+          {/* Swipe instruction for first-time users */}
+          {/* {!isDragging && zoomLevel === 1 && (
+            <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 text-white/50 text-sm animate-pulse">
+              Swipe left/right to navigate
+            </div>
+          )} */}
         </div>
       </DialogContent>
     </Dialog>
