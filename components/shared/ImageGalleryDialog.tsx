@@ -53,14 +53,14 @@ export function ImageGalleryDialog({
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const minSwipeDistance = 50;
 
-  useEffect(() => {
-    if (isOpen && !isFullscreen) {
-      document.documentElement.requestFullscreen().catch((err) => {
-        console.error(`Error attempting to enable fullscreen: ${err.message}`);
-      });
-      setIsFullscreen(true);
-    }
-  }, [isOpen, isFullscreen]);
+  // useEffect(() => {
+  //   if (isOpen && !isFullscreen) {
+  //     document.documentElement.requestFullscreen().catch((err) => {
+  //       console.error(`Error attempting to enable fullscreen: ${err.message}`);
+  //     });
+  //     setIsFullscreen(true);
+  //   }
+  // }, [isOpen, isFullscreen]);
 
   useEffect(() => {
     if (currentImageSrc) {
@@ -231,7 +231,7 @@ export function ImageGalleryDialog({
         onKeyDown={handleKeyDown}
       >
         <div className="relative flex flex-col items-center justify-center min-h-[80vh]">
-          <div className="absolute top-2 right-2 flex space-x-2 z-10">
+          <div className="absolute top-8 right-8 flex space-x-2 z-10">
             <Button
               variant="ghost"
               size="icon"
@@ -250,7 +250,7 @@ export function ImageGalleryDialog({
             >
               <ZoomOut className="h-5 w-5" />
             </Button>
-            {/* <Button
+            <Button
               variant="ghost"
               size="icon"
               className="text-white hover:bg-white/20"
@@ -262,7 +262,7 @@ export function ImageGalleryDialog({
               ) : (
                 <Maximize className="h-5 w-5" />
               )}
-            </Button> */}
+            </Button>
             <Button
               variant="ghost"
               size="icon"
