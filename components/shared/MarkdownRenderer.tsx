@@ -49,7 +49,7 @@ export default function MarkdownRenderer({
       const srcIndex = token.attrIndex("src");
       const src = token.attrs?.[srcIndex][1] || "";
       const altIndex = token.attrIndex("alt");
-      const alt = token.attrs?.[altIndex]?.[1] || "";
+      const alt = token.attrs?.[altIndex]?.[1] || "Art Sunday";
 
       // Register this image with the gallery context
       registerImage({ src, alt });

@@ -54,12 +54,6 @@ export function ImageGalleryDialog({
   const minSwipeDistance = 50;
 
   useEffect(() => {
-    if (isOpen) {
-      toggleFullscreen();
-    }
-  }, [isOpen]);
-
-  useEffect(() => {
     if (currentImageSrc) {
       const index = images.findIndex((img) => img.src === currentImageSrc);
       if (index !== -1) {
@@ -105,59 +99,73 @@ export function ImageGalleryDialog({
     }
   };
 
-  // Touch event handlers
+  // Touch event handlers - improved for mobile devices
   const onTouchStart = (e: React.TouchEvent) => {
-    // Only handle swipes when not zoomed in
-    if (zoomLevel > 1) return;
+    // Only handle swipes when not zoomed in and gallery is already open
+    if (zoomLevel > 1 || !isOpen) return;
 
+    // Prevent conflicts with other touch interactions
+    const touch = e.touches[0];
     setTouchEnd(null);
     setTouchStart({
-      x: e.targetTouches[0].clientX,
-      y: e.targetTouches[0].clientY,
+      x: touch.clientX,
+      y: touch.clientY,
     });
-    setIsDragging(true);
+    setIsDragging(false); // Don't set dragging immediately
   };
 
   const onTouchMove = (e: React.TouchEvent) => {
-    if (!touchStart || zoomLevel > 1) return;
+    if (!touchStart || zoomLevel > 1 || !isOpen) return;
 
+    const touch = e.touches[0];
     const currentTouch = {
-      x: e.targetTouches[0].clientX,
-      y: e.targetTouches[0].clientY,
+      x: touch.clientX,
+      y: touch.clientY,
     };
 
     const deltaX = currentTouch.x - touchStart.x;
     const deltaY = Math.abs(currentTouch.y - touchStart.y);
 
-    // Only handle horizontal swipes (ignore vertical scrolling)
-    if (deltaY < 100) {
+    // Only start dragging if horizontal movement is significant
+    if (Math.abs(deltaX) > 10 && deltaY < 50) {
+      if (!isDragging) {
+        setIsDragging(true);
+      }
+      // Prevent scrolling only when we're actually swiping
       e.preventDefault();
       setDragOffset(deltaX);
       setTouchEnd(currentTouch);
     }
   };
 
-  const onTouchEnd = () => {
-    if (!touchStart || !touchEnd || zoomLevel > 1) {
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (!touchStart || zoomLevel > 1 || !isOpen) {
       setIsDragging(false);
       setDragOffset(0);
+      setTouchStart(null);
+      setTouchEnd(null);
       return;
     }
 
-    const distance = touchStart.x - touchEnd.x;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
+    // If we were dragging, handle the swipe
+    if (isDragging && touchEnd) {
+      const distance = touchStart.x - touchEnd.x;
+      const isLeftSwipe = distance > minSwipeDistance;
+      const isRightSwipe = distance < -minSwipeDistance;
 
-    if (isLeftSwipe) {
-      goToNext();
-    } else if (isRightSwipe) {
-      goToPrevious();
-    } else {
-      // Snap back to original position
-      setDragOffset(0);
+      if (isLeftSwipe) {
+        goToNext();
+      } else if (isRightSwipe) {
+        goToPrevious();
+      } else {
+        // Snap back to original position
+        setDragOffset(0);
+      }
     }
 
+    // Reset all touch state
     setIsDragging(false);
+    setDragOffset(0);
     setTouchStart(null);
     setTouchEnd(null);
   };
@@ -270,10 +278,11 @@ export function ImageGalleryDialog({
             <div className="flex flex-col items-center">
               <div
                 ref={imageContainerRef}
-                className="overflow-auto max-h-[90vh] max-w-full"
+                className="overflow-auto max-h-[90vh] max-w-full touch-pan-y"
                 onTouchStart={onTouchStart}
                 onTouchMove={onTouchMove}
                 onTouchEnd={onTouchEnd}
+                style={{ touchAction: "pan-y pinch-zoom" }}
               >
                 <div
                   className={`transition-transform duration-300 ease-out ${isDragging ? "duration-0" : ""}`}
