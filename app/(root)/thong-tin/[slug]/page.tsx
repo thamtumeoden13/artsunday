@@ -48,11 +48,11 @@ export default async function InfoBySlug({ params }: { readonly params: Promise<
 
         <ProjectDetailList key={data?._id} post={data} className="!px-0" />
 
-        <div className={"space-y-5 mt-10 max-w-7xl mx-auto"}>
+        <div className={"space-y-5 mt-10 max-w-[96rem] mx-auto"}>
           {/* <h3 className={"text-30-bold"}>Bài Viết Chi Tiết</h3> */}
           {parsedContent ? (
             <article
-              className={"prose max-w-7xl font-ibm-plex text-justify"}
+              className={"max-w-[96rem] font-ibm-plex text-justify"}
               dangerouslySetInnerHTML={{ __html: parsedContent }}
             />
           ) : (

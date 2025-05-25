@@ -36,7 +36,7 @@ const ProjectGeneral = ({ post }: { post: StartupCardType }) => {
   const parsedContent = md.render(post?.pitch || '');
 
   return (
-    <TracingBeam className="px-6 max-w-7xl">
+    <TracingBeam className="px-6 max-w-[96rem]">
       <div className="mx-auto antialiased pt-4 relative">
         <div className={"space-y-5 px-4 max-w-5xl mx-auto"}>
           <ImageModal item={post} />
@@ -44,7 +44,7 @@ const ProjectGeneral = ({ post }: { post: StartupCardType }) => {
           {/* <h3 className={"text-30-bold"}>Bài Viết Chi Tiết</h3> */}
           {parsedContent ? (
             <article
-              className={"prose max-w-7xl font-ibm-plex text-justify"}
+              className={"max-w-[96rem] font-ibm-plex text-justify"}
               dangerouslySetInnerHTML={{ __html: parsedContent }}
             />
           ) : (

@@ -43,11 +43,11 @@ export default async function Constructions({ params }: { readonly params: Promi
 
         <ProjectDetailList key={data?._id} post={data} className="!p-0" />
 
-        <div className={"space-y-5 mt-10 max-w-7xl mx-auto !px-2"}>
+        <div className={"space-y-5 mt-10 max-w-[96rem] mx-auto !px-2"}>
           {/* <h3 className={"text-30-bold"}>Bài Viết Chi Tiết</h3> */}
           {parsedContent ? (
             <article
-              className={"prose max-w-7xl font-ibm-plex text-justify"}
+              className={"max-w-[96rem] font-ibm-plex text-justify"}
               dangerouslySetInnerHTML={{ __html: parsedContent }}
             />
           ) : (
