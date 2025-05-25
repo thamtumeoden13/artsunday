@@ -54,6 +54,15 @@ export function ImageGalleryDialog({
   const minSwipeDistance = 50;
 
   useEffect(() => {
+    if (isOpen && !isFullscreen) {
+      document.documentElement.requestFullscreen().catch((err) => {
+        console.error(`Error attempting to enable fullscreen: ${err.message}`);
+      });
+      setIsFullscreen(true);
+    }
+  }, [isOpen, isFullscreen]);
+
+  useEffect(() => {
     if (currentImageSrc) {
       const index = images.findIndex((img) => img.src === currentImageSrc);
       if (index !== -1) {
@@ -302,12 +311,12 @@ export function ImageGalleryDialog({
                   />
                 </div>
               </div>
-              {currentImage.alt && (
+              {/* {currentImage.alt && (
                 <p className="text-white mt-4 text-center">
                   {currentImage.alt}
                 </p>
-              )}
-              <div className="flex items-center space-x-4 mt-2">
+              )} */}
+              {/* <div className="flex items-center space-x-4 mt-2">
                 <p className="text-white/70 text-sm">
                   {currentIndex + 1} / {images.length}
                 </p>
@@ -316,7 +325,7 @@ export function ImageGalleryDialog({
                     Zoom: {Math.round(zoomLevel * 100)}%
                   </p>
                 )}
-              </div>
+              </div> */}
               {/* Swipe indicator */}
               {isDragging && Math.abs(dragOffset) > 20 && (
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/50 text-white px-4 py-2 rounded-lg">
