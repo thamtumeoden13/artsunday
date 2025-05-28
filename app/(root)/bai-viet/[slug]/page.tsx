@@ -18,6 +18,7 @@ import { CloudinaryImage } from "@/components/shared/CloudinaryImage";
 import { overvewTranslate } from "@/constants";
 import { ImageGalleryProvider } from "@/components/shared/ImageGalleryContext";
 import MarkdownRenderer from "@/components/shared/MarkdownRenderer";
+import MarkdownIt from "markdown-it";
 
 const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const slug = (await params).slug;
@@ -34,8 +35,6 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
         id: post._id,
       }))) ||
     [];
-
-  console.log(releatedPosts);
 
   if (!post) return notFound();
 
@@ -107,7 +106,11 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
               <p className={"no-result"}>Không tìm thấy thông tin phù hợp</p>
             )} */}
             <ImageGalleryProvider>
-              <MarkdownRenderer markdown={post?.pitch} thumbnail={post.thumbnail} title={post.subtitle}/>
+              <MarkdownRenderer
+                markdown={post?.pitch}
+                thumbnail={post.thumbnail}
+                title={post.subtitle}
+              />
             </ImageGalleryProvider>
           </div>
 
@@ -148,7 +151,6 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 };
 
 export default Page;
-
 export async function generateMetadata({
   params,
 }: {
@@ -160,6 +162,51 @@ export async function generateMetadata({
   const data = await client.fetch(PROJECT_DETAIL_BY_SLUG_QUERY, { slug });
 
   if (!data) return null;
+
+  const registerImage: { src: string; alt: string }[] = [];
+
+  const md = new MarkdownIt({
+    html: true,
+    linkify: true,
+    typographer: true,
+  });
+  const defaultRender =
+    md.renderer.rules.image ||
+    ((tokens, idx, options, env, self) =>
+      self.renderToken(tokens, idx, options));
+
+  md.renderer.rules.image = (tokens, idx, options, env, self) => {
+    const token = tokens[idx];
+    console.log("Image Token generateMetadata:", token.attrs);
+    const srcIndex = token.attrIndex("src");
+    const src = token.attrs?.[srcIndex][1] || "";
+    const altIndex = token.attrIndex("alt");
+    console.log("Image Alt Index:", altIndex);
+    const alt = token.attrs?.[altIndex]?.[1];
+    const finalAlt =
+      !alt || alt.trim().toLowerCase() === "image" ? token.content : alt;
+
+    // Register this image with the gallery context
+    registerImage.push({ src, alt: finalAlt });
+
+    // Render the image with the default renderer
+    const defaultHtml = defaultRender(tokens, idx, options, env, self);
+
+    // Wrap the image in a div with a click handler
+    return `<div class="inline-block cursor-pointer" data-gallery-image="${src}">${defaultHtml}</div>`;
+  };
+
+  // Parse the pitch markdown to extract images
+  if (data.pitch) {
+    md.render(data.pitch);
+  }
+
+  // Remove duplicate images (optional)
+  const uniqueImages = Array.from(
+    new Map(registerImage.map((img) => [img.src, img])).values()
+  );
+
+  console.log("Unique Images:", uniqueImages);
 
   return {
     title: `${data.title} - Art Sunday`,
@@ -175,13 +222,29 @@ export async function generateMetadata({
           height: 600,
           alt: data.title,
         },
+        {
+          url: data.thumbnail,
+          width: 800,
+          height: 600,
+          alt: data.subtitle,
+        },
+        ...uniqueImages.map((img) => ({
+          url: img.src,
+          width: 800,
+          height: 600,
+          alt: img.alt,
+        })),
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${data.name} - Art Sunday`,
+      title: `${data.title} - Art Sunday`,
       description: `${data.description}`,
-      images: [data.image],
+      images: [
+        data.image,
+        data.thumbnail,
+        ...uniqueImages.map((img) => img.src),
+      ],
     },
   };
 }

@@ -49,10 +49,12 @@ export default function MarkdownRenderer({
       const srcIndex = token.attrIndex("src");
       const src = token.attrs?.[srcIndex][1] || "";
       const altIndex = token.attrIndex("alt");
-      const alt = token.attrs?.[altIndex]?.[1] || "Art Sunday";
+      const alt = token.attrs?.[altIndex]?.[1];
+      const finalAlt =
+        !alt || alt.trim().toLowerCase() === "image" ? "Art Sunday" : alt;
 
       // Register this image with the gallery context
-      registerImage({ src, alt });
+      registerImage({ src, alt: finalAlt });
 
       // Render the image with the default renderer
       const defaultHtml = defaultRender(tokens, idx, options, env, self);
