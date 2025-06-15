@@ -159,7 +159,7 @@ const ProjectDetailForm = ({ post }: { post?: ProjectDetailFormType }) => {
 
       setFormData({ ..._formData });
 
-      if (post.pitch) {
+      if (post?.pitch) {
         setPitch(post.pitch)
       }
       if (project) {

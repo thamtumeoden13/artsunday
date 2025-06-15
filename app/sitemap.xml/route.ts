@@ -92,7 +92,7 @@ async function fetchPosts() {
 
   const sitemapProjectDetails =
     searchForProjectDetails?.map((post: PostType) => {
-      const images = extractImagesFromMarkdown(post.pitch || "") || [];
+      const images = extractImagesFromMarkdown(post?.pitch || "") || [];
       const imageEntry = images.map((image) => ({
         loc: new URL( image?.src),
         caption: image?.alt || post.title,

@@ -42,7 +42,7 @@ export default function MarkupSchema({
   };
 
   // Parse the pitch markdown to extract images
-  if (post.pitch) {
+  if (post?.pitch) {
     md.render(post.pitch);
   }
 

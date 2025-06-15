@@ -104,7 +104,7 @@ const ConstructionForm = ({ post }: { post?: Construction }) => {
 
       setFormData({ ...formData!, _id, title, subtitle, description, thumbnail, image, orderIndex });
 
-      if (post.pitch) {
+      if (post?.pitch) {
         setPitch(post.pitch)
       }
     }

@@ -103,7 +103,7 @@ const DesignForm = ({ post }: { post?: Design }) => {
 
       setFormData({ ...formData!, _id, title, subtitle, description, thumbnail, image });
 
-      if (post.pitch) {
+      if (post?.pitch) {
         setPitch(post.pitch)
       }
     }
