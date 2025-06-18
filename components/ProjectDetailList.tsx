@@ -13,6 +13,8 @@ const ProjectDetailList = async ({ post, className }: { post: SimpleCardType, cl
 
   const { data: searchForProjectDetails } = await sanityFetch({ query: PROJECT_DETAILS_BY_PROJECT_QUERY, params });
 
+  console.log({searchForProjectDetails})
+
   if (!searchForProjectDetails?.length) return null
 
   return (

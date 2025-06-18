@@ -82,7 +82,7 @@ export const PLAYLIST_BY_SLUG_QUERY =
 }`);
 
 export const CONSTRUCTIONS_BY_QUERY =
-  defineQuery(`*[_type == "construction" && !defined($search) && isDeleted == false || title match $search] | order(orderIndex asc, _createdAt desc) {
+  defineQuery(`*[_type == "construction" && !defined($search) && (isDeleted == false || isDeleted == null) || title match $search] | order(orderIndex asc, _createdAt desc) {
   _id, 
   title, 
   subtitle,
@@ -139,7 +139,7 @@ export const CONSTRUCTION_BY_SLUG_QUERY =
 }`);
 
 export const DESIGNS_BY_QUERY =
-  defineQuery(`*[_type == "design" && isDeleted == false && !defined($search) || title match $search] | order(orderIndex asc, _createdAt desc) {
+  defineQuery(`*[_type == "design" && (isDeleted == false || isDeleted == null) && !defined($search) || title match $search] | order(orderIndex asc, _createdAt desc) {
   _id, 
   title, 
   subtitle,
@@ -194,7 +194,7 @@ export const DESIGN_BY_SLUG_QUERY =
 }`);
 
 export const PROJECTS_BY_QUERY =
-  defineQuery(`*[_type == "project" && !defined($search) && isDeleted == false || title match $search] | order(orderIndex asc, _createdAt desc) {
+  defineQuery(`*[_type == "project" && !defined($search) && (isDeleted == false || isDeleted == null) || title match $search] | order(orderIndex asc, _createdAt desc) {
   _id, 
   title, 
   subtitle,
@@ -258,7 +258,7 @@ export const PROJECT_BY_SLUG_QUERY =
 }`);
 
 export const PROJECT_BY_CONSTRUCTION_SLUGS_QUERY = defineQuery(`
-  *[_type == "project" && isDeleted == false 
+  *[_type == "project" && (isDeleted == false || isDeleted == null) 
     && references(*[_type == "construction" && slug.current in $slugs]._id)] | order(orderIndex asc, _createdAt desc) {
     _id, 
     title,
@@ -282,7 +282,7 @@ export const PROJECT_BY_CONSTRUCTION_SLUGS_QUERY = defineQuery(`
 `);
 
 export const PROJECTS_BY_CONSTRUCTION_ID_QUERY = defineQuery(`
-  *[_type == "project" && isDeleted == false && $id in construction[]._ref] | order(orderIndex asc, _createdAt desc) {
+  *[_type == "project" && (isDeleted == false || isDeleted == null) && $id in construction[]._ref] | order(orderIndex asc, _createdAt desc) {
     _id, 
     title, 
     subtitle,
@@ -305,7 +305,7 @@ export const PROJECTS_BY_CONSTRUCTION_ID_QUERY = defineQuery(`
 
 export const PROJECT_DETAILS_BY_QUERY =
   defineQuery(`*[_type == "projectDetail" && !defined($search) 
-        && published == 'approved' && isDeleted == false
+        && published == 'approved' && (isDeleted == false || isDeleted == null)
         || (project != null && title match $search)] | order(orderIndex asc, _createdAt desc) {
   _id, 
   title, 
@@ -375,7 +375,7 @@ export const PROJECT_DETAIL_BY_ID_QUERY =
 
 export const PROJECT_DETAILS_BY_PROJECT_QUERY =
   defineQuery(`*[_type == "projectDetail" 
-    && isDeleted == false && published == 'approved'
+    && (isDeleted == false || isDeleted == null) && published == 'approved'
     && project._ref == $id]| order(orderIndex asc, _createdAt desc) {
   _id,
   title,
@@ -445,7 +445,7 @@ export const PROJECT_DETAIL_BY_SLUG_QUERY =
 
 export const PROJECT_DETAILS_BY_TAG =
   defineQuery(`*[_type == "projectDetail" && defined($tag) 
-    && isDeleted == false && published == 'approved'
+    && (isDeleted == false || isDeleted == null) && published == 'approved'
     && _id != $id && ($tag match tags || tags match $tag)] | order(orderIndex asc, _createdAt desc) {
   _id,
   title,
