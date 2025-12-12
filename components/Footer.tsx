@@ -65,7 +65,7 @@ const Footer = () => {
             />
             <TextGenerateEffect
               className="font-medium text-left my-1 text-white-100 text-[20px] md:text-md lg:text-lg hover:cursor-pointer hover:underline"
-              words="Địa Chỉ: 42-D1 Khu NOXH Hiệp Phát, Nguyễn Đức Thuận, P.Hiệp Thành, Tp.Thủ Dầu Một, T.Bình Dương"
+              words="Địa Chỉ: Số 42 đường D1, Khu Noxh Hiệp Phát, Phường Phú Lợi (p.Hiệp Thành cũ), Tp. Hồ Chí Minh"
               idxTranfer={1}
               link="https://maps.app.goo.gl/AyaCwsVrC4kCTPQf7"
             />
